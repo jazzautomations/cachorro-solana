@@ -6,8 +6,11 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 - 15/09: git init do repo; decisão: casca web NOVA em `web/` reaproveitando o visual vaporwave do jazzweb3audit (globals.css + tailwind + Terminal/AgentFlow/Navbar). NÃO reviver jazzweb3audit (backend divergente, mixed-content).
 - Engine: scripts/fetch-target.sh (--repo | --program-id) e scripts/static-scan.sh funcionam sem IA. opencode com credencial `oci` (api).
 
-## Em andamento (M0)
-- web/: Next 15 + Tailwind, 1 tela: input program-id/repo → POST /api/scan → roda fetch+static → AgentFlow ao vivo → relatório. Jobs em cachorro-out/runs/<id>/status.json. Roda na Hermes (tailnet).
+## M0 — FEITO 15/09
+- `web/`: Next 15 + Tailwind (visual vaporwave transplantado do jazzweb3audit), 1 tela: input program-id/repo → `POST /api/scan` → `scripts/run-job.sh` (fetch + static) → AgentFlow com polling 2s → relatório estático (summary tiles + seções de lint colapsáveis + conta on-chain). Jobs em `cachorro-out/runs/<id>/status.json`. Sem DB, só filesystem.
+- No ar na Hermes: systemd `cachorro-web.service` :8790, **só pela tailnet** → http://100.83.230.76:8790
+- Smoke E2E: coral-xyz/sealevel-attacks (repo, 12s, 8 seções de lint / 55 entradas) e Tokenkeg… (program-id mainnet, 1s, conta on-chain + static skipped). Limite de 3 jobs simultâneos (429) validado.
+- Estágios RESEARCH/ANALYZE/DEVIL/POC/REVIEW aparecem como `pending-ai` — entram no M1.
 
 ## Próximo
 1. M1: estágios com IA (ANALYZE/DEVIL/POC) via opencode headless dentro do job.

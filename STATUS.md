@@ -12,8 +12,15 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 - Smoke E2E: coral-xyz/sealevel-attacks (repo, 12s, 8 seções de lint / 55 entradas) e Tokenkeg… (program-id mainnet, 1s, conta on-chain + static skipped). Limite de 3 jobs simultâneos (429) validado.
 - Estágios RESEARCH/ANALYZE/DEVIL/POC/REVIEW aparecem como `pending-ai` — entram no M1.
 
+## M2 — Atestado on-chain — FEITO 15/09 (o moat)
+- `attest/`: recibo verificável de auditoria ancorado no Solana **devnet**. Sem programa Anchor próprio (avm não instalado) → usa **SPL Memo** (`MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr`), nada pra deployar.
+- Payload canônico `{schema, report_sha256, audited_commit, verified_build_digest, journal_head, target, cluster, created_at}` → `sha256` dos bytes canônicos = digest da atestação. Só o digest vai on-chain como `cachorro:v1:<digest>`; JSON completo fica no recibo local.
+- CLI Node ESM (`@solana/web3.js` 1.99.0 pinado; sem build step): `attest anchor <report.json>` (airdrop→memo tx→recibo em `receipts/<hash>.json`) e `attest verify <sig|hash>` (recomputa digest do recibo, busca a tx no devnet, compara o memo → PASS/FAIL). Devnet hardcoded; `--cluster mainnet` recusado. Keypair throwaway em `attest/.devnet-keypair.json` (gitignored).
+- Provado: 5/5 unit tests (canonicalização + lógica de verify contra tx mockada); `fetchMemoTx` validado contra tx real de memo no devnet (parse do log OK). ⚠️ **anchor ao vivo bloqueado hoje** pelo faucet devnet (429 "airdrop limit today" por IP nesta VPS, RPC e CLI). Rodar quando o faucet liberar (ou financiar manual): `solana airdrop 1 $(solana address -k attest/.devnet-keypair.json) --url https://api.devnet.solana.com` e então `node attest/bin/attest.js anchor attest/fixtures/sample-report.json`.
+
 ## Próximo
 1. M1: estágios com IA (ANALYZE/DEVIL/POC) via opencode headless dentro do job.
-2. M2: programa Anchor de atestado on-chain (hash do relatório) — integração Solana real.
-3. 3 alvos auditados com commits datados na janela; 1 bug real.
-4. Última semana: vídeo 3min + demo 3min + GTM. Submissão em inglês.
+2. **Gate: runsc/PoC** — rodar os PoCs de auditoria em sandbox isolada (gVisor/runsc) via litesvm/solana-test-validator, provar 1 bug real reproduzível; amarrar o `report.json` (report_sha256/journal_head) ao recibo on-chain de ponta a ponta.
+3. Anchor ao vivo assim que o faucet devnet liberar (comando acima) → assinatura real + explorer URL no pitch.
+4. 3 alvos auditados com commits datados na janela; 1 bug real.
+5. Última semana: vídeo 3min + demo 3min + GTM. Submissão em inglês.

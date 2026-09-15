@@ -1,0 +1,20 @@
+{
+  "name": "cachorro-attest",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "On-chain audit attestation for cachorro-solana via SPL Memo on Solana devnet",
+  "bin": {
+    "attest": "bin/attest.js"
+  },
+  "scripts": {
+    "attest": "node bin/attest.js",
+    "test": "node --test test/verify.test.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "1.99.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

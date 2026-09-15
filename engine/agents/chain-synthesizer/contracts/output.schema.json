@@ -1,0 +1,2 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["status","ordered_primitive_ids","closed_preconditions","gaps","graph_edges"],"properties":{"status":{"enum":["candidate","rejected","inconclusive"]},"ordered_primitive_ids":{"type":"array","items":{"type":"string"}},"closed_preconditions":{"type":"array","items":{"type":"object"}},"gaps":{"type":"array","items":{"type":"string"}},"graph_edges":{"type":"array","items":{"type":"string"}}},"additionalProperties":false}
+

@@ -1,0 +1,34 @@
+schema_version: "0.1.0"
+name: context-modeler
+version: "0.1.0"
+description: Builds selective, provenance-linked architectural context for one falsifiable research question.
+instruction: AGENT.md
+capabilities:
+  - context.compile
+  - context.expand
+  - architecture.model
+  - static.anchor.scan
+tools:
+  - name: source-browser
+    mode: read
+    mutates_target: false
+  - name: anchor-static-scan
+    mode: analyze
+    mutates_target: false
+  - name: history-reader
+    mode: read
+    mutates_target: false
+side_effects:
+  - workspace_write
+budgets:
+  max_turns: 10
+  max_tool_calls: 40
+  max_wall_seconds: 1200
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/selective-context/SKILL.md
+child_agents: []
+runtime_requirements: []
+

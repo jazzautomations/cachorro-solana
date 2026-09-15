@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["cycle_id", "graph_revision", "scope_receipt_id", "budget", "candidates"],
+  "properties": {
+    "cycle_id": {"type": "string", "minLength": 8},
+    "graph_revision": {"type": "integer", "minimum": 0},
+    "scope_receipt_id": {"type": "string", "minLength": 8},
+    "budget": {"type": "object"},
+    "coverage_gaps": {"type": "array", "items": {"type": "string"}},
+    "contradiction_ids": {"type": "array", "items": {"type": "string"}},
+    "candidates": {"type": "array", "items": {"type": "object"}}
+  }
+}
+

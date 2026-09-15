@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.1.0",
+  "hypothesis_id": "hyp-00000001",
+  "mechanism": "A state transition may consume an object after its ownership has moved to another request.",
+  "preconditions": [
+    "Two authorized requests overlap at the ownership transition"
+  ],
+  "predicted_effect": "The second transition observes invalid object lifetime state.",
+  "falsifier": "Serializing the ownership transition leaves the same invalid lifetime observation.",
+  "supporting_observation_ids": [
+    "obs-00000001"
+  ],
+  "contradicting_observation_ids": [],
+  "status": "proposed"
+}
+

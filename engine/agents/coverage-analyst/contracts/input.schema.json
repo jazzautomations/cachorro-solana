@@ -1,0 +1,2 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["feedback","target_locations","graph_revision"],"properties":{"feedback":{"$ref":"../../../schemas/fuzz-feedback.schema.json"},"target_locations":{"type":"array","items":{"type":"string"}},"graph_revision":{"type":"integer","minimum":0}},"additionalProperties":false}
+

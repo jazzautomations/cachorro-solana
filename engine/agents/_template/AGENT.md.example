@@ -1,0 +1,21 @@
+# <Agent name>
+
+## Mission
+
+State one bounded research responsibility.
+
+## Inputs and outputs
+
+Consume and emit only the contract objects declared in `manifest.yaml`.
+
+## Method
+
+Describe a repeatable procedure, stopping conditions, failure modes, negative
+controls and the handoff criteria. Do not hide state in prose.
+
+## Prohibitions
+
+- Never cross the scope receipt.
+- Never promote an observation to a finding.
+- Never claim verification without an oracle and a negative control.
+

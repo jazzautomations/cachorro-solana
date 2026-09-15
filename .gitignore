@@ -4,3 +4,10 @@ cachorro-out/runs
 
 # GMTrade rounding harness build artifacts
 harness/gmtrade/target/
+
+# Engine (vendored v3 spine) + Solana PoC build artifacts
+**/__pycache__/
+**/target/
+test-ledger/
+**/node_modules/
+cachorro-out/engine-runs/

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/evidence.schema.json",
+  "title": "Oracle-backed evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_id", "hypothesis_id", "experiment_id",
+    "oracle", "negative_control", "artifact_ids", "reproduction", "verdict"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "evidence_id": {"type": "string", "minLength": 8},
+    "hypothesis_id": {"type": "string", "minLength": 8},
+    "experiment_id": {"type": "string", "minLength": 8},
+    "oracle": {"type": "string", "minLength": 15},
+    "negative_control": {"type": "string", "minLength": 15},
+    "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "reproduction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempts", "successes", "environment_hash"],
+      "properties": {
+        "attempts": {"type": "integer", "minimum": 1},
+        "successes": {"type": "integer", "minimum": 0},
+        "environment_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+      }
+    },
+    "verdict": {"enum": ["supports", "refutes", "inconclusive"]}
+  }
+}
+

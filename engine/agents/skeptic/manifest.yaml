@@ -1,0 +1,27 @@
+schema_version: "0.1.0"
+name: skeptic
+version: "0.1.0"
+description: Independently attacks candidate evidence with negative controls, alternative explanations and clean replay.
+instruction: AGENT.md
+capabilities:
+  - evidence.refute
+  - evidence.counterreview
+  - oracle.audit
+tools:
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects:
+  - workspace_write
+budgets:
+  max_turns: 10
+  max_tool_calls: 30
+  max_wall_seconds: 1200
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/counterevidence/SKILL.md
+child_agents: []
+runtime_requirements: []
+

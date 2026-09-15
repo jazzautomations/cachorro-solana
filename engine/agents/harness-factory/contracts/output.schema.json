@@ -1,0 +1,2 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["harness_id","build_ok","smoke_ok","coverage_delta","artifact_ids","environment_hash"],"properties":{"harness_id":{"type":"string","minLength":8},"build_ok":{"type":"boolean"},"smoke_ok":{"type":"boolean"},"coverage_delta":{"type":"integer"},"artifact_ids":{"type":"array","minItems":1,"items":{"type":"string"}},"environment_hash":{"type":"string","pattern":"^sha256:[a-f0-9]{64}$"}},"additionalProperties":false}
+

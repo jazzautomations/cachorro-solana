@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dossier_id", "facts", "inferences", "gaps", "coverage_delta", "artifact_ids"],
+  "properties": {
+    "dossier_id": {"type": "string", "minLength": 8},
+    "facts": {"type": "array", "items": {"type": "object"}},
+    "inferences": {"type": "array", "items": {"type": "object"}},
+    "gaps": {"type": "array", "items": {"type": "string"}},
+    "coverage_delta": {"type": "object"},
+    "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}
+

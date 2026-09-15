@@ -1,0 +1,43 @@
+schema_version: "0.1.0"
+mode: authorized-research
+local_control_plane_adapters:
+  - hexstrike-passive
+scope:
+  require_scope_receipt: true
+  default_network: deny
+  deny_out_of_scope_redirects: true
+  require_target_match_before_each_network_action: true
+  require_expiry: true
+side_effects:
+  default: deny
+  require_declared_capability: true
+  require_explicit_approval:
+    - target_state_change
+    - credential_use
+    - code_execution
+    - destructive_test
+    - external_service
+  forbidden:
+    - persistence
+    - stealth_or_evasion
+    - credential_theft
+    - destructive_payload
+evidence:
+  hash_algorithm: sha256
+  redact_secrets: true
+  immutable_raw_artifacts: true
+  require_tool_version: true
+  require_agent_package_hash: true
+promotion_gates:
+  verified_primitive:
+    require:
+      - deterministic_oracle
+      - negative_control
+      - exact_reproduction
+      - scope_receipt
+  reportable_finding:
+    require:
+      - clean_room_reproduction
+      - impact_demonstration
+      - skeptic_review
+      - provenance_complete

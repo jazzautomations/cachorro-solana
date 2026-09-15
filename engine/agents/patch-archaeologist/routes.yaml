@@ -1,0 +1,12 @@
+schema_version: "0.1.0"
+accepts:
+  - history.requested
+  - variant.cascade
+emits:
+  - variant.seeds
+  - history.exhausted
+routes:
+  - when: one or more semantic variant seeds survive classification
+    handoff: round-director
+    reason: schedule independent context and hypothesis rounds for the seeds
+

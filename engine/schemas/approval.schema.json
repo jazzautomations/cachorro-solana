@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/approval.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "approval_id", "issued_at", "expires_at", "scope_receipt_id",
+    "agent_name", "capability", "adapter", "action", "target", "side_effect",
+    "plan_digest", "signature"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "approval_id": {"type": "string", "pattern": "^[a-zA-Z0-9_.-]{8,120}$"},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "scope_receipt_id": {"type": "string", "minLength": 8},
+    "agent_name": {"type": "string", "minLength": 1},
+    "capability": {"type": "string", "minLength": 1},
+    "adapter": {"type": "string", "minLength": 1},
+    "action": {"type": "string", "minLength": 1},
+    "target": {"type": "string", "minLength": 1},
+    "side_effect": {"type": "string", "minLength": 1},
+    "plan_digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "signature": {
+      "type": "object", "additionalProperties": false,
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": {"const": "Ed25519"},
+        "key_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "value": {"type": "string", "minLength": 80}
+      }
+    }
+  }
+}
+

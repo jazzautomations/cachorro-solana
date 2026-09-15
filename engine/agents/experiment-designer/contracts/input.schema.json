@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hypothesis", "scope_receipt_id", "graph_revision", "available_capabilities"],
+  "properties": {
+    "hypothesis": {"$ref": "../../../schemas/hypothesis.schema.json"},
+    "scope_receipt_id": {"type": "string", "minLength": 8},
+    "graph_revision": {"type": "integer", "minimum": 0},
+    "available_capabilities": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

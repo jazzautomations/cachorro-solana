@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id", "hypothesis_id", "url", "parameter",
+    "scope_receipt_id", "repetitions", "delay_seconds"
+  ],
+  "properties": {
+    "experiment_id": {"type": "string", "minLength": 8},
+    "hypothesis_id": {"type": "string", "minLength": 8},
+    "url": {"type": "string", "format": "uri", "pattern": "^https?://"},
+    "parameter": {"type": "string", "minLength": 1, "maxLength": 128},
+    "scope_receipt_id": {"type": "string", "minLength": 8},
+    "repetitions": {"type": "integer", "minimum": 1, "maximum": 3},
+    "delay_seconds": {"type": "number", "minimum": 12, "maximum": 60}
+  }
+}

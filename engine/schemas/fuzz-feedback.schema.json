@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/fuzz-feedback.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "iteration", "harness_id", "build_ok", "execution_ok", "coverage_features",
+    "coverage_delta", "reached_targets", "stuck_locations", "crashes", "artifact_ids"
+  ],
+  "properties": {
+    "iteration": {"type": "integer", "minimum": 1},
+    "harness_id": {"type": "string", "minLength": 8},
+    "build_ok": {"type": "boolean"},
+    "execution_ok": {"type": "boolean"},
+    "coverage_features": {"type": "integer", "minimum": 0},
+    "coverage_delta": {"type": "integer"},
+    "reached_targets": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "stuck_locations": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "crashes": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["signature", "artifact_id", "oracle_status"],
+        "properties": {
+          "signature": {"type": "string", "minLength": 8},
+          "artifact_id": {"type": "string", "minLength": 8},
+          "oracle_status": {"enum": ["untriaged", "supports", "refutes", "inconclusive"]}
+        }
+      }
+    },
+    "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "notes": {"type": "string"}
+  }
+}
+

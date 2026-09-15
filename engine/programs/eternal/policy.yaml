@@ -1,0 +1,35 @@
+schema_version: "0.1.0"
+program: eternal
+snapshot_at: "2026-09-07T00:00:00Z"
+policy_url: "https://hackerone.com/eternal?type=team"
+researcher_header:
+  name: X-Hackerone
+  value: jazz-sec
+traffic:
+  max_concurrency: 1
+  max_requests_per_minute: 5
+  minimum_delay_seconds: 12
+  follow_redirects: false
+  stop_on_consecutive_5xx: 2
+  stop_on_latency_multiplier: 4
+prohibited:
+  - denial_of_service
+  - brute_force
+  - credential_stuffing
+  - password_spraying
+  - destructive_sql
+  - stacked_sql_queries
+  - bulk_data_access
+  - third_party_active_testing
+  - automatic_out_of_scope_redirects
+sqli_lane:
+  paired_treatment_control: true
+  max_pairs_per_endpoint: 3
+  timing_payloads: false
+  data_extraction: false
+  state_changes: false
+  require_manual_promotion_after_signal: true
+data_protection_lane:
+  passive_only: true
+  external_active_testing: false
+  minimum_verification: true

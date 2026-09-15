@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["primitive_id", "evidence_ids", "environment_lock_id", "scope_receipt_id", "repetitions"],
+  "properties": {
+    "primitive_id": {"type": "string", "minLength": 8},
+    "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "environment_lock_id": {"type": "string", "minLength": 8},
+    "scope_receipt_id": {"type": "string", "minLength": 8},
+    "repetitions": {"type": "integer", "minimum": 2, "maximum": 100}
+  }
+}
+

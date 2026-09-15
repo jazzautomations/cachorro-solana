@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id", "classification", "candidate_only", "requests_sent",
+    "artifact_ids", "stopped_early", "next_event"
+  ],
+  "properties": {
+    "experiment_id": {"type": "string", "minLength": 8},
+    "classification": {
+      "enum": ["candidate_boolean_differential", "no_deterministic_signal", "policy_stopped"]
+    },
+    "candidate_only": {"const": true},
+    "requests_sent": {"type": "integer", "minimum": 0, "maximum": 9},
+    "artifact_ids": {"type": "array", "items": {"type": "string"}},
+    "stopped_early": {"type": "boolean"},
+    "next_event": {
+      "enum": ["candidate.signal", "hypothesis.falsified", "policy.stopped"]
+    }
+  }
+}

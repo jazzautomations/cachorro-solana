@@ -1,0 +1,16 @@
+schema_version: "0.1.0"
+name: chain-synthesizer
+version: "0.1.0"
+description: Composes verified primitives only when graph state, identity, version and preconditions close end to end.
+instruction: AGENT.md
+capabilities: [chain.compose, chain.validate, chain.reject]
+tools: []
+side_effects: [none]
+budgets: {max_turns: 10, max_tool_calls: 10, max_wall_seconds: 900}
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills: []
+child_agents: []
+runtime_requirements: []
+

@@ -1,0 +1,2 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["entrypoint","source_artifact_ids","environment_lock_id","scope_receipt_id"],"properties":{"entrypoint":{"type":"string","minLength":1},"source_artifact_ids":{"type":"array","minItems":1,"items":{"type":"string"}},"environment_lock_id":{"type":"string","minLength":8},"scope_receipt_id":{"type":"string","minLength":8}},"additionalProperties":false}
+

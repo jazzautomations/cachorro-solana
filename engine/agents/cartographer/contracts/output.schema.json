@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assets", "coverage_delta", "context_requests", "artifact_ids", "redirects"],
+  "properties": {
+    "assets": {"type": "array", "items": {"type": "object"}},
+    "coverage_delta": {"type": "object"},
+    "context_requests": {"type": "array", "items": {"type": "object"}},
+    "artifact_ids": {"type": "array", "items": {"type": "string"}},
+    "redirects": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

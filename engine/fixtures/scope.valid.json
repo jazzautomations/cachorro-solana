@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1.0",
+  "receipt_id": "scope-example-0001",
+  "authorization_reference": "example-fixture-not-real-authorization",
+  "issued_at": "2026-01-01T00:00:00Z",
+  "expires_at": "2030-01-01T00:00:00Z",
+  "assets": [
+    {
+      "kind": "host",
+      "value": "*.example.test",
+      "actions": ["http.observe", "http.replay", "http.sqli.differential"]
+    },
+    {
+      "kind": "url-prefix",
+      "value": "https://api.example.test/v1",
+      "actions": ["api.sequence"]
+    },
+    {
+      "kind": "filesystem",
+      "value": "/root/cachorro-solana",
+      "actions": ["source.read", "history.read", "harness.execute"]
+    }
+  ],
+  "denied_assets": [
+    {
+      "kind": "host",
+      "value": "billing.example.test",
+      "actions": ["http.observe", "http.replay", "api.sequence"]
+    }
+  ],
+  "allowed_side_effects": ["none", "workspace_write", "network_read"],
+  "required_headers": {"X-Hackerone": "fixture-researcher"},
+  "notes": "Schema and unit-test fixture only; this is not an authorization document."
+}

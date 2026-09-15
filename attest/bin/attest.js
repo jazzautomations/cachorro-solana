@@ -142,6 +142,52 @@ async function cmdAnchor(positional, flags) {
   console.log(`receipt          : ${receiptPath}`);
 }
 
+async function cmdDigest(positional, flags) {
+  // Offline: compute the attestation digest from the real journal head and
+  // write a local receipt WITHOUT a devnet send (faucet-blocked). The receipt
+  // is anchor-ready: `attest anchor` can later put memo `cachorro:v1:<digest>`
+  // on devnet, and `attest verify` recomputes the same digest.
+  const reportPath = positional[0];
+  if (!reportPath || !existsSync(reportPath)) {
+    console.error("usage: attest digest <report.json> --journal-head <h> --commit <sha> --target <name> [--verified-build-digest <d>]");
+    process.exit(2);
+  }
+  const report = readReport(reportPath);
+  const auditedCommit = flags.commit || report.audited_commit || report.commit || null;
+  const target = flags.target || report.target || null;
+  if (!auditedCommit || !target) {
+    console.error("digest needs --commit and --target (or fields in the report).");
+    process.exit(2);
+  }
+  const createdAt = flags["created-at"] || new Date().toISOString();
+  const payload = buildPayload({
+    reportSha256: reportSha256(reportPath),
+    auditedCommit,
+    verifiedBuildDigest: flags["verified-build-digest"] || null,
+    journalHead: flags["journal-head"] || null,
+    target,
+    createdAt,
+  });
+  const attHash = attestationSha256(payload);
+  const memo = memoString(attHash);
+  const receipt = {
+    ...payload,
+    attestation_sha256: attHash,
+    memo,
+    status: "pending_anchor_faucet_blocked",
+    signature: null,
+    slot: null,
+    explorer_url: null,
+  };
+  mkdirSync(RECEIPTS_DIR, { recursive: true });
+  const receiptPath = join(RECEIPTS_DIR, `${attHash}.json`);
+  writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + "\n");
+  console.log(JSON.stringify(
+    { attestation_sha256: attHash, memo, report_sha256: payload.report_sha256, journal_head: payload.journal_head, receipt: receiptPath },
+    null, 2
+  ));
+}
+
 function findReceipt(arg) {
   // sha256 -> receipts/<hash>.json ; otherwise treat as a signature and scan.
   if (/^[0-9a-f]{64}$/.test(arg)) {
@@ -219,6 +265,7 @@ async function main() {
   const [, , cmd, ...rest] = process.argv;
   const { flags, positional } = parseFlags(rest);
   if (cmd === "anchor") return cmdAnchor(positional, flags);
+  if (cmd === "digest") return cmdDigest(positional, flags);
   if (cmd === "verify") return cmdVerify(positional, flags);
   console.error("cachorro attest — on-chain audit receipt (Solana devnet)");
   console.error("commands:");

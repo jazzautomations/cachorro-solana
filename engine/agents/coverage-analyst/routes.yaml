@@ -1,0 +1,11 @@
+schema_version: "0.1.0"
+accepts: [fuzz.feedback, harness.feedback]
+emits: [coverage.blocker, context.requested]
+routes:
+  - when: a precise semantic blocker is localized
+    handoff: context-modeler
+    reason: expand the smallest source and state slice around the blocker
+  - when: coverage changes the campaign priority
+    handoff: round-director
+    reason: re-score the fuzz and non-fuzz lanes
+

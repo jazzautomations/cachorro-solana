@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/scope-receipt.schema.json",
+  "title": "Authorized research scope receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "receipt_id", "authorization_reference", "issued_at",
+    "expires_at", "assets", "denied_assets", "allowed_side_effects",
+    "required_headers"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "receipt_id": {"type": "string", "minLength": 8},
+    "authorization_reference": {"type": "string", "minLength": 5},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "assets": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/asset"}
+    },
+    "denied_assets": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/asset"}
+    },
+    "allowed_side_effects": {
+      "type": "array", "uniqueItems": true,
+      "items": {
+        "enum": [
+          "none", "workspace_write", "network_read", "target_state_change",
+          "credential_use", "code_execution", "external_service", "destructive_test"
+        ]
+      }
+    },
+    "required_headers": {
+      "type": "object",
+      "maxProperties": 16,
+      "propertyNames": {
+        "pattern": "^[!#$%&'*+.^_`|~0-9A-Za-z-]{1,64}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512,
+        "pattern": "^[^\\r\\n]+$"
+      }
+    },
+    "notes": {"type": "string"},
+    "signature": {
+      "type": "object", "additionalProperties": false,
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": {"const": "Ed25519"},
+        "key_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "value": {"type": "string", "minLength": 80, "maxLength": 120}
+      }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "value", "actions"],
+      "properties": {
+        "kind": {"enum": ["host", "host-glob", "url-prefix", "cidr", "filesystem"]},
+        "value": {"type": "string", "minLength": 1},
+        "actions": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]*$"}
+        }
+      }
+    }
+  }
+}

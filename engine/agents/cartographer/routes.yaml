@@ -1,0 +1,16 @@
+schema_version: "0.1.0"
+accepts:
+  - surface.requested
+  - redirect.discovered
+  - chain.surface-gap
+emits:
+  - surface.delta
+  - context.requested
+routes:
+  - when: a new component or boundary needs semantic expansion
+    handoff: context-modeler
+    reason: compile context for the newly mapped surface
+  - when: surface pass completes with normalized graph delta
+    handoff: round-director
+    reason: re-score the research portfolio
+

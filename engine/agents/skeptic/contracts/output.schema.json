@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "reason", "negative_controls", "alternative_explanations", "missing_evidence"],
+  "properties": {
+    "verdict": {"enum": ["survives", "refuted", "inconclusive"]},
+    "reason": {"type": "string", "minLength": 20},
+    "negative_controls": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "alternative_explanations": {"type": "array", "items": {"type": "string"}},
+    "missing_evidence": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

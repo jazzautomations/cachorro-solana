@@ -1,0 +1,13 @@
+schema_version: "0.1.0"
+accepts:
+  - primitive.candidate
+  - evidence.disputed
+emits:
+  - primitive.survives_review
+  - primitive.refuted
+  - evidence.inconclusive
+routes:
+  - when: verdict changes graph state or requests new evidence
+    handoff: round-director
+    reason: re-score the portfolio using counterreview results
+

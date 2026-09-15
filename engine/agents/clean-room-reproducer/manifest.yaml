@@ -1,0 +1,31 @@
+schema_version: "0.1.0"
+name: clean-room-reproducer
+version: "0.1.0"
+description: Replays candidate primitives in pinned fresh environments with controls, integrity checks and variance tracking.
+instruction: AGENT.md
+capabilities:
+  - reproduction.clean-room
+  - evidence.replay
+  - evidence.minimize
+tools:
+  - name: sandbox-replay
+    mode: execute
+    mutates_target: false
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects:
+  - workspace_write
+  - code_execution
+budgets:
+  max_turns: 12
+  max_tool_calls: 50
+  max_wall_seconds: 3600
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/clean-replay/SKILL.md
+child_agents: []
+runtime_requirements: []
+

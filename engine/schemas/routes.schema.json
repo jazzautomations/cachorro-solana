@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/routes.schema.json",
+  "title": "Agent routing table",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "accepts", "emits", "routes"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "accepts": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "emits": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["when", "handoff"],
+        "properties": {
+          "when": {"type": "string", "minLength": 3},
+          "handoff": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+          "reason": {"type": "string", "minLength": 3}
+        }
+      }
+    }
+  }
+}
+

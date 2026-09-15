@@ -1,0 +1,16 @@
+schema_version: "0.1.0"
+accepts:
+  - context.compiled
+  - variant.seeds
+  - contradiction.new
+emits:
+  - hypotheses.proposed
+  - context.requested
+routes:
+  - when: falsifiable hypotheses were emitted
+    handoff: round-director
+    reason: schedule oracle design across independent trajectories
+  - when: a precise context gap prevents a causal hypothesis
+    handoff: context-modeler
+    reason: expand only the missing semantic edge
+

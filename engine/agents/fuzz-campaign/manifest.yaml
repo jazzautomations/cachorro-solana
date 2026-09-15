@@ -1,0 +1,23 @@
+schema_version: "0.1.0"
+name: fuzz-campaign
+version: "0.1.0"
+description: Coordinates networkless coverage-guided campaigns and structured bidirectional feedback across research rounds.
+instruction: AGENT.md
+capabilities: [fuzz.execute, fuzz.coordinate, corpus.manage]
+tools:
+  - name: container-fuzz
+    mode: execute
+    mutates_target: false
+    requires_approval: true
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects: [workspace_write, code_execution]
+budgets: {max_turns: 20, max_tool_calls: 100, max_wall_seconds: 14400}
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills: []
+child_agents: []
+runtime_requirements: [docker, runsc]
+

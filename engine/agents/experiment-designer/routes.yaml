@@ -1,0 +1,15 @@
+schema_version: "0.1.0"
+accepts:
+  - hypothesis.testing
+  - evidence.inconclusive
+emits:
+  - experiment.proposed
+  - oracle.blocked
+routes:
+  - when: a bounded experiment with a discriminating oracle is ready
+    handoff: round-director
+    reason: apply scope, capability and budget gates before execution
+  - when: an oracle cannot distinguish the causal mechanism
+    handoff: context-modeler
+    reason: acquire the missing observable state or instrumentation point
+

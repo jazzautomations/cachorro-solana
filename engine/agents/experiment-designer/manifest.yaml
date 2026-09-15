@@ -1,0 +1,27 @@
+schema_version: "0.1.0"
+name: experiment-designer
+version: "0.1.0"
+description: Produces bounded treatment-control experiments with semantic oracles, scope metadata and stopping rules.
+instruction: AGENT.md
+capabilities:
+  - experiment.design
+  - oracle.design
+  - controls.design
+tools:
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects:
+  - none
+budgets:
+  max_turns: 8
+  max_tool_calls: 16
+  max_wall_seconds: 600
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/oracle-engineering/SKILL.md
+child_agents: []
+runtime_requirements: []
+

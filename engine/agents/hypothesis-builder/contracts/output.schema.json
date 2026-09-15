@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hypotheses", "context_gaps", "dedupe_groups"],
+  "properties": {
+    "hypotheses": {
+      "type": "array",
+      "items": {"$ref": "../../../schemas/hypothesis.schema.json"}
+    },
+    "context_gaps": {"type": "array", "items": {"type": "string"}},
+    "dedupe_groups": {"type": "array", "items": {"type": "object"}}
+  }
+}
+

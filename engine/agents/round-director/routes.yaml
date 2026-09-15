@@ -1,0 +1,16 @@
+schema_version: "0.1.0"
+accepts:
+  - cycle.ready
+  - graph.changed
+  - round.completed
+emits:
+  - round.proposed
+  - campaign.stopped
+routes:
+  - when: selected candidate requires a context model
+    handoff: context-modeler
+    reason: compile the smallest sufficient architectural dossier
+  - when: candidate primitive requests adversarial review
+    handoff: skeptic
+    reason: search for counterevidence before promotion
+

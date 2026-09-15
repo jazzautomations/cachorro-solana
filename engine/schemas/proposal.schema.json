@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/proposal.schema.json",
+  "title": "Candidate research round proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposal_id", "lane", "objective", "information_gain", "impact_potential",
+    "reachability", "novelty", "exploration_bonus", "cost", "operational_risk",
+    "difficulty", "repetition_count", "target", "action", "side_effect",
+    "stopping_condition"
+  ],
+  "properties": {
+    "proposal_id": {"type": "string", "minLength": 8},
+    "lane": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]*$"},
+    "objective": {"type": "string", "minLength": 15},
+    "information_gain": {"type": "number", "minimum": 0, "maximum": 1},
+    "impact_potential": {"type": "number", "minimum": 0, "maximum": 1},
+    "reachability": {"type": "number", "minimum": 0, "maximum": 1},
+    "novelty": {"type": "number", "minimum": 0, "maximum": 1},
+    "exploration_bonus": {"type": "number", "minimum": 0, "maximum": 1},
+    "cost": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+    "operational_risk": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+    "difficulty": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+    "repetition_count": {"type": "integer", "minimum": 0},
+    "target": {"type": "string", "minLength": 1},
+    "action": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]*$"},
+    "side_effect": {
+      "enum": [
+        "none", "workspace_write", "network_read", "target_state_change",
+        "credential_use", "code_execution", "external_service", "destructive_test"
+      ]
+    },
+    "stopping_condition": {"type": "string", "minLength": 10},
+    "required_capabilities": {
+      "type": "array", "uniqueItems": true, "items": {"type": "string"}
+    }
+  }
+}

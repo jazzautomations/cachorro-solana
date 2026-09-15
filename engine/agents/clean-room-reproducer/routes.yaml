@@ -1,0 +1,13 @@
+schema_version: "0.1.0"
+accepts:
+  - primitive.verified
+  - chain.verified
+emits:
+  - reproduction.verified
+  - reproduction.refuted
+  - reproduction.inconclusive
+routes:
+  - when: replay yields any verdict and complete artifacts
+    handoff: skeptic
+    reason: independent counterreview remains mandatory before reporting
+

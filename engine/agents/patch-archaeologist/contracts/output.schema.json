@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["invariant", "variant_seeds", "classified_negatives", "artifact_ids"],
+  "properties": {
+    "invariant": {"type": "string", "minLength": 20},
+    "variant_seeds": {"type": "array", "items": {"type": "object"}},
+    "classified_negatives": {"type": "array", "items": {"type": "object"}},
+    "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}
+

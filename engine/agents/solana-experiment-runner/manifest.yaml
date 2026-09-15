@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+name: solana-experiment-runner
+version: "0.1.0"
+description: Executes bounded treatment-control Solana PoC experiments through policy-locked adapters and emits candidate signals, never findings.
+instruction: AGENT.md
+capabilities:
+  - experiment.solana.poc
+  - oracle.observe
+  - evidence.capture
+tools:
+  - name: litesvm-poc
+    mode: execute
+    mutates_target: false
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects:
+  - workspace_write
+budgets:
+  max_turns: 8
+  max_tool_calls: 24
+  max_wall_seconds: 900
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/bounded-solana-experiments/SKILL.md
+child_agents: []
+runtime_requirements:
+  - cargo>=1.90

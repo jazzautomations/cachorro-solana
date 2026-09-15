@@ -1,0 +1,14 @@
+{
+  "name": "HexStrike AI",
+  "repository": "https://github.com/0x4m4/hexstrike-ai",
+  "commit": "d689933ff579d839c676c82b231f8e98326c5f04",
+  "commit_date": "2026-08-03T18:33:01+04:00",
+  "license": "MIT",
+  "integration": "loopback HTTP compatibility API",
+  "reviewed_profiles": [
+    "subfinder-passive",
+    "gau-archive",
+    "waybackurls-archive"
+  ],
+  "copied_upstream_code": false
+}

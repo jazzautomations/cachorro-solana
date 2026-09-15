@@ -1,0 +1,24 @@
+schema_version: "0.1.0"
+name: hypothesis-builder
+version: "0.1.0"
+description: Converts bounded dossiers into independent, falsifiable vulnerability hypotheses and explicit context gaps.
+instruction: AGENT.md
+capabilities:
+  - hypothesis.generate
+  - hypothesis.diversify
+  - hypothesis.dedupe
+tools: []
+side_effects:
+  - none
+budgets:
+  max_turns: 8
+  max_tool_calls: 8
+  max_wall_seconds: 600
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/falsifiable-portfolio/SKILL.md
+child_agents: []
+runtime_requirements: []
+

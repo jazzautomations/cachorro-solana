@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/eval-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "condition", "trial_id", "target_id", "model", "model_version",
+    "target_snapshot", "budget_id", "verified_bug_ids", "reported_findings",
+    "false_positives", "clean_reproductions", "coverage", "cost_usd",
+    "elapsed_seconds", "policy_violations"
+  ],
+  "properties": {
+    "condition": {"type": "string", "minLength": 1},
+    "trial_id": {"type": "string", "minLength": 1},
+    "target_id": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "model_version": {"type": "string", "minLength": 1},
+    "target_snapshot": {"type": "string", "minLength": 1},
+    "budget_id": {"type": "string", "minLength": 1},
+    "verified_bug_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "reported_findings": {"type": "integer", "minimum": 0},
+    "false_positives": {"type": "integer", "minimum": 0},
+    "clean_reproductions": {"type": "integer", "minimum": 0},
+    "coverage": {"type": "number", "minimum": 0},
+    "cost_usd": {"type": "number", "minimum": 0},
+    "elapsed_seconds": {"type": "number", "minimum": 0},
+    "policy_violations": {"type": "integer", "minimum": 0}
+  }
+}
+

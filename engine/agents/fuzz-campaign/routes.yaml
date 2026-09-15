@@ -1,0 +1,14 @@
+schema_version: "0.1.0"
+accepts: [harness.candidate, fuzz.resume]
+emits: [fuzz.feedback, crash.candidate, fuzz.stopped]
+routes:
+  - when: coverage stagnates or a target path diverges
+    handoff: coverage-analyst
+    reason: localize the blocker and request selective context
+  - when: a new crash signature appears
+    handoff: skeptic
+    reason: deduplicate and design a semantic oracle with negative control
+  - when: current harness is structurally inadequate
+    handoff: harness-factory
+    reason: create an orthogonal harness or structured generator
+

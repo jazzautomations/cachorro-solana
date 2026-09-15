@@ -1,0 +1,2 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["classification","first_divergence","context_requests","artifact_ids"],"properties":{"classification":{"enum":["harness","input-structure","state","environment","unreachable","unknown"]},"first_divergence":{"type":["string","null"]},"context_requests":{"type":"array","items":{"type":"object"}},"artifact_ids":{"type":"array","items":{"type":"string"}}},"additionalProperties":false}
+

@@ -1,0 +1,7 @@
+schema_version: "0.1.0"
+accepts:
+  - example.input
+emits:
+  - example.output
+routes: []
+

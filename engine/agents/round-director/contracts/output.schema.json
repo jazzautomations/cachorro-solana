@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "reason", "selected", "alternates"],
+  "properties": {
+    "decision": {"enum": ["continue", "pause", "stop"]},
+    "reason": {"type": "string", "minLength": 10},
+    "selected": {
+      "oneOf": [
+        {"$ref": "../../../schemas/proposal.schema.json"},
+        {"type": "null"}
+      ]
+    },
+    "alternates": {"type": "array", "items": {"type": "object"}}
+  }
+}

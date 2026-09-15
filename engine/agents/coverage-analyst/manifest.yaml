@@ -1,0 +1,19 @@
+schema_version: "0.1.0"
+name: coverage-analyst
+version: "0.1.0"
+description: Converts coverage and execution traces into semantic blockers, context requests and harness feedback.
+instruction: AGENT.md
+capabilities: [coverage.analyze, coverage.blocker, context.request]
+tools:
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects: [workspace_write]
+budgets: {max_turns: 8, max_tool_calls: 20, max_wall_seconds: 900}
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills: []
+child_agents: []
+runtime_requirements: []
+

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pentest-agent.local/schemas/round.schema.json",
+  "title": "Persisted research round",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "round_id", "cycle_id", "kind", "objective", "agent_name",
+    "agent_package_hash", "graph_revision_in", "scope_receipt_id", "budget",
+    "hypothesis_ids", "experiment_ids", "artifact_ids", "observation_ids",
+    "graph_revision_out", "decision", "decision_reason", "next_candidates"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "round_id": {"type": "string", "minLength": 8},
+    "cycle_id": {"type": "string", "minLength": 8},
+    "kind": {
+      "enum": [
+        "surface", "context", "history", "hypothesis", "experiment",
+        "execution", "refutation", "synthesis", "reproduction", "fuzz"
+      ]
+    },
+    "objective": {"type": "string", "minLength": 10},
+    "agent_name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "agent_package_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "graph_revision_in": {"type": "integer", "minimum": 0},
+    "scope_receipt_id": {"type": "string", "minLength": 8},
+    "budget": {"type": "object"},
+    "hypothesis_ids": {"type": "array", "items": {"type": "string"}},
+    "experiment_ids": {"type": "array", "items": {"type": "string"}},
+    "artifact_ids": {"type": "array", "items": {"type": "string"}},
+    "observation_ids": {"type": "array", "items": {"type": "string"}},
+    "graph_revision_out": {"type": "integer", "minimum": 0},
+    "contradiction_ids": {"type": "array", "items": {"type": "string"}},
+    "decision": {"enum": ["continue", "branch", "refute", "verify", "pause", "stop"]},
+    "decision_reason": {"type": "string", "minLength": 10},
+    "next_candidates": {"type": "array", "items": {"type": "string"}}
+  }
+}

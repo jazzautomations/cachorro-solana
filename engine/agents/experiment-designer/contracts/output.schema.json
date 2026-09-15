@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id", "hypothesis_id", "treatment", "negative_control", "oracle",
+    "target", "action", "side_effect", "repetitions", "timeout_seconds",
+    "stopping_condition", "required_capabilities"
+  ],
+  "properties": {
+    "experiment_id": {"type": "string", "minLength": 8},
+    "hypothesis_id": {"type": "string", "minLength": 8},
+    "treatment": {"type": "object"},
+    "negative_control": {"type": "object"},
+    "oracle": {"type": "string", "minLength": 15},
+    "target": {"type": "string", "minLength": 1},
+    "action": {"type": "string", "minLength": 3},
+    "side_effect": {"type": "string", "minLength": 3},
+    "repetitions": {"type": "integer", "minimum": 1, "maximum": 100},
+    "timeout_seconds": {"type": "integer", "minimum": 1, "maximum": 86400},
+    "stopping_condition": {"type": "string", "minLength": 10},
+    "required_capabilities": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

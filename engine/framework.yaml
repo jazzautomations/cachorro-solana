@@ -1,0 +1,40 @@
+schema_version: "0.1.0"
+name: pentest-agent-v3
+version: "0.3.0"
+description: Oracle-driven, multi-round framework for authorized vulnerability research.
+agent_roots:
+  - agents
+policy: policies/default.yaml
+schemas:
+  agent_manifest: schemas/agent-manifest.schema.json
+  routes: schemas/routes.schema.json
+  round: schemas/round.schema.json
+  observation: schemas/observation.schema.json
+  hypothesis: schemas/hypothesis.schema.json
+  evidence: schemas/evidence.schema.json
+  finding: schemas/finding.schema.json
+  scope_receipt: schemas/scope-receipt.schema.json
+  proposal: schemas/proposal.schema.json
+  fuzz_feedback: schemas/fuzz-feedback.schema.json
+  eval_result: schemas/eval-result.schema.json
+  approval: schemas/approval.schema.json
+runtime:
+  max_agent_nesting: 3
+  max_rounds: 64
+  default_round_budget:
+    max_turns: 12
+    max_tool_calls: 40
+    max_wall_seconds: 1800
+  required_agent_files:
+    - AGENT.md
+    - manifest.yaml
+    - routes.yaml
+    - contracts/input.schema.json
+    - contracts/output.schema.json
+packaging:
+  exclude:
+    - .git
+    - __pycache__
+    - .pytest_cache
+    - dist
+    - workspaces/runs

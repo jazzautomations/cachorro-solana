@@ -1,0 +1,23 @@
+schema_version: "0.1.0"
+name: harness-factory
+version: "0.1.0"
+description: Builds and evaluates pinned networkless fuzz harnesses by compilation, stability and coverage delta.
+instruction: AGENT.md
+capabilities: [harness.design, harness.execute, harness.evaluate]
+tools:
+  - name: container-fuzz
+    mode: execute
+    mutates_target: false
+    requires_approval: true
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects: [workspace_write, code_execution]
+budgets: {max_turns: 14, max_tool_calls: 60, max_wall_seconds: 3600}
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills: []
+child_agents: []
+runtime_requirements: [docker, runsc]
+

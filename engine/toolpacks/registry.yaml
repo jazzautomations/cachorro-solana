@@ -1,0 +1,229 @@
+schema_version: "0.1.0"
+selection_rule: Prefer orthogonal feedback and verifiable reachability over scanner volume.
+packs:
+  source-core:
+    purpose: Selective source context, flows, variants and historical intent.
+    tools:
+      - name: ripgrep
+        role: exact source and artifact retrieval
+        feedback: matched locations
+        integration: external-process
+        adapter: source-browser
+        status: implemented
+      - name: git
+        role: bounded commit history and patch-intent retrieval
+        feedback: commit identities, parents, timestamps and untrusted subjects
+        integration: external-process
+        adapter: git-history
+        status: implemented
+      - name: ast-grep
+        role: syntax-aware structural search and rewrite matching
+        feedback: typed syntax matches
+        integration: external-process
+        status: planned
+      - name: Semgrep
+        role: customizable static analysis and local rule experiments
+        feedback: structured source findings
+        integration: external-process
+        status: planned
+      - name: CodeQL
+        role: interprocedural flow queries and variant analysis
+        feedback: query results and paths
+        integration: external-process
+        status: planned-license-review
+      - name: Joern
+        role: code-property-graph queries across syntax, control and data flow
+        feedback: graph paths and reachable sinks
+        integration: external-process
+        status: planned
+
+  native-fuzz:
+    purpose: Coverage-guided generation, harness diagnosis and reproducible crashes.
+    tools:
+      - name: libFuzzer
+        role: in-process coverage-guided fuzzing with sanitizers
+        feedback: coverage, corpus and minimized crash
+        integration: external-process
+        status: planned
+      - name: AFL++
+        role: high-performance instrumentation and mutation ecosystem
+        feedback: edge coverage, queue state and crashes
+        integration: isolated-external-process
+        status: planned-license-review
+      - name: LibAFL
+        role: composable custom fuzzers and feedback pipelines
+        feedback: user-defined observers, feedbacks and objectives
+        integration: external-process
+        status: planned
+      - name: OSS-Fuzz-Gen
+        role: LLM-assisted harness generation evaluated by compilation and coverage
+        feedback: build, run, coverage delta and crash result
+        integration: isolated-external-process
+        status: planned
+      - name: Fuzz Introspector
+        role: locate harness blockers and unreached functions
+        feedback: reachability and coverage gaps
+        integration: external-process
+        status: planned
+
+  managed-fuzz:
+    purpose: Coverage-guided campaigns for managed runtimes.
+    tools:
+      - name: Jazzer
+        role: JVM coverage-guided fuzzing and sanitizer hooks
+        feedback: coverage and reproducible finding
+        integration: external-process
+        status: planned
+      - name: Atheris
+        role: Python coverage-guided fuzzing
+        feedback: Python/native coverage and crashes
+        integration: external-process
+        status: planned
+
+  api-stateful:
+    purpose: Generate valid multi-request sequences and test state invariants.
+    tools:
+      - name: RESTler
+        role: producer-consumer dependency inference and stateful API sequence fuzzing
+        feedback: sequence depth, checker result and replay log
+        integration: isolated-external-process
+        status: planned
+      - name: Schemathesis
+        role: property-based OpenAPI and GraphQL testing with state machines
+        feedback: minimized counterexample and reproduction command
+        integration: external-process
+        status: planned
+
+  specialist-generators:
+    purpose: Domain grammars and state-aware generation where generic fuzzers stall.
+    tools:
+      - name: syzkaller
+        role: kernel syscall program generation and coverage-guided mutation
+        feedback: coverage, crash and minimized reproducer
+        integration: isolated-external-process
+        status: planned
+      - name: AFLNet
+        role: protocol-state-aware network fuzzing
+        feedback: state transitions, coverage and replayable sequences
+        integration: isolated-external-process
+        status: planned-license-review
+      - name: Fuzzilli
+        role: JavaScript engine program generation with execution feedback
+        feedback: coverage and minimized programs
+        integration: isolated-external-process
+        status: planned
+      - name: Domato
+        role: grammar-based DOM and browser testcase generation
+        feedback: generated corpus and crash artifacts
+        integration: isolated-external-process
+        status: planned
+
+  dynamic-analysis:
+    purpose: Turn hypotheses into causal runtime evidence.
+    tools:
+      - name: sanitizers
+        role: ASan, MSan, UBSan and TSan security-property oracles
+        feedback: instrumented violation trace
+        integration: compiler-runtime
+        status: planned
+      - name: debugger
+        role: breakpoints, state inspection and executed-line localization
+        feedback: state snapshots and reached locations
+        integration: isolated-external-process
+        status: planned
+      - name: Frida
+        role: runtime instrumentation at trust boundaries
+        feedback: structured hooks and traces
+        integration: isolated-external-process
+        status: planned-license-review
+
+  program-analysis:
+    purpose: Explore hard paths that coverage-guided mutation cannot reach alone.
+    tools:
+      - name: angr
+        role: symbolic and concolic path exploration
+        feedback: path constraints and concrete inputs
+        integration: isolated-external-process
+        status: planned
+      - name: KLEE
+        role: symbolic execution of LLVM programs
+        feedback: path tests and assertion violations
+        integration: isolated-external-process
+        status: planned-license-review
+      - name: SymCC
+        role: compiler-based concolic execution paired with fuzzers
+        feedback: new path inputs and constraints
+        integration: isolated-external-process
+        status: planned-license-review
+
+  web-surface:
+    purpose: Map authorized surface and provide replayable web observations.
+    tools:
+      - name: curl
+        role: DNS-pinned GET/HEAD observation without automatic redirects
+        feedback: raw response artifact and bounded untrusted envelope
+        integration: external-process
+        adapter: http-observe
+        status: implemented
+      - name: Katana
+        role: crawler and endpoint discovery
+        feedback: normalized URL and request corpus
+        integration: external-process
+        status: planned
+      - name: Nuclei
+        role: templated hypotheses and regression probes
+        feedback: structured template observations
+        integration: external-process
+        status: planned
+      - name: intercepting-proxy
+        role: exact request replay, mutation and evidence capture
+        feedback: raw request-response artifacts
+        integration: capability-mediated
+        status: planned
+      - name: bounded-sqli-differential
+        role: paired baseline/true/false GET experiments without extraction or timing payloads
+        feedback: repeatable response fingerprints and policy-stop signals
+        integration: capability-mediated
+        adapter: sqli-differential
+        status: implemented
+      - name: HexStrike-passive-bridge
+        role: closed-profile passive subdomain and public-archive discovery through a loopback HexStrike service
+        feedback: bounded untrusted output plus normalized in-scope candidates
+        integration: capability-mediated-loopback
+        adapter: hexstrike-passive
+        status: implemented
+
+  bug-bounty-program-packs:
+    purpose: Encode public program rules into short-lived signed execution scope.
+    tools:
+      - name: eternal-pack
+        role: low-volume Eternal web observations with mandatory researcher identification
+        feedback: scope-bound response artifacts and policy-stop signals
+        integration: capability-mediated
+        status: implemented
+
+  solana-core:
+    purpose: Read-only Solana/Anchor source and on-chain surface for context and coverage.
+    tools:
+      - name: anchor-static-scan
+        role: source-only Anchor/Solana lint heuristics and dependency audit (no target build)
+        feedback: typed static observations (unchecked accounts, missing authority, casts, CPI)
+        integration: external-process
+        adapter: anchor-static-scan
+        status: implemented
+      - name: solana-program-dump
+        role: DNS-pinned read-only on-chain program/account dump via the solana CLI + RPC
+        feedback: program bytes and account listing as a bounded untrusted envelope
+        integration: external-process
+        adapter: solana-program-dump
+        status: implemented
+
+  solana-dynamic:
+    purpose: Turn a Solana hypothesis into causal differential PoC evidence on a self-compiled corpus.
+    tools:
+      - name: litesvm-poc
+        role: in-process differential PoC (treatment vs minimal-delta control) on a trusted corpus
+        feedback: per-repetition treatment/control booleans for the binary differential oracle
+        integration: trusted-process
+        adapter: litesvm-poc
+        status: implemented

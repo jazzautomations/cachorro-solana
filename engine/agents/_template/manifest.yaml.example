@@ -1,0 +1,21 @@
+schema_version: "0.1.0"
+name: replace-me
+version: "0.1.0"
+description: Replace with a bounded description of this agent package.
+instruction: AGENT.md
+capabilities:
+  - research.example
+tools: []
+side_effects:
+  - none
+budgets:
+  max_turns: 8
+  max_tool_calls: 20
+  max_wall_seconds: 900
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills: []
+child_agents: []
+runtime_requirements: []
+

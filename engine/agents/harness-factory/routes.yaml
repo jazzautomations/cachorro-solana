@@ -1,0 +1,11 @@
+schema_version: "0.1.0"
+accepts: [harness.requested, coverage.blocker]
+emits: [harness.candidate, harness.rejected]
+routes:
+  - when: a harness compiles, runs stably and creates coverage delta
+    handoff: fuzz-campaign
+    reason: begin or resume the bounded fuzz campaign
+  - when: a harness stalls at a semantic blocker
+    handoff: coverage-analyst
+    reason: localize the missing state or input constraint
+

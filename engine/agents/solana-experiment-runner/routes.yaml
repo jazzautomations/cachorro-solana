@@ -1,0 +1,19 @@
+schema_version: "0.1.0"
+accepts:
+  - experiment.approved
+  - hypothesis.selected
+emits:
+  - experiment.observed
+  - candidate.signal
+  - hypothesis.falsified
+  - policy.stopped
+routes:
+  - when: a stable treatment-control differential survives bounded repetition
+    handoff: skeptic
+    reason: challenge benign explanations before any reproduction attempt
+  - when: the signal survives skeptic review
+    handoff: clean-room-reproducer
+    reason: independently replay the minimal experiment
+  - when: the experiment is negative, unstable or policy-stopped
+    handoff: round-director
+    reason: update the graph and select an orthogonal next trajectory

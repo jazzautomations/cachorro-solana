@@ -1,0 +1,12 @@
+schema_version: "0.1.0"
+accepts:
+  - context.requested
+  - contradiction.context
+emits:
+  - context.compiled
+  - context.blocked
+routes:
+  - when: compiled dossier exposes a candidate mechanism
+    handoff: round-director
+    reason: schedule an independent hypothesis or experiment round
+

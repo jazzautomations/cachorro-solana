@@ -1,0 +1,39 @@
+schema_version: "0.1.0"
+name: cartographer
+version: "0.2.0"
+description: Maps authorized web and source surfaces through mediated read-only adapters and emits coverage deltas.
+instruction: AGENT.md
+capabilities:
+  - surface.http.observe
+  - surface.hexstrike.passive
+  - surface.normalize
+  - coverage.surface
+  - surface.solana.dump
+tools:
+  - name: http-observe
+    mode: read
+    mutates_target: false
+  - name: solana-program-dump
+    mode: read
+    mutates_target: false
+  - name: hexstrike-passive
+    mode: execute
+    mutates_target: false
+  - name: artifact-reader
+    mode: read
+    mutates_target: false
+side_effects:
+  - workspace_write
+  - network_read
+budgets:
+  max_turns: 12
+  max_tool_calls: 60
+  max_wall_seconds: 1800
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/surface-coverage/SKILL.md
+child_agents: []
+runtime_requirements:
+  - curl>=7.88

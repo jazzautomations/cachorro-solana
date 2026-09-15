@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+name: patch-archaeologist
+version: "0.1.0"
+description: Mines history and semantic siblings to produce falsifiable variant-analysis seeds with provenance.
+instruction: AGENT.md
+capabilities:
+  - history.reconstruct
+  - variants.seed
+  - patch.invariant
+tools:
+  - name: git-history
+    mode: read
+    mutates_target: false
+  - name: source-browser
+    mode: read
+    mutates_target: false
+side_effects:
+  - workspace_write
+budgets:
+  max_turns: 12
+  max_tool_calls: 50
+  max_wall_seconds: 1800
+contracts:
+  input: contracts/input.schema.json
+  output: contracts/output.schema.json
+skills:
+  - skills/variant-analysis/SKILL.md
+child_agents: []
+runtime_requirements: []
+

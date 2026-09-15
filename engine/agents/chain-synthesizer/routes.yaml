@@ -1,0 +1,11 @@
+schema_version: "0.1.0"
+accepts: [primitive.verified, graph.changed]
+emits: [chain.candidate, chain.rejected]
+routes:
+  - when: a compatible candidate chain needs causal verification
+    handoff: experiment-designer
+    reason: design an end-to-end treatment and negative control
+  - when: a chain survives verification
+    handoff: clean-room-reproducer
+    reason: reproduce the complete impact from fresh pinned state
+

@@ -1,0 +1,24 @@
+### zk / crypto modules present? ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/zk.rs
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs
+
+### verifying-key constants ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:32:declare_id!("GYy4kM6GHhpgLCUscuABbzkD2ZbJ2fneYryaZ6Ch7fFU");
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:5://! Generated from transaction_verification_key.json
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:49:pub const TRANSACTION_VK_IC: [[u8; 64]; 9] = [
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:112:    vk_ic: &TRANSACTION_VK_IC,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:117:// Generated from swap_verification_key.json
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:160:pub const SWAP_VK_IC: [[u8; 64]; 11] = [
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:234:    vk_ic: &SWAP_VK_IC,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs:54:    pub vk_ic: &'a [[u8; 64]],
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs:92:        if public_inputs.len() + 1 != vk.vk_ic.len() {
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs:114:        let mut acc: [u8; 64] = self.vk.vk_ic[0];
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs:123:            let mul_input = [&self.vk.vk_ic[i + 1][..], &input[..]].concat();

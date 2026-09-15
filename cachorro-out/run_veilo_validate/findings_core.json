@@ -1,0 +1,67 @@
+[
+  {
+    "vulnerability_type": "ROOT VALIDATION (verified secure - NOT a vulnerability)",
+    "severity": "informational",
+    "file": "programs/privacy-pool/src/lib.rs, programs/privacy-pool/src/merkle_tree.rs",
+    "function": "transact / MerkleTree::is_known_root",
+    "line_range": "lib.rs:3644-3658, 3476; merkle_tree.rs:116-148",
+    "description": "The #1 catastrophic privacy-pool bug (attacker-chosen Merkle root) is NOT present. transact() feeds `root` into the Groth16 public inputs at lib.rs:3644, verifies the proof at 3653, then REQUIRES the root to be a known historical root of the on-chain input tree at lib.rs:3656: `require!(MerkleTree::is_known_root(&*input_tree, root), PrivacyError::UnknownRoot)`. The input_tree account is a PDA seeded by [b\"privacy_note_tree_v3\", mint_address, input_tree_id] (lib.rs:742-747), so the attacker cannot substitute a foreign/fabricated tree. is_known_root (merkle_tree.rs:116-148) rejects the zero root and walks the 256-entry root_history ring buffer, returning true ONLY on an exact match with a genuinely stored root; there is no code path that accepts an unknown root. Root is also require_canonical'd (< Fr) in zk.rs:173 so the byte encoding is unique. An attacker therefore cannot prove membership of a self-controlled commitment against an arbitrary root.",
+    "attack_scenario": "N/A - attempted attack: pass an attacker-computed root that commits to a note the attacker controls, prove membership, and withdraw. Blocked: is_known_root only matches roots the program itself appended via MerkleTree::append, and the tree is a mint-bound PDA.",
+    "impact": "None. Pool cannot be drained via forged root.",
+    "code_snippet": "// lib.rs:3653-3656\nzk::verify_transaction_groth16(proof, &public_inputs)?;\nrequire!(MerkleTree::is_known_root(&*input_tree, root), PrivacyError::UnknownRoot);",
+    "recommendation": "No change required. (Minor non-security note: merkle_tree.rs line 8/EXPECTED_SIZE=9107 and the stale '26 * 32' test comment vs MERKLE_TREE_HEIGHT=22 are cosmetic/layout-doc drift, not exploitable.)",
+    "poc_outline": "N/A - control verified present and correct."
+  },
+  {
+    "vulnerability_type": "NULLIFIER DOUBLE-SPEND (verified secure - NOT a vulnerability)",
+    "severity": "informational",
+    "file": "programs/privacy-pool/src/lib.rs",
+    "function": "Transact context / transact / mark_nullifier_spent",
+    "line_range": "lib.rs:768-788, 3491-3496, 3660-3685, 4898-4923",
+    "description": "Double-spend is prevented at account-resolution time. Each input nullifier gets a dedicated PDA marker created with Anchor `init` (NOT init_if_needed) seeded by [b\"nullifier_v3\", mint_address, input_nullifier_N] (lib.rs:768-788). `init` fails if the PDA already exists, so a re-used nullifier aborts the tx before any state change, and this is atomic across concurrent txs (only one can create the PDA). Markers are GLOBAL (no tree_id in seeds), preventing cross-tree reuse. transact() additionally rejects equal nullifiers (3492) and zero nullifiers (3494-3496), and defensively checks !is_spent (3666-3667) before mark_nullifier_spent sets is_spent=true (4908). Nullifiers are require_canonical'd (< Fr, zk.rs:174-175) so the raw 32-byte PDA seed is 1:1 with the field element bound by the proof - no two byte-encodings collide to bypass the marker. State-change ordering is safe: proof + root + marker init all precede any fund movement in handle_public_amount.",
+    "attack_scenario": "N/A - attempted attacks (reuse same nullifier, two concurrent txs, both nullifiers equal, zero nullifier, non-canonical alias) are all rejected.",
+    "impact": "None.",
+    "code_snippet": "// lib.rs:768-775\n#[account(init, payer = relayer,\n  seeds = [b\"nullifier_v3\", mint_address.as_ref(), input_nullifier_0.as_ref()],\n  bump, space = NullifierMarker::LEN)]\npub nullifier_marker_0: Account<'info, NullifierMarker>,",
+    "recommendation": "No change required.",
+    "poc_outline": "N/A - control verified present and correct."
+  },
+  {
+    "vulnerability_type": "EXT DATA / RECIPIENT & RELAYER BINDING (verified secure - NOT a vulnerability)",
+    "severity": "informational",
+    "file": "programs/privacy-pool/src/lib.rs",
+    "function": "transact / ExtData::hash",
+    "line_range": "lib.rs:478-555, 3513-3544, 3628-3638",
+    "description": "Fee-redirection / front-running is prevented. transact() recomputes the ext-data hash on-chain from the caller-supplied ExtData (recipient, relayer, fee, refund, claimant) via ExtData::hash() and requires it to equal the ext_data_hash argument (lib.rs:3514-3515), which is itself a bound Groth16 public input (zk.rs:189). It then binds the ACTUAL accounts to the hashed values: relayer signer == ext_data.relayer (3533-3537), recipient == ext_data.recipient (3540-3544), and for token withdrawals recipient_token.owner == ext_data.recipient and relayer_token.owner == ext_data.relayer (3628-3638). Because ext_data_hash is a proof public input, a relayer/front-runner cannot swap in their own recipient/relayer without invalidating the proof. ExtData::hash reduces pubkeys mod Fr and Poseidon-hashes Poseidon(recipient,relayer), Poseidon(fee,refund), claimant (lib.rs:538-551); the claimant field (AUDIT-005) additionally binds the ephemeral claim key.",
+    "attack_scenario": "N/A - attempted attack: malicious relayer substitutes its own recipient/relayer accounts to steal a withdrawal. Blocked by the on-chain hash recomputation + account-equality checks against proof-bound ext_data_hash.",
+    "impact": "None.",
+    "code_snippet": "// lib.rs:3514-3515\nlet computed_ext_hash = ext_data.hash()?;\nrequire!(computed_ext_hash == ext_data_hash, PrivacyError::InvalidExtData);",
+    "recommendation": "No change required.",
+    "poc_outline": "N/A - control verified present and correct."
+  },
+  {
+    "vulnerability_type": "ACCOUNTING / publicAmount CONSERVATION (verified secure - NOT a vulnerability)",
+    "severity": "informational",
+    "file": "programs/privacy-pool/src/lib.rs",
+    "function": "transact / handle_public_amount / zk::i64_to_field_be",
+    "line_range": "lib.rs:3644-3653, 4932-5172; zk.rs:126-155, 186",
+    "description": "publicAmount is a single i64 used BOTH as the proof public input (zk.rs:186 i64_to_field_be, correctly encoding negatives as Fr-|x|) and as the on-chain transfer amount (handle_public_amount), so the value moved always equals the value the circuit proved (sumIns + publicAmount = sumOuts). Sign handling is correct: >0 deposit (user->vault), <0 withdrawal (vault->recipient+relayer), ==0 private transfer. Withdrawal uses unsigned_abs() to avoid i64::MIN overflow (5000). Fee/refund are constrained: deposits/transfers force fee==refund==0 (4963,5164-5167); withdrawals enforce fee+refund <= withdrawal (5015-5016), to_recipient via checked_sub (5019-5022), fee within [min_withdrawal_fee, max_fee*(1+margin)] (5043-5064), and min-withdrawal-for-fee floor (5029-5039). All arithmetic uses checked_add/sub/mul; TVL updated with checked ops. Vault-side balance is verified sufficient before payout in both token (5074-5077) and SOL (5117-5125, incl. rent-exempt + 0.01 SOL buffer) paths. A withdrawal cannot move more than the proof authorizes, and value is conserved across recipient+relayer+remaining-notes.",
+    "attack_scenario": "N/A - attempted attacks (withdraw more than deposited, sign confusion, fee/refund underflow to inflate payout) all blocked by the shared i64, checked arithmetic, and fee<=withdrawal bounds.",
+    "impact": "None.",
+    "code_snippet": "// lib.rs:5015-5022\nlet fee_plus_refund = fee.checked_add(refund).ok_or(PrivacyError::ArithmeticOverflow)?;\nrequire!(fee_plus_refund <= withdrawal_amount, PrivacyError::InvalidPublicAmount);\nlet to_recipient = withdrawal_amount.checked_sub(fee).and_then(|x| x.checked_sub(refund))...",
+    "recommendation": "No change required.",
+    "poc_outline": "N/A - control verified present and correct."
+  },
+  {
+    "vulnerability_type": "TOKEN vs SOL CONFUSION & VAULT AUTHORITY/PDA SUBSTITUTION (verified secure - NOT a vulnerability)",
+    "severity": "informational",
+    "file": "programs/privacy-pool/src/lib.rs",
+    "function": "transact / handle_public_amount / deserialize_token_account / effective_mint / is_token_mint",
+    "line_range": "lib.rs:125-127, 827-841, 3547-3640, 5066-5146",
+    "description": "Mint, vault, and vault-ATA are all bound to config, and the vault is a program-signed PDA. transact() requires mint_address == config.mint_address (3547). is_token_mint(mint) (827) selects the token vs native-SOL path off that config-bound mint, so an attacker cannot deposit a worthless SPL token and withdraw SOL: the pool is single-mint and effective_mint/is_token_mint derive from config.mint_address only. For SPL pools it enforces token_program == token::ID (3555), vault_token_account == canonical ATA(vault, config.mint_address) (3566-3575), vault_token.mint == config.mint_address (3578), and vault_token.owner == vault PDA (3581-3585). deserialize_token_account (833-841) rejects any account not owned by the SPL Token program before use, blocking fake/attacker token-account substitution. Withdrawal CPIs are signed by the vault PDA with seeds [b\"privacy_vault_v3\", config.mint_address, vault.bump] (5088,5105); the SOL path manipulates lamports directly on the vault PDA the program owns (5131-5145). The vault account itself is a PDA seeded [b\"privacy_vault_v3\", mint_address] bump=config.vault_bump (lib.rs:734-739), so it cannot be swapped for an attacker account.",
+    "attack_scenario": "N/A - attempted attacks (pass attacker-controlled token account as vault, wrong-mint ATA, deposit cheap token / withdraw SOL, substitute non-ATA vault) all blocked by ATA derivation check, mint/owner checks, SPL-owner check, and PDA seed constraints.",
+    "impact": "None.",
+    "code_snippet": "// lib.rs:3567-3585\nlet expected_vault_ata = get_associated_token_address(&ctx.accounts.vault.key(), &cfg.mint_address);\nrequire_keys_eq!(ctx.accounts.vault_token_account.key(), expected_vault_ata, PrivacyError::VaultTokenAccountNotATA);\nrequire_keys_eq!(vault_token.owner, ctx.accounts.vault.key(), PrivacyError::InvalidTokenAuthority);",
+    "recommendation": "No change required.",
+    "poc_outline": "N/A - control verified present and correct."
+  }
+]

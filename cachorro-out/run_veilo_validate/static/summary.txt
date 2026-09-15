@@ -1,0 +1,7 @@
+STATIC SCAN SUMMARY (Tue Jul 28 04:47:53 UTC 2026)
+target: cachorro-out/run_veilo_validate/repo
+rust files: 17
+instruction handlers (pub fn): 102
+Accounts structs: 44
+UncheckedAccount/AccountInfo: 150
+zk modules: 9

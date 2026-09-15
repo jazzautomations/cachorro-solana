@@ -1,0 +1,74 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "agent": {
+    "cachorro-researcher": {
+      "description": "Recon pre-auditoria Solana: tipo de protocolo, lineage de fork (tornado-nova/SPL/anchor), auditorias previas, escopo do bounty, artefatos zk publicos. So contexto tecnico.",
+      "mode": "subagent",
+      "temperature": 0.2,
+      "color": "#a855f7",
+      "prompt": "{file:./prompts/researcher.md}",
+      "permission": { "edit": { "*": "deny", "cachorro-out/**": "allow" }, "bash": "deny", "webfetch": "allow", "websearch": "allow" }
+    },
+    "cachorro-analyzer": {
+      "description": "Analise profunda de vulnerabilidades em programas Solana/Anchor/Rust (+ zk). Le o codigo, escreve findings.json. Nao altera codigo.",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "color": "#eab308",
+      "prompt": "{file:./prompts/analyzer.md}",
+      "permission": { "edit": { "*": "deny", "cachorro-out/**": "allow" }, "bash": "deny" }
+    },
+    "cachorro-devil": {
+      "description": "Advogado do Capeta. Destroi falsos positivos cruzando os findings com o codigo Rust real e a semantica de contas/PDAs.",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "color": "#ef4444",
+      "prompt": "{file:./prompts/devil.md}",
+      "permission": { "edit": { "*": "deny", "cachorro-out/**": "allow" }, "bash": "deny" }
+    },
+    "cachorro-pocsmith": {
+      "description": "Escreve PoCs Solana: anchor-test (TS) / litesvm / solana-test-validator --clone / snarkjs zk harness.",
+      "mode": "subagent",
+      "temperature": 0.2,
+      "color": "#3b82f6",
+      "prompt": "{file:./prompts/pocsmith.md}",
+      "permission": { "edit": { "*": "deny", "cachorro-out/**": "allow" }, "bash": "deny" }
+    },
+    "cachorro-reviewer": {
+      "description": "Roda os PoCs em ambiente isolado (anchor/node/solana-test-validator), corrige e classifica por reproducibilidade.",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "color": "#22c55e",
+      "prompt": "{file:./prompts/reviewer.md}",
+      "permission": {
+        "edit": { "*": "deny", "cachorro-out/**": "allow" },
+        "bash": {
+          "*": "ask",
+          "bash scripts/poc-run.sh*": "allow",
+          "node*": "allow",
+          "anchor*": "allow",
+          "solana*": "allow",
+          "npm*": "allow"
+        }
+      }
+    },
+    "cachorro-reporter": {
+      "description": "Monta o relatorio final pronto pra revisao humana a partir dos PoCs validados.",
+      "mode": "subagent",
+      "temperature": 0.2,
+      "color": "#06b6d4",
+      "prompt": "{file:./prompts/reporter.md}",
+      "permission": { "edit": { "*": "deny", "cachorro-out/**": "allow" }, "bash": "deny" }
+    }
+  },
+  "command": {
+    "cachorro-sol": {
+      "description": "Auditoria completa de programa SOLANA pra bug bounty. Arg: <git_url> ou '--program-id <PUBKEY> <cluster>'.",
+      "agent": "build",
+      "template": "Voce vai conduzir uma auditoria de programa SOLANA (Anchor/Rust) para BUG BOUNTY WHITEHAT no alvo: $ARGUMENTS\n\nPRIMEIRO leia o AGENTS.md deste projeto e siga as REGRAS DE USO sem excecao (escopo autorizado, validacao humana obrigatoria, PoC so em validador local / fork / snarkjs local, recon so de contexto tecnico, NUNCA mover fundos reais nem enviar tx pra mainnet). Voce produz candidatos de PoC validados localmente — voce NAO submete nada.\n\nCrie RUN_DIR = cachorro-out/run_<YYYYmmdd_HHMMSS>/ e passe RUN_DIR e TARGET_DIR a cada etapa.\n\nExecute o pipeline NA ORDEM:\n1. FETCH — se $ARGUMENTS for URL git: `bash scripts/fetch-target.sh --repo <url> RUN_DIR` (TARGET_DIR = RUN_DIR/repo). Se comecar com --program-id: `bash scripts/fetch-target.sh --program-id <PUBKEY> <cluster> RUN_DIR` e AVISE que bytecode nao e' fonte — tente achar o repo-fonte.\n2. STATIC — `bash scripts/static-scan.sh <TARGET_DIR> RUN_DIR`.\n3. RESEARCH — @cachorro-researcher.\n4. ANALYZE — @cachorro-analyzer (para alvos grandes, rode varias instancias por cluster: verificador zk / core-transact / access-control / CPI-DeFi).\n5. DEVIL — @cachorro-devil.\n6. POC — @cachorro-pocsmith.\n7. REVIEW — @cachorro-reviewer (roda scripts/poc-run.sh).\n8. REPORT — @cachorro-reporter.\n\nNo fim mostre ao humano: caminho do RUN_DIR, contagem verde/amarelo/vermelho, caminho do relatorio. Recomende rodar cada PoC verde manualmente antes de qualquer submissao. PARE aqui — nao submeta nada."
+    }
+  }
+}

@@ -1,0 +1,329 @@
+### UncheckedAccount / AccountInfo (verify each is validated) ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:802:    pub vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:807:    pub user_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:812:    pub recipient_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:817:    pub relayer_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:821:    pub token_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:922:    pub source_vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:959:    pub dest_vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1018:    pub swap_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1030:    pub jupiter_event_authority: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1097:    pub instructions_sysvar: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1111:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1136:    pub instructions_sysvar: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1174:    pub owner: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1293:    pub source_vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1322:    pub position_vault_pda: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1326:    pub position_vault_ata: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1354:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1367:    pub executor_dest_token: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1371:    pub dest_mint_info: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1379:    pub relayer_dest_token: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1383:    pub swap_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1386:    pub jupiter_event_authority: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1392:    pub token_2022_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1455:    pub position_vault_pda: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1459:    pub position_vault_ata: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1485:    pub usdc_vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1506:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1510:    pub executor_source_token: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1523:    pub source_mint_info: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1540:    pub swap_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1543:    pub jupiter_event_authority: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1549:    pub token_2022_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1607:    pub position_vault_pda: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1611:    pub position_vault_ata: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1637:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1641:    pub executor_source_token: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1645:    pub source_mint_info: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1658:    pub swap_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1661:    pub jupiter_event_authority: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1667:    pub token_2022_program: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1856:    pub vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1861:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1866:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1871:    pub relayer_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1905:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1933:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1957:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1982:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2007:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2031:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2055:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2079:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2103:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2128:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2138:    pub phoenix_slot: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2169:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2174:    pub executor_ph_usd_ata: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2198:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2203:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2208:    pub executor_ph_usd_ata: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2247:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2252:    pub executor_ph_usd_ata: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2257:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2262:    pub vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2292:    pub phoenix_slot: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2478:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2498:    pub instructions_sysvar: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2583:    pub vault_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2597:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2602:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2607:    pub relayer_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2650:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2655:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2694:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2727:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2732:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2767:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2772:    pub executor_token_account: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2875:    pub executor: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2880:    pub executor_token_account: UncheckedAccount<'info>,
+
+### init_if_needed (reinit risk) ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:765:    /// init (not init_if_needed) ensures the transaction fails if this PDA already exists,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:778:    /// init (not init_if_needed) ensures the transaction fails if this PDA already exists,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:971:    /// Uses init_if_needed: for native SOL swaps the executor is pre-created by fund_native_source.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:973:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:988:    /// Uses init_if_needed: pre-created by fund_native_source for native SOL swaps.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:990:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:999:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1312:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1358:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1514:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2271:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2313:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2390:    /// Dummy-input nullifier marker 0. init_if_needed: deposits reuse dummy witnesses.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2392:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2400:    /// Dummy-input nullifier marker 1. init_if_needed: deposits reuse dummy witnesses.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2402:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2417:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2834:    /// init_if_needed: deposit circuit reuses dummy zero-value witnesses.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2836:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2845:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2950:    /// init_if_needed: deposit circuit reuses dummy zero-value witnesses (mirrors reissue).
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2952:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2961:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3159:    /// init_if_needed: deposit circuit uses dummy zero nullifiers shared across all deposits.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3161:        init_if_needed,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3170:        init_if_needed,
+
+### CPI invoke/invoke_signed (check program id pinned) ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:251:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:271:        CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:471:            CpiContext::new(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:485:        CpiContext::new(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:501:        token::close_account(CpiContext::new(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:395:                CpiContext::new(ctx.accounts.token_program.to_account_info(), SyncNative {
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:414:                CpiContext::new(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:425:                CpiContext::new(ctx.accounts.token_program.to_account_info(), SyncNative {
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:451:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:621:        invoke_signed(&swap_ix, &account_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:699:        invoke_signed(&swap_ix, &account_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:838:        invoke_signed(&swap_ix, &account_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:879:                CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:894:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:916:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:931:                CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:958:        CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:971:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:409:        CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:454:    invoke_signed(&ember_wrap_ix, &ember_wrap_cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:492:    invoke_signed(&deposit_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:506:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:634:        invoke_signed(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:688:    invoke_signed(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:774:    invoke_signed(&cancel_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:872:    invoke_signed(&cancel_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:967:    invoke_signed(&transfer_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1070:    invoke_signed(&close_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1209:    invoke_signed(&withdraw_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1315:    invoke_signed(&register_ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1418:    invoke_signed(&ember_wrap_ix, &ember_wrap_cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1638:    invoke_signed(&ember_unwrap_ix, &ember_unwrap_cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1642:        CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1952:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:2128:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:2297:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:2382:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:4972:                CpiContext::new(token_program.to_account_info(), token::Transfer {
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:4982:                CpiContext::new(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:5081:                CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:5098:                    CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:84:    invoke_signed(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:482:        token::sync_native(CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:501:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:580:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:616:                CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:735:    invoke_signed(&ix, &build_decrease_request_infos(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:821:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:913:    invoke_signed(&ix, &build_decrease_request_infos(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1033:    invoke_signed(&ix, &cpi_infos, &[executor_seeds])?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1206:        token::close_account(CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1243:                CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1256:            CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1272:            token::close_account(CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1490:    invoke_signed(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:168:        CpiContext::new(system_program.to_account_info(), anchor_lang::system_program::Transfer {
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:189:        CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:219:        CpiContext::new_with_signer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:237:        CpiContext::new(system_program.clone(), anchor_lang::system_program::Transfer {
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:257:        CpiContext::new(system_program.clone(), anchor_lang::system_program::Transfer {
+
+### instruction introspection / sysvar instructions (atomicity) ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:2:use anchor_lang::solana_program::sysvar::instructions::{
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:3:    load_current_index_checked,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:4:    load_instruction_at_checked,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:167:    let ix_sysvar = ctx.accounts.instructions_sysvar.to_account_info();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:168:    let current_idx = load_current_index_checked(&ix_sysvar)? as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:169:    let next_ix = load_instruction_at_checked(current_idx + 1, &ix_sysvar).map_err(|_|
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1096:    #[account(address = anchor_lang::solana_program::sysvar::instructions::ID @ PrivacyError::Unauthorized)]
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1097:    pub instructions_sysvar: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1135:    #[account(address = anchor_lang::solana_program::sysvar::instructions::ID @ PrivacyError::Unauthorized)]
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1136:    pub instructions_sysvar: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2497:    #[account(address = anchor_lang::solana_program::sysvar::instructions::ID @ PrivacyError::Unauthorized)]
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2498:    pub instructions_sysvar: UncheckedAccount<'info>,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:176:    use anchor_lang::solana_program::sysvar::instructions as ix_sysvar;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:179:    let ixs = ctx.accounts.instructions_sysvar.to_account_info();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:180:    let current_idx = ix_sysvar::load_current_index_checked(&ixs)? as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:181:    let next_ix = ix_sysvar::load_instruction_at_checked(current_idx + 1, &ixs)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2337:        use anchor_lang::solana_program::sysvar::instructions as ix_sysvar;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2338:        let ixs = ctx.accounts.instructions_sysvar.to_account_info();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2339:        let current_idx = ix_sysvar::load_current_index_checked(&ixs)? as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2341:            ::load_instruction_at_checked(current_idx + 1, &ixs)
+
+### numeric casts (as u64 / as i64 / as u128 — overflow/sign) ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:44:        let height = tree.height as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:66:        let height = tree.height as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:67:        let root_history_size = tree.root_history_size as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:73:        let mut current_index = tree.next_index as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:107:            .ok_or(PrivacyError::MathOverflow)? as usize
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:110:        tree.root_index = new_root_index as u64;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:121:        let root_history_size = tree.root_history_size as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:122:        let current_root_index = tree.root_index as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:198:        let base = core::ptr::null::<MerkleTreeAccount>() as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:202:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).authority) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:211:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).height) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:220:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).root_history_size) as usize
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:230:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).next_index) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:239:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).root_index) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:248:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).root) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:257:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).subtrees) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:266:            ptr::addr_of!((*core::ptr::null::<MerkleTreeAccount>()).root_history) as usize - base
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:143:    let max_fee_u128 = (deposit_amount as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:144:        .checked_mul(cfg.fee_bps as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:146:    require!(max_fee_u128 <= u64::MAX as u128, PrivacyError::ExcessiveFee);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:147:    let max_fee_with_margin = (max_fee_u128 as u64)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:148:        .checked_mul((10_000u64).saturating_add(cfg.fee_error_margin_bps as u64))
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:150:        .unwrap_or(max_fee_u128 as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:155:    require!(total_outflow <= i64::MAX as u64, PrivacyError::ArithmeticOverflow);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:158:        public_amount: -(total_outflow as i64),
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:193:        let max_capacity = 1u64 << (output_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:370:    let max_fee_u128 = (reissue_amount as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:371:        .checked_mul(cfg.fee_bps as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:373:    require!(max_fee_u128 <= u64::MAX as u128, PrivacyError::ExcessiveFee);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:374:    let max_fee_with_margin = (max_fee_u128 as u64)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:375:        .checked_mul((10_000u64).saturating_add(cfg.fee_error_margin_bps as u64))
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:377:        .unwrap_or(max_fee_u128 as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:383:    require!(reissue_amount <= i64::MAX as u64, PrivacyError::ArithmeticOverflow);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:386:        public_amount: reissue_amount as i64,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:513:        let max_capacity = 1u64 << (output_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:168:    let current_idx = load_current_index_checked(&ix_sysvar)? as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:329:    let source_max_capacity = 1u64 << (source_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:335:    let dest_max_capacity = 1u64 << (dest_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:484:        let cap = 1u64 << (dest_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:504:        let cap = 1u64 << (source_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:855:    let percentage_fee = (swapped_amount as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:856:        .checked_mul(dest_config.swap_fee_bps as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:858:        .ok_or(PrivacyError::ArithmeticOverflow)? as u64;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:233:    let max_fee_u128 = (deposit_amount as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:234:        .checked_mul(cfg.fee_bps as u128)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:236:    require!(max_fee_u128 <= u64::MAX as u128, PrivacyError::ExcessiveFee);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:237:    let max_fee_with_margin = (max_fee_u128 as u64)
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:238:        .checked_mul((10_000u64).saturating_add(cfg.fee_error_margin_bps as u64))
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:240:        .unwrap_or(max_fee_u128 as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:247:    require!(total_outflow <= i64::MAX as u64, PrivacyError::ArithmeticOverflow);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:248:    let public_amount_signed = -(total_outflow as i64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:292:        let max_capacity = 1u64 << (output_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1785:    require!(amount <= i64::MAX as u64, PrivacyError::ArithmeticOverflow);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1788:        public_amount: amount as i64,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1829:        let max_capacity = 1u64 << (output_tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:210:        let n = self.num_relayers as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:228:        let max_capacity = 1u64 << (tree.height as u64);
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3330:        let n = cfg.num_relayers as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3343:        let n = cfg.num_relayers as usize;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3691:        let max_capacity = 1u64 << (output_tree.height as u64);
+
+### .unwrap()/.expect()/panic in handlers (DoS) ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:90:    hash[..8].try_into().expect("sha256 output is 32 bytes")
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:580:    let disc_bytes: [u8; 8] = order_data[..8].try_into().unwrap();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:1023:    let disc_bytes: [u8; 8] = order_data[..8].try_into().unwrap();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3346:        let idx = idx.unwrap();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:3873:        let idx = idx.unwrap();
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:96:    hash[..8].try_into().expect("sha256 output is 32 bytes")
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:208:            .unwrap()
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs:219:        BigUint::parse_bytes(MOD_STR.as_bytes(), 10).expect("bn254 modulus string should parse");
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1923:        swap_data[0..8].try_into().unwrap()
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2369:                .unwrap()
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2375:                .unwrap()
+
+### close = / lamport moves ###
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:210:    **vault_ai.try_borrow_mut_lamports()? = vault_ai
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:215:    **ctx.accounts.executor_source_token.to_account_info().try_borrow_mut_lamports()? =
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:413:            anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:985:        **vault_ai.try_borrow_mut_lamports()? = vault_ai
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:989:        **ctx.accounts.relayer.to_account_info().try_borrow_mut_lamports()? = ctx.accounts.relayer
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:997:    **executor.to_account_info().try_borrow_mut_lamports()? = 0;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:998:    **ctx.accounts.relayer.to_account_info().try_borrow_mut_lamports()? = ctx.accounts.relayer
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1166:        close = relayer,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1424:        close = relayer,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1580:        close = relayer,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1714:        close = relayer,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:1725:        close = relayer,
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2589:    /// `system_program::transfer(from = executor)`, which Solana rejects if the
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:2647:    /// `system_program::transfer(from = executor)`. The handler tops it up with SOL.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:4981:            anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:5131:            **vault_ai.try_borrow_mut_lamports()? = vault_ai
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:5136:            **recipient_ai.try_borrow_mut_lamports()? = recipient_ai
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:5141:            **relayer_ai.try_borrow_mut_lamports()? = relayer_ai
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:59:/// via `system_program::transfer(from = executor)` — legal only because the executor is
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:227:    **vault_info.try_borrow_mut_lamports()? -= deposit_amount;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:228:    **ctx.accounts.executor_wsol_ata.to_account_info().try_borrow_mut_lamports()? += deposit_amount;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:600:            let mut vault_lamports = vault_ai.try_borrow_mut_lamports()?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:601:            let mut relayer_lamports = relayer_ai.try_borrow_mut_lamports()?;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:602:            **vault_lamports = vault_lamports
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:605:            **relayer_lamports = relayer_lamports
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:1334:/// Settle native-SOL proceeds that the keeper returned to the executor as **native lamports**
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:167:    anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:188:    anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:218:    anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:236:    anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:256:    anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1018:    **executor_ai.try_borrow_mut_lamports()? = 0;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1019:    **ctx.accounts.relayer.to_account_info().try_borrow_mut_lamports()? = ctx.accounts.relayer
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1368:    // PositionPDA is auto-closed by Anchor `close = relayer` constraint
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1411:    **executor_ai.try_borrow_mut_lamports()? = 0;
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1412:    **ctx.accounts.relayer.to_account_info().try_borrow_mut_lamports()? = ctx.accounts.relayer
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1745:    anchor_lang::system_program::transfer(
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1796:    // PositionPDA auto-closed by Anchor `close = relayer`.
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2318:    // Both input PositionPDAs auto-closed by Anchor `close = relayer` constraint
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:2395:    **vault_ai.try_borrow_mut_lamports()? = vault_ai
+
+### Signer / has_one / constraint (presence census) ###
+cachorro-out/run_veilo_validate/repo/target/debug/build/typenum-7a31b61b38ac7733/out/tests.rs:0
+cachorro-out/run_veilo_validate/repo/target/debug/build/libsecp256k1-be0830058f8c3170/out/const.rs:0
+cachorro-out/run_veilo_validate/repo/target/debug/build/libsecp256k1-be0830058f8c3170/out/const_gen.rs:0
+cachorro-out/run_veilo_validate/repo/target/debug/build/crunchy-db7368e41f377379/out/lib.rs:0
+cachorro-out/run_veilo_validate/repo/target/debug/build/serde-c6d3080859c3d3a7/out/private.rs:0
+cachorro-out/run_veilo_validate/repo/target/debug/build/serde_core-1c9fbbded5f4dda7/out/private.rs:0
+cachorro-out/run_veilo_validate/repo/target/debug/build/thiserror-a97f0191c39000db/out/private.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/merkle_tree.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/predictions.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/swap.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/phoenix.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/lib.rs:93
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/perps.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/vk_constants.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/groth16.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/zk.rs:0
+cachorro-out/run_veilo_validate/repo/programs/privacy-pool/src/positions.rs:1

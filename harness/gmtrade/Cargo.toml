@@ -1,0 +1,16 @@
+[package]
+name = "gmtrade-rounding-harness"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Numeric harness that exercises the REAL production rounding math of gmx-solana
+# (crate `gmsol-model`) via its exported `test` feature (TestMarket) + `u128` feature.
+# No validator / no anchor build needed: the deposit/withdraw arithmetic lives in
+# this pure-Rust crate and is identical to what the `store` program calls on-chain.
+[dependencies]
+gmsol-model = { path = "../../cachorro-out/runs/gmtrade_1789497977/repo/crates/model", features = ["test", "u128"] }
+
+[[bin]]
+name = "gmtrade-rounding-harness"
+path = "src/main.rs"

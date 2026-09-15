@@ -1,0 +1,87 @@
+================ GMTrade deposit/withdraw ROUNDING numeric harness ================
+Target: gmsol-labs/gmx-solana  crate=gmsol-model (the store program's deposit/withdraw math)
+Oracle: attacker end USD value > start USD value  => VALUE EXTRACTED = BUG
+
+A u64/9 zero-fee price(l=1,s=1) dep=1      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=2      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=3      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=5      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=7      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=11     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=13     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=99     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=100    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=101    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=333    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=1000   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=9999   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=1,s=1) dep=12345  iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=1      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=2      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=3      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=5      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=7      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=11     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=13     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=99     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=100    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=101    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=333    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=1000   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=9999   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=120,s=1) dep=12345  iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=1      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=2      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=3      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=5      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=7      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=11     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=13     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=99     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=100    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=101    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=333    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=1000   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=9999   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=7,s=3) dep=12345  iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=1      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=2      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=3      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=5      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=7      iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=11     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=13     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=99     iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=100    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=101    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=333    iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=1000   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=9999   iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A u64/9 zero-fee price(l=97,s=101) dep=12345  iters=100000 cum_net_usd=0              per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=1        iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=2        iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=3        iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=5        iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=7        iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=11       iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=13       iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=100      iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=1000     iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=99999    iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+A' u128/20 zero-fee dep=1000000  iters=100000 cum_net_usd=0                    per_iter=+0.000000 best_single=0
+B u64/9 DEFAULT-fees dep=1        iters=10000  cum_net_usd=-1200000         per_iter=-120.000000 best_single=-120
+B u64/9 DEFAULT-fees dep=10       iters=10000  cum_net_usd=-1202400         per_iter=-120.240000 best_single=-120
+B u64/9 DEFAULT-fees dep=100      iters=10000  cum_net_usd=-1224000         per_iter=-122.400000 best_single=-120
+B u64/9 DEFAULT-fees dep=1000     iters=10000  cum_net_usd=-1440000         per_iter=-144.000000 best_single=-120
+B u64/9 DEFAULT-fees dep=100000   iters=10000  cum_net_usd=-168512520       per_iter=-16851.252000 best_single=-16800
+B u64/9 DEFAULT-fees dep=1000000  iters=10000  cum_net_usd=-1681200000      per_iter=-168120.000000 best_single=-168120
+
+INVARIANT victim_deposit=1000000000 victim_out=1000000000 victim_delta=+0 attacker_cum_usd_over_200k=+0
+  (victim_delta >= 0 means the pool retained value; attacker_cum <= 0 means no extraction)
+
+================================ VERDICT ================================
+RESULT: NO attacker-favorable drift in any scenario/size/price.
+Every deposit->withdraw round trip nets <= 0 to the attacker: rounding is POOL-FAVORABLE.
+Deposit mint = floor(supply*usd/pool_value); withdraw out = floor(...)/price (floor).
+Both directions floor toward the pool => dust is retained by the pool, not extractable.
+=> NOT A BUG (within rounding tolerance).

@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: (e as Error).message }, { status: 500 })
   }
 
-  let body: { target?: string; kind?: string; cluster?: string }
+  let body: { target?: string; kind?: string; cluster?: string; mode?: string }
   try {
     body = await req.json()
   } catch {
@@ -38,7 +38,12 @@ export async function POST(req: Request) {
 
   const target = (body.target || '').trim()
   const cluster = (body.cluster || 'mainnet').trim()
+  const mode = (body.mode || 'deep').trim()
   let kind = (body.kind || '').trim()
+
+  if (!['quick', 'deep', 'full'].includes(mode)) {
+    return NextResponse.json({ error: 'mode must be quick, deep or full' }, { status: 400 })
+  }
 
   if (!target) return NextResponse.json({ error: 'target is required' }, { status: 400 })
   if (!kind) kind = target.startsWith('http') ? 'repo' : 'program-id'
@@ -82,6 +87,7 @@ export async function POST(req: Request) {
     cluster: kind === 'program-id' ? cluster : undefined,
     status: 'running',
     stage: 'fetch',
+    mode,
     stages: { fetch: 'running' },
     createdAt: Math.floor(Date.now() / 1000),
   }
@@ -90,7 +96,7 @@ export async function POST(req: Request) {
   fs.renameSync(tmp, path.join(dir, 'status.json'))
 
   const runner = pickRunner()
-  const child = spawn('bash', [runner, id, kind, target, cluster], {
+  const child = spawn('bash', [runner, id, kind, target, cluster, mode], {
     detached: true,
     stdio: 'ignore',
     cwd: path.dirname(path.dirname(runner)),

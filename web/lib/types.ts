@@ -5,6 +5,7 @@ export interface JobStatus {
   cluster?: string
   status: 'running' | 'done' | 'error'
   stage: string
+  mode?: 'quick' | 'deep' | 'full'
   stages: Record<string, string>
   staticNote?: string
   error?: string
@@ -12,6 +13,10 @@ export interface JobStatus {
   reportFile?: string
   createdAt: number
   updatedAt?: number
+  targetRev?: string
+  stale?: boolean
+  staleRev?: string
+  staleSince?: number
 }
 
 export interface LintEntry { file: string; line: number; code: string }

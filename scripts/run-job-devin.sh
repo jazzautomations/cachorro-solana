@@ -13,21 +13,26 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEVIN_BIN="${DEVIN_BIN:-/root/.local/bin/devin}"
 AI_TIMEOUT="${CACHORRO_AI_TIMEOUT:-5400}"
 
+# scan modes: quick (top-1 survivor, ~40min cap), deep (top-3, default),
+# full (all survivors, deepest). Mode tunes the AI timeout + engine guidance.
+MODE_TIMEOUT() { case "$1" in quick) echo 2400 ;; full) echo 9000 ;; *) echo 5400 ;; esac; }
+
 if [[ "${1:-}" != "--inner" ]]; then
-  ID="${1:?run id}"; KIND="${2:?kind}"; TARGET="${3:?target}"; CLUSTER="${4:-mainnet}"
+  ID="${1:?run id}"; KIND="${2:?kind}"; TARGET="${3:?target}"; CLUSTER="${4:-mainnet}"; MODE="${5:-deep}"
   ST="$ROOT/cachorro-out/runs/$ID/status.json"
-  timeout 7200 bash "$ROOT/scripts/run-job-devin.sh" --inner "$ID" "$KIND" "$TARGET" "$CLUSTER"
+  OUTER=$(( ${CACHORRO_AI_TIMEOUT:-$(MODE_TIMEOUT "$MODE")} + 1200 ))
+  timeout "$OUTER" bash "$ROOT/scripts/run-job-devin.sh" --inner "$ID" "$KIND" "$TARGET" "$CLUSTER" "$MODE"
   RC=$?
-  python3 - "$ST" "$RC" <<'PY'
+  python3 - "$ST" "$RC" "$OUTER" <<'PY'
 import json, os, sys, tempfile, time
-path, rc = sys.argv[1], int(sys.argv[2])
+path, rc, outer = sys.argv[1], int(sys.argv[2]), sys.argv[3]
 try:
     with open(path) as f: d = json.load(f)
 except Exception:
     sys.exit(0)
 if d.get('status') == 'running':
     d['status'] = 'error'
-    d['error'] = 'timeout: job exceeded 7200s' if rc == 124 else 'runner exited with code %d' % rc
+    d['error'] = 'timeout: job exceeded %ss' % outer if rc == 124 else 'runner exited with code %d' % rc
     d['updatedAt'] = int(time.time())
     fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path))
     with os.fdopen(fd, 'w') as f: json.dump(d, f, indent=2)
@@ -37,7 +42,8 @@ PY
 fi
 
 shift
-ID="${1:?run id}"; KIND="${2:?kind}"; TARGET="${3:?target}"; CLUSTER="${4:-mainnet}"
+ID="${1:?run id}"; KIND="${2:?kind}"; TARGET="${3:?target}"; CLUSTER="${4:-mainnet}"; MODE="${5:-deep}"
+AI_TIMEOUT="${CACHORRO_AI_TIMEOUT:-$(MODE_TIMEOUT "$MODE")}"
 RUN="$ROOT/cachorro-out/runs/$ID"
 ST="$RUN/status.json"
 mkdir -p "$RUN"
@@ -47,7 +53,7 @@ emit() { bash "$ROOT/scripts/emit-event.sh" "$RUN" "$@"; }
 fail() { emit "engine" "runner" error "$1"; jset "status=error" "error=$1"; exit 1; }
 
 # ---------- 1. FETCH (deterministic) ----------
-jset "status=running" "stage=fetch" "stage.fetch=running" "engine=devin"
+jset "status=running" "stage=fetch" "stage.fetch=running" "engine=devin" "mode=$MODE"
 emit fetch runner action "clonando alvo: $TARGET"
 if [[ "$KIND" == "repo" ]]; then
   bash "$ROOT/scripts/fetch-target.sh" --repo "$TARGET" "$RUN" > "$RUN/fetch.log" 2>&1
@@ -60,6 +66,15 @@ if [[ "$KIND" == "repo" && ! -d "$RUN/repo" ]]; then
   fail "fetch failed: clone produced no repo (rc=$FETCH_RC)"
 fi
 jset "stage.fetch=done"
+# record what we actually hunted — the upgrade monitor compares against this
+if [[ -d "$RUN/repo" ]]; then
+  REV=$(git -C "$RUN/repo" rev-parse HEAD 2>/dev/null || true)
+elif [[ -f "$RUN/onchain/program.so" ]]; then
+  REV=$(sha256sum "$RUN/onchain/program.so" | cut -d' ' -f1)
+else
+  REV=""
+fi
+[[ -n "$REV" ]] && jset "targetRev=$REV"
 emit fetch runner obs "alvo baixado; $(du -sh "$RUN/repo" 2>/dev/null | cut -f1 || echo '?') de fonte"
 
 # ---------- 2. STATIC (deterministic) ----------
@@ -90,7 +105,12 @@ if [[ ! -x "$DEVIN_BIN" ]]; then
 fi
 
 emit engine runner action "devin assumindo — matilha solta nos estágios de IA"
-PROMPT="Leia $ROOT/.devin/skills/cachorro-sol/SKILL.md e execute o pipeline /cachorro-sol para o alvo $TARGET com RUN_DIR=$RUN e TARGET_DIR=$RUN/repo (fetch e static já feitos — vá direto pro estágio 3 RESEARCH). Siga o contrato de observabilidade do skill ao pé da letra: jset nos estágios e emit-event a cada passo. Trabalhe de forma autônoma até o REPORT; não peça confirmação."
+MODE_GUIDE="Modo DEEP (padrão): fan-out por cluster se o alvo for grande; PoC dos top-3 survivors."
+case "$MODE" in
+  quick) MODE_GUIDE="Modo QUICK: sem fan-out — um passe de ANALYZE focado nas classes T1/T2 do atlas, DEVIL só nos candidatos critical/high, PoC do top-1 survivor apenas. Velocidade > cobertura." ;;
+  full)  MODE_GUIDE="Modo FULL: fan-out por cluster obrigatório, DEVIL em dois passes (segundo passe re-lê os killed buscando ressurreição válida), PoC de TODOS os survivors ordenados por severidade. Cobertura > velocidade." ;;
+esac
+PROMPT="Leia $ROOT/.devin/skills/cachorro-sol/SKILL.md e execute o pipeline /cachorro-sol para o alvo $TARGET com RUN_DIR=$RUN e TARGET_DIR=$RUN/repo (fetch e static já feitos — vá direto pro estágio 3 RESEARCH). $MODE_GUIDE Siga o contrato de observabilidade do skill ao pé da letra: jset nos estágios e emit-event a cada passo. Trabalhe de forma autônoma até o REPORT; não peça confirmação."
 
 timeout "$AI_TIMEOUT" "$DEVIN_BIN" -p "$PROMPT" \
   --permission-mode bypass \

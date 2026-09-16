@@ -119,10 +119,27 @@ export default function ScanView({ id }: { id: string }) {
     <div className="space-y-4 sm:space-y-6">
       {/* target header */}
       <div className="border border-dark-600 bg-dark-900 p-3 sm:p-4">
-        <div className="text-[9px] text-gray-600 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}</div>
+        <div className="text-[9px] text-gray-600 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}{data.mode ? ` · ${data.mode.toUpperCase()}` : ''}</div>
         <div className="text-[11px] sm:text-sm text-neon-green font-mono break-all">{data.target}</div>
         <div className="text-[9px] text-gray-700 font-mono mt-1">{data.id}</div>
       </div>
+
+      {/* stale receipt — target moved after the hunt */}
+      {data.stale && (
+        <div className="border border-neon-yellow bg-dark-900 p-3 sm:p-4 flex flex-wrap items-center gap-3">
+          <span className="text-[10px] sm:text-xs font-arcade text-neon-yellow">[ RECEIPT STALE ]</span>
+          <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 flex-1 min-w-0">
+            target moved after this hunt — {data.targetRev?.slice(0, 8)} → {data.staleRev?.slice(0, 8)}.
+            The attestation no longer covers the live code.
+          </span>
+          <a
+            href={`/?target=${encodeURIComponent(data.target)}#hunt`}
+            className="px-2.5 py-1 border border-neon-yellow text-neon-yellow text-[8px] sm:text-[9px] font-mono hover:bg-neon-yellow hover:text-black transition-all shrink-0"
+          >
+            RE-HUNT ▸
+          </a>
+        </div>
+      )}
 
       {/* verdict banner — the outcome first, then the process */}
       {!running && data.status === 'done' && (

@@ -14,3 +14,12 @@ rec = {"ts": int(time.time()), "stage": stage, "agent": agent,
 with open(path, "a") as f:
     f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 PY
+
+# critical alert: fire-and-forget webhook on critical findings/verdicts
+if [[ -n "${CACHORRO_ALERT_URL:-}" ]] && [[ "$KIND" =~ ^(finding|verdict|poc)$ ]] && echo "$*" | grep -qiE 'critical|cr[ií]tico'; then
+  curl -s -m 5 -X POST "$CACHORRO_ALERT_URL" \
+    -H 'Content-Type: application/json' \
+    -d "$(python3 -c 'import json,sys; print(json.dumps({"run":sys.argv[1],"stage":sys.argv[2],"agent":sys.argv[3],"text":" ".join(sys.argv[4:])[:500]}))' "$(basename "$RUN")" "$STAGE" "$AGENT" "$@")" \
+    >/dev/null 2>&1 &
+fi
+exit 0

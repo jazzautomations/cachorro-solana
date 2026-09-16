@@ -11,6 +11,7 @@ export default function ScanInput() {
   const params = useSearchParams()
   const [target, setTarget] = useState('')
   const [cluster, setCluster] = useState('mainnet')
+  const [mode, setMode] = useState('deep')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 
@@ -35,7 +36,7 @@ export default function ScanInput() {
       const res = await fetch('/api/scan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ target: t, kind, cluster }),
+        body: JSON.stringify({ target: t, kind, cluster, mode }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`)
@@ -77,6 +78,25 @@ export default function ScanInput() {
         >
           {busy ? 'RELEASING…' : 'UNLEASH THE PACK'}
         </button>
+      </div>
+
+      <div className="mt-2 flex items-center gap-1 text-[8px] sm:text-[9px] font-mono">
+        <span className="text-gray-700 mr-1">mode:</span>
+        {([
+          ['quick', 'QUICK ~40min · top-1'],
+          ['deep', 'DEEP ~90min · top-3'],
+          ['full', 'FULL ~2.5h · everything'],
+        ] as const).map(([m, label]) => (
+          <button
+            key={m}
+            onClick={() => setMode(m)}
+            className={`px-2 py-0.5 border transition-colors ${
+              mode === m ? 'border-neon-green text-neon-green' : 'border-dark-600 text-gray-600 hover:text-gray-400'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-3 text-[9px] sm:text-[10px] font-mono">

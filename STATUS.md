@@ -48,3 +48,10 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 - Landing: seção LIVE BOUNTY BOARD com top 6 + link pro board.
 - Refresh: `cachorro-bounties.timer` diário 06:00 UTC.
 - Fontes futuras: Superteam Earn (earnapi não resolve DNS desta VPS — conferir), Cantina, HackenProof, Sherlock. Script já é multi-source: falha de fonte mantém dados velhos, não derruba.
+
+## Labs (módulo novo — learn by hunting)
+- `corpus/sealevel-attacks/` vendorado (33 lib.rs, variants insecure/secure/recommended por classe; fonte: coral-xyz/sealevel-attacks, Apache-2.0).
+- `scripts/build-labs.mjs` → `web/data/labs.json`: 11 labs, copy autoral + código puxado do corpus (não drifta).
+- `/labs` = currículo em 3 tiers (account model / CPI+PDA / lifecycle+sysvar); badges PACK-PROVEN nos labs que a engine já explorou de verdade.
+- `/labs/[id]` = aula: conceito, "seen in the wild" (exploit real), code compare VULNERABLE/SECURE/RECOMMENDED, UNLEASH THE PACK → hunt preenchido, link pro run que provou.
+- Roadmap de conteúdo: labs com alvo dedicado por classe (programa mínimo próprio por lab, não repo inteiro), trilhas além do Sealevel (share-inflation, oracle staleness, Token-2022), quiz/checklist "spot the bug" por lab.

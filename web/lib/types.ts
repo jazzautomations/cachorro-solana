@@ -79,6 +79,28 @@ export interface BountyIndex {
   bounties: Bounty[]
 }
 
+export interface Lab {
+  id: string
+  dir: string
+  tier: 1 | 2 | 3
+  title: string
+  vulnClass: string
+  concept: string
+  realWorld: string
+  proven?: string
+  insecure: string | null
+  secure: string | null
+  recommended: string | null
+  repoUrl: string
+  huntTarget: string
+}
+
+export interface LabIndex {
+  generatedAt: string
+  source: string
+  labs: Lab[]
+}
+
 export interface RunListItem {
   id: string
   target: string

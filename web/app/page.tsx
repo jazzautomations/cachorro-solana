@@ -235,6 +235,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LABS — learn by hunting */}
+      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-xs sm:text-lg font-arcade text-neon-purple mb-2">
+            [ LEARN BY HUNTING ]
+          </h2>
+          <p className="text-[10px] sm:text-xs text-gray-500 mb-6 font-mono max-w-2xl mx-auto leading-relaxed">
+            11 labs · every Sealevel vulnerability class · vulnerable vs secure code side by side ·
+            the real exploit it caused · and a button that sets the pack loose on it.
+          </p>
+          <a
+            href="/labs"
+            className="inline-block px-5 py-2.5 border border-neon-purple text-neon-purple font-arcade text-[9px] sm:text-[10px] hover:bg-neon-purple hover:text-black transition-all"
+          >
+            ENTER THE LABS ▸
+          </a>
+        </div>
+      </section>
+
       {/* STATS — true numbers only */}
       <section className="px-4 py-8 sm:py-12 border-t border-dark-600">
         <div className="max-w-4xl mx-auto">

@@ -11,6 +11,7 @@ export default function Navbar() {
           <a href="/#gate" className="text-gray-600 hover:text-neon-green transition-colors">PROOF</a>
           <a href="/#receipt" className="text-gray-600 hover:text-neon-green transition-colors">RECEIPT</a>
           <a href="/#hunts" className="text-gray-600 hover:text-neon-green transition-colors">HUNTS</a>
+          <a href="/pricing" className="text-gray-600 hover:text-neon-yellow transition-colors">PRICING</a>
         </div>
         <a
           href="/#hunt"

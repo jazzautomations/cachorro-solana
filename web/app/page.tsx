@@ -329,6 +329,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PRICING teaser */}
+      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-xs sm:text-lg font-arcade text-neon-yellow mb-2">
+            [ RUN WITH THE PACK ]
+          </h2>
+          <p className="text-[10px] sm:text-xs text-gray-500 mb-6 font-mono max-w-2xl mx-auto leading-relaxed">
+            Free hunts forever. Paid tiers unlock FULL mode, API keys and the watchlist —
+            paid in SOL, verified on-chain. Your payment receipt is your account.
+          </p>
+          <a
+            href="/pricing"
+            className="inline-block px-5 py-2.5 border border-neon-yellow text-neon-yellow font-arcade text-[9px] sm:text-[10px] hover:bg-neon-yellow hover:text-black transition-all"
+          >
+            SEE PACK RANKS ▸
+          </a>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
       <section className="px-4 py-12 sm:py-16 border-t border-dark-600 text-center">
         <div className="text-sm sm:text-xl font-arcade text-neon-green mb-4">READY TO HUNT?</div>

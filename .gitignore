@@ -11,3 +11,4 @@ harness/gmtrade/target/
 test-ledger/
 **/node_modules/
 cachorro-out/engine-runs/
+.secrets

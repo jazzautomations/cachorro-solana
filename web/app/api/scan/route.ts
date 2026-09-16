@@ -7,6 +7,7 @@ import {
   assertEngine, countRunning, isValidId, listRuns, pickRunner,
   PUBKEY_RE, REPO_RE, RUNS_DIR,
 } from '@/lib/cachorro'
+import { planFor, recordHunt, huntsLeft } from '@/lib/plans'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -43,6 +44,26 @@ export async function POST(req: Request) {
 
   if (!['quick', 'deep', 'full'].includes(mode)) {
     return NextResponse.json({ error: 'mode must be quick, deep or full' }, { status: 400 })
+  }
+
+  // plan gate: anonymous = STRAY (quick+deep); FULL needs a paid key
+  const apiKey = req.headers.get('x-cachorro-key')
+  const { plan, keyEntry } = planFor(apiKey)
+  if (apiKey && !keyEntry) {
+    return NextResponse.json({ error: 'invalid API key' }, { status: 401 })
+  }
+  if (!plan.modes.includes(mode)) {
+    return NextResponse.json(
+      { error: `mode ${mode.toUpperCase()} requires ${plan.id === 'free' ? 'a paid plan — see /pricing' : 'a higher plan'}` },
+      { status: 402 }
+    )
+  }
+  // monthly quota for keyed hunts (anonymous stays on the shared concurrency cap)
+  if (keyEntry) {
+    if (huntsLeft(apiKey, 0) === 0) {
+      return NextResponse.json({ error: `monthly hunt quota reached for ${plan.name}` }, { status: 429 })
+    }
+    recordHunt(apiKey!)
   }
 
   if (!target) return NextResponse.json({ error: 'target is required' }, { status: 400 })

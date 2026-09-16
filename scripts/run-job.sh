@@ -37,27 +37,7 @@ ST="$RUN/status.json"
 mkdir -p "$RUN"
 
 # atomic status.json patch: jset key=value ... ("stage.<name>=value" writes into stages{})
-jset() {
-  python3 - "$ST" "$@" <<'PY'
-import json, os, sys, tempfile, time
-path = sys.argv[1]
-try:
-    with open(path) as f: d = json.load(f)
-except Exception:
-    d = {}
-d.setdefault('stages', {})
-for p in sys.argv[2:]:
-    k, v = p.split('=', 1)
-    if k.startswith('stage.'):
-        d['stages'][k[6:]] = v
-    else:
-        d[k] = v
-d['updatedAt'] = int(time.time())
-fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path))
-with os.fdopen(fd, 'w') as f: json.dump(d, f, indent=2)
-os.replace(tmp, path)
-PY
-}
+jset() { bash "$ROOT/scripts/jset.sh" "$ST" "$@"; }
 
 fail() { jset "status=error" "error=$1"; exit 1; }
 

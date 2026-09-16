@@ -5,6 +5,13 @@ export const CACHORRO_ROOT =
   process.env.CACHORRO_ROOT || path.resolve(process.cwd(), '..')
 
 export const RUNNER = path.join(CACHORRO_ROOT, 'scripts', 'run-job.sh')
+const DEVIN_RUNNER = path.join(CACHORRO_ROOT, 'scripts', 'run-job-devin.sh')
+
+/** Devin is the default engine; CACHORRO_ENGINE=static forces the deterministic-only runner. */
+export function pickRunner(): string {
+  if (process.env.CACHORRO_ENGINE === 'static') return RUNNER
+  return fs.existsSync(DEVIN_RUNNER) ? DEVIN_RUNNER : RUNNER
+}
 export const RUNS_DIR = path.join(CACHORRO_ROOT, 'cachorro-out', 'runs')
 
 /** Throws if the engine isn't where we think it is — fail loud, not silently mock. */
@@ -133,6 +140,23 @@ export function readStatus(id: string): JobStatus | null {
   }
 }
 
+/** events.jsonl appended by scripts/emit-event.sh — the live "pack thinking" feed. */
+function parseEvents(file: string): ScanReport['events'] | undefined {
+  try {
+    const out: NonNullable<ScanReport['events']> = []
+    for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+      if (!line.trim()) continue
+      try {
+        const e = JSON.parse(line)
+        if (e && typeof e.ts === 'number' && typeof e.text === 'string') out.push(e)
+      } catch { /* partial last line while writer is mid-append — skip */ }
+    }
+    return out.length ? out : undefined
+  } catch {
+    return undefined
+  }
+}
+
 export function readReport(id: string): ScanReport | null {
   const st = readStatus(id)
   if (!st) return null
@@ -147,6 +171,7 @@ export function readReport(id: string): ScanReport | null {
     onchain: parseOnchain(path.join(dir, 'onchain', 'program_account.json')),
     fetchLog: tail(path.join(dir, 'fetch.log')),
     staticLog: tail(path.join(dir, 'static.log')),
+    events: parseEvents(path.join(dir, 'events.jsonl')),
   }
 }
 

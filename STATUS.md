@@ -26,6 +26,14 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 - **Live vs scriptado**: runtime (journal/vault/graph/oracle/gate/report/attest) = código v3 real; só a **prosa dos agentes de raciocínio** é scriptada (provider de modelo ao vivo = M2).
 - **Scoped-down conscientemente**: (a) sem `CommandProvider` ao vivo — próximo passo; (b) `litesvm-poc` só em corpus confiável (alvo de 3º = runsc + `code_execution` + approval no M2); (c) adapter `snarkjs` adiado; (d) anchor devnet ao vivo espera faucet.
 
+## M1.5 — Devin como motor + feed ao vivo — EM ANDAMENTO 16/09
+- **Devin CLI é o cérebro do pipeline** (substitui opencode nos estágios de IA): skill `.devin/skills/cachorro-sol/SKILL.md` porta o pipeline do `opencode.json`; roda headless via `devin -p --permission-mode bypass`.
+- **Observabilidade = o produto**: `scripts/emit-event.sh` → `RUN_DIR/events.jsonl` (kind: action/thought/obs/finding/verdict/poc/note/error) + `scripts/jset.sh` (status.json atômico, extraído do run-job.sh). UI renderiza `AgentFeed.tsx` ("PACK MIND") com o raciocínio ao vivo — o que cada agente está pensando/achando.
+- `scripts/run-job-devin.sh`: fetch+static determinísticos → `devin -p` toca RESEARCH→REPORT. Fallback: `CACHORRO_ENGINE=static` ou devin ausente → runner antigo. Timeout 7200s (IA: `CACHORRO_AI_TIMEOUT`, padrão 3600s).
+- `prompts/vuln-atlas.md`: atlas de vulns Solana (T1: signer/owner, substitution, CPI arbitrária, PDA/reinit, introspection, accounting/share-inflation, close; T2: oracle/staleness, remaining_accounts, upgrade-auth, Token-2022, gov; T3: DoS, ordering, zk) com exploits reais como referência (Wormhole sysvar, Cashio collateral, Crema flash-loan, Mango oracle).
+- **E2E provado 16/09**: `run_1789547662_fca40c` (sealevel-attacks via UI) — fetch+static 5s, devin assumiu, feed ao vivo mostrando researcher/analyzer pensando.
+- **Pendente**: rodada completa até REPORT; runsc (M2) pra build de 3º; Trident + solana-verify; faucet devnet p/ atestado ao vivo.
+
 ## Próximo
 1. **Live model `CommandProvider`** guiando os agentes via `agent_runner.py` (substitui a prosa scriptada) — torna o round agent-driven.
 2. **Alvo real de bounty** (Superteam/Immunefi) pela mesma espinha, com o scope receipt codificando as regras do programa.

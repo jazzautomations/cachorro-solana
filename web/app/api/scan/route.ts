@@ -4,8 +4,8 @@ import crypto from 'crypto'
 import fs from 'fs'
 import path from 'path'
 import {
-  assertEngine, countRunning, isValidId, listRuns,
-  PUBKEY_RE, REPO_RE, RUNNER, RUNS_DIR,
+  assertEngine, countRunning, isValidId, listRuns, pickRunner,
+  PUBKEY_RE, REPO_RE, RUNS_DIR,
 } from '@/lib/cachorro'
 
 export const runtime = 'nodejs'
@@ -89,10 +89,11 @@ export async function POST(req: Request) {
   fs.writeFileSync(tmp, JSON.stringify(status, null, 2))
   fs.renameSync(tmp, path.join(dir, 'status.json'))
 
-  const child = spawn('bash', [RUNNER, id, kind, target, cluster], {
+  const runner = pickRunner()
+  const child = spawn('bash', [runner, id, kind, target, cluster], {
     detached: true,
     stdio: 'ignore',
-    cwd: path.dirname(path.dirname(RUNNER)),
+    cwd: path.dirname(path.dirname(runner)),
   })
   child.unref()
 

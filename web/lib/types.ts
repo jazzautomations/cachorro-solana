@@ -15,7 +15,18 @@ export interface JobStatus {
 export interface LintEntry { file: string; line: number; code: string }
 export interface LintSection { title: string; lines: LintEntry[]; raw: string[] }
 
+export interface HuntEvent {
+  ts: number
+  stage: string
+  agent: string
+  kind: 'action' | 'thought' | 'obs' | 'finding' | 'verdict' | 'poc' | 'note' | 'error' | string
+  text: string
+}
+
 export interface ScanReport extends JobStatus {
+  events?: HuntEvent[]
+  engine?: string
+  reportFile?: string
   summary?: Record<string, string>
   sections?: LintSection[]
   zkModules?: string[]

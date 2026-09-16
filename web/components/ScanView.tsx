@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import AgentFlow from './AgentFlow'
+import AgentFeed from './AgentFeed'
 import Terminal from './Terminal'
 import type { LintSection, ScanReport } from '@/lib/types'
 
@@ -113,6 +114,10 @@ export default function ScanView({ id }: { id: string }) {
       </div>
 
       <AgentFlow stages={data.stages || {}} status={data.status} elapsed={elapsed} />
+
+      {(data.events?.length || running) && (
+        <AgentFeed events={data.events || []} live={running} />
+      )}
 
       {data.status === 'error' && (
         <div className="border border-neon-red bg-dark-900 p-3 text-[11px] font-mono text-neon-red break-words">

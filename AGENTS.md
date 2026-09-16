@@ -1,9 +1,11 @@
-# AGENTS.md — Cachorro-Solana (opencode-native)
+# AGENTS.md — Cachorro-Solana (Devin-native, opencode legado)
 
 Pipeline de auditoria de **programas Solana (Anchor/Rust, + zk)** para **bug bounty whitehat**
-(Superteam / Immunefi / Sherlock). O **opencode é o cérebro**: lê o código e raciocina com o
-modelo que **você** conectou (`opencode auth login` / `/connect`). Este projeto **não** configura
-provider nem faz chamadas de API próprias.
+(Superteam / Immunefi / Sherlock). O **Devin CLI é o cérebro**: a skill
+`.devin/skills/cachorro-sol` conduz o pipeline e narra cada passo em
+`RUN_DIR/events.jsonl`, que a web UI renderiza ao vivo (feed "PACK MIND").
+O caminho opencode (`opencode.json`, `/cachorro-sol`) segue disponível — o cérebro é
+quem você conecta; este projeto não configura provider nem faz chamadas de API próprias.
 
 Irmão do `cachorro-opencode` (EVM/Solidity). Mesma espinha (8 estágios, DEVIL, zero-falso-positivo),
 corpo trocado pra Solana: static via cargo/clippy/cargo-audit + lint de padrões Anchor; PoC via
@@ -28,7 +30,13 @@ Se algo conflitar com estas regras, pare e avise o operador.
 
 ## Como executar
 
-Dentro do opencode:
+Com Devin (motor principal — feed ao vivo na UI):
+```
+devin -p "/cachorro-sol https://github.com/ORG/programa"     # na raiz do repo
+# ou pela UI: POST /api/scan spawna scripts/run-job-devin.sh
+```
+
+Dentro do opencode (legado):
 ```
 /cachorro-sol https://github.com/ORG/programa
 /cachorro-sol --program-id GYy4kM6...Ch7fFU mainnet

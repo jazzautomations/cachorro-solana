@@ -41,3 +41,10 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 3. Anchor ao vivo assim que o faucet devnet liberar (comando acima) → assinatura real + explorer URL no pitch.
 4. 3 alvos auditados com commits datados na janela; 1 bug real.
 5. Última semana: vídeo 3min + demo 3min + GTM. Submissão em inglês.
+
+## Bounty board (módulo novo)
+- `scripts/update-bounties.mjs` indexa bounties: scrape do `/bug-bounty/` da Immunefi (RSC payload server-rendered), + página de escopo de cada programa Solana p/ extrair repos in-scope (rankeados: solana-first, evm/docs por último, cap 8). Saída: `web/data/bounties.json` (175 programas, 12 Solana, ~$6.2M).
+- `/bounties` = board expansível (filtro SOLANA/ALL, badges KYC/PoC REQUIRED, HUNT por repo → `/?target=<repo>#hunt` prefaz o ScanInput via `?target=`).
+- Landing: seção LIVE BOUNTY BOARD com top 6 + link pro board.
+- Refresh: `cachorro-bounties.timer` diário 06:00 UTC.
+- Fontes futuras: Superteam Earn (earnapi não resolve DNS desta VPS — conferir), Cantina, HackenProof, Sherlock. Script já é multi-source: falha de fonte mantém dados velhos, não derruba.

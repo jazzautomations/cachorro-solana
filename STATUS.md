@@ -65,3 +65,9 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 
 ## Deploy público (roadmap pós-demo)
 Multi-tenant real fica pro launch: contas/wallet-login, run dir isolado por usuário, quota por plano, API key p/ CI. Pré-requisito duro: sandbox runsc antes de deixar estranho apontar alvo (build.rs arbitrário + exec de PoC = RCE na VPS). Rate limit já existe (3 concorrentes) mas é por IP anônimo — precisa de identidade.
+
+## Billing (SOL-native)
+- Planos: STRAY free (quick+deep, cap compartilhado) / HUNTER 0.5 SOL/mês (30 hunts, full) / ALPHA 2 SOL/mês (ilimitado + API). Store: `web/data/billing.json`.
+- Fluxo: POST /api/billing/checkout {plan} → invoice {treasury, memo `cachorro:<plan>:<rand>`, lamports} → user paga com memo → POST /api/billing/verify {invoice, signature} confere via RPC getTransaction (jsonParsed: transfer ≥ amount pro treasury + memo presente, inner ixs inclusas) → emite `cch_*` key.
+- Gate: POST /api/scan lê X-Cachorro-Key; FULL exige key paga (402), quota mensal por key (429). Anônimo = STRAY.
+- Treasury: `.secrets/treasury.json` (gitignored), RPC via CACHORRO_RPC (devnet default p/ demo). Subir pra mainnet = env vars, zero código.

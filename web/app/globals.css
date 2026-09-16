@@ -159,3 +159,17 @@ input:-webkit-autofill:focus {
 * {
   -webkit-overflow-scrolling: touch;
 }
+
+/* glitch micro-moment: critical confirmations in the pack feed */
+@keyframes glitch {
+  0%   { text-shadow: 2px 0 #ff2a6d, -2px 0 #00d4ff; transform: translate(0); }
+  20%  { text-shadow: -3px 0 #ff2a6d, 3px 0 #00d4ff; transform: translate(1px,-1px); }
+  40%  { text-shadow: 3px 0 #ff2a6d, -3px 0 #00d4ff; transform: translate(-1px,1px); }
+  60%  { text-shadow: -2px 0 #ff2a6d, 2px 0 #00d4ff; transform: translate(0); }
+  80%  { text-shadow: 4px 0 #ff2a6d, -4px 0 #00d4ff; transform: translate(1px,0); }
+  100% { text-shadow: 0 0 8px currentColor; transform: translate(0); }
+}
+.animate-glitch {
+  animation: glitch 0.7s steps(2,end) 2;
+  color: #ff2a6d;
+}

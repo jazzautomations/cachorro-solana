@@ -45,7 +45,11 @@ export default function AgentFeed({ events, live }: { events: HuntEvent[]; live:
               <span className={`text-[9px] shrink-0 pt-px w-16 ${k.cls}`}>{k.icon} {k.label}</span>
               <div className="min-w-0 flex-1">
                 <span className="text-[9px] text-gray-600 mr-2">[{e.agent}·{e.stage}]</span>
-                <span className={`text-[10px] sm:text-[11px] break-words ${e.kind === 'finding' ? 'text-neon-yellow' : e.kind === 'error' ? 'text-neon-red' : 'text-gray-300'}`}>
+                <span className={`text-[10px] sm:text-[11px] break-words ${
+                  e.kind === 'finding' || e.kind === 'verdict'
+                    ? /critical|CONFIRMED/i.test(e.text) ? 'text-neon-yellow animate-glitch' : 'text-neon-yellow'
+                    : e.kind === 'error' ? 'text-neon-red' : 'text-gray-300'
+                }`}>
                   {e.text}
                 </span>
               </div>

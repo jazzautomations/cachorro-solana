@@ -132,6 +132,16 @@ export default function ScanView({ id }: { id: string }) {
             target moved after this hunt — {data.targetRev?.slice(0, 8)} → {data.staleRev?.slice(0, 8)}.
             The attestation no longer covers the live code.
           </span>
+          {data.kind === 'repo' && data.targetRev && data.staleRev && (
+            <a
+              href={`${data.target}/compare/${data.targetRev}...${data.staleRev}`}
+              target="_blank"
+              rel="noreferrer"
+              className="px-2.5 py-1 border border-dark-600 text-gray-500 text-[8px] sm:text-[9px] font-mono hover:text-neon-cyan shrink-0"
+            >
+              WHAT CHANGED ↗
+            </a>
+          )}
           <a
             href={`/?target=${encodeURIComponent(data.target)}#hunt`}
             className="px-2.5 py-1 border border-neon-yellow text-neon-yellow text-[8px] sm:text-[9px] font-mono hover:bg-neon-yellow hover:text-black transition-all shrink-0"

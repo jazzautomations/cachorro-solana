@@ -1,0 +1,3746 @@
+{
+  "updatedAt": "2026-09-16T11:51:45.353Z",
+  "sources": {
+    "immunefi": {
+      "status": "ok",
+      "count": 175
+    }
+  },
+  "bounties": [
+    {
+      "id": "immunefi:layerzero",
+      "source": "immunefi",
+      "project": "LayerZero",
+      "slug": "layerzero",
+      "url": "https://immunefi.com/bug-bounty/layerzero/information/",
+      "maxBounty": 15000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Astar zkEVM",
+        "Aurora",
+        "Avalanche",
+        "BSC",
+        "Base",
+        "Blast",
+        "Canto",
+        "Celo",
+        "Conflux",
+        "DOS",
+        "ETH",
+        "Fantom",
+        "Fraxtal",
+        "Fuse",
+        "Gnosis",
+        "Harmony",
+        "Horizen EON",
+        "Injective",
+        "Kava",
+        "Linea",
+        "Manta",
+        "Mantle",
+        "Merit Circle",
+        "Metis",
+        "Mode",
+        "Moonbeam",
+        "Moonriver",
+        "Optimism",
+        "Orderly",
+        "Polygon",
+        "Polygon zkEVM",
+        "Scroll",
+        "ShimmerEVM",
+        "Telos",
+        "Tenet",
+        "Viction",
+        "XPLA",
+        "Xai",
+        "Zora",
+        "opBNB",
+        "Aptos",
+        "Cronos",
+        "Rootstock",
+        "Sei",
+        "TON"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3UXQcPOIAaOkE2QBCasSKa/14893bedf55bdb191e4cf99a67203e85/LayerZero_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-07-16T21:53:08.647Z"
+    },
+    {
+      "id": "immunefi:stargate",
+      "source": "immunefi",
+      "project": "Stargate",
+      "slug": "stargate",
+      "url": "https://immunefi.com/bug-bounty/stargate/information/",
+      "maxBounty": 10000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7LX3n66MkHEBIYLZtNzQTA/811af3d0f225034e794af65976ba5d19/Stargate_logo.png",
+      "repos": [],
+      "updatedDate": "2026-05-28T11:56:20.233Z"
+    },
+    {
+      "id": "immunefi:sky",
+      "source": "immunefi",
+      "project": "Sky",
+      "slug": "sky",
+      "url": "https://immunefi.com/bug-bounty/sky/information/",
+      "maxBounty": 10000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/29CWfnhFWZUDZ0w83H0wj6/30bb70512c04338d29bd3bd5a261ad2c/Sky_Ecosystem.png",
+      "repos": [],
+      "updatedDate": "2026-09-11T05:09:54.405Z"
+    },
+    {
+      "id": "immunefi:usdt0",
+      "source": "immunefi",
+      "project": "USDT0",
+      "slug": "usdt0",
+      "url": "https://immunefi.com/bug-bounty/usdt0/information/",
+      "maxBounty": 6000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Typescript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4qpRnmuoUMcdOxUOuFQUeN/278e2ad4821b6e2dadf60d84e3a4bb4f/USDT0.png",
+      "repos": [],
+      "updatedDate": "2026-09-01T13:34:37.189Z"
+    },
+    {
+      "id": "immunefi:sparklend",
+      "source": "immunefi",
+      "project": "Spark",
+      "slug": "sparklend",
+      "url": "https://immunefi.com/bug-bounty/sparklend/information/",
+      "maxBounty": 5000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6PSQWUew0V3et86JKkvxs0/152af27a6fa55003a4cc5511f0641d17/badge__1_.png",
+      "repos": [],
+      "updatedDate": "2026-08-13T18:08:25.033Z"
+    },
+    {
+      "id": "immunefi:gmx",
+      "source": "immunefi",
+      "project": "GMX",
+      "slug": "gmx",
+      "url": "https://immunefi.com/bug-bounty/gmx/information/",
+      "maxBounty": 5000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3MNDLo0J4LVTW2PgGVCsrb/1b8813ff88a37704386e3c81237dfbbc/GMX_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-02T08:15:27.630Z"
+    },
+    {
+      "id": "immunefi:olympus",
+      "source": "immunefi",
+      "project": "Olympus",
+      "slug": "olympus",
+      "url": "https://immunefi.com/bug-bounty/olympus/information/",
+      "maxBounty": 3333333,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "Boba Network",
+        "ETH",
+        "Fantom",
+        "Optimism",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7csKh5iZlfBPWyb3cJUY5h/1b7fd615e0a6edce69010e2913edbef6/final_logo_01_07_22_OLYMPUS.png",
+      "repos": [],
+      "updatedDate": "2026-07-22T21:58:43.152Z"
+    },
+    {
+      "id": "immunefi:ethena",
+      "source": "immunefi",
+      "project": "Ethena",
+      "slug": "ethena",
+      "url": "https://immunefi.com/bug-bounty/ethena/information/",
+      "maxBounty": 3000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2SCfByxtr2f7bf1Z8Vefzb/cea115652062b3f56441d4d63702fe22/download_copy.png",
+      "repos": [],
+      "updatedDate": "2026-08-11T08:18:02.651Z"
+    },
+    {
+      "id": "immunefi:chainlink",
+      "source": "immunefi",
+      "project": "Chainlink",
+      "slug": "chainlink",
+      "url": "https://immunefi.com/bug-bounty/chainlink/information/",
+      "maxBounty": 3000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Base",
+        "Celo",
+        "ETH",
+        "Fantom",
+        "Gnosis",
+        "Linea",
+        "Metis",
+        "Moonriver",
+        "Optimism",
+        "Polygon",
+        "Scroll",
+        "Solana",
+        "Aptos"
+      ],
+      "languages": [
+        "Go",
+        "Rust",
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2NbXmUd05dVTI4CddDDFEK/62bc8a522d1b1bf77183097a87ee45d7/1200px-Chainlink_Logo__1_.png",
+      "repos": [
+        "https://github.com/smartcontractkit/chainlink-solana",
+        "https://github.com/smartcontractkit/chainlink-ccip",
+        "https://github.com/smartcontractkit/libocr",
+        "https://github.com/smartcontractkit/chainlink",
+        "https://github.com/smartcontractkit/ccip-owner-contracts",
+        "https://github.com/smartcontractkit/chainlink-common",
+        "https://github.com/smartcontractkit/external-adapters-js",
+        "https://github.com/smartcontractkit/chainlink-evm"
+      ],
+      "updatedDate": "2026-07-24T18:34:20.099Z"
+    },
+    {
+      "id": "immunefi:hyperlane",
+      "source": "immunefi",
+      "project": "Hyperlane",
+      "slug": "hyperlane",
+      "url": "https://immunefi.com/bug-bounty/hyperlane/information/",
+      "maxBounty": 2500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "BSC",
+        "Celo",
+        "ETH",
+        "Gnosis",
+        "Moonbeam",
+        "Optimism",
+        "Polygon"
+      ],
+      "languages": [
+        "NextJS",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/32dUEjoP7WozWkfwxWEhK2/92b2a5020a729f64f689dfa47af55717/Hyperlane_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-07-28T10:38:59.160Z"
+    },
+    {
+      "id": "immunefi:optimism",
+      "source": "immunefi",
+      "project": "Optimism",
+      "slug": "optimism",
+      "url": "https://immunefi.com/bug-bounty/optimism/information/",
+      "maxBounty": 2000042,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Optimism"
+      ],
+      "languages": [
+        "C/C++",
+        "Go",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/75509-lZCayrCTytqHks6hhqjFb-81Kn1Z8SSg5DCSCLlX91oISNPhHMUL.png",
+      "repos": [],
+      "updatedDate": "2026-09-01T16:28:12.432Z"
+    },
+    {
+      "id": "immunefi:rhinofi",
+      "source": "immunefi",
+      "project": "Rhino.fi",
+      "slug": "rhinofi",
+      "url": "https://immunefi.com/bug-bounty/rhinofi/information/",
+      "maxBounty": 2000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "BSC",
+        "ETH",
+        "Optimism",
+        "Polygon",
+        "Polygon zkEVM",
+        "zkSync",
+        "Starknet",
+        "Tron",
+        "Base"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/46929-RHrjSZrhVLR1lBITL1XN4.png",
+      "repos": [],
+      "updatedDate": "2026-07-20T11:03:58.754Z"
+    },
+    {
+      "id": "immunefi:gnosischain",
+      "source": "immunefi",
+      "project": "Gnosis Chain",
+      "slug": "gnosischain",
+      "url": "https://immunefi.com/bug-bounty/gnosischain/information/",
+      "maxBounty": 2000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6ibSou9KOCjwRMOviQ4op0/76c3c2bda63a9c0c8c8432d71f234f8c/Aatar_green_white.png",
+      "repos": [],
+      "updatedDate": "2026-09-10T15:09:32.275Z"
+    },
+    {
+      "id": "immunefi:arbitrum",
+      "source": "immunefi",
+      "project": "Arbitrum",
+      "slug": "arbitrum",
+      "url": "https://immunefi.com/bug-bounty/arbitrum/information/",
+      "maxBounty": 2000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4R1H4ktLiQcp601gnixkJa/20dc4d9cf5229ae712f1413d9afced4f/Arbitrum.jpeg",
+      "repos": [],
+      "updatedDate": "2026-07-30T13:48:34.594Z"
+    },
+    {
+      "id": "immunefi:lido",
+      "source": "immunefi",
+      "project": "Lido",
+      "slug": "lido",
+      "url": "https://immunefi.com/bug-bounty/lido/information/",
+      "maxBounty": 2000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "Vyper"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/62hsATkPdR14taAS7FTlXW/2b3efcb09394982db6e67d0b028a271c/G2czctJJ_400x400.png",
+      "repos": [],
+      "updatedDate": "2026-06-29T15:13:04.363Z"
+    },
+    {
+      "id": "immunefi:beanstalk",
+      "source": "immunefi",
+      "project": "Beanstalk",
+      "slug": "beanstalk",
+      "url": "https://immunefi.com/bug-bounty/beanstalk/information/",
+      "maxBounty": 1100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3H8XDjXYI9JfMPAHZRNEGw/0652faecfc8a425182a7567cc93f00e5/Beanstalk_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-01T17:43:32.028Z"
+    },
+    {
+      "id": "immunefi:veda",
+      "source": "immunefi",
+      "project": "Veda",
+      "slug": "veda",
+      "url": "https://immunefi.com/bug-bounty/veda/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7sPnqpegIJPwnGefGAuA4G/5004455ff135c3909c69a6337075934d/3ELNfUvR_400x400.png",
+      "repos": [],
+      "updatedDate": "2026-08-18T14:41:13.318Z"
+    },
+    {
+      "id": "immunefi:capyfi",
+      "source": "immunefi",
+      "project": "CapyFi",
+      "slug": "capyfi",
+      "url": "https://immunefi.com/bug-bounty/capyfi/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1EIJT2Cc6oawRdQQHlTt8B/f2a45dceb673a4b14c2f4f05dcf6e8d9/CapyFi.png",
+      "repos": [],
+      "updatedDate": "2026-08-19T10:42:33.170Z"
+    },
+    {
+      "id": "immunefi:immutable",
+      "source": "immunefi",
+      "project": "Immutable",
+      "slug": "immutable",
+      "url": "https://immunefi.com/bug-bounty/immutable/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4jyESr3DuPBvV84CVG2sL1/4a66b3f802b2aa1117a34981a098921b/immutable.png",
+      "repos": [],
+      "updatedDate": "2026-01-29T22:03:25.078Z"
+    },
+    {
+      "id": "immunefi:compoundfinance",
+      "source": "immunefi",
+      "project": "Compound Finance",
+      "slug": "compoundfinance",
+      "url": "https://immunefi.com/bug-bounty/compoundfinance/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5pzaBv2Ygrx3DN9sctxd0a/dcb98ece577d2c0ac8b6ea637e9a3069/Compound.png",
+      "repos": [],
+      "updatedDate": "2026-05-14T15:57:42.716Z"
+    },
+    {
+      "id": "immunefi:0x",
+      "source": "immunefi",
+      "project": "0x",
+      "slug": "0x",
+      "url": "https://immunefi.com/bug-bounty/0x/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Polygon",
+        "Avalanche",
+        "Arbitrum",
+        "Base",
+        "BSC",
+        "ETH",
+        "Linea",
+        "Mantle",
+        "Mode",
+        "Optimism",
+        "Scroll",
+        "Solana"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/lyQiC5BZ6cB4x9bgGUFPi/dd8c99b13df7edf308ca678c0607ee48/dlhDYt89_400x400.png",
+      "repos": [
+        "https://github.com/0xProject/0x-settler"
+      ],
+      "updatedDate": "2026-08-18T13:14:59.275Z"
+    },
+    {
+      "id": "immunefi:aave",
+      "source": "immunefi",
+      "project": "AAVE",
+      "slug": "aave",
+      "url": "https://immunefi.com/bug-bounty/aave/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5nVG9oUSZ05hb2dlIuqPU6/5d6e4c5db151fdd8fb48448990056e05/Screenshot_2024-08-12_at_5.37.45___PM.png",
+      "repos": [],
+      "updatedDate": "2026-04-17T03:19:08.603Z"
+    },
+    {
+      "id": "immunefi:staderforeth",
+      "source": "immunefi",
+      "project": "Stader for ETH",
+      "slug": "staderforeth",
+      "url": "https://immunefi.com/bug-bounty/staderforeth/information/",
+      "maxBounty": 1000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1iQDInT514hzL2832OmJSQ/81275804e386d69c44048a90c690eecb/j-TUyZEq_400x400.jpg",
+      "repos": [],
+      "updatedDate": "2025-01-01T19:57:21.288Z"
+    },
+    {
+      "id": "immunefi:ondofinance",
+      "source": "immunefi",
+      "project": "Ondo Finance",
+      "slug": "ondofinance",
+      "url": "https://immunefi.com/bug-bounty/ondofinance/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2dR2c08kamplNaWIiF37h6/c269496e763806bbbd815efa7c662590/ondo-logo.svg",
+      "repos": [],
+      "updatedDate": "2026-07-28T10:40:24.026Z"
+    },
+    {
+      "id": "immunefi:listadao",
+      "source": "immunefi",
+      "project": "Lista DAO",
+      "slug": "listadao",
+      "url": "https://immunefi.com/bug-bounty/listadao/information/",
+      "maxBounty": 1000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5aOBSUu0V6jW0Op03W4NDF/beec6ccbe2927310dffb147f24fdb902/Twitter_profile_400x400.png",
+      "repos": [],
+      "updatedDate": "2026-05-29T22:24:05.811Z"
+    },
+    {
+      "id": "immunefi:balancer",
+      "source": "immunefi",
+      "project": "Balancer Foundation",
+      "slug": "balancer",
+      "url": "https://immunefi.com/bug-bounty/balancer/information/",
+      "maxBounty": 1000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5RONBs8MvUillmn49FRQ8G/58ec9b1dcf5079426bebf218c3948166/Balancer_Logo.png",
+      "repos": [],
+      "updatedDate": "2026-07-20T16:57:54.650Z"
+    },
+    {
+      "id": "immunefi:wormhole",
+      "source": "immunefi",
+      "project": "Wormhole",
+      "slug": "wormhole",
+      "url": "https://immunefi.com/bug-bounty/wormhole/information/",
+      "maxBounty": 1000000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Go",
+        "Move",
+        "Python",
+        "Rust",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/zjpjBpSpX6wiIdgfoLeKc/b7c1a836bbc7a4a850623ddee15f3158/wormhole-logo-full-color-rgb-2000px_72ppi__1_.png",
+      "repos": [],
+      "updatedDate": "2026-08-12T14:22:36.806Z"
+    },
+    {
+      "id": "immunefi:originprotocol",
+      "source": "immunefi",
+      "project": "Origin Protocol",
+      "slug": "originprotocol",
+      "url": "https://immunefi.com/bug-bounty/originprotocol/information/",
+      "maxBounty": 1000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Base",
+        "Arbitrum"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/V5uJkzVDim5cy4syFWXHn/081f82c419fd83a700d15a8c80e46eb6/ognresized.png",
+      "repos": [],
+      "updatedDate": "2026-09-07T13:50:00.380Z"
+    },
+    {
+      "id": "immunefi:cowprotocol",
+      "source": "immunefi",
+      "project": "CoW Protocol",
+      "slug": "cowprotocol",
+      "url": "https://immunefi.com/bug-bounty/cowprotocol/information/",
+      "maxBounty": 1000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Gnosis"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2SCCBIzc5z3ZxUhwhW1NSK/c6616b0b6f3bbacfebd5a6ea18f929dd/CoW-Protocol-icon-circle-light-purple.png",
+      "repos": [],
+      "updatedDate": "2025-08-19T16:06:40.858Z"
+    },
+    {
+      "id": "immunefi:pancakeswap",
+      "source": "immunefi",
+      "project": "PancakeSwap",
+      "slug": "pancakeswap",
+      "url": "https://immunefi.com/bug-bounty/pancakeswap/information/",
+      "maxBounty": 1000000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2xJOw4FpKeRGxyQOV0RG0G/58c413a9b3969ddbd605bea881c02e72/Pancakeswap-logo.jpg",
+      "repos": [],
+      "updatedDate": "2026-04-29T15:33:33.746Z"
+    },
+    {
+      "id": "immunefi:fluxfinance",
+      "source": "immunefi",
+      "project": "Flux Finance",
+      "slug": "fluxfinance",
+      "url": "https://immunefi.com/bug-bounty/fluxfinance/information/",
+      "maxBounty": 550000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4aokvelvaJE4fFquv6ScJb/7533cb65195c3bb2c9707a314aba7776/2023-02-07_08_Small.png",
+      "repos": [],
+      "updatedDate": "2026-02-23T23:08:17.118Z"
+    },
+    {
+      "id": "immunefi:raydium",
+      "source": "immunefi",
+      "project": "Raydium",
+      "slug": "raydium",
+      "url": "https://immunefi.com/bug-bounty/raydium/information/",
+      "maxBounty": 505000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Solana"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4X5hbah3bOvGiEZIPrFmeW/30eb4e2d5a47c3eca8d10b3fcff3ee7c/Raydium_logo.jpeg",
+      "repos": [
+        "https://github.com/raydium-io/raydium-amm-v3",
+        "https://github.com/raydium-io/raydium-amm",
+        "https://github.com/raydium-io/raydium-cp-swap",
+        "https://github.com/raydium-io/raydium-docs"
+      ],
+      "updatedDate": "2026-07-09T15:21:35.875Z"
+    },
+    {
+      "id": "immunefi:1inch-SmartContracts",
+      "source": "immunefi",
+      "project": "1inch - Smart Contracts",
+      "slug": "1inch-SmartContracts",
+      "url": "https://immunefi.com/bug-bounty/1inch-SmartContracts/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-N0PfF8lPJ5UspaXfvesvo.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:57:37.687Z"
+    },
+    {
+      "id": "immunefi:babylon-labs",
+      "source": "immunefi",
+      "project": "Babylon Labs",
+      "slug": "babylon-labs",
+      "url": "https://immunefi.com/bug-bounty/babylon-labs/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Bitcoin"
+      ],
+      "languages": [
+        "Go",
+        "Typescript",
+        "JavaScript",
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5ZuVO0D8rx9fzSoB5UVsx4/e5f38f1b93be6cb32b6255c21f6db81c/NEW_Babylon_Labs.png",
+      "repos": [],
+      "updatedDate": "2026-09-03T07:58:20.643Z"
+    },
+    {
+      "id": "immunefi:etherfi",
+      "source": "immunefi",
+      "project": "Ether.fi",
+      "slug": "etherfi",
+      "url": "https://immunefi.com/bug-bounty/etherfi/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "NextJS"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6uARdqsJxpv7UY78Xbg27/bce4b93c8e971a1a55315d80310f1b9f/ether_fi1677585111698.png",
+      "repos": [],
+      "updatedDate": "2026-09-01T05:00:46.329Z"
+    },
+    {
+      "id": "immunefi:dexeprotocol",
+      "source": "immunefi",
+      "project": "DeXe Protocol",
+      "slug": "dexeprotocol",
+      "url": "https://immunefi.com/bug-bounty/dexeprotocol/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Python",
+        "Typescript",
+        "Go"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5ZQ0i4NAKMQyO19x7Z65k8/257b06a35dfa48dcdb2ec16351267695/71133570.png",
+      "repos": [],
+      "updatedDate": "2024-11-13T15:46:02.266Z"
+    },
+    {
+      "id": "immunefi:sei",
+      "source": "immunefi",
+      "project": "Sei",
+      "slug": "sei",
+      "url": "https://immunefi.com/bug-bounty/sei/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Sei"
+      ],
+      "languages": [
+        "Go",
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1lOFdVmQG8KNmJhGtr8lhs/40400407c90b0736a8e506b081b70887/Sei_Labs_Logo.png",
+      "repos": [],
+      "updatedDate": "2026-08-31T11:15:40.215Z"
+    },
+    {
+      "id": "immunefi:mETH",
+      "source": "immunefi",
+      "project": "mETH Protocol",
+      "slug": "mETH",
+      "url": "https://immunefi.com/bug-bounty/mETH/information/",
+      "maxBounty": 500000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5TuHbYiYuIs9pkt4uXgpYi/e3de325d4dccda8d68e8a4cc61e95050/mantle.png",
+      "repos": [],
+      "updatedDate": "2025-03-18T13:56:04.710Z"
+    },
+    {
+      "id": "immunefi:aera",
+      "source": "immunefi",
+      "project": "Aera",
+      "slug": "aera",
+      "url": "https://immunefi.com/bug-bounty/aera/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Arbitrum",
+        "Base",
+        "Polygon",
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/68079-n9d0rNJbDR1UhZrk5PB-8-drmxDRKWuwD1uXuimpkrn5Bgau0swQ.png",
+      "repos": [],
+      "updatedDate": "2026-04-17T02:35:37.609Z"
+    },
+    {
+      "id": "immunefi:utix",
+      "source": "immunefi",
+      "project": "Utix",
+      "slug": "utix",
+      "url": "https://immunefi.com/bug-bounty/utix/information/",
+      "maxBounty": 500000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/11JCYUuvvCgVwDyzMmDklA/79a4bfd3682951f96d5ca851f6d9abdb/10_copy.png",
+      "repos": [],
+      "updatedDate": "2025-01-24T16:07:08.781Z"
+    },
+    {
+      "id": "immunefi:ankr",
+      "source": "immunefi",
+      "project": "Ankr",
+      "slug": "ankr",
+      "url": "https://immunefi.com/bug-bounty/ankr/information/",
+      "maxBounty": 500000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC",
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [
+        "JavaScript",
+        "Vyper"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3LohZrbHuhcG4MgU2zrH4A/39bca0e7dc6e249cee3706c8c0021929/Ankr_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-05-27T11:56:16.787Z"
+    },
+    {
+      "id": "immunefi:orca",
+      "source": "immunefi",
+      "project": "Orca",
+      "slug": "orca",
+      "url": "https://immunefi.com/bug-bounty/orca/information/",
+      "maxBounty": 500000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Solana"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6p07t55yWuOlsHLiQV9xsM/61c489fc59e7233557039a6965c76000/Screenshot_2024-11-11_at_11.35.18___PM.png",
+      "repos": [
+        "https://github.com/orca-so/whirlpools",
+        "https://github.com/orca-so/xorca"
+      ],
+      "updatedDate": "2026-08-18T05:06:10.250Z"
+    },
+    {
+      "id": "immunefi:axelarnetwork",
+      "source": "immunefi",
+      "project": "Axelar Network",
+      "slug": "axelarnetwork",
+      "url": "https://immunefi.com/bug-bounty/axelarnetwork/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "Base",
+        "Blast",
+        "Celo",
+        "Centrifuge",
+        "ETH",
+        "Fantom",
+        "Filecoin",
+        "Fraxtal",
+        "Kava",
+        "Linea",
+        "Mantle",
+        "Moonbeam",
+        "Optimism",
+        "Polygon",
+        "Scroll"
+      ],
+      "languages": [
+        "Go",
+        "Rust",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/50nSUkPKWY77vhNfAtPIXc/4200a486fe40455e51f74d3bd242d735/Axelar_Logo_Symbol_Black_3x.png",
+      "repos": [],
+      "updatedDate": "2026-08-13T11:03:12.836Z"
+    },
+    {
+      "id": "immunefi:maple",
+      "source": "immunefi",
+      "project": "Maple",
+      "slug": "maple",
+      "url": "https://immunefi.com/bug-bounty/maple/information/",
+      "maxBounty": 500000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/eUOQ1h8f4Rp7j6crz0YSq/669fab983d425d27fad87560219065a5/Maple_Logo.jpg",
+      "repos": [],
+      "updatedDate": "2026-04-21T11:06:24.590Z"
+    },
+    {
+      "id": "immunefi:instadapp",
+      "source": "immunefi",
+      "project": "Instadapp",
+      "slug": "instadapp",
+      "url": "https://immunefi.com/bug-bounty/instadapp/information/",
+      "maxBounty": 500000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Optimism",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7jHZEinQjaABm48Sct1BZs/3d224c5a05bff575e14b98970f939667/Instadapp.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-11T20:28:30.647Z"
+    },
+    {
+      "id": "immunefi:benqi",
+      "source": "immunefi",
+      "project": "BENQI",
+      "slug": "benqi",
+      "url": "https://immunefi.com/bug-bounty/benqi/information/",
+      "maxBounty": 500000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Avalanche"
+      ],
+      "languages": [
+        "ReactJS",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/14300-nU4DSeZAHougwVPw4q-SQ-Wooj2YwSfUcpv5Msnb6tyrMGQU4XKm.png",
+      "repos": [],
+      "updatedDate": "2026-08-05T13:40:26.978Z"
+    },
+    {
+      "id": "immunefi:defisaver",
+      "source": "immunefi",
+      "project": "DeFi Saver",
+      "slug": "defisaver",
+      "url": "https://immunefi.com/bug-bounty/defisaver/information/",
+      "maxBounty": 350000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1S8ggfDmWMZTN2T6wcMNaS/b56ce9699295511536c8e970e550ee9c/Defisaver-logo.jpg",
+      "repos": [],
+      "updatedDate": "2025-09-24T13:20:19.707Z"
+    },
+    {
+      "id": "immunefi:zksyncera",
+      "source": "immunefi",
+      "project": "ZKsync Era",
+      "slug": "zksyncera",
+      "url": "https://immunefi.com/bug-bounty/zksyncera/information/",
+      "maxBounty": 300000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "zkSync"
+      ],
+      "languages": [
+        "Solidity",
+        "Yul"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5C91MGheTJXJfhYXd7Jjry/89c1af83fcb8de564462eb5e0e727012/era-arrows-white__1_.png",
+      "repos": [],
+      "updatedDate": "2026-09-02T05:24:13.620Z"
+    },
+    {
+      "id": "immunefi:Aevo",
+      "source": "immunefi",
+      "project": "Aevo",
+      "slug": "Aevo",
+      "url": "https://immunefi.com/bug-bounty/Aevo/information/",
+      "maxBounty": 300000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Solana"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1ORcP6RE6HcGhV4bTAv8AN/8ce035bee832701401c4576fda63117c/Ribbon-logo.svg",
+      "repos": [],
+      "updatedDate": "2026-07-23T08:56:16.945Z"
+    },
+    {
+      "id": "immunefi:sbtc",
+      "source": "immunefi",
+      "project": "sBTC",
+      "slug": "sbtc",
+      "url": "https://immunefi.com/bug-bounty/sbtc/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Stacks",
+        "Bitcoin"
+      ],
+      "languages": [
+        "Rust",
+        "Clarity",
+        "Bitcoin Script"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/83952-KDZr6EBKuDmZsJaPtZ9vZ.png",
+      "repos": [],
+      "updatedDate": "2026-08-31T07:56:38.504Z"
+    },
+    {
+      "id": "immunefi:royco",
+      "source": "immunefi",
+      "project": "Royco",
+      "slug": "royco",
+      "url": "https://immunefi.com/bug-bounty/royco/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Arbitrum",
+        "Base",
+        "Avalanche"
+      ],
+      "languages": [
+        "Solidity",
+        "JavaScript",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4Hh4QPr7P8sC92rhy3vTc9/ef9957de799e11eb119a3d25f4db6d00/Royco.png",
+      "repos": [],
+      "updatedDate": "2026-08-12T04:40:24.274Z"
+    },
+    {
+      "id": "immunefi:parallel",
+      "source": "immunefi",
+      "project": "Parallel",
+      "slug": "parallel",
+      "url": "https://immunefi.com/bug-bounty/parallel/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Polygon",
+        "Arbitrum",
+        "Avalanche",
+        "Base",
+        "Gnosis",
+        "LayerZero",
+        "Optimism",
+        "Scroll",
+        "Sei",
+        "BSC",
+        "xDAI / Gnosis Chain"
+      ],
+      "languages": [
+        "JavaScript",
+        "NextJS",
+        "ReactJS",
+        "Solidity",
+        "Typescript",
+        "Go"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2cR3OuUeSXBHqSGDcezrsX/90bffee28924be018f95fac32470840b/Parallel_Protocol.png",
+      "repos": [],
+      "updatedDate": "2026-06-30T11:00:09.911Z"
+    },
+    {
+      "id": "immunefi:strata",
+      "source": "immunefi",
+      "project": "Strata",
+      "slug": "strata",
+      "url": "https://immunefi.com/bug-bounty/strata/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/107906-l6VGRJ3IkWbagmAfSm0yR.png",
+      "repos": [],
+      "updatedDate": "2026-09-08T09:12:44.252Z"
+    },
+    {
+      "id": "immunefi:lombard-finance",
+      "source": "immunefi",
+      "project": "Lombard Finance",
+      "slug": "lombard-finance",
+      "url": "https://immunefi.com/bug-bounty/lombard-finance/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Bitcoin"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/62368-OIo8lLqnFjUCyS2rK1Azh.png",
+      "repos": [],
+      "updatedDate": "2026-09-11T14:51:36.520Z"
+    },
+    {
+      "id": "immunefi:kelp-dao",
+      "source": "immunefi",
+      "project": "Kelp DAO",
+      "slug": "kelp-dao",
+      "url": "https://immunefi.com/bug-bounty/kelp-dao/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/45teNS8w4f7XgiQvJnl82R/aafacb2bdce0fe3bbaf3b4453ad422ab/IwyLpOfL_400x400.png",
+      "repos": [],
+      "updatedDate": "2025-03-21T10:29:19.016Z"
+    },
+    {
+      "id": "immunefi:avail",
+      "source": "immunefi",
+      "project": "Avail",
+      "slug": "avail",
+      "url": "https://immunefi.com/bug-bounty/avail/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/37wGk8Qz27HTCY0URGtIzR/3c3171085fec2e44832cc45a25326d09/avail.png",
+      "repos": [],
+      "updatedDate": "2025-12-15T09:56:17.673Z"
+    },
+    {
+      "id": "immunefi:pythnetwork",
+      "source": "immunefi",
+      "project": "Pyth Network",
+      "slug": "pythnetwork",
+      "url": "https://immunefi.com/bug-bounty/pythnetwork/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Solana"
+      ],
+      "languages": [],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5MjWJd5jcGHtNLtAZnYNN0/0c111c048c5b2452457756f172948bb9/pyth-network-pyth-logo.png",
+      "repos": [
+        "https://github.com/pyth-network/pyth-crosschain",
+        "https://github.com/pyth-network/governance",
+        "https://github.com/pyth-network/audit-reports"
+      ],
+      "updatedDate": "2026-09-14T16:54:13.098Z"
+    },
+    {
+      "id": "immunefi:ens",
+      "source": "immunefi",
+      "project": "ENS",
+      "slug": "ens",
+      "url": "https://immunefi.com/bug-bounty/ens/information/",
+      "maxBounty": 250000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "NextJS"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4eTVMLtAvVcZKfzuVivfV0/fa593db62bd32e8d72b2194b76ae4205/ethereum-name-service-ens-logo.png",
+      "repos": [],
+      "updatedDate": "2026-08-27T11:44:18.481Z"
+    },
+    {
+      "id": "immunefi:ssvnetwork",
+      "source": "immunefi",
+      "project": "SSV Network",
+      "slug": "ssvnetwork",
+      "url": "https://immunefi.com/bug-bounty/ssvnetwork/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/66mTctNPGQxwpoc8NxKOzc/db72f4f7f79f09e6b26198097ee59b76/ssv.png",
+      "repos": [],
+      "updatedDate": "2026-09-13T09:14:03.442Z"
+    },
+    {
+      "id": "immunefi:burrow",
+      "source": "immunefi",
+      "project": "Burrow",
+      "slug": "burrow",
+      "url": "https://immunefi.com/bug-bounty/burrow/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/D7UlWRymDBGzPOH2gUXdC/49de0cd1e1d6cbdc922e162888fa437b/brrr.svg",
+      "repos": [],
+      "updatedDate": "2024-11-09T20:05:15.421Z"
+    },
+    {
+      "id": "immunefi:starknet",
+      "source": "immunefi",
+      "project": "Starknet",
+      "slug": "starknet",
+      "url": "https://immunefi.com/bug-bounty/starknet/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Cairo",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4ZifqdIHOxX3ckxGAMiQc6/4158480f9932b5fe099a1236902cd588/starknet.png",
+      "repos": [],
+      "updatedDate": "2026-08-10T13:08:34.629Z"
+    },
+    {
+      "id": "immunefi:decentraland",
+      "source": "immunefi",
+      "project": "Decentraland",
+      "slug": "decentraland",
+      "url": "https://immunefi.com/bug-bounty/decentraland/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/CXsZzmFYIOc6VRsmn4i4P/aa9602446e06cec6320bbab0f437ea98/decentraland-mana-logo_copy.png",
+      "repos": [],
+      "updatedDate": "2026-09-09T12:10:21.868Z"
+    },
+    {
+      "id": "immunefi:reffinance",
+      "source": "immunefi",
+      "project": "Ref Finance",
+      "slug": "reffinance",
+      "url": "https://immunefi.com/bug-bounty/reffinance/information/",
+      "maxBounty": 250000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Near"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4TAtaBVjyvSndkNO3Y61F2/2a3c5d9cda7a3aa4ecb2d9548a4390b3/Ref_Finance_Logo__Small.png",
+      "repos": [],
+      "updatedDate": "2026-02-09T17:37:12.715Z"
+    },
+    {
+      "id": "immunefi:stacks",
+      "source": "immunefi",
+      "project": "Stacks",
+      "slug": "stacks",
+      "url": "https://immunefi.com/bug-bounty/stacks/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Stacks",
+        "Bitcoin"
+      ],
+      "languages": [
+        "Rust",
+        "Bitcoin Script",
+        "Clarity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7rDt9WPKt1aTDNVmrLDaZ9/e8474a103962162a8e704ac863984684/stacks__1_.png",
+      "repos": [],
+      "updatedDate": "2026-09-08T20:15:26.321Z"
+    },
+    {
+      "id": "immunefi:marinade",
+      "source": "immunefi",
+      "project": "Marinade",
+      "slug": "marinade",
+      "url": "https://immunefi.com/bug-bounty/marinade/information/",
+      "maxBounty": 250000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Solana"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2frWdK3ryfQBfzOadBi4xf/4a0a61ac6b3dccfb39bf6474b2e09f1f/Marinade_icon_white.png",
+      "repos": [
+        "https://github.com/marinade-finance/liquid-staking-program"
+      ],
+      "updatedDate": "2024-11-12T15:28:47.750Z"
+    },
+    {
+      "id": "immunefi:polygon",
+      "source": "immunefi",
+      "project": "Polygon",
+      "slug": "polygon",
+      "url": "https://immunefi.com/bug-bounty/polygon/information/",
+      "maxBounty": 250000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/8EEzTabH4B0Palx5UgpL8/4d800cd963e02d33e39872b4030e7e2f/Polygon__1_.jpeg",
+      "repos": [],
+      "updatedDate": "2026-07-28T10:47:57.809Z"
+    },
+    {
+      "id": "immunefi:hydration",
+      "source": "immunefi",
+      "project": "Hydration",
+      "slug": "hydration",
+      "url": "https://immunefi.com/bug-bounty/hydration/information/",
+      "maxBounty": 222222,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Polkadot"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3lm40Mobfxo3pFJkKBXPuc/b12c4e4926c6c5185a9b2a0ce7ae106a/Hydration.png",
+      "repos": [],
+      "updatedDate": "2026-07-17T15:49:42.756Z"
+    },
+    {
+      "id": "immunefi:rootstocklabs",
+      "source": "immunefi",
+      "project": "RootstockLabs",
+      "slug": "rootstocklabs",
+      "url": "https://immunefi.com/bug-bounty/rootstocklabs/information/",
+      "maxBounty": 200000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Rootstock"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-HRRlntLm0wgUL3yHO1ooa-mhtM4syqoqcMMRp6oHThrtRpWBVMt4.png",
+      "repos": [],
+      "updatedDate": "2026-09-03T04:30:53.792Z"
+    },
+    {
+      "id": "immunefi:enzyme-onyx",
+      "source": "immunefi",
+      "project": "Enzyme Onyx",
+      "slug": "enzyme-onyx",
+      "url": "https://immunefi.com/bug-bounty/enzyme-onyx/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3iP5zSqWcE9ivBa4KHRO7o/f6b068029c43b748115d87919d8387fc/S5wC58QC_400x400.png",
+      "repos": [],
+      "updatedDate": "2026-08-11T10:20:44.552Z"
+    },
+    {
+      "id": "immunefi:ostium",
+      "source": "immunefi",
+      "project": "Ostium",
+      "slug": "ostium",
+      "url": "https://immunefi.com/bug-bounty/ostium/information/",
+      "maxBounty": 200000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum"
+      ],
+      "languages": [
+        "NextJS",
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/28Y1opgIz9KYOLep9I9LeJ/59cbd0b6b78fd59315392da40c22d2e8/Screenshot_2025-04-30_at_6.36.13â__pm_Small.png",
+      "repos": [],
+      "updatedDate": "2026-05-29T09:46:26.014Z"
+    },
+    {
+      "id": "immunefi:aster",
+      "source": "immunefi",
+      "project": "Aster",
+      "slug": "aster",
+      "url": "https://immunefi.com/bug-bounty/aster/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5JAjynpvtsS5CKnbIjoEh3/1a35eff396c8025a3eb76806dcff9e6e/white-color__1_.png",
+      "repos": [],
+      "updatedDate": "2026-04-17T02:40:19.993Z"
+    },
+    {
+      "id": "immunefi:magpiexyz",
+      "source": "immunefi",
+      "project": "MagpieXYZ",
+      "slug": "magpiexyz",
+      "url": "https://immunefi.com/bug-bounty/magpiexyz/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC",
+        "Arbitrum",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2vJzZgqrXJMktkGnp6dAD0/aa53b3071c402376d83ff78bd71fe24b/Magpie_logo_Small.png",
+      "repos": [],
+      "updatedDate": "2026-08-26T11:04:39.143Z"
+    },
+    {
+      "id": "immunefi:beets",
+      "source": "immunefi",
+      "project": "Beets",
+      "slug": "beets",
+      "url": "https://immunefi.com/bug-bounty/beets/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Fantom",
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4GlzHxgPznR8kcXXInjZb5/8bbd0a32213345274cbd638cf963af5c/Beets.png",
+      "repos": [],
+      "updatedDate": "2025-02-18T09:09:32.633Z"
+    },
+    {
+      "id": "immunefi:stakewise",
+      "source": "immunefi",
+      "project": "StakeWise Mainnet",
+      "slug": "stakewise",
+      "url": "https://immunefi.com/bug-bounty/stakewise/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "xDAI / Gnosis Chain"
+      ],
+      "languages": [
+        "JavaScript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6pcegtZ9EgRSp41tiAroSX/e146d81a9b7bea7994de08885d5fd2b7/StakeWise_Logo.jpg",
+      "repos": [],
+      "updatedDate": "2026-03-10T15:26:41.820Z"
+    },
+    {
+      "id": "immunefi:folksfinance",
+      "source": "immunefi",
+      "project": "Folks Finance",
+      "slug": "folksfinance",
+      "url": "https://immunefi.com/bug-bounty/folksfinance/information/",
+      "maxBounty": 200000,
+      "kyc": true,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Algorand",
+        "Avalanche",
+        "ETH",
+        "Base",
+        "Arbitrum",
+        "BSC"
+      ],
+      "languages": [
+        "Python",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4TM7aspvZxpPR9ToJuIZWC/fe0d98e1960bf04060fc9d764c9cc23a/folks_finance.png",
+      "repos": [],
+      "updatedDate": "2026-07-28T10:53:40.632Z"
+    },
+    {
+      "id": "immunefi:debridge",
+      "source": "immunefi",
+      "project": "deBridge",
+      "slug": "debridge",
+      "url": "https://immunefi.com/bug-bounty/debridge/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Fantom",
+        "Heco",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4gJ8bOnkVhbdw5Q0ifWOts/e6a561b18bee2eaa58c815dd5de35591/deBridge_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-08-27T19:54:18.152Z"
+    },
+    {
+      "id": "immunefi:celer",
+      "source": "immunefi",
+      "project": "Celer",
+      "slug": "celer",
+      "url": "https://immunefi.com/bug-bounty/celer/information/",
+      "maxBounty": 200000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "Base",
+        "ETH",
+        "Fantom",
+        "Moonbeam",
+        "Optimism",
+        "Polygon"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/13hITYqQMxBrQvjeOzbRhl/b7ca8569a07d3a2212aeac6a92244110/Celer_Logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-09T13:05:59.009Z"
+    },
+    {
+      "id": "immunefi:yearnfinance",
+      "source": "immunefi",
+      "project": "Yearn Finance",
+      "slug": "yearnfinance",
+      "url": "https://immunefi.com/bug-bounty/yearnfinance/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH",
+        "Fantom",
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/46652-poMYBlE470F3ANFEzLX3a-PhDjdUVamAGgfjv2TMLhs2M2H40O54.png",
+      "repos": [],
+      "updatedDate": "2026-07-25T16:07:08.619Z"
+    },
+    {
+      "id": "immunefi:enzymefinance",
+      "source": "immunefi",
+      "project": "Enzyme Blue",
+      "slug": "enzymefinance",
+      "url": "https://immunefi.com/bug-bounty/enzymefinance/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4a7y72EOvOMZWlUx3h2ZNi/7877774da8145f9d7cbd85f902d7198a/Enzymefinance-logo.jpg",
+      "repos": [],
+      "updatedDate": "2026-09-14T17:15:14.045Z"
+    },
+    {
+      "id": "immunefi:sushiswap",
+      "source": "immunefi",
+      "project": "SushiSwap",
+      "slug": "sushiswap",
+      "url": "https://immunefi.com/bug-bounty/sushiswap/information/",
+      "maxBounty": 200000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "Celo",
+        "ETH",
+        "Fantom",
+        "Gnosis",
+        "Harmony",
+        "Heco",
+        "Kava",
+        "Linea",
+        "Metis",
+        "Moonbeam",
+        "Optimism",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/ktA91VW40fkAtwAT2Ygs9/4bccd7ed0e2b2b2ef8f27e783801273e/Sushiswap-logo.png",
+      "repos": [],
+      "updatedDate": "2025-10-16T22:38:56.122Z"
+    },
+    {
+      "id": "immunefi:alchemix-1",
+      "source": "immunefi",
+      "project": "Alchemix",
+      "slug": "alchemix-1",
+      "url": "https://immunefi.com/bug-bounty/alchemix-1/information/",
+      "maxBounty": 150000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH",
+        "Optimism",
+        "Base"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1n32B4eQNgsTaCpybMEudK/57f8ae5777af97e0e7a91f4b2ec17517/alchemix.png",
+      "repos": [],
+      "updatedDate": "2026-09-08T09:17:45.294Z"
+    },
+    {
+      "id": "immunefi:thresholdnetwork",
+      "source": "immunefi",
+      "project": "Threshold Network",
+      "slug": "thresholdnetwork",
+      "url": "https://immunefi.com/bug-bounty/thresholdnetwork/information/",
+      "maxBounty": 150000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH",
+        "Optimism",
+        "Polygon",
+        "Solana",
+        "Base",
+        "Starknet",
+        "SUI"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5sXJAYkgjf0BtH2uarlVA3/1f1993cf792814921c5c289b57004768/token-symbol-purple.svg",
+      "repos": [
+        "https://github.com/keep-network/tbtc-v2",
+        "https://github.com/threshold-network/tbtc-v2",
+        "https://github.com/tlabs-xyz/tbtc-v2-security",
+        "https://github.com/keep-network/keep-core",
+        "https://github.com/Thesis-Defense/Security-Audit-Reports",
+        "https://github.com/threshold-network/token-dashboard",
+        "https://github.com/threshold-network/solidity-contracts"
+      ],
+      "updatedDate": "2026-05-15T17:14:54.436Z"
+    },
+    {
+      "id": "immunefi:gearbox",
+      "source": "immunefi",
+      "project": "Gearbox",
+      "slug": "gearbox",
+      "url": "https://immunefi.com/bug-bounty/gearbox/information/",
+      "maxBounty": 150000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5GOsjS01FpGEPA6hXdth5H/ce653a8ad09690883d2184043b04d552/Gearbox_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-06-29T08:45:48.296Z"
+    },
+    {
+      "id": "immunefi:rocketpool",
+      "source": "immunefi",
+      "project": "Rocket Pool",
+      "slug": "rocketpool",
+      "url": "https://immunefi.com/bug-bounty/rocketpool/information/",
+      "maxBounty": 150000,
+      "kyc": true,
+      "pocType": "runnable",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/14418-DXFyXv__MxF7LZmviqmzR.png",
+      "repos": [],
+      "updatedDate": "2026-09-02T02:08:03.356Z"
+    },
+    {
+      "id": "immunefi:intuition",
+      "source": "immunefi",
+      "project": "Intuition",
+      "slug": "intuition",
+      "url": "https://immunefi.com/bug-bounty/intuition/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Base"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/111115-L45399W3IOUQriX6kkyQo.png",
+      "repos": [],
+      "updatedDate": "2026-08-27T11:21:01.106Z"
+    },
+    {
+      "id": "immunefi:gmtrade",
+      "source": "immunefi",
+      "project": "GMTrade",
+      "slug": "gmtrade",
+      "url": "https://immunefi.com/bug-bounty/gmtrade/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Solana"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": true,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/109982-JkUubvelMtdWlXGDV-SYa.png",
+      "repos": [
+        "https://github.com/gmsol-labs/gmx-solana",
+        "https://github.com/gmsol-labs/gmx-solana-audits",
+        "https://github.com/code-423n4/gmtrade-bug-bounty"
+      ],
+      "updatedDate": "2026-09-16T09:09:12.312Z"
+    },
+    {
+      "id": "immunefi:1inch-business",
+      "source": "immunefi",
+      "project": "1inch - Business",
+      "slug": "1inch-business",
+      "url": "https://immunefi.com/bug-bounty/1inch-business/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/sebastian%40immunefi.com-kBDb1SLqYrIF8ZZR1mjYm.png",
+      "repos": [],
+      "updatedDate": "2026-07-21T20:26:08.185Z"
+    },
+    {
+      "id": "immunefi:1inch-wallet",
+      "source": "immunefi",
+      "project": "1inch - Wallet",
+      "slug": "1inch-wallet",
+      "url": "https://immunefi.com/bug-bounty/1inch-wallet/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/sebastian%40immunefi.com-0D7ORCa1eljegSHa4S61Q.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:57:59.530Z"
+    },
+    {
+      "id": "immunefi:1inch-aqua",
+      "source": "immunefi",
+      "project": "1inch - Aqua",
+      "slug": "1inch-aqua",
+      "url": "https://immunefi.com/bug-bounty/1inch-aqua/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/sebastian%40immunefi.com-9KuIMXdORw2kDGjEQXDL0.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:57:45.301Z"
+    },
+    {
+      "id": "immunefi:onre",
+      "source": "immunefi",
+      "project": "OnRe",
+      "slug": "onre",
+      "url": "https://immunefi.com/bug-bounty/onre/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Solana"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": true,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/98309-R5QfV8zxRauXHmTjK_B-V.png",
+      "repos": [
+        "https://github.com/onre-finance/onre-sol"
+      ],
+      "updatedDate": "2026-08-28T13:55:19.325Z"
+    },
+    {
+      "id": "immunefi:variational",
+      "source": "immunefi",
+      "project": "Variational",
+      "slug": "variational",
+      "url": "https://immunefi.com/bug-bounty/variational/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-mbfwfHAlj7ZfZxAFQmzTK.png",
+      "repos": [],
+      "updatedDate": "2026-03-17T07:32:57.475Z"
+    },
+    {
+      "id": "immunefi:hermetica",
+      "source": "immunefi",
+      "project": "Hermetica",
+      "slug": "hermetica",
+      "url": "https://immunefi.com/bug-bounty/hermetica/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-tAU4WIInnssdEbEADCndS.png",
+      "repos": [],
+      "updatedDate": "2026-07-11T05:40:54.737Z"
+    },
+    {
+      "id": "immunefi:zest-protocol-v2",
+      "source": "immunefi",
+      "project": "Zest Protocol V2",
+      "slug": "zest-protocol-v2",
+      "url": "https://immunefi.com/bug-bounty/zest-protocol-v2/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Stacks"
+      ],
+      "languages": [
+        "Clarity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/55173-A_F5B1RkUtAzUMkPhW2Tl-3MM75wsf7i85VmIazkqH94mu0J1kxO.png",
+      "repos": [],
+      "updatedDate": "2026-09-03T18:46:59.360Z"
+    },
+    {
+      "id": "immunefi:zksync-os",
+      "source": "immunefi",
+      "project": "ZKsync OS",
+      "slug": "zksync-os",
+      "url": "https://immunefi.com/bug-bounty/zksync-os/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "zkSync"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/bqfH2eaRX9bOByRgNuuL4/aceec9b93efea1ad81061596d6d2ee11/zkSync.png",
+      "repos": [],
+      "updatedDate": "2026-09-02T05:24:30.526Z"
+    },
+    {
+      "id": "immunefi:felix",
+      "source": "immunefi",
+      "project": "Felix",
+      "slug": "felix",
+      "url": "https://immunefi.com/bug-bounty/felix/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4BS96MKj8tAsSeXuOSQJ7f/99b997f0a0e0b8e3aecbd046b330a152/mx8MTMca_400x400_Small_Small.png",
+      "repos": [],
+      "updatedDate": "2026-08-20T14:26:29.332Z"
+    },
+    {
+      "id": "immunefi:granite-protocol",
+      "source": "immunefi",
+      "project": "Granite Protocol",
+      "slug": "granite-protocol",
+      "url": "https://immunefi.com/bug-bounty/granite-protocol/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Stacks"
+      ],
+      "languages": [
+        "Clarity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3fdopun3Bz1q6QKlheZ9Qm/62bce98dda30c5ee99ffa4baa9593945/Granite_Protocol.png",
+      "repos": [],
+      "updatedDate": "2026-07-25T18:28:04.449Z"
+    },
+    {
+      "id": "immunefi:berachain",
+      "source": "immunefi",
+      "project": "Berachain",
+      "slug": "berachain",
+      "url": "https://immunefi.com/bug-bounty/berachain/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Cosmos"
+      ],
+      "languages": [
+        "Go",
+        "Solidity",
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/28aHSz4GDuMcAuSR8VmJ4P/b943afe474489ec74fab8cf921f17118/NEW_Berachain.png",
+      "repos": [],
+      "updatedDate": "2026-07-24T12:54:47.156Z"
+    },
+    {
+      "id": "immunefi:fbtc",
+      "source": "immunefi",
+      "project": "FBTC",
+      "slug": "fbtc",
+      "url": "https://immunefi.com/bug-bounty/fbtc/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/0HsOMFTI5wCKiK3qWsupo/f4a32361884fef795964414549b32902/fbtc.png",
+      "repos": [],
+      "updatedDate": "2025-01-24T16:06:02.886Z"
+    },
+    {
+      "id": "immunefi:starknet-staking",
+      "source": "immunefi",
+      "project": "Starknet Staking",
+      "slug": "starknet-staking",
+      "url": "https://immunefi.com/bug-bounty/starknet-staking/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Starknet"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/ZfXCvEBrW9zv4R7VqmZg5/8ec5fed17af2d46128a91be5507f4e3f/starknet.png",
+      "repos": [],
+      "updatedDate": "2026-06-23T15:58:38.086Z"
+    },
+    {
+      "id": "immunefi:arkadiko",
+      "source": "immunefi",
+      "project": "Arkadiko",
+      "slug": "arkadiko",
+      "url": "https://immunefi.com/bug-bounty/arkadiko/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Clarity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5jrH7DqiZ86zEEUx473Bit/6a9e7bfe578a231c669df87b47ccb06a/iXZxqXae_400x400.png",
+      "repos": [],
+      "updatedDate": "2026-01-22T11:49:05.608Z"
+    },
+    {
+      "id": "immunefi:orderlynetwork",
+      "source": "immunefi",
+      "project": "Orderly Network",
+      "slug": "orderlynetwork",
+      "url": "https://immunefi.com/bug-bounty/orderlynetwork/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7lTtLkBbBPlnMIrlDObNWW/b7e2aea26d0ecd4b3e0f6d092ee52100/logo.png",
+      "repos": [],
+      "updatedDate": "2024-12-16T08:08:56.989Z"
+    },
+    {
+      "id": "immunefi:stackingdao",
+      "source": "immunefi",
+      "project": "StackingDAO",
+      "slug": "stackingdao",
+      "url": "https://immunefi.com/bug-bounty/stackingdao/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Stacks"
+      ],
+      "languages": [
+        "Clarity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3c1wyuX1YyOb70NlbRzfMY/504a03b8588b17c5b060319414d37d6b/StackingDAO_logo_copy.png",
+      "repos": [],
+      "updatedDate": "2026-09-02T17:45:09.307Z"
+    },
+    {
+      "id": "immunefi:avalanche",
+      "source": "immunefi",
+      "project": "Ava Labs Avalanche",
+      "slug": "avalanche",
+      "url": "https://immunefi.com/bug-bounty/avalanche/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5fRxILLIATvLUm99ia2pOU/4e6a64dbb5b672f8f7dd6960bfaa324e/Avalanche_AVAX_Black.png",
+      "repos": [],
+      "updatedDate": "2026-08-18T18:39:45.303Z"
+    },
+    {
+      "id": "immunefi:extrafinance",
+      "source": "immunefi",
+      "project": "Extra Finance",
+      "slug": "extrafinance",
+      "url": "https://immunefi.com/bug-bounty/extrafinance/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4JXYt1FfXPS1UNWVkuryvd/59e60a80562a52a0a4298df84a6f444e/photo_2023-08-22_06-36-56_copy.png",
+      "repos": [],
+      "updatedDate": "2026-09-16T09:50:30.826Z"
+    },
+    {
+      "id": "immunefi:linea",
+      "source": "immunefi",
+      "project": "Linea",
+      "slug": "linea",
+      "url": "https://immunefi.com/bug-bounty/linea/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Linea"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/79486-iBsXHAc2W40JUtjhEvU61-2Fr4tDIwLvSnpvuY4fUfVIpcBLgwQj.png",
+      "repos": [],
+      "updatedDate": "2026-09-13T09:41:00.655Z"
+    },
+    {
+      "id": "immunefi:velodromefinance",
+      "source": "immunefi",
+      "project": "Velodrome Finance",
+      "slug": "velodromefinance",
+      "url": "https://immunefi.com/bug-bounty/velodromefinance/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1wE9LGw9ezKeFgCpStoSFM/5696f7e72b6c7ff3f8ad5cec3c8cb36d/velodrome.svg",
+      "repos": [],
+      "updatedDate": "2026-07-05T20:53:25.443Z"
+    },
+    {
+      "id": "immunefi:bobanetwork",
+      "source": "immunefi",
+      "project": "Boba Network",
+      "slug": "bobanetwork",
+      "url": "https://immunefi.com/bug-bounty/bobanetwork/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Avalanche",
+        "BSC",
+        "ETH"
+      ],
+      "languages": [
+        "Go",
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2wV1YzHxDN4EUqz1RJuw6E/a8d877797715ffa2e502bd56e411899b/Boba_Network_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-03-15T21:31:23.434Z"
+    },
+    {
+      "id": "immunefi:silofinance-v2",
+      "source": "immunefi",
+      "project": "Silo Finance (v2 & v3)",
+      "slug": "silofinance-v2",
+      "url": "https://immunefi.com/bug-bounty/silofinance-v2/information/",
+      "maxBounty": 100000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/33187-kA_wCDBD9XOKxLzFnGw6z.png",
+      "repos": [],
+      "updatedDate": "2026-06-17T11:45:57.339Z"
+    },
+    {
+      "id": "immunefi:symbiosis",
+      "source": "immunefi",
+      "project": "Symbiosis",
+      "slug": "symbiosis",
+      "url": "https://immunefi.com/bug-bounty/symbiosis/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1iaWGdtWL8bWK160VFHjey/fed9cc2230e6ca767667c230eac6f52c/Screenshot_2024-11-15_at_12.57.39___AM_Small.png",
+      "repos": [],
+      "updatedDate": "2024-11-14T20:25:00.605Z"
+    },
+    {
+      "id": "immunefi:mux",
+      "source": "immunefi",
+      "project": "MUX",
+      "slug": "mux",
+      "url": "https://immunefi.com/bug-bounty/mux/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Fantom",
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/55511-foBiGCvU6KeufT7DGoIoY.png",
+      "repos": [],
+      "updatedDate": "2026-04-30T10:25:43.589Z"
+    },
+    {
+      "id": "immunefi:synthetix",
+      "source": "immunefi",
+      "project": "Synthetix",
+      "slug": "synthetix",
+      "url": "https://immunefi.com/bug-bounty/synthetix/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "JavaScript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3GJoatBuqt8RlBr5f1yRa1/6f37cd51feefc6382e47d61e93a612e3/Synthetix-logo.png",
+      "repos": [],
+      "updatedDate": "2026-06-21T18:33:15.584Z"
+    },
+    {
+      "id": "immunefi:harvest",
+      "source": "immunefi",
+      "project": "Harvest Finance",
+      "slug": "harvest",
+      "url": "https://immunefi.com/bug-bounty/harvest/information/",
+      "maxBounty": 100000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "BSC",
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6D2KOw280UzI3PrzjpsdD7/38eaf1bd703f4109b6795eaeebd210cf/Harvestfinance-logo.gif",
+      "repos": [],
+      "updatedDate": "2024-11-18T13:44:21.767Z"
+    },
+    {
+      "id": "immunefi:katana",
+      "source": "immunefi",
+      "project": "Katana",
+      "slug": "katana",
+      "url": "https://immunefi.com/bug-bounty/katana/information/",
+      "maxBounty": 80000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-IIZaco2x4WFmJ9SSnn33a-UJclQl91ZY5ZpTKCtaGRU7vOEw1kn9.png",
+      "repos": [],
+      "updatedDate": "2026-07-24T10:38:46.835Z"
+    },
+    {
+      "id": "immunefi:xterio",
+      "source": "immunefi",
+      "project": "Xterio",
+      "slug": "xterio",
+      "url": "https://immunefi.com/bug-bounty/xterio/information/",
+      "maxBounty": 80000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2V51mPozlf2ns8PH0fal6o/b329a8cb6021badc1abdaa99fe48f18e/xterio.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T14:43:23.983Z"
+    },
+    {
+      "id": "immunefi:termstructurelabs",
+      "source": "immunefi",
+      "project": "TermMax",
+      "slug": "termstructurelabs",
+      "url": "https://immunefi.com/bug-bounty/termstructurelabs/information/",
+      "maxBounty": 80000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6rB2UnvCtcaZKo2NLotubD/287fcccf956bc219626bbc5792446bfa/TermMax-Logo-transparent.png",
+      "repos": [],
+      "updatedDate": "2026-09-14T07:26:23.682Z"
+    },
+    {
+      "id": "immunefi:beefyfinance",
+      "source": "immunefi",
+      "project": "Beefy Finance",
+      "slug": "beefyfinance",
+      "url": "https://immunefi.com/bug-bounty/beefyfinance/information/",
+      "maxBounty": 75000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4RRpze2TX8zrUXZRASuA5J/7b80332fae613b69171bc40baf22b097/BeefyFinance_Small.png",
+      "repos": [],
+      "updatedDate": "2024-12-02T18:46:02.247Z"
+    },
+    {
+      "id": "immunefi:velvetcapital",
+      "source": "immunefi",
+      "project": "Velvet Capital",
+      "slug": "velvetcapital",
+      "url": "https://immunefi.com/bug-bounty/velvetcapital/information/",
+      "maxBounty": 51000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4fNtrMshK2BRjG0W6Iez6i/bd85f8f23f50089eeae19d9502755b09/tYpL6jGL_400x400.png",
+      "repos": [],
+      "updatedDate": "2026-01-29T22:01:36.558Z"
+    },
+    {
+      "id": "immunefi:cosmos",
+      "source": "immunefi",
+      "project": "Cosmos",
+      "slug": "cosmos",
+      "url": "https://immunefi.com/bug-bounty/cosmos/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Cosmos"
+      ],
+      "languages": [
+        "Go",
+        "Rust",
+        "Solidity",
+        "C/C++",
+        "cosm-wasm"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/sebastian%40immunefi.com-G80dK2NYJcfl_hXexN5rn.png",
+      "repos": [],
+      "updatedDate": "2026-09-16T05:57:05.237Z"
+    },
+    {
+      "id": "immunefi:1inch-web",
+      "source": "immunefi",
+      "project": "1inch - Web",
+      "slug": "1inch-web",
+      "url": "https://immunefi.com/bug-bounty/1inch-web/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-H18TSSw2dXg4KqUiel4QJ.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:58:36.135Z"
+    },
+    {
+      "id": "immunefi:KAST",
+      "source": "immunefi",
+      "project": "KAST",
+      "slug": "KAST",
+      "url": "https://immunefi.com/bug-bounty/KAST/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-UVXxK0PdibnbErA3g3VQn.png",
+      "repos": [],
+      "updatedDate": "2026-06-24T14:59:52.800Z"
+    },
+    {
+      "id": "immunefi:kleidi",
+      "source": "immunefi",
+      "project": "Kleidi",
+      "slug": "kleidi",
+      "url": "https://immunefi.com/bug-bounty/kleidi/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-8B83Ue-aQ-fSvpU2qSF8m.png",
+      "repos": [],
+      "updatedDate": "2026-02-19T17:59:51.088Z"
+    },
+    {
+      "id": "immunefi:twyne",
+      "source": "immunefi",
+      "project": "Twyne",
+      "slug": "twyne",
+      "url": "https://immunefi.com/bug-bounty/twyne/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1tEO5hy6BK1IitUVevC7Mm/70f476b0452b9f6af1b327ceaa34bea9/Twyne.png",
+      "repos": [],
+      "updatedDate": "2026-06-25T11:37:11.813Z"
+    },
+    {
+      "id": "immunefi:xoxno",
+      "source": "immunefi",
+      "project": "XOXNO",
+      "slug": "xoxno",
+      "url": "https://immunefi.com/bug-bounty/xoxno/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "MultiversX"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5jY3HNj6JkKgJG8eVfrILY/bd62c19d04421265d5be2ad5ad4684f9/bTA7cvxE_400x400.png",
+      "repos": [],
+      "updatedDate": "2025-09-22T09:39:53.581Z"
+    },
+    {
+      "id": "immunefi:usdn",
+      "source": "immunefi",
+      "project": "USDN",
+      "slug": "usdn",
+      "url": "https://immunefi.com/bug-bounty/usdn/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/eg4KntgnqGEXCaoNRIODv/96c11278c62f890c722ab2112f8c83f8/USDN.png",
+      "repos": [],
+      "updatedDate": "2026-07-24T12:53:47.734Z"
+    },
+    {
+      "id": "immunefi:pragmaoracle",
+      "source": "immunefi",
+      "project": "Pragma Oracle",
+      "slug": "pragmaoracle",
+      "url": "https://immunefi.com/bug-bounty/pragmaoracle/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4oI0gXaVamuG4KdqVG0LC1/fd67ba15a8d6811a385faa1c2a175bf0/Group__3_.png",
+      "repos": [],
+      "updatedDate": "2024-11-11T13:44:29.750Z"
+    },
+    {
+      "id": "immunefi:galagames",
+      "source": "immunefi",
+      "project": "Gala Games",
+      "slug": "galagames",
+      "url": "https://immunefi.com/bug-bounty/galagames/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6nciXw1iCQlQbBpXt9TzXr/272c5767841fe5888ee360c81d414db7/Gala_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2025-10-16T10:47:23.877Z"
+    },
+    {
+      "id": "immunefi:filecoin",
+      "source": "immunefi",
+      "project": "Filecoin",
+      "slug": "filecoin",
+      "url": "https://immunefi.com/bug-bounty/filecoin/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Filecoin"
+      ],
+      "languages": [
+        "Go",
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3qI8wK3cAr9keSN6QLBCSE/6d1ca48363a4450ae1516814cc548c07/filecoin-logo.svg",
+      "repos": [],
+      "updatedDate": "2026-09-01T17:23:01.942Z"
+    },
+    {
+      "id": "immunefi:metronome",
+      "source": "immunefi",
+      "project": "Metronome",
+      "slug": "metronome",
+      "url": "https://immunefi.com/bug-bounty/metronome/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7tYcCLOmtIXMMh3MgHf4S0/d632ed42420c48826660786e643b3f87/met2-signet-option1.png",
+      "repos": [],
+      "updatedDate": "2026-09-01T00:42:28.176Z"
+    },
+    {
+      "id": "immunefi:justlenddao",
+      "source": "immunefi",
+      "project": "JustLend DAO",
+      "slug": "justlenddao",
+      "url": "https://immunefi.com/bug-bounty/justlenddao/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Tron"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1bDk6uC4OdDNpTT1tc49ew/05be446f35159bf6304b33933a4fe6b5/Justlend300_300.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:59:20.407Z"
+    },
+    {
+      "id": "immunefi:hashflow",
+      "source": "immunefi",
+      "project": "Hashflow",
+      "slug": "hashflow",
+      "url": "https://immunefi.com/bug-bounty/hashflow/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Optimism",
+        "Polygon",
+        "Solana"
+      ],
+      "languages": [],
+      "solana": true,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/747gU6QyVl6pKVbOP64hW/f73ddabdc42fa47f42bddc5d163b06b7/Hashflow_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-06-08T16:27:20.536Z"
+    },
+    {
+      "id": "immunefi:glodollar",
+      "source": "immunefi",
+      "project": "Glo Dollar",
+      "slug": "glodollar",
+      "url": "https://immunefi.com/bug-bounty/glodollar/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Polygon"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4P8QMkQfJs8betN40aGVhh/384de78ef91d39c953d0863b37c0f6fe/Global_Income_Coin_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2024-12-10T18:52:45.380Z"
+    },
+    {
+      "id": "immunefi:dhedge",
+      "source": "immunefi",
+      "project": "dHEDGE",
+      "slug": "dhedge",
+      "url": "https://immunefi.com/bug-bounty/dhedge/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Base",
+        "ETH",
+        "Optimism",
+        "Polygon"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7jfCx6b5D8nfAMemuBnaOW/25d35d4095909785d015401d8cff263f/dHEDGE_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-06T18:41:15.176Z"
+    },
+    {
+      "id": "immunefi:gamma",
+      "source": "immunefi",
+      "project": "Gamma",
+      "slug": "gamma",
+      "url": "https://immunefi.com/bug-bounty/gamma/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2teADVeqlZjb4p9u7YbiMX/9c40208f8f56b9beb73bb3077228fa2c/Gamma_Logo.png",
+      "repos": [],
+      "updatedDate": "2024-12-07T18:43:32.008Z"
+    },
+    {
+      "id": "immunefi:derive",
+      "source": "immunefi",
+      "project": "Derive",
+      "slug": "derive",
+      "url": "https://immunefi.com/bug-bounty/derive/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/60S3l21WgTXVpkeEf6mRBO/3ca066168039dc5319d5b6d972300617/derive__1_.png",
+      "repos": [],
+      "updatedDate": "2026-01-12T09:47:48.867Z"
+    },
+    {
+      "id": "immunefi:thegraph",
+      "source": "immunefi",
+      "project": "The Graph",
+      "slug": "thegraph",
+      "url": "https://immunefi.com/bug-bounty/thegraph/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH"
+      ],
+      "languages": [
+        "Go",
+        "Rust",
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2L62ScwrnMTV5zczetmm3N/3441bc33007755cf6d8865db69d0d50e/the-graph-grt-logo_copy.png",
+      "repos": [],
+      "updatedDate": "2026-08-27T13:53:35.331Z"
+    },
+    {
+      "id": "immunefi:ichi",
+      "source": "immunefi",
+      "project": "Ichi",
+      "slug": "ichi",
+      "url": "https://immunefi.com/bug-bounty/ichi/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4sIm0crvpmamzvcEeYiPf3/0b6dd39dc320f99744fb16f6cecf4f28/Ichi.jpeg",
+      "repos": [],
+      "updatedDate": "2024-11-12T12:44:04.171Z"
+    },
+    {
+      "id": "immunefi:vesper",
+      "source": "immunefi",
+      "project": "Vesper",
+      "slug": "vesper",
+      "url": "https://immunefi.com/bug-bounty/vesper/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7dITyStGvxKujlwtjOQEKo/9fdf4fd4b601246ac60030eee6ad4321/Copy_of_vesper.jpeg",
+      "repos": [],
+      "updatedDate": "2026-07-28T10:43:33.307Z"
+    },
+    {
+      "id": "immunefi:pareto",
+      "source": "immunefi",
+      "project": "Pareto Credit",
+      "slug": "pareto",
+      "url": "https://immunefi.com/bug-bounty/pareto/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/52eX2vYXd4Q7PBZ7WCxhjL/062d7f630b8f0decfd1d4746e0dc96ab/Screenshot_2025-06-03_at_4.20.18_pm.png",
+      "repos": [],
+      "updatedDate": "2026-07-06T20:33:03.061Z"
+    },
+    {
+      "id": "immunefi:immunefi",
+      "source": "immunefi",
+      "project": "Immunefi",
+      "slug": "immunefi",
+      "url": "https://immunefi.com/bug-bounty/immunefi/information/",
+      "maxBounty": 50000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1XjTFUMSo1pLNrTF0aIH4U/353cf547e2cd9dcfc4e464ce9c328c07/Logo_square.png",
+      "repos": [],
+      "updatedDate": "2026-09-09T12:02:37.269Z"
+    },
+    {
+      "id": "immunefi:obyte",
+      "source": "immunefi",
+      "project": "Obyte",
+      "slug": "obyte",
+      "url": "https://immunefi.com/bug-bounty/obyte/information/",
+      "maxBounty": 50000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Obyte"
+      ],
+      "languages": [
+        "JavaScript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5Wy12MgPYWNvcH7ihgHVqT/684f80d914af4b26229e0109d7185145/Obyte-logo.svg",
+      "repos": [],
+      "updatedDate": "2026-07-21T05:25:15.795Z"
+    },
+    {
+      "id": "immunefi:nuva",
+      "source": "immunefi",
+      "project": "NUVA",
+      "slug": "nuva",
+      "url": "https://immunefi.com/bug-bounty/nuva/information/",
+      "maxBounty": 40000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-LPbeLhpz6LJ0woMrWUCOZ.png",
+      "repos": [],
+      "updatedDate": "2026-08-12T11:42:24.754Z"
+    },
+    {
+      "id": "immunefi:gammaswap",
+      "source": "immunefi",
+      "project": "GammaSwap",
+      "slug": "gammaswap",
+      "url": "https://immunefi.com/bug-bounty/gammaswap/information/",
+      "maxBounty": 40000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/139C1UQUOpAxZQpCgPNSbP/8b72b96955637df0c288dea8cb2e7602/GammaSwap_logo.png",
+      "repos": [],
+      "updatedDate": "2026-05-19T19:33:58.666Z"
+    },
+    {
+      "id": "immunefi:livepeer",
+      "source": "immunefi",
+      "project": "Livepeer",
+      "slug": "livepeer",
+      "url": "https://immunefi.com/bug-bounty/livepeer/information/",
+      "maxBounty": 40000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "Go"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/3UUkKoNVTz0RMrIhQnL0v8/042be0217ef163209cec501313440815/Livepeer_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-10T21:34:04.290Z"
+    },
+    {
+      "id": "immunefi:hedera",
+      "source": "immunefi",
+      "project": "Hedera",
+      "slug": "hedera",
+      "url": "https://immunefi.com/bug-bounty/hedera/information/",
+      "maxBounty": 30000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1mdLr3Lrnw2O3ImGQmB84V/1618014dbfe7c18c0da68a28d63c603b/hedera.png",
+      "repos": [],
+      "updatedDate": "2026-08-31T18:10:37.120Z"
+    },
+    {
+      "id": "immunefi:serai",
+      "source": "immunefi",
+      "project": "Serai",
+      "slug": "serai",
+      "url": "https://immunefi.com/bug-bounty/serai/information/",
+      "maxBounty": 30000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5xUPQvjAjam8ACUKuhW1Ga/472fbbbcb27749a403d6dcbac86577ab/Screenshot_2024-11-15_at_3.48.57___PM.png",
+      "repos": [],
+      "updatedDate": "2026-04-24T17:57:20.956Z"
+    },
+    {
+      "id": "immunefi:1inch-aqua-improvement",
+      "source": "immunefi",
+      "project": "1inch - Aqua Improvement",
+      "slug": "1inch-aqua-improvement",
+      "url": "https://immunefi.com/bug-bounty/1inch-aqua-improvement/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": null,
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/sebastian%40immunefi.com-PGBK0afR1r0wiqKO0ATOa.png",
+      "repos": [],
+      "updatedDate": "2026-08-18T16:46:50.891Z"
+    },
+    {
+      "id": "immunefi:openzeppelin-stellar",
+      "source": "immunefi",
+      "project": "OpenZeppelin on Stellar",
+      "slug": "openzeppelin-stellar",
+      "url": "https://immunefi.com/bug-bounty/openzeppelin-stellar/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5dlUG1E6sheSJXTj8T3pbh/810c198bb74efdb222d701da00d91957/oz.png",
+      "repos": [],
+      "updatedDate": "2026-04-21T06:29:21.890Z"
+    },
+    {
+      "id": "immunefi:exactly",
+      "source": "immunefi",
+      "project": "Exactly",
+      "slug": "exactly",
+      "url": "https://immunefi.com/bug-bounty/exactly/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Optimism"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5GCy1Eo4QWn4rGzZmgQlYp/87a84ca80ce45355b0db3d1b7090b51c/Exactly_logo_copy.png",
+      "repos": [],
+      "updatedDate": "2026-03-19T13:56:12.606Z"
+    },
+    {
+      "id": "immunefi:zerion",
+      "source": "immunefi",
+      "project": "Zerion",
+      "slug": "zerion",
+      "url": "https://immunefi.com/bug-bounty/zerion/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "ETH",
+        "Fantom",
+        "Optimism",
+        "Polygon",
+        "xDAI / Gnosis Chain"
+      ],
+      "languages": [
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/rl1wbbQqjXdQOjPmDm331/6f9697fe2c9b6d98dd68c81072bba5c6/Zerion_Logo.jpg",
+      "repos": [],
+      "updatedDate": "2026-07-03T16:26:07.766Z"
+    },
+    {
+      "id": "immunefi:antefinance",
+      "source": "immunefi",
+      "project": "Ante Finance",
+      "slug": "antefinance",
+      "url": "https://immunefi.com/bug-bounty/antefinance/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4CENEoWKC4YGCHgAxZ1f4U/1e4a8244ff3ba31e495992ea3dc67ddc/Ante_logo.png",
+      "repos": [],
+      "updatedDate": "2024-12-02T18:33:01.800Z"
+    },
+    {
+      "id": "immunefi:openzeppelin",
+      "source": "immunefi",
+      "project": "OpenZeppelin",
+      "slug": "openzeppelin",
+      "url": "https://immunefi.com/bug-bounty/openzeppelin/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4tl7aEnEwJyvmUxPKqR2KH/2ad9232b3e2e462c88aa27262ce93deb/OpenZeppelin_Logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-09-08T17:10:25.882Z"
+    },
+    {
+      "id": "immunefi:integral",
+      "source": "immunefi",
+      "project": "Integral",
+      "slug": "integral",
+      "url": "https://immunefi.com/bug-bounty/integral/information/",
+      "maxBounty": 25000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5dHTFAc230t6p8vYxgilO2/38e96d7cbe65593285dfec560c736985/Integral-logo.jpg",
+      "repos": [],
+      "updatedDate": "2024-11-18T14:00:08.992Z"
+    },
+    {
+      "id": "immunefi:nexusmutual",
+      "source": "immunefi",
+      "project": "Nexus Mutual",
+      "slug": "nexusmutual",
+      "url": "https://immunefi.com/bug-bounty/nexusmutual/information/",
+      "maxBounty": 25000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7EnL7ZjXRSux9PUrPA8rJ6/2e8adefab735fed30e37d2d744b20964/NXM_Token_Logo.svg",
+      "repos": [],
+      "updatedDate": "2025-11-14T12:09:41.156Z"
+    },
+    {
+      "id": "immunefi:1inch-infrastructure",
+      "source": "immunefi",
+      "project": "1inch - Infrastructure",
+      "slug": "1inch-infrastructure",
+      "url": "https://immunefi.com/bug-bounty/1inch-infrastructure/information/",
+      "maxBounty": 20000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/sebastian%40immunefi.com-cXT4h-eUxcLXdNEz1pEey.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:58:08.504Z"
+    },
+    {
+      "id": "immunefi:hibachi",
+      "source": "immunefi",
+      "project": "Hibachi",
+      "slug": "hibachi",
+      "url": "https://immunefi.com/bug-bounty/hibachi/information/",
+      "maxBounty": 20000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Celestia"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/86uYalXw77xPgt0tHUI79/99bbd4a6580107cb38c51c89c4b0d328/Hibachi.png",
+      "repos": [],
+      "updatedDate": "2025-04-08T14:37:35.770Z"
+    },
+    {
+      "id": "immunefi:trufin",
+      "source": "immunefi",
+      "project": "TruYields",
+      "slug": "trufin",
+      "url": "https://immunefi.com/bug-bounty/trufin/information/",
+      "maxBounty": 20000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Polygon",
+        "Solana"
+      ],
+      "languages": [
+        "Solidity",
+        "Rust"
+      ],
+      "solana": true,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/49836-qR0lpAJoUui5DAtlyBL4L.png",
+      "repos": [
+        "https://github.com/TruFin-io/smart-contracts-solana-public"
+      ],
+      "updatedDate": "2026-08-12T01:40:39.880Z"
+    },
+    {
+      "id": "immunefi:ipor",
+      "source": "immunefi",
+      "project": "IPOR",
+      "slug": "ipor",
+      "url": "https://immunefi.com/bug-bounty/ipor/information/",
+      "maxBounty": 20000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1PWUkjxOSqZ6A6oiZIr4hc/c02ae0b18f6f29eb5e977088ba93db88/tVLWWz2T_400x400.jpg",
+      "repos": [],
+      "updatedDate": "2026-03-30T16:01:29.290Z"
+    },
+    {
+      "id": "immunefi:exodus",
+      "source": "immunefi",
+      "project": "Exodus",
+      "slug": "exodus",
+      "url": "https://immunefi.com/bug-bounty/exodus/information/",
+      "maxBounty": 18000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6jSWqO85JxgkH0iBYbbZjy/9d0e1d65deee581154270c5856e55a99/Exodus.png",
+      "repos": [],
+      "updatedDate": "2026-07-17T09:27:46.734Z"
+    },
+    {
+      "id": "immunefi:horizen",
+      "source": "immunefi",
+      "project": "Horizen",
+      "slug": "horizen",
+      "url": "https://immunefi.com/bug-bounty/horizen/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Base"
+      ],
+      "languages": [
+        "Solidity",
+        "Typescript",
+        "ReactJS"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/43562-DuC7v0DHS6PQwf4rZxZqc-AXDcBf217UD2Oh7CFoF8xcDZirbcQp.png",
+      "repos": [],
+      "updatedDate": "2026-07-21T15:59:33.631Z"
+    },
+    {
+      "id": "immunefi:edgex",
+      "source": "immunefi",
+      "project": "edgeX",
+      "slug": "edgex",
+      "url": "https://immunefi.com/bug-bounty/edgex/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-RO0-XrelZ1HeX_pqfcnUx.png",
+      "repos": [],
+      "updatedDate": "2026-04-08T14:09:20.005Z"
+    },
+    {
+      "id": "immunefi:ofza-1",
+      "source": "immunefi",
+      "project": "OFZA",
+      "slug": "ofza-1",
+      "url": "https://immunefi.com/bug-bounty/ofza-1/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/76788-rfS129jaGhIhJO4Vjg2OK-6jUzFcBg2j4m7Cbupk4fazB1mQ1RvS.png",
+      "repos": [],
+      "updatedDate": "2026-08-13T10:49:02.085Z"
+    },
+    {
+      "id": "immunefi:yo-protocol",
+      "source": "immunefi",
+      "project": "YO Protocol",
+      "slug": "yo-protocol",
+      "url": "https://immunefi.com/bug-bounty/yo-protocol/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4tiXVdfiMqdRMuuLMVDjsc/f048a90f465a4625784d6d7acb1c8ebb/Screenshot_2025-04-30_at_09.50.39.png",
+      "repos": [],
+      "updatedDate": "2026-01-29T22:03:28.891Z"
+    },
+    {
+      "id": "immunefi:berachain-webapps",
+      "source": "immunefi",
+      "project": "Berachain (Web/Apps)",
+      "slug": "berachain-webapps",
+      "url": "https://immunefi.com/bug-bounty/berachain-webapps/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2diXYoF3V6dLx321wM3wvg/bfb6686f0481055416ee5c2977a5a2a3/Berachain.png",
+      "repos": [],
+      "updatedDate": "2026-07-10T20:13:12.274Z"
+    },
+    {
+      "id": "immunefi:velvet-capital-v2",
+      "source": "immunefi",
+      "project": "Velvet Capital V2",
+      "slug": "velvet-capital-v2",
+      "url": "https://immunefi.com/bug-bounty/velvet-capital-v2/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5GovZHnyLiccbBurf4U2im/8f1fb7c9a835c6939d0fc7d6b3e2ae70/velvet.png",
+      "repos": [],
+      "updatedDate": "2026-01-29T22:03:33.375Z"
+    },
+    {
+      "id": "immunefi:avalabs",
+      "source": "immunefi",
+      "project": "Ava Labs",
+      "slug": "avalabs",
+      "url": "https://immunefi.com/bug-bounty/avalabs/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "Avalanche"
+      ],
+      "languages": [
+        "Go",
+        "JavaScript",
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/62GmRlVFu7IOBMrAAXOlu6/50a7afd87333d0f62be3123093e2ec78/Avalanche_AVAX_Black__1_.png",
+      "repos": [],
+      "updatedDate": "2026-09-08T15:12:21.733Z"
+    },
+    {
+      "id": "immunefi:spot",
+      "source": "immunefi",
+      "project": "SPOT",
+      "slug": "spot",
+      "url": "https://immunefi.com/bug-bounty/spot/information/",
+      "maxBounty": 10000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6rCsA47lat2NRRvjQNB1cE/bd1a3c990aabecec1ea6ed43daf18b8d/Screenshot_2024-11-15_at_1.35.17___AM.png",
+      "repos": [],
+      "updatedDate": "2024-11-14T20:35:54.712Z"
+    },
+    {
+      "id": "immunefi:marsecosystem",
+      "source": "immunefi",
+      "project": "Mars Ecosystem",
+      "slug": "marsecosystem",
+      "url": "https://immunefi.com/bug-bounty/marsecosystem/information/",
+      "maxBounty": 10000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "BSC",
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7KJxasjqM6UtmFBkXCD2Mj/4fc1b19a942ac6be1e3f1ba945ad5491/Mars_Ecosystem.jpeg",
+      "repos": [],
+      "updatedDate": "2025-06-26T15:38:41.855Z"
+    },
+    {
+      "id": "immunefi:moneyonchain",
+      "source": "immunefi",
+      "project": "Money on Chain / RIF on Chain",
+      "slug": "moneyonchain",
+      "url": "https://immunefi.com/bug-bounty/moneyonchain/information/",
+      "maxBounty": 10000,
+      "kyc": true,
+      "pocType": "step_by_step",
+      "ecosystems": [
+        "RSK"
+      ],
+      "languages": [
+        "Solidity",
+        "Python",
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/1OsrVnYDfPNy8a3qWntuk4/9d26ef24ff56bf9ff6c71a6c1e90c84d/MoneyonChain-logo.png",
+      "repos": [],
+      "updatedDate": "2026-08-20T19:37:23.183Z"
+    },
+    {
+      "id": "immunefi:charm",
+      "source": "immunefi",
+      "project": "Charm",
+      "slug": "charm",
+      "url": "https://immunefi.com/bug-bounty/charm/information/",
+      "maxBounty": 6000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6bbf7HCTEuoJ4f2qgaaCcp/0eed4177229bc1ff8b47064256e46a58/Charm-logo_Small.png",
+      "repos": [],
+      "updatedDate": "2026-09-02T09:51:18.648Z"
+    },
+    {
+      "id": "immunefi:leather",
+      "source": "immunefi",
+      "project": "Leather",
+      "slug": "leather",
+      "url": "https://immunefi.com/bug-bounty/leather/information/",
+      "maxBounty": 5000,
+      "kyc": true,
+      "pocType": "step_by_step",
+      "ecosystems": [
+        "Stacks",
+        "Bitcoin"
+      ],
+      "languages": [
+        "Typescript"
+      ],
+      "solana": false,
+      "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/83952-PR6ezgemOROgH6HV6JX5u.png",
+      "repos": [],
+      "updatedDate": "2026-08-31T07:57:13.713Z"
+    },
+    {
+      "id": "immunefi:blockpinetwork",
+      "source": "immunefi",
+      "project": "BlockPI Network",
+      "slug": "blockpinetwork",
+      "url": "https://immunefi.com/bug-bounty/blockpinetwork/information/",
+      "maxBounty": 5000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "Base",
+        "Cronos",
+        "ETH",
+        "Fantom",
+        "Gnosis",
+        "Klaytn",
+        "Linea",
+        "Meter",
+        "Oasis",
+        "Optimism",
+        "Polygon",
+        "Scroll",
+        "Starknet",
+        "Viction",
+        "zkSync"
+      ],
+      "languages": [],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/7zua6OFbUgptQngH9PyKkE/b18feda35f0f62a79659db0b7646cdf6/BlockPI_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-08-13T12:43:46.048Z"
+    },
+    {
+      "id": "immunefi:autonolas",
+      "source": "immunefi",
+      "project": "Autonolas",
+      "slug": "autonolas",
+      "url": "https://immunefi.com/bug-bounty/autonolas/information/",
+      "maxBounty": 5000,
+      "kyc": true,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH",
+        "Base",
+        "Celo",
+        "Gnosis",
+        "Optimism",
+        "Polygon",
+        "Arbitrum",
+        "Mode"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4r8fmQqm5emK0IceVDJtLF/1c5f298890761f6b5342c04aa0df8c63/Autonolas_logo.jpeg",
+      "repos": [],
+      "updatedDate": "2026-08-20T22:50:44.328Z"
+    },
+    {
+      "id": "immunefi:mtpelerin",
+      "source": "immunefi",
+      "project": "Mt Pelerin",
+      "slug": "mtpelerin",
+      "url": "https://immunefi.com/bug-bounty/mtpelerin/information/",
+      "maxBounty": 5000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "Arbitrum",
+        "Avalanche",
+        "BSC",
+        "Base",
+        "Bitcoin",
+        "ETH",
+        "Gnosis",
+        "Optimism",
+        "Polygon",
+        "Rootstock",
+        "Tezos",
+        "Celo",
+        "zkSync",
+        "Lightning",
+        "Sonic",
+        "xDAI / Gnosis Chain"
+      ],
+      "languages": [
+        "Solidity"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6tsDyr3ikdFL8rLa53IcOZ/e249b3d566eee170e2b73a37d6666f2f/Mtpelerin-logo.png",
+      "repos": [],
+      "updatedDate": "2026-08-12T08:49:15.122Z"
+    },
+    {
+      "id": "immunefi:unstoppablewallet",
+      "source": "immunefi",
+      "project": "Unstoppable Wallet",
+      "slug": "unstoppablewallet",
+      "url": "https://immunefi.com/bug-bounty/unstoppablewallet/information/",
+      "maxBounty": 1000,
+      "kyc": false,
+      "pocType": "required",
+      "ecosystems": [
+        "ETH"
+      ],
+      "languages": [
+        "Kotlin"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/4aNgN7QLwG3UL0uXAwCJJd/681686d79ae211b93ca98d3e90b98166/Unstoppable_Wallet_logo.png",
+      "repos": [],
+      "updatedDate": "2026-09-11T05:11:49.688Z"
+    },
+    {
+      "id": "immunefi:acala",
+      "source": "immunefi",
+      "project": "Acala",
+      "slug": "acala",
+      "url": "https://immunefi.com/bug-bounty/acala/information/",
+      "maxBounty": 1000,
+      "kyc": false,
+      "pocType": "runnable",
+      "ecosystems": [
+        "Polkadot"
+      ],
+      "languages": [
+        "Rust"
+      ],
+      "solana": false,
+      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/2yQpKoZm8AOR2wLqYzZa9j/fd4701886536ad5828e0ff05edd4771d/acala_logo.png",
+      "repos": [],
+      "updatedDate": "2026-08-14T10:58:56.483Z"
+    }
+  ]
+}

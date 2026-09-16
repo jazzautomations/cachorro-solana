@@ -1,7 +1,12 @@
+import { Suspense } from 'react'
 import Navbar from '@/components/Navbar'
 import ScanInput from '@/components/ScanInput'
 import RecentHunts from '@/components/RecentHunts'
 import LiveFeedPreview from '@/components/LiveFeedPreview'
+import { readBounties, solanaBounties } from '@/lib/bounties'
+import { fmtUsd } from '@/lib/format'
+
+export const dynamic = 'force-dynamic'
 
 const JOURNEY = [
   {
@@ -64,7 +69,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch text-left">
             <div className="flex flex-col justify-center">
-              <ScanInput />
+              <Suspense fallback={<div className="h-24" />}>
+                <ScanInput />
+              </Suspense>
             </div>
             <LiveFeedPreview />
           </div>
@@ -95,6 +102,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* BOUNTY BOARD — pick a target with money on it */}
+      <BountyTeaser />
 
       {/* NARRATIVE — why now (the web3 story that wins) */}
       <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
@@ -317,5 +327,51 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  )
+}
+
+function BountyTeaser() {
+  const idx = readBounties()
+  const sol = solanaBounties(idx).slice(0, 6)
+  if (!sol.length) return null
+  const total = solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0)
+
+  return (
+    <section id="board" className="px-4 py-10 sm:py-14 border-t border-dark-600 scroll-mt-16">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-xs sm:text-lg font-arcade text-neon-yellow mb-2 text-center">
+          [ LIVE BOUNTY BOARD ]
+        </h2>
+        <p className="text-[10px] sm:text-xs text-gray-500 text-center mb-6 font-mono">
+          {fmtUsd(total)} in active Solana bounties indexed — pick a target with money on it.
+        </p>
+        <div className="border border-dark-600 divide-y divide-dark-600">
+          {sol.map((b) => (
+            <div key={b.id} className="flex items-center gap-3 px-3 sm:px-4 py-2.5 bg-dark-900">
+              <span className="text-[11px] sm:text-sm font-mono text-white flex-1 min-w-0 truncate">{b.project}</span>
+              <span className="text-[8px] font-mono text-gray-600 uppercase shrink-0 hidden sm:inline">{b.source}</span>
+              <span className="text-[10px] sm:text-xs font-mono text-neon-green w-16 text-right shrink-0">{fmtUsd(b.maxBounty)}</span>
+              {b.repos[0] ? (
+                <a
+                  href={`/?target=${encodeURIComponent(b.repos[0])}#hunt`}
+                  className="px-2 py-1 border border-neon-green/60 text-neon-green text-[8px] sm:text-[9px] font-mono hover:bg-neon-green hover:text-black transition-all shrink-0"
+                >
+                  HUNT ▸
+                </a>
+              ) : (
+                <a href={b.url} target="_blank" rel="noreferrer" className="px-2 py-1 border border-dark-600 text-gray-500 text-[8px] sm:text-[9px] font-mono hover:text-neon-cyan shrink-0">
+                  SCOPE ↗
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-4">
+          <a href="/bounties" className="text-[9px] sm:text-[10px] font-mono text-neon-cyan hover:text-neon-green transition-colors">
+            ▸ full board — {idx.bounties.length} programs indexed ↗
+          </a>
+        </div>
+      </div>
+    </section>
   )
 }

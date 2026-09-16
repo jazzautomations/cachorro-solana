@@ -1,17 +1,23 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const REPO_RE = /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+(\.git)?\/?$/
 const PUBKEY_RE = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/
 
 export default function ScanInput() {
   const router = useRouter()
+  const params = useSearchParams()
   const [target, setTarget] = useState('')
   const [cluster, setCluster] = useState('mainnet')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const t = params.get('target')
+    if (t) setTarget(t)
+  }, [params])
 
   const t = target.trim()
   const kind: 'repo' | 'program-id' | null =

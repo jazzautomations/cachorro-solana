@@ -56,6 +56,29 @@ export interface ScanReport extends JobStatus {
   staticLog?: string[]
 }
 
+export interface Bounty {
+  id: string
+  source: string
+  project: string
+  slug: string
+  url: string
+  maxBounty: number | null
+  kyc: boolean
+  pocType: string | null
+  ecosystems: string[]
+  languages: string[]
+  solana: boolean
+  logo: string | null
+  repos: string[]
+  updatedDate: string | null
+}
+
+export interface BountyIndex {
+  updatedAt: string
+  sources: Record<string, { status: string; count?: number; error?: string }>
+  bounties: Bounty[]
+}
+
 export interface RunListItem {
   id: string
   target: string

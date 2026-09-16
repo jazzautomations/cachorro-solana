@@ -8,6 +8,8 @@ export interface JobStatus {
   stages: Record<string, string>
   staticNote?: string
   error?: string
+  engine?: string
+  reportFile?: string
   createdAt: number
   updatedAt?: number
 }
@@ -23,10 +25,23 @@ export interface HuntEvent {
   text: string
 }
 
+export interface Finding {
+  id?: string
+  vulnerability_type: string
+  severity: 'critical' | 'high' | 'medium' | 'low' | string
+  file: string
+  function?: string
+  line_range?: string
+  description?: string
+  impact?: string
+}
+
 export interface ScanReport extends JobStatus {
   events?: HuntEvent[]
   engine?: string
   reportFile?: string
+  findings?: Finding[]
+  survivorCount?: number
   summary?: Record<string, string>
   sections?: LintSection[]
   zkModules?: string[]

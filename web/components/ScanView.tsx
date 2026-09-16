@@ -6,6 +6,13 @@ import AgentFeed from './AgentFeed'
 import Terminal from './Terminal'
 import type { LintSection, ScanReport } from '@/lib/types'
 
+const SEV_CLS: Record<string, string> = {
+  critical: 'text-neon-red border-neon-red',
+  high: 'text-neon-orange border-neon-orange',
+  medium: 'text-neon-yellow border-neon-yellow',
+  low: 'text-gray-500 border-dark-600',
+}
+
 const TILES: { key: string; label: string; color: string }[] = [
   { key: 'rust files', label: 'RUST FILES', color: 'text-neon-green' },
   { key: 'instruction handlers (pub fn)', label: 'HANDLERS', color: 'text-neon-cyan' },
@@ -117,6 +124,57 @@ export default function ScanView({ id }: { id: string }) {
 
       {(data.events?.length || running) && (
         <AgentFeed events={data.events || []} live={running} />
+      )}
+
+      {/* findings — candidates that passed through ANALYZE; survivors = post-DEVIL */}
+      {data.findings && data.findings.length > 0 && (
+        <div>
+          <h2 className="text-[11px] sm:text-sm font-arcade text-neon-green mb-3">
+            [ FINDINGS · {data.findings.length}
+            {data.survivorCount != null && ` · ${data.survivorCount} SURVIVED THE DEVIL`} ]
+          </h2>
+          <div className="border border-dark-600 bg-dark-900 divide-y divide-dark-700">
+            {data.findings.map((f, i) => (
+              <details key={i} className="group">
+                <summary className="flex items-center gap-2 sm:gap-3 px-3 py-2 cursor-pointer hover:bg-dark-800 transition-colors list-none">
+                  <span className={`text-[8px] sm:text-[9px] font-mono border px-1.5 py-0.5 uppercase shrink-0 ${SEV_CLS[f.severity] || SEV_CLS.low}`}>
+                    {f.severity}
+                  </span>
+                  <span className="flex-1 min-w-0 text-[10px] sm:text-[11px] text-gray-300 font-mono truncate">
+                    {f.id && <span className="text-gray-600">{f.id} </span>}{f.vulnerability_type}
+                  </span>
+                  <span className="text-[9px] text-neon-cyan font-mono truncate hidden sm:inline max-w-[40%]">
+                    {f.file}{f.line_range ? `:${f.line_range}` : ''}
+                  </span>
+                  <span className="text-neon-green text-[9px] shrink-0 group-open:rotate-90 transition-transform">▸</span>
+                </summary>
+                <div className="px-3 pb-3 pt-1 space-y-2 border-t border-dark-700">
+                  {f.function && (
+                    <div className="text-[9px] text-gray-600 font-mono">fn: {f.function}</div>
+                  )}
+                  {f.description && (
+                    <p className="text-[10px] sm:text-[11px] text-gray-400 font-mono leading-relaxed whitespace-pre-wrap break-words">{f.description}</p>
+                  )}
+                  {f.impact && (
+                    <p className="text-[10px] sm:text-[11px] text-neon-yellow font-mono leading-relaxed break-words">impact: {f.impact}</p>
+                  )}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* final report */}
+      {data.reportFile && (
+        <a
+          href={`/api/scan/${data.id}/report`}
+          target="_blank"
+          className="flex items-center justify-between border border-neon-green bg-dark-900 px-4 py-3 hover:bg-dark-800 transition-colors"
+        >
+          <span className="text-[10px] sm:text-xs font-arcade text-neon-green">[ HUNT REPORT READY ]</span>
+          <span className="text-[9px] sm:text-[10px] font-mono text-neon-cyan">{data.reportFile} ↗</span>
+        </a>
       )}
 
       {data.status === 'error' && (

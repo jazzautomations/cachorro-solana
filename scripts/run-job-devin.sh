@@ -11,7 +11,7 @@ set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEVIN_BIN="${DEVIN_BIN:-/root/.local/bin/devin}"
-AI_TIMEOUT="${CACHORRO_AI_TIMEOUT:-3600}"
+AI_TIMEOUT="${CACHORRO_AI_TIMEOUT:-5400}"
 
 if [[ "${1:-}" != "--inner" ]]; then
   ID="${1:?run id}"; KIND="${2:?kind}"; TARGET="${3:?target}"; CLUSTER="${4:-mainnet}"

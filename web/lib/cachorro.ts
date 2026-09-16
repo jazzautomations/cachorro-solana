@@ -40,7 +40,7 @@ export { STAGES } from './stages'
 export type { Stage } from './stages'
 
 export * from './types'
-import type { JobStatus, LintSection, ScanReport } from './types'
+import type { Finding, JobStatus, LintSection, ScanReport } from './types'
 
 function tail(file: string, n = 40): string[] | undefined {
   try {
@@ -157,6 +157,25 @@ function parseEvents(file: string): ScanReport['events'] | undefined {
   }
 }
 
+/** findings.json — analyzer candidates that survived the DEVIL stage live in survivors.json. */
+function parseFindings(file: string): Finding[] | undefined {
+  try {
+    const arr = JSON.parse(fs.readFileSync(file, 'utf8'))
+    return Array.isArray(arr) && arr.length ? arr : undefined
+  } catch {
+    return undefined
+  }
+}
+
+function countJson(file: string): number | undefined {
+  try {
+    const arr = JSON.parse(fs.readFileSync(file, 'utf8'))
+    return Array.isArray(arr) ? arr.length : undefined
+  } catch {
+    return undefined
+  }
+}
+
 export function readReport(id: string): ScanReport | null {
   const st = readStatus(id)
   if (!st) return null
@@ -172,6 +191,8 @@ export function readReport(id: string): ScanReport | null {
     fetchLog: tail(path.join(dir, 'fetch.log')),
     staticLog: tail(path.join(dir, 'static.log')),
     events: parseEvents(path.join(dir, 'events.jsonl')),
+    findings: parseFindings(path.join(dir, 'findings.json')),
+    survivorCount: countJson(path.join(dir, 'survivors.json')),
   }
 }
 

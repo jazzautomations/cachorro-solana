@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react'
 
-// Real events captured from run_1789547662_fca40c — the pack hunting sealevel-attacks.
+// Real events captured from run_1789547662 — the pack hunting sealevel-attacks (translated).
 const FEED: { agent: string; kind: string; text: string }[] = [
-  { agent: 'devin-researcher', kind: 'thought', text: 'Alvo = repo didático da Coral: 11 classes de bug Sealevel. Métrica real = recall nos plantados + zero FP nas variantes corrigidas.' },
-  { agent: 'devin-analyzer', kind: 'action', text: 'Fan-out em 3 clusters: access-control · CPI/PDA/sysvar · closing-accounts.' },
-  { agent: 'devil-advocate', kind: 'verdict', text: 'F-09 CONFIRMED critical — invoke com program id arbitrário + signer-bit propagation = drain real.' },
-  { agent: 'devil-advocate', kind: 'verdict', text: 'F-06 CONFIRMED high — check invertido no "secure" do dir4: bug upstream real, não plantado.' },
-  { agent: 'devil-advocate', kind: 'verdict', text: 'F-15/16/17 CONFIRMED — exit writeback pisa o zeroing; revival segue em todas variantes.' },
-  { agent: 'devin-pocsmith', kind: 'poc', text: 'treatment: vault drenado · control: bloqueado com Custom(1) — oráculo: SUPPORTS' },
+  { agent: 'researcher', kind: 'thought', text: 'Target = Coral teaching repo: 11 Sealevel bug classes, each with insecure/secure/recommended. Real metric = recall on planted bugs, zero FP on fixed variants.' },
+  { agent: 'analyzer', kind: 'action', text: 'Fan-out into 3 clusters: access-control · CPI/PDA/sysvar · closing-accounts.' },
+  { agent: 'devil', kind: 'verdict', text: 'F-09 CONFIRMED critical — invoke with arbitrary program id + signer-bit propagation = real drain.' },
+  { agent: 'devil', kind: 'verdict', text: 'F-06 CONFIRMED high — inverted check in the "secure" variant of dir4: a real upstream bug, not a planted one.' },
+  { agent: 'devil', kind: 'verdict', text: 'F-15/16/17 CONFIRMED — exit writeback stomps the zeroing; account revival survives in every variant.' },
+  { agent: 'pocsmith', kind: 'poc', text: 'treatment: vault drained to 0 · control: blocked with Custom(1) — oracle: SUPPORTS' },
 ]
 
 const KIND_CLS: Record<string, string> = {
@@ -34,15 +34,15 @@ export default function LiveFeedPreview() {
   const shown = FEED.slice(0, Math.min(n, FEED.length))
 
   return (
-    <div className="border border-dark-600 bg-black/80 text-left pixel-border-glow">
+    <div className="border border-dark-600 bg-black/80 text-left pixel-border-glow h-full flex flex-col">
       <div className="flex items-center justify-between px-3 py-2 border-b border-dark-600 bg-dark-800">
-        <span className="text-[9px] sm:text-[10px] font-arcade text-neon-purple">PACK MIND · AO VIVO</span>
+        <span className="text-[9px] sm:text-[10px] font-arcade text-neon-purple">PACK MIND · LIVE</span>
         <span className="flex items-center gap-1.5 text-[8px] font-mono text-gray-600">
           <span className="w-1.5 h-1.5 rounded-full bg-neon-red animate-pulse" />
-          capturado de uma caçada real
+          captured from a real hunt
         </span>
       </div>
-      <div className="p-3 space-y-1.5 min-h-[168px] sm:min-h-[188px] font-mono">
+      <div className="p-3 space-y-1.5 flex-1 font-mono">
         {shown.map((e, i) => (
           <div key={i} className="flex items-start gap-2">
             <span className={`text-[8px] sm:text-[9px] uppercase shrink-0 w-14 pt-px ${KIND_CLS[e.kind]}`}>

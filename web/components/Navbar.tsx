@@ -5,9 +5,11 @@ export default function Navbar() {
         <a href="/" className="text-[10px] sm:text-xs font-arcade text-neon-green hover:text-green-400 transition-colors shrink-0">
           CACHORRO
         </a>
-        <span className="hidden sm:block text-[10px] text-gray-600 truncate">
-          Solana program auditor · proof, not opinion
-        </span>
+        <div className="hidden sm:flex items-center gap-4 text-[10px] font-mono">
+          <a href="/#gate" className="text-gray-600 hover:text-neon-green transition-colors">PROOF</a>
+          <a href="/#receipt" className="text-gray-600 hover:text-neon-green transition-colors">RECEIPT</a>
+          <a href="/#hunts" className="text-gray-600 hover:text-neon-green transition-colors">HUNTS</a>
+        </div>
         <a
           href="/#hunt"
           className="px-3 py-1.5 border border-neon-green text-neon-green text-[10px] sm:text-xs hover:bg-neon-green hover:text-black transition-all shrink-0"

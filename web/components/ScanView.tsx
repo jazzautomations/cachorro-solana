@@ -110,15 +110,42 @@ export default function ScanView({ id }: { id: string }) {
   ]
   const sections = data.sections || []
   const running = data.status === 'running'
+  const sev = (data.findings || []).reduce<Record<string, number>>((acc, f) => {
+    acc[f.severity] = (acc[f.severity] || 0) + 1
+    return acc
+  }, {})
 
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* target header */}
       <div className="border border-dark-600 bg-dark-900 p-3 sm:p-4">
-        <div className="text-[9px] text-gray-600 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}</div>
+        <div className="text-[9px] text-gray-600 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}</div>
         <div className="text-[11px] sm:text-sm text-neon-green font-mono break-all">{data.target}</div>
         <div className="text-[9px] text-gray-700 font-mono mt-1">{data.id}</div>
       </div>
+
+      {/* verdict banner — the outcome first, then the process */}
+      {!running && data.status === 'done' && (
+        <div className="border border-neon-green bg-dark-900 p-4 sm:p-5 pixel-border-glow">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span className="text-[11px] sm:text-sm font-arcade text-neon-green">HUNT COMPLETE</span>
+            <div className="flex gap-2">
+              {(['critical', 'high', 'medium', 'low'] as const).filter((s) => sev[s]).map((s) => (
+                <span key={s} className={`text-[8px] sm:text-[9px] font-mono border px-1.5 py-0.5 uppercase ${SEV_CLS[s]}`}>
+                  {sev[s]} {s}
+                </span>
+              ))}
+            </div>
+            <span className="text-[9px] font-mono text-gray-600 ml-auto">⏱ {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, '0')}</span>
+          </div>
+          {data.reportFile && (
+            <a href={`/api/scan/${data.id}/report`} target="_blank"
+               className="mt-3 inline-block text-[10px] sm:text-xs font-mono text-neon-cyan hover:text-neon-green transition-colors">
+              ▸ {data.reportFile} — full hunt report ↗
+            </a>
+          )}
+        </div>
+      )}
 
       <AgentFlow stages={data.stages || {}} status={data.status} elapsed={elapsed} />
 
@@ -165,8 +192,8 @@ export default function ScanView({ id }: { id: string }) {
         </div>
       )}
 
-      {/* final report */}
-      {data.reportFile && (
+      {/* final report link — only shown while running (done hunts get the verdict banner) */}
+      {running && data.reportFile && (
         <a
           href={`/api/scan/${data.id}/report`}
           target="_blank"
@@ -188,13 +215,15 @@ export default function ScanView({ id }: { id: string }) {
         </div>
       )}
 
-      <Terminal
-        title={`ENGINE LOG · ${data.id}`}
-        lines={logs}
-        height="h-56 sm:h-64"
-        live={running}
-        empty="spawning runner…"
-      />
+      {(logs.length > 0 || running) && (
+        <Terminal
+          title={`ENGINE LOG · ${data.id}`}
+          lines={logs}
+          height="h-56 sm:h-64"
+          live={running}
+          empty="spawning runner…"
+        />
+      )}
 
       {/* on-chain account */}
       {data.onchain && (

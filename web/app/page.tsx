@@ -35,7 +35,7 @@ export default function Home() {
 
       {/* HERO */}
       <section id="hunt" className="relative px-4 pt-12 pb-10 sm:pt-20 sm:pb-14 overflow-hidden scroll-mt-16">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <div className="text-[9px] sm:text-xs text-neon-green mb-4 animate-blink font-mono">
             ▶ THE PACK IS AWAKE — 8 STAGES, ONE HUNT, ZERO OPINIONS
           </div>
@@ -45,13 +45,13 @@ export default function Home() {
             <span className="text-neon-cyan">NOT OPINION.</span>
           </h1>
 
-          <p className="text-[11px] sm:text-base text-gray-400 mb-6 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[11px] sm:text-base text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
             Point the pack at an Anchor program. It finds the bug class, writes the exploit,
             <span className="text-neon-green"> runs it on a local validator — never mainnet —</span>
             and anchors the verdict on-chain. The audit you can verify yourself.
           </p>
 
-          <div className="mb-8 border border-dark-600 pixel-border-glow overflow-hidden">
+          <div className="relative mb-8 sm:mb-10 border border-dark-600 pixel-border-glow overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/hero.jpg"
@@ -59,11 +59,13 @@ export default function Home() {
               className="w-full h-auto block"
               loading="eager"
             />
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
           </div>
 
-          <ScanInput />
-
-          <div className="mt-8 sm:mt-10 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch text-left">
+            <div className="flex flex-col justify-center">
+              <ScanInput />
+            </div>
             <LiveFeedPreview />
           </div>
         </div>
@@ -127,7 +129,7 @@ export default function Home() {
       </section>
 
       {/* THE GATE — proof, not opinion, made concrete */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
+      <section id="gate" className="px-4 py-10 sm:py-14 border-t border-dark-600 scroll-mt-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-xs sm:text-lg font-arcade text-neon-green mb-2 text-center">
             [ NOTHING PROMOTES WITHOUT PROOF ]
@@ -154,7 +156,7 @@ export default function Home() {
       </section>
 
       {/* ATTESTATION — the moat */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
+      <section id="receipt" className="px-4 py-10 sm:py-14 border-t border-dark-600 scroll-mt-16">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
           <div>
             <h2 className="text-xs sm:text-lg font-arcade text-neon-green mb-3">
@@ -244,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* RECENT HUNTS */}
-      <section className="px-4 py-8 sm:py-12 border-t border-dark-600">
+      <section id="hunts" className="px-4 py-8 sm:py-12 border-t border-dark-600 scroll-mt-16">
         <div className="max-w-4xl mx-auto">
           <RecentHunts />
         </div>

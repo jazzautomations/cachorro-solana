@@ -1,8 +1,93 @@
 {
-  "generatedAt": "2026-09-16T11:55:21.038Z",
+  "generatedAt": "2026-09-16T13:40:54.175Z",
   "source": "https://github.com/coral-xyz/sealevel-attacks",
   "labs": [
     {
+      "kind": "lesson",
+      "id": "solana-model",
+      "tier": 0,
+      "title": "The Account Model",
+      "vulnClass": "foundations",
+      "concept": "Ethereum contracts own their storage. Solana programs are stateless — they hold no data. Everything lives in accounts: lamports (balance), data (raw bytes), owner (the program allowed to write it), and flags. A \"wallet\" is an account owned by the System Program. A \"token account\" is an account owned by the Token Program whose data encodes mint+owner+amount. Every instruction receives the accounts it may touch as arguments — the runtime enforces nothing about what they mean. That single design choice is why Solana security exists as a discipline.",
+      "realWorld": "Almost every Solana exploit is an account-model misunderstanding weaponized: wrong owner, wrong data, wrong signer, wrong program. Learn the model and the bugs read themselves.",
+      "insecure": null,
+      "secure": null,
+      "recommended": null,
+      "repoUrl": null,
+      "huntTarget": null
+    },
+    {
+      "kind": "lesson",
+      "id": "signers-and-writers",
+      "tier": 0,
+      "title": "Signers & Writable Flags",
+      "vulnClass": "foundations",
+      "concept": "The runtime tracks two facts per account in a transaction: is_signer (did its private key sign the tx) and is_writable (may the program mutate it). A program that reads authority.key() without checking authority.is_signer has only learned who the caller CLAIMS is authority. Signatures are how Solana says \"this human agreed\" — everything else is just bytes anyone can pass.",
+      "realWorld": "The signer bit is the cheapest check in the runtime and the most skipped. Missing-signer is the #1 bug class by frequency.",
+      "insecure": null,
+      "secure": null,
+      "recommended": null,
+      "repoUrl": null,
+      "huntTarget": null
+    },
+    {
+      "kind": "lesson",
+      "id": "ownership-and-validation",
+      "tier": 0,
+      "title": "Ownership = Trust",
+      "vulnClass": "foundations",
+      "concept": "A program can only write to accounts it owns — the runtime enforces that. What it does NOT enforce: that an account you READ was created by who you think. Any program can craft an account whose bytes deserialize perfectly into your struct. Checking account.owner == expected_program is what turns \"bytes that look right\" into \"data I can trust\".",
+      "realWorld": "Fake-account attacks powered the early Solana exploit wave. Anchor's Account<'info, T> validates owner + discriminator automatically; raw AccountInfo validates nothing.",
+      "insecure": null,
+      "secure": null,
+      "recommended": null,
+      "repoUrl": null,
+      "huntTarget": null
+    },
+    {
+      "kind": "lesson",
+      "id": "pdas",
+      "tier": 0,
+      "title": "PDAs — Program Derived Addresses",
+      "vulnClass": "foundations",
+      "concept": "A PDA is an address derived deterministically from seeds + program id that deliberately falls OFF the ed25519 curve — no private key exists, so only the program can \"sign\" for it (via invoke_signed + the same seeds). PDAs are how programs hold authority: vaults, mint authorities, pool signers. The seeds ARE the security policy — collide them or reuse one PDA for everything and the walls come down.",
+      "realWorld": "PDA seed design is protocol design. Wormhole-era exploits, share-inflation attacks and vault drains routinely trace back to seeds that didn't encode enough context.",
+      "insecure": null,
+      "secure": null,
+      "recommended": null,
+      "repoUrl": null,
+      "huntTarget": null
+    },
+    {
+      "kind": "lesson",
+      "id": "cpi",
+      "tier": 0,
+      "title": "CPI — Cross-Program Invocation",
+      "vulnClass": "foundations",
+      "concept": "Programs call programs: invoke passes your signer privileges down the call. That means the program_id you invoke decides who inherits your authority. Pin it to the expected address or an attacker supplies a program that says \"transfer succeeded\" while pocketing the tokens. CPI is composability — and the trust boundary where composability gets exploited.",
+      "realWorld": "The pack CONFIRMED this class live: arbitrary program id + propagated signer bit = the callee can do anything your program can.",
+      "insecure": null,
+      "secure": null,
+      "recommended": null,
+      "repoUrl": null,
+      "huntTarget": null
+    },
+    {
+      "kind": "lesson",
+      "id": "how-the-pack-hunts",
+      "tier": 0,
+      "title": "How the Pack Hunts",
+      "vulnClass": "methodology",
+      "concept": "The pipeline mirrors a human auditor: FETCH the target → STATIC lint maps the surface → RESEARCH the protocol lineage → ANALYZE hypotheses per vuln class → DEVIL tries to kill every candidate (false positives burn bounty reputation) → POC writes the exploit → REVIEW runs treatment vs control on a local validator → REPORT. A finding only ships when code execution proves it — the gate, not the model, decides.",
+      "realWorld": "This is the discipline Immunefi payouts reward: proof-of-concept required means the report must demonstrate impact, not argue it.",
+      "insecure": null,
+      "secure": null,
+      "recommended": null,
+      "repoUrl": null,
+      "huntTarget": null
+    },
+    {
+      "kind": "lab",
       "id": "missing-signer",
       "dir": "0-signer-authorization",
       "tier": 1,
@@ -18,6 +103,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "account-data-matching",
       "dir": "1-account-data-matching",
       "tier": 1,
@@ -32,6 +118,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "owner-checks",
       "dir": "2-owner-checks",
       "tier": 1,
@@ -46,6 +133,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "type-cosplay",
       "dir": "3-type-cosplay",
       "tier": 1,
@@ -60,6 +148,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "initialization",
       "dir": "4-initialization",
       "tier": 2,
@@ -74,6 +163,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "arbitrary-cpi",
       "dir": "5-arbitrary-cpi",
       "tier": 2,
@@ -89,6 +179,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "duplicate-mutable-accounts",
       "dir": "6-duplicate-mutable-accounts",
       "tier": 2,
@@ -103,6 +194,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "bump-canonicalization",
       "dir": "7-bump-seed-canonicalization",
       "tier": 2,
@@ -117,6 +209,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "pda-sharing",
       "dir": "8-pda-sharing",
       "tier": 2,
@@ -131,6 +224,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "closing-accounts",
       "dir": "9-closing-accounts",
       "tier": 3,
@@ -146,6 +240,7 @@
       "huntTarget": "https://github.com/coral-xyz/sealevel-attacks"
     },
     {
+      "kind": "lab",
       "id": "sysvar-address-checking",
       "dir": "10-sysvar-address-checking",
       "tier": 3,

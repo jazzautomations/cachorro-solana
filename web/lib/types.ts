@@ -86,8 +86,9 @@ export interface BountyIndex {
 
 export interface Lab {
   id: string
-  dir: string
-  tier: 1 | 2 | 3
+  dir?: string
+  kind: 'lesson' | 'lab'
+  tier: 0 | 1 | 2 | 3
   title: string
   vulnClass: string
   concept: string
@@ -96,8 +97,8 @@ export interface Lab {
   insecure: string | null
   secure: string | null
   recommended: string | null
-  repoUrl: string
-  huntTarget: string
+  repoUrl: string | null
+  huntTarget: string | null
 }
 
 export interface LabIndex {

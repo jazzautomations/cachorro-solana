@@ -6,7 +6,7 @@ export const metadata = { title: 'Labs' }
 
 export default function LabsPage() {
   const { labs } = readLabs()
-  const tiers = [1, 2, 3] as const
+  const tiers = [0, 1, 2, 3] as const
 
   return (
     <main className="min-h-screen bg-black">
@@ -18,9 +18,9 @@ export default function LabsPage() {
             [ LABS · LEARN BY HUNTING ]
           </h1>
           <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-8 leading-relaxed max-w-2xl">
-            Eleven vulnerability classes from the Sealevel canon — each lab shows the vulnerable
-            code, the fix, the real-world exploit it caused, and lets you unleash the pack on it.
-            No slides. You learn what a bug looks like by watching it get exploited.
+            A Solana security curriculum: foundations first (the account model every bug exploits),
+            then eleven vulnerability classes — each lab shows the vulnerable code, the fix, the
+            real-world exploit it caused, and lets you unleash the pack on it. No slides.
           </p>
 
           {tiers.map((tier) => (
@@ -40,14 +40,18 @@ export default function LabsPage() {
                       <span className="text-[10px] sm:text-xs font-arcade text-white group-hover:text-neon-green transition-colors">
                         {l.title}
                       </span>
-                      {l.proven && (
+                      {l.proven ? (
                         <span className="text-[7px] sm:text-[8px] font-mono text-neon-green border border-neon-green/40 px-1.5 py-0.5 shrink-0">
                           PACK-PROVEN
                         </span>
-                      )}
+                      ) : l.kind === 'lesson' ? (
+                        <span className="text-[7px] sm:text-[8px] font-mono text-gray-500 border border-dark-600 px-1.5 py-0.5 shrink-0">
+                          LESSON
+                        </span>
+                      ) : null}
                     </div>
                     <div className="text-[9px] sm:text-[10px] font-mono text-gray-600">
-                      {l.vulnClass} · {l.dir}
+                      {l.vulnClass}{l.dir ? ` · ${l.dir}` : ''}
                     </div>
                   </a>
                 ))}

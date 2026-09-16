@@ -14,12 +14,74 @@ const CORPUS = join(ROOT, 'corpus', 'sealevel-attacks')
 const OUT = join(ROOT, 'web', 'data', 'labs.json')
 const REPO_URL = 'https://github.com/coral-xyz/sealevel-attacks'
 
-// tier: 1 = core model bugs (signer/owner/accounts) · 2 = CPI/PDA/sysvar · 3 = lifecycle & DoS
+// tier: 0 = foundations (no bug — the model) · 1 = core model bugs · 2 = CPI/PDA · 3 = lifecycle & DoS
+// kind: 'lesson' = conceptual, no corpus code · 'lab' = vulnerable program + hunt
 const LABS = [
+  {
+    id: 'solana-model',
+    tier: 0,
+    kind: 'lesson',
+    title: 'The Account Model',
+    vulnClass: 'foundations',
+    concept:
+      'Ethereum contracts own their storage. Solana programs are stateless — they hold no data. Everything lives in accounts: lamports (balance), data (raw bytes), owner (the program allowed to write it), and flags. A "wallet" is an account owned by the System Program. A "token account" is an account owned by the Token Program whose data encodes mint+owner+amount. Every instruction receives the accounts it may touch as arguments — the runtime enforces nothing about what they mean. That single design choice is why Solana security exists as a discipline.',
+    realWorld: 'Almost every Solana exploit is an account-model misunderstanding weaponized: wrong owner, wrong data, wrong signer, wrong program. Learn the model and the bugs read themselves.',
+  },
+  {
+    id: 'signers-and-writers',
+    tier: 0,
+    kind: 'lesson',
+    title: 'Signers & Writable Flags',
+    vulnClass: 'foundations',
+    concept:
+      'The runtime tracks two facts per account in a transaction: is_signer (did its private key sign the tx) and is_writable (may the program mutate it). A program that reads authority.key() without checking authority.is_signer has only learned who the caller CLAIMS is authority. Signatures are how Solana says "this human agreed" — everything else is just bytes anyone can pass.',
+    realWorld: 'The signer bit is the cheapest check in the runtime and the most skipped. Missing-signer is the #1 bug class by frequency.',
+  },
+  {
+    id: 'ownership-and-validation',
+    tier: 0,
+    kind: 'lesson',
+    title: 'Ownership = Trust',
+    vulnClass: 'foundations',
+    concept:
+      'A program can only write to accounts it owns — the runtime enforces that. What it does NOT enforce: that an account you READ was created by who you think. Any program can craft an account whose bytes deserialize perfectly into your struct. Checking account.owner == expected_program is what turns "bytes that look right" into "data I can trust".',
+    realWorld: 'Fake-account attacks powered the early Solana exploit wave. Anchor\'s Account<\'info, T> validates owner + discriminator automatically; raw AccountInfo validates nothing.',
+  },
+  {
+    id: 'pdas',
+    tier: 0,
+    kind: 'lesson',
+    title: 'PDAs — Program Derived Addresses',
+    vulnClass: 'foundations',
+    concept:
+      'A PDA is an address derived deterministically from seeds + program id that deliberately falls OFF the ed25519 curve — no private key exists, so only the program can "sign" for it (via invoke_signed + the same seeds). PDAs are how programs hold authority: vaults, mint authorities, pool signers. The seeds ARE the security policy — collide them or reuse one PDA for everything and the walls come down.',
+    realWorld: 'PDA seed design is protocol design. Wormhole-era exploits, share-inflation attacks and vault drains routinely trace back to seeds that didn\'t encode enough context.',
+  },
+  {
+    id: 'cpi',
+    tier: 0,
+    kind: 'lesson',
+    title: 'CPI — Cross-Program Invocation',
+    vulnClass: 'foundations',
+    concept:
+      'Programs call programs: invoke passes your signer privileges down the call. That means the program_id you invoke decides who inherits your authority. Pin it to the expected address or an attacker supplies a program that says "transfer succeeded" while pocketing the tokens. CPI is composability — and the trust boundary where composability gets exploited.',
+    realWorld: 'The pack CONFIRMED this class live: arbitrary program id + propagated signer bit = the callee can do anything your program can.',
+  },
+  {
+    id: 'how-the-pack-hunts',
+    tier: 0,
+    kind: 'lesson',
+    title: 'How the Pack Hunts',
+    vulnClass: 'methodology',
+    concept:
+      'The pipeline mirrors a human auditor: FETCH the target → STATIC lint maps the surface → RESEARCH the protocol lineage → ANALYZE hypotheses per vuln class → DEVIL tries to kill every candidate (false positives burn bounty reputation) → POC writes the exploit → REVIEW runs treatment vs control on a local validator → REPORT. A finding only ships when code execution proves it — the gate, not the model, decides.',
+    realWorld: 'This is the discipline Immunefi payouts reward: proof-of-concept required means the report must demonstrate impact, not argue it.',
+  },
   {
     id: 'missing-signer',
     dir: '0-signer-authorization',
     tier: 1,
+    kind: 'lab',
     title: 'Missing Signer Check',
     vulnClass: 'signer-authorization',
     concept:
@@ -137,15 +199,16 @@ function readRs(dir, variant) {
 }
 
 const labs = LABS.map((l) => ({
+  kind: l.dir ? 'lab' : 'lesson',
   ...l,
-  insecure: readRs(l.dir, 'insecure'),
-  secure: readRs(l.dir, 'secure'),
-  recommended: readRs(l.dir, 'recommended'),
-  repoUrl: `${REPO_URL}/tree/master/programs/${l.dir}`,
-  huntTarget: REPO_URL,
+  insecure: l.dir ? readRs(l.dir, 'insecure') : null,
+  secure: l.dir ? readRs(l.dir, 'secure') : null,
+  recommended: l.dir ? readRs(l.dir, 'recommended') : null,
+  repoUrl: l.dir ? `${REPO_URL}/tree/master/programs/${l.dir}` : null,
+  huntTarget: l.dir ? REPO_URL : null,
 }))
 
-const missing = labs.filter((l) => !l.insecure || !l.secure)
+const missing = labs.filter((l) => l.kind === 'lab' && (!l.insecure || !l.secure))
 if (missing.length) {
   console.error('missing variants for:', missing.map((l) => l.id).join(', '))
   process.exit(1)

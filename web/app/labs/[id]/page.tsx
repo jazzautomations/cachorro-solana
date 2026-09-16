@@ -32,9 +32,11 @@ export default async function LabPage({ params }: { params: Promise<{ id: string
         <div className="max-w-4xl mx-auto">
           <a href="/labs" className="text-[9px] font-mono text-gray-600 hover:text-neon-green">◂ labs</a>
           <div className="text-[9px] text-gray-600 font-mono mt-3 mb-1">
-            {TIER_META[lab.tier].name} · {lab.dir}
+            {TIER_META[lab.tier].name}{lab.dir ? ` · ${lab.dir}` : ''}
           </div>
-          <h1 className="text-sm sm:text-xl font-arcade text-neon-red mb-4">{lab.title.toUpperCase()}</h1>
+          <h1 className={`text-sm sm:text-xl font-arcade mb-4 ${lab.kind === 'lab' ? 'text-neon-red' : 'text-neon-cyan'}`}>
+            {lab.title.toUpperCase()}
+          </h1>
 
           <p className="text-[10px] sm:text-sm text-gray-400 leading-relaxed mb-4 max-w-3xl">
             {lab.concept}
@@ -45,25 +47,40 @@ export default async function LabPage({ params }: { params: Promise<{ id: string
             <div className="text-[10px] sm:text-xs font-mono text-gray-400 leading-relaxed">{lab.realWorld}</div>
           </div>
 
-          <CodeCompare insecure={lab.insecure} secure={lab.secure} recommended={lab.recommended} />
+          {lab.insecure && (
+            <CodeCompare insecure={lab.insecure} secure={lab.secure} recommended={lab.recommended} />
+          )}
 
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <a
-              href={`/?target=${encodeURIComponent(lab.huntTarget)}#hunt`}
-              className="flex items-center justify-between border border-neon-green bg-dark-900 px-4 py-3 hover:bg-dark-800 transition-colors"
-            >
-              <span className="text-[10px] sm:text-xs font-arcade text-neon-green">[ UNLEASH THE PACK ]</span>
-              <span className="text-[8px] sm:text-[9px] font-mono text-gray-600">hunt this class ↗</span>
-            </a>
-            <a
-              href={lab.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-between border border-dark-600 bg-dark-900 px-4 py-3 hover:bg-dark-800 transition-colors"
-            >
-              <span className="text-[10px] sm:text-xs font-mono text-gray-400">full program + tests</span>
-              <span className="text-[8px] sm:text-[9px] font-mono text-gray-600">github ↗</span>
-            </a>
+            {lab.huntTarget && (
+              <a
+                href={`/?target=${encodeURIComponent(lab.huntTarget)}#hunt`}
+                className="flex items-center justify-between border border-neon-green bg-dark-900 px-4 py-3 hover:bg-dark-800 transition-colors"
+              >
+                <span className="text-[10px] sm:text-xs font-arcade text-neon-green">[ UNLEASH THE PACK ]</span>
+                <span className="text-[8px] sm:text-[9px] font-mono text-gray-600">hunt this class ↗</span>
+              </a>
+            )}
+            {lab.repoUrl && (
+              <a
+                href={lab.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between border border-dark-600 bg-dark-900 px-4 py-3 hover:bg-dark-800 transition-colors"
+              >
+                <span className="text-[10px] sm:text-xs font-mono text-gray-400">full program + tests</span>
+                <span className="text-[8px] sm:text-[9px] font-mono text-gray-600">github ↗</span>
+              </a>
+            )}
+            {lab.kind === 'lesson' && (
+              <a
+                href="/#hunt"
+                className="flex items-center justify-between border border-dark-600 bg-dark-900 px-4 py-3 hover:border-neon-green/60 transition-colors sm:col-span-2"
+              >
+                <span className="text-[10px] sm:text-xs font-mono text-gray-400">see the model in action — hunt a real target</span>
+                <span className="text-[8px] sm:text-[9px] font-mono text-gray-600">▸</span>
+              </a>
+            )}
           </div>
 
           {lab.proven && (

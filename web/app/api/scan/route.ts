@@ -117,11 +117,22 @@ export async function POST(req: Request) {
   fs.renameSync(tmp, path.join(dir, 'status.json'))
 
   const runner = pickRunner()
-  const child = spawn('bash', [runner, id, kind, target, cluster, mode], {
-    detached: true,
-    stdio: 'ignore',
-    cwd: path.dirname(path.dirname(runner)),
-  })
+  const runnerCwd = path.dirname(path.dirname(runner))
+  // Escapes the web service cgroup: a cachorro-web restart must not kill a
+  // running hunt. systemd-run puts the job in its own transient unit; setsid
+  // is the fallback for non-systemd hosts.
+  const useSystemd = fs.existsSync('/usr/bin/systemd-run') || fs.existsSync('/bin/systemd-run')
+  const child = useSystemd
+    ? spawn('systemd-run', [
+        '--quiet', '--collect', '--unit', `cachorro-hunt-${id}`,
+        '--setenv', `HOME=${process.env.HOME || '/root'}`,
+        '--setenv', `PATH=${process.env.PATH}`,
+        '--setenv', `CACHORRO_ROOT=${runnerCwd}`,
+        'bash', runner, id, kind, target, cluster, mode,
+      ], { detached: true, stdio: 'ignore', cwd: runnerCwd })
+    : spawn('setsid', ['bash', runner, id, kind, target, cluster, mode], {
+        detached: true, stdio: 'ignore', cwd: runnerCwd,
+      })
   child.unref()
 
   return NextResponse.json({ id, status: 'running' }, { status: 202 })

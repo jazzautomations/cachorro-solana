@@ -71,3 +71,16 @@ Multi-tenant real fica pro launch: contas/wallet-login, run dir isolado por usu�
 - Fluxo: POST /api/billing/checkout {plan} → invoice {treasury, memo `cachorro:<plan>:<rand>`, lamports} → user paga com memo → POST /api/billing/verify {invoice, signature} confere via RPC getTransaction (jsonParsed: transfer ≥ amount pro treasury + memo presente, inner ixs inclusas) → emite `cch_*` key.
 - Gate: POST /api/scan lê X-Cachorro-Key; FULL exige key paga (402), quota mensal por key (429). Anônimo = STRAY.
 - Treasury: `.secrets/treasury.json` (gitignored), RPC via CACHORRO_RPC (devnet default p/ demo). Subir pra mainnet = env vars, zero código.
+
+## Trustless proof surface (commit 85975b4)
+- `/report/[id]` — página pública do relatório (renderer md próprio em `web/lib/markdown.tsx`), header com sha256 do report + link pra attestation.
+- `/verify` — página trustless: cola attestation sha / report sha / tx sig → `GET /api/verify` re-executa a canonicalização (port do `attest/lib/canonical.js`) e confere memo on-chain via RPC. Verificação não depende de confiar no site.
+- `/badge/[id].svg` — shield embutível p/ README (`HUNTED BY THE PACK · N proven findings`) linkando pro scan.
+- `LiveFeedPreview` da landing agora faz polling `/api/scans`: se tem hunt rodando, mostra eventos REAIS ao vivo c/ link; senão, replay gravado.
+- Stale receipts ganharam link WHAT CHANGED (compare auditedRev...liveRev no GitHub).
+- Glitch CSS em finding/verdict critical no feed (`animate-glitch`).
+
+## Fix: runner sobrevive restart do web (importante)
+- POST /api/scan agora spawna via `systemd-run --collect --unit=cachorro-hunt-<id>` (envs HOME/PATH/CACHORRO_ROOT passadas via --setenv). Restart/deploy do cachorro-web não mata caçada em voo. Fallback setsid fora de systemd.
+- BUG encontrado: run_1789560920_177f62 (onre-sol FULL) morreu no ANALYZE quando o web reiniciou — runner era filho do cgroup do serviço. Marcado error, relançado como run_1789568330_9453f2 (FULL, onre-sol $100K).
+- Ops key mintada localmente p/ hunts internos: cch_640f…83b463 (plan pack, em billing.json).

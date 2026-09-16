@@ -55,3 +55,13 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 - `/labs` = currículo em 3 tiers (account model / CPI+PDA / lifecycle+sysvar); badges PACK-PROVEN nos labs que a engine já explorou de verdade.
 - `/labs/[id]` = aula: conceito, "seen in the wild" (exploit real), code compare VULNERABLE/SECURE/RECOMMENDED, UNLEASH THE PACK → hunt preenchido, link pro run que provou.
 - Roadmap de conteúdo: labs com alvo dedicado por classe (programa mínimo próprio por lab, não repo inteiro), trilhas além do Sealevel (share-inflation, oracle staleness, Token-2022), quiz/checklist "spot the bug" por lab.
+
+## Gaps de plataforma (modo aveone-vertical)
+- Modos de scan: quick/deep/full → POST /api/scan {mode} → runner ajusta AI timeout (40m/90m/2.5h) + guia de engine (top-1/top-3/todos survivors, devil 1 ou 2 passes).
+- Dup-check: REVIEW faz websearch vs disclosures públicos + dedup interno vs runs anteriores do mesmo alvo. Finding dup vira prova sem valor de bounty.
+- Alertas: emit-event dispara CACHORRO_ALERT_URL (webhook) em finding/verdict/poc crítico.
+- Receipt staleness: fetch grava targetRev (git HEAD / sha do .so); `watch-targets.sh` + `cachorro-watch.timer` (6h) marcam stale → banner RECEIPT STALE + RE-HUNT na UI.
+- Run FULL ao vivo: run_1789560920_177f62 em onre-finance/onre-sol ($100K, Immunefi).
+
+## Deploy público (roadmap pós-demo)
+Multi-tenant real fica pro launch: contas/wallet-login, run dir isolado por usuário, quota por plano, API key p/ CI. Pré-requisito duro: sandbox runsc antes de deixar estranho apontar alvo (build.rs arbitrário + exec de PoC = RCE na VPS). Rate limit já existe (3 concorrentes) mas é por IP anônimo — precisa de identidade.

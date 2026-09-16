@@ -48,7 +48,7 @@ export default function ScanInput() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto w-full">
+    <div className="w-full">
       <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="text"

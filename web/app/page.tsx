@@ -4,183 +4,200 @@ import ScanInput from '@/components/ScanInput'
 import RecentHunts from '@/components/RecentHunts'
 import LiveFeedPreview from '@/components/LiveFeedPreview'
 import { readBounties, solanaBounties } from '@/lib/bounties'
+import { listRuns } from '@/lib/cachorro'
 import { fmtUsd } from '@/lib/format'
 
 export const dynamic = 'force-dynamic'
 
 const JOURNEY = [
   {
-    n: '1',
+    cmd: 'cachorro hunt <target>',
     t: 'PASTE A TARGET',
     d: 'A GitHub repo or an on-chain program ID. Fetch and static lint run in seconds — no wallet, no signup.',
+    meta: 'fetch 5s · static 7s',
   },
   {
-    n: '2',
+    cmd: 'pack --stages research..review',
     t: 'WATCH THE PACK THINK',
     d: 'RESEARCH → ANALYZE → DEVIL → POC → REVIEW. Every hypothesis, dead-end and verdict streams live — you watch the reasoning, not a spinner.',
+    meta: 'reasoning, not a spinner',
   },
   {
-    n: '3',
+    cmd: 'attest verify <sha256>',
     t: 'VERIFY THE RECEIPT',
     d: 'Findings ship with an executable PoC (treatment drains, control blocks) and an on-chain attestation anchored to the exact bytes tested.',
+    meta: 'anchored on-chain · revocable',
   },
 ]
 
 const LADDER = [
-  { t: 'OBSERVATION', d: 'static lint + on-chain dump become typed graph nodes', live: true },
-  { t: 'HYPOTHESIS', d: 'each candidate carries a falsifier — what would disprove it', live: true },
-  { t: 'EXPERIMENT', d: 'treatment vs negative control on a local validator', live: true },
-  { t: 'VERIFIED', d: 'the gate refuses promotion without oracle SUPPORTS + reproduction', live: true },
+  { t: 'OBSERVATION', d: 'static lint + on-chain dump become typed graph nodes' },
+  { t: 'HYPOTHESIS', d: 'each candidate carries a falsifier — what would disprove it' },
+  { t: 'EXPERIMENT', d: 'treatment vs negative control on a local validator' },
+  { t: 'VERIFIED', d: 'the gate refuses promotion without oracle SUPPORTS + reproduction' },
 ]
 
 export default function Home() {
+  const idx = readBounties()
+  const nHunts = listRuns(50).length
+
   return (
     <main className="min-h-screen bg-black">
       <Navbar />
 
-      {/* HERO */}
-      <section id="hunt" className="relative px-4 pt-12 pb-10 sm:pt-20 sm:pb-14 overflow-hidden scroll-mt-16">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="text-[9px] sm:text-xs text-neon-green mb-4 animate-blink font-mono">
-            ▶ THE PACK IS AWAKE — 8 STAGES, ONE HUNT, ZERO OPINIONS
+      {/* ═══ HERO — the product is usable in the first viewport ═══ */}
+      <section id="hunt" className="px-4 pt-10 pb-12 sm:pt-16 sm:pb-16 scroll-mt-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+            <div className="text-[9px] sm:text-xs text-neon-green animate-blink font-mono">
+              ▶ THE PACK IS AWAKE — 8 STAGES, ONE HUNT, ZERO OPINIONS
+            </div>
+            <div className="text-[8px] sm:text-[9px] font-mono text-gray-700">
+              COLOSSEUM · CRYPTO WORLD'S FAIR '26
+            </div>
           </div>
 
-          <h1 className="text-2xl sm:text-5xl font-arcade text-neon-green mb-5 leading-tight">
-            PROOF,<br />
-            <span className="text-neon-cyan">NOT OPINION.</span>
+          <h1 className="font-arcade leading-[1.05] mb-4 sm:mb-6">
+            <span className="block text-4xl sm:text-6xl lg:text-7xl text-neon-green">PROOF,</span>
+            <span className="block text-4xl sm:text-6xl lg:text-7xl text-neon-cyan">NOT OPINION.</span>
           </h1>
 
-          <p className="text-[11px] sm:text-base text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">
             Point the pack at an Anchor program. It finds the bug class, writes the exploit,
             <span className="text-neon-green"> runs it on a local validator — never mainnet —</span>
             and anchors the verdict on-chain. The audit you can verify yourself.
           </p>
 
-          <div className="relative mb-8 sm:mb-10 border border-dark-600 pixel-border-glow overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/hero.jpg"
-              alt="The cachorro — a wireframe guard dog in neon phosphor green, chained to a Solana program"
-              className="w-full h-auto block"
-              loading="eager"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch text-left">
-            <div className="flex flex-col justify-center">
-              <Suspense fallback={<div className="h-24" />}>
-                <ScanInput />
-              </Suspense>
+          {/* the console: screen on top, prompt at the bottom edge */}
+          <div className="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-4 items-stretch">
+            <div className="border border-dark-600 pixel-border-glow bg-dark-900/40 flex flex-col">
+              <div className="flex items-center gap-1.5 px-3 py-2 border-b border-dark-600 bg-dark-800">
+                <span className="w-2 h-2 rounded-full bg-neon-red/70" />
+                <span className="w-2 h-2 rounded-full bg-neon-yellow/70" />
+                <span className="w-2 h-2 rounded-full bg-neon-green/70" />
+                <span className="ml-2 text-[8px] font-mono text-gray-600">cachorro — the pack terminal</span>
+              </div>
+              <div className="relative overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/hero.jpg"
+                  alt="The cachorro — a wireframe guard dog in neon phosphor green, chained to a Solana program"
+                  className="w-full h-auto block"
+                  loading="eager"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
+              </div>
+              <div className="border-t border-dark-600 bg-black/70 p-3 sm:p-4">
+                <div className="text-[8px] font-mono text-gray-600 mb-2">$ unleash &lt;target&gt;</div>
+                <Suspense fallback={<div className="h-24" />}>
+                  <ScanInput />
+                </Suspense>
+              </div>
             </div>
             <LiveFeedPreview />
           </div>
         </div>
       </section>
 
-      {/* JOURNEY */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs sm:text-lg font-arcade text-neon-green mb-6 sm:mb-8 text-center">
-            [ THE HUNT, END TO END ]
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-dark-600">
-            {JOURNEY.map((j, i) => (
-              <div
-                key={j.n}
-                className={`p-4 sm:p-5 bg-dark-900 ${i > 0 ? 'border-t sm:border-t-0 sm:border-l border-dark-600' : ''}`}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-6 h-6 flex items-center justify-center border border-neon-green text-neon-green font-arcade text-[10px]">
-                    {j.n}
-                  </span>
-                  <span className="text-[10px] sm:text-xs font-arcade text-white">{j.t}</span>
-                </div>
-                <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">{j.d}</p>
-              </div>
-            ))}
-          </div>
+      {/* ═══ TICKER — one line, not a section ═══ */}
+      <div className="border-y border-dark-600 bg-dark-900/60 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-4 sm:gap-6 text-[8px] sm:text-[9px] font-mono text-gray-500 whitespace-nowrap overflow-x-auto">
+          <span><span className="text-neon-yellow">{fmtUsd(solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0))}</span> on the board</span>
+          <span className="text-dark-600">|</span>
+          <span><span className="text-white">{idx.bounties.length}</span> programs indexed</span>
+          <span className="text-dark-600">|</span>
+          <span><span className="text-neon-cyan">{nHunts}</span> hunts logged</span>
+          <span className="text-dark-600">|</span>
+          <span><span className="text-neon-green">0</span> mainnet txs — local validator only</span>
+          <span className="text-dark-600">|</span>
+          <span>journal: <span className="text-neon-purple">hash-chained</span></span>
         </div>
-      </section>
+      </div>
 
-      {/* BOUNTY BOARD — pick a target with money on it */}
+      {/* ═══ BOARD — money first: pick a target that pays ═══ */}
       <BountyTeaser />
 
-      {/* NARRATIVE — why now (the web3 story that wins) */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
+      {/* ═══ THE HUNT — a terminal timeline, not three cards ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs sm:text-lg font-arcade text-neon-red mb-6 sm:mb-8 text-center">
-            [ EVERY AUDIT IS AN OPINION UNTIL PROVEN ]
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-dark-600">
-            <div className="p-4 sm:p-6 bg-dark-900">
-              <div className="text-xl sm:text-3xl font-bold text-neon-red mb-2">$285M</div>
-              <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
-                drained from Drift in <span className="text-gray-300">128 seconds</span> — after the audit.
-                The same bug classes keep paying because reports ship prose.
-              </div>
-            </div>
-            <div className="p-4 sm:p-6 bg-dark-900 border-t sm:border-t-0 sm:border-l border-dark-600">
-              <div className="text-xl sm:text-3xl font-bold text-neon-yellow mb-2">PoC REQUIRED</div>
-              <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
-                Immunefi won&apos;t pay a bounty without a runnable exploit.
-                The market already decided: <span className="text-gray-300">proof is the product.</span>
-              </div>
-            </div>
-            <div className="p-4 sm:p-6 bg-dark-900 border-t sm:border-t-0 sm:border-l border-dark-600">
-              <div className="text-xl sm:text-3xl font-bold text-neon-cyan mb-2">COMMODITY</div>
-              <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
-                Detection is crowded — Sec3, Trident, CertiK. The gap nobody automates is
-                <span className="text-gray-300"> proving it safely and attesting it trustlessly.</span>
-              </div>
-            </div>
+          <div className="flex items-baseline gap-3 mb-8">
+            <span className="text-neon-green font-arcade text-[10px]">~/</span>
+            <h2 className="text-xs sm:text-base font-arcade text-white">THE HUNT, END TO END</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[8px] font-mono text-gray-600">~40min — 2.5h</span>
           </div>
-        </div>
-      </section>
-
-      {/* THE GATE — proof, not opinion, made concrete */}
-      <section id="gate" className="px-4 py-10 sm:py-14 border-t border-dark-600 scroll-mt-16">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs sm:text-lg font-arcade text-neon-green mb-2 text-center">
-            [ NOTHING PROMOTES WITHOUT PROOF ]
-          </h2>
-          <p className="text-[10px] sm:text-xs text-gray-500 text-center mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
-            A finding can&apos;t be voted in. The promotion gate demands a differential oracle
-            verdict — treatment drains, control blocks — plus a clean-room reproduction.
-            The machine enforces it, not the prompt.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 border border-dark-600">
-            {LADDER.map((s, i) => (
-              <div key={s.t} className={`p-3 sm:p-4 bg-dark-900 ${i > 0 ? 'border-l border-dark-600' : ''} ${i > 1 ? 'max-sm:border-t max-sm:border-l-0' : ''} ${i === 3 ? 'max-sm:border-l' : ''}`}>
-                <div className="text-[9px] sm:text-[10px] font-arcade text-neon-green mb-1.5">{s.t}</div>
-                <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">{s.d}</div>
-                <div className="mt-2 text-[8px] font-mono text-neon-green">● ENFORCED</div>
+          <div>
+            {JOURNEY.map((j, i) => (
+              <div key={j.t} className="flex gap-4 sm:gap-6">
+                <div className="flex flex-col items-center shrink-0 w-5">
+                  <span className="w-5 h-5 flex items-center justify-center border border-neon-green text-neon-green font-arcade text-[9px] bg-black">
+                    {i + 1}
+                  </span>
+                  {i < JOURNEY.length - 1 && <span className="w-px flex-1 bg-gradient-to-b from-neon-green/60 to-dark-600" />}
+                </div>
+                <div className={i < JOURNEY.length - 1 ? 'pb-8' : ''}>
+                  <div className="text-[8px] sm:text-[9px] font-mono text-gray-600 mb-1">$ {j.cmd}</div>
+                  <div className="text-[11px] sm:text-sm font-arcade text-white mb-1.5">{j.t}</div>
+                  <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed max-w-xl">{j.d}</p>
+                  <div className="mt-1.5 text-[8px] font-mono text-neon-green/70">{j.meta}</div>
+                </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-3 text-[9px] sm:text-[10px] text-gray-600 font-mono">
-            oracle verdict on the last hunt: <span className="text-neon-green">SUPPORTS</span> — treatment drained
-            5,000,000,000 lamports, control rejected with Custom(1)
+        </div>
+      </section>
+
+      {/* ═══ THE GATE — the argument, once, loud ═══ */}
+      <section id="gate" className="border-t border-dark-600 scroll-mt-16">
+        <div className="px-4 pt-12 sm:pt-16 pb-8 text-center">
+          <div className="text-5xl sm:text-8xl font-bold font-arcade text-neon-red leading-none">$285M</div>
+          <p className="text-[10px] sm:text-xs text-gray-500 mt-3 max-w-xl mx-auto leading-relaxed">
+            drained from Drift in <span className="text-gray-200">128 seconds</span> — after the audit.
+            Reports ship prose; Immunefi won't pay without a runnable exploit.
+            Detection is commodity. <span className="text-neon-green">Proof is the product.</span>
+          </p>
+        </div>
+        <div className="px-4 pb-12 sm:pb-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-[9px] sm:text-[10px] font-mono text-gray-600 text-center mb-5">
+              nothing promotes without proof — the gate is enforced by the machine, not the prompt
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-dark-600 border border-dark-600">
+              {LADDER.map((s) => (
+                <div key={s.t} className="p-3 sm:p-4 bg-dark-900">
+                  <div className="text-[9px] sm:text-[10px] font-arcade text-neon-green mb-1.5">{s.t}</div>
+                  <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">{s.d}</div>
+                  <div className="mt-2 text-[8px] font-mono text-neon-green">● ENFORCED</div>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-3 text-[9px] sm:text-[10px] text-gray-600 font-mono">
+              oracle verdict on the last hunt: <span className="text-neon-green">SUPPORTS</span> — treatment drained
+              5,000,000,000 lamports, control rejected with Custom(1)
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ATTESTATION — the moat */}
-      <section id="receipt" className="px-4 py-10 sm:py-14 border-t border-dark-600 scroll-mt-16">
+      {/* ═══ RECEIPT — the moat ═══ */}
+      <section id="receipt" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
           <div>
-            <h2 className="text-xs sm:text-lg font-arcade text-neon-green mb-3">
-              [ ON-CHAIN RECEIPT ]
+            <h2 className="text-xs sm:text-base font-arcade text-neon-green mb-3">
+              THE RECEIPT LIVES ON-CHAIN
             </h2>
             <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed mb-3">
               Every finished hunt anchors a SHA-256 digest of the report — bound to the audited
               commit, the build digest and the hash-chained evidence journal — as a Solana memo.
               Tamper with either side and the digests diverge.
             </p>
-            <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">
+            <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed mb-4">
               And the receipt knows when it&apos;s stale: the program upgrades, the digest stops
               matching, the attestation expires on its own.
             </p>
+            <a href="/verify" className="text-[9px] sm:text-[10px] font-mono text-neon-yellow hover:text-neon-green transition-colors">
+              ▸ verify a receipt yourself — no trust in us required ↗
+            </a>
           </div>
           <div className="border border-dark-600 bg-dark-900 font-mono">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -193,7 +210,7 @@ export default function Home() {
               <div className="flex justify-between gap-2"><span className="text-gray-600">memo</span><span className="text-neon-green break-all">cachorro:v1:24037a60…</span></div>
               <div className="flex justify-between gap-2"><span className="text-gray-600">journal_head</span><span className="text-gray-400">1a44a53f… → b94cbb55…</span></div>
               <div className="flex justify-between gap-2"><span className="text-gray-600">report_sha256</span><span className="text-gray-400">sha256:✓</span></div>
-              <div className="flex justify-between gap-2"><span className="text-gray-600">verify</span><span className="text-neon-green">attest verify → PASS</span></div>
+              <div className="flex justify-between gap-2"><span className="text-gray-600">verify</span><span className="text-neon-green">recomputed → MATCH</span></div>
             </div>
             <div className="px-3 py-2 border-t border-dark-600 text-[8px] sm:text-[9px] text-gray-600 leading-relaxed">
               trivial for them to verify — hard for us to fake
@@ -202,13 +219,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHAT THE PACK HUNTS */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs sm:text-lg font-arcade text-neon-green mb-6 sm:mb-8 text-center">
-            [ WHAT THE PACK HUNTS ]
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {/* ═══ ARSENAL — what the pack hunts ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-baseline gap-3 mb-6">
+            <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">WHAT THE PACK HUNTS</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[8px] font-mono text-gray-600 hidden sm:inline">vuln atlas · 3 tiers · real exploits as reference</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
             {[
               {
                 t: 'ACCOUNTS & AUTHORITY',
@@ -226,8 +245,8 @@ export default function Home() {
                 c: 'text-neon-purple',
               },
             ].map((x) => (
-              <div key={x.t} className="border border-dark-600 bg-dark-900 p-4 sm:p-5">
-                <div className={`text-[11px] sm:text-sm font-arcade mb-2 ${x.c}`}>{x.t}</div>
+              <div key={x.t} className="bg-dark-900 p-4 sm:p-5">
+                <div className={`text-[10px] sm:text-xs font-arcade mb-2 ${x.c}`}>{x.t}</div>
                 <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">{x.d}</div>
               </div>
             ))}
@@ -235,57 +254,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LABS — learn by hunting */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-xs sm:text-lg font-arcade text-neon-purple mb-2">
-            [ LEARN BY HUNTING ]
-          </h2>
-          <p className="text-[10px] sm:text-xs text-gray-500 mb-6 font-mono max-w-2xl mx-auto leading-relaxed">
-            11 labs · every Sealevel vulnerability class · vulnerable vs secure code side by side ·
-            the real exploit it caused · and a button that sets the pack loose on it.
-          </p>
+      {/* ═══ LABS — split banner ═══ */}
+      <section className="border-t border-dark-600">
+        <div className="max-w-6xl mx-auto px-4 py-8 sm:py-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+          <div className="flex-1">
+            <h2 className="text-xs sm:text-base font-arcade text-neon-purple mb-1.5">LEARN BY HUNTING</h2>
+            <p className="text-[10px] sm:text-xs text-gray-500 font-mono leading-relaxed">
+              17 lessons &amp; labs · every Sealevel vulnerability class · vulnerable vs secure side by side ·
+              the real exploit it caused · a button that sets the pack loose on it.
+            </p>
+          </div>
           <a
             href="/labs"
-            className="inline-block px-5 py-2.5 border border-neon-purple text-neon-purple font-arcade text-[9px] sm:text-[10px] hover:bg-neon-purple hover:text-black transition-all"
+            className="px-5 py-2.5 border border-neon-purple text-neon-purple font-arcade text-[9px] sm:text-[10px] hover:bg-neon-purple hover:text-black transition-all shrink-0"
           >
             ENTER THE LABS ▸
           </a>
         </div>
       </section>
 
-      {/* STATS — true numbers only */}
-      <section className="px-4 py-8 sm:py-12 border-t border-dark-600">
+      {/* ═══ FIELD LOG — evidence ═══ */}
+      <section id="hunts" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {[
-              { v: '8', l: 'Pipeline stages', s: 'FETCH → REPORT', c: 'text-neon-green' },
-              { v: '18', l: 'Findings last hunt', s: 'DEVIL-TESTED', c: 'text-neon-cyan' },
-              { v: '0', l: 'Mainnet txs', s: 'LOCAL VALIDATOR ONLY', c: 'text-neon-yellow' },
-              { v: '1', l: 'Human in the loop', s: 'NOTHING AUTO-SUBMITTED', c: 'text-neon-purple' },
-            ].map((t) => (
-              <div key={t.l} className="border border-dark-600 bg-dark-900 p-4 text-center">
-                <div className={`text-xl sm:text-3xl font-bold ${t.c}`}>{t.v}</div>
-                <div className="text-[9px] sm:text-[10px] text-gray-600 mt-1">{t.l}</div>
-                <div className={`text-[8px] sm:text-[9px] mt-1 ${t.c}`}>{t.s}</div>
-              </div>
-            ))}
+          <div className="flex items-baseline gap-3 mb-6">
+            <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">FIELD LOG</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[8px] font-mono text-gray-600">every row is a real run</span>
           </div>
-        </div>
-      </section>
-
-      {/* RECENT HUNTS */}
-      <section id="hunts" className="px-4 py-8 sm:py-12 border-t border-dark-600 scroll-mt-16">
-        <div className="max-w-4xl mx-auto">
           <RecentHunts />
         </div>
       </section>
 
-      {/* RULES + HONEST LIMITS */}
-      <section className="px-4 py-8 sm:py-12 border-t border-dark-600">
+      {/* ═══ HONEST FOOTER — rules + limits, then the close ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="border border-dark-600 bg-dark-900 p-4 sm:p-6">
-            <div className="text-[11px] sm:text-sm font-arcade text-neon-red mb-3">[ RULES OF ENGAGEMENT ]</div>
+            <div className="text-[10px] sm:text-xs font-arcade text-neon-red mb-3">RULES OF ENGAGEMENT</div>
             <ul className="text-[10px] sm:text-xs text-gray-500 space-y-1.5 leading-relaxed">
               <li>▸ Audit only what you are authorized to audit — an active bounty with a defined scope.</li>
               <li>▸ PoCs run on a local validator or a local fork. No attack transaction ever touches mainnet.</li>
@@ -294,7 +298,7 @@ export default function Home() {
             </ul>
           </div>
           <div className="border border-dark-600 bg-dark-900 p-4 sm:p-6">
-            <div className="text-[11px] sm:text-sm font-arcade text-neon-yellow mb-3">[ WHAT ATTESTED MEANS ]</div>
+            <div className="text-[10px] sm:text-xs font-arcade text-neon-yellow mb-3">WHAT ATTESTED MEANS</div>
             <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed mb-3">
               <span className="text-neon-yellow">cachorro-attested</span> = this exact artifact was
               adversarially tested and here is the reproducible evidence, on-chain and revocable.
@@ -308,60 +312,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HACKATHON NARRATIVE — built in the open */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-[9px] sm:text-[10px] font-mono text-neon-purple mb-3">
-            COLOSSEUM · CRYPTO WORLD&apos;S FAIR · 2026
+      {/* ═══ CLOSE — one ask ═══ */}
+      <section className="border-t border-dark-600 px-4 py-14 sm:py-20 text-center relative overflow-hidden">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3">READY TO HUNT?</div>
+          <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-lg mx-auto leading-relaxed">
+            Free hunts forever. Paid tiers unlock FULL mode and API keys — paid in SOL, verified on-chain.
+            Your payment receipt is your account.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <a
+              href="#hunt"
+              className="px-6 py-3 border-2 border-neon-green text-neon-green font-arcade text-[10px] sm:text-xs hover:bg-neon-green hover:text-black transition-all"
+            >
+              UNLEASH THE PACK
+            </a>
+            <a href="/pricing" className="text-[9px] sm:text-[10px] font-mono text-neon-yellow hover:text-neon-green transition-colors">
+              pack ranks ↗
+            </a>
           </div>
-          <h2 className="text-xs sm:text-lg font-arcade text-white mb-4 leading-relaxed">
-            BUILT IN THE OPEN,<br />HUNTING IN THE WINDOW.
-          </h2>
-          <p className="text-[10px] sm:text-xs text-gray-500 leading-relaxed max-w-2xl mx-auto mb-4">
-            This engine was assembled during the Colosseum window by a Brazilian team that took
-            <span className="text-neon-green"> 1st place at the Oracle+Runflow hackathon</span> — the same
-            pipeline we hunt bounties with, productized. No vaporware: the hunts on this page are
-            real runs, the journal is hash-chained, and the receipt verifies without us.
-          </p>
-          <p className="text-[9px] sm:text-[10px] font-mono text-gray-600">
-            Solana track · Trilha Brasil · honest limits over loud badges
-          </p>
         </div>
       </section>
 
-      {/* PRICING teaser */}
-      <section className="px-4 py-10 sm:py-14 border-t border-dark-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-xs sm:text-lg font-arcade text-neon-yellow mb-2">
-            [ RUN WITH THE PACK ]
-          </h2>
-          <p className="text-[10px] sm:text-xs text-gray-500 mb-6 font-mono max-w-2xl mx-auto leading-relaxed">
-            Free hunts forever. Paid tiers unlock FULL mode, API keys and the watchlist —
-            paid in SOL, verified on-chain. Your payment receipt is your account.
-          </p>
-          <a
-            href="/pricing"
-            className="inline-block px-5 py-2.5 border border-neon-yellow text-neon-yellow font-arcade text-[9px] sm:text-[10px] hover:bg-neon-yellow hover:text-black transition-all"
-          >
-            SEE PACK RANKS ▸
-          </a>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="px-4 py-12 sm:py-16 border-t border-dark-600 text-center">
-        <div className="text-sm sm:text-xl font-arcade text-neon-green mb-4">READY TO HUNT?</div>
-        <a
-          href="#hunt"
-          className="inline-block px-6 py-3 border-2 border-neon-green text-neon-green font-arcade text-[10px] sm:text-xs hover:bg-neon-green hover:text-black transition-all"
-        >
-          UNLEASH THE PACK
-        </a>
-      </section>
-
-      <footer className="px-4 py-8 border-t border-dark-600 text-center">
-        <div className="text-[9px] sm:text-[10px] text-gray-700 font-mono">
-          CACHORRO · Solana program auditor · proof, not opinion
+      <footer className="px-4 py-8 border-t border-dark-600">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[9px] sm:text-[10px] font-mono text-gray-700">
+          <span>CACHORRO · Solana program auditor · proof, not opinion</span>
+          <span>built in the open during Colosseum · Solana track</span>
         </div>
       </footer>
     </main>
@@ -375,14 +351,15 @@ function BountyTeaser() {
   const total = solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0)
 
   return (
-    <section id="board" className="px-4 py-10 sm:py-14 border-t border-dark-600 scroll-mt-16">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-xs sm:text-lg font-arcade text-neon-yellow mb-2 text-center">
-          [ LIVE BOUNTY BOARD ]
-        </h2>
-        <p className="text-[10px] sm:text-xs text-gray-500 text-center mb-6 font-mono">
-          {fmtUsd(total)} in active Solana bounties indexed — pick a target with money on it.
-        </p>
+    <section id="board" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-baseline gap-3 mb-6">
+          <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">MONEY ON THE TABLE</h2>
+          <span className="flex-1 border-b border-dashed border-dark-600" />
+          <span className="text-[8px] sm:text-[9px] font-mono text-neon-yellow shrink-0">
+            {fmtUsd(total)} in active Solana bounties
+          </span>
+        </div>
         <div className="border border-dark-600 divide-y divide-dark-600">
           {sol.map((b) => (
             <div key={b.id} className="flex items-center gap-3 px-3 sm:px-4 py-2.5 bg-dark-900">
@@ -404,7 +381,7 @@ function BountyTeaser() {
             </div>
           ))}
         </div>
-        <div className="text-center mt-4">
+        <div className="mt-4">
           <a href="/bounties" className="text-[9px] sm:text-[10px] font-mono text-neon-cyan hover:text-neon-green transition-colors">
             ▸ full board — {idx.bounties.length} programs indexed ↗
           </a>

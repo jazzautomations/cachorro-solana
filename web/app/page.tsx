@@ -182,6 +182,47 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* ═══ THE INVOICE — audit-price anchoring, the startup case ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-baseline gap-3 mb-2">
+            <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">WHAT A $150K AUDIT SHIPS</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[8px] font-mono text-gray-600">vs what the pack ships</span>
+          </div>
+          <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-2xl leading-relaxed">
+            For protocol teams about to wire six figures to an audit firm — and for the hunter
+            who knows Immunefi pays for exploits, not prose.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-dark-600 border border-dark-600">
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[9px] sm:text-[10px] font-arcade text-neon-red mb-3">THE FIRM</div>
+              <ul className="space-y-2 text-[10px] sm:text-xs text-gray-500 leading-relaxed">
+                <li><span className="text-miami-pink">✗</span> 8–16 week queue while your TVL sits exposed</li>
+                <li><span className="text-miami-pink">✗</span> a PDF where most &ldquo;findings&rdquo; are informational noise</li>
+                <li><span className="text-miami-pink">✗</span> you pay for triage — they never prove a thing executes</li>
+                <li><span className="text-miami-pink">✗</span> expires silently the day you ship an upgrade</li>
+              </ul>
+            </div>
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[9px] sm:text-[10px] font-arcade text-neon-green mb-3">THE PACK</div>
+              <ul className="space-y-2 text-[10px] sm:text-xs text-gray-400 leading-relaxed">
+                <li><span className="text-neon-green">✓</span> hours, not months — you watch the hunt live</li>
+                <li><span className="text-neon-green">✓</span> executable PoCs — treatment drains, control blocks</li>
+                <li><span className="text-neon-green">✓</span> machine-enforced gate: no proof, no finding</li>
+                <li><span className="text-neon-green">✓</span> a receipt on-chain that expires when your program does</li>
+              </ul>
+            </div>
+          </div>
+          <div className="text-center mt-4">
+            <a href="/pricing" className="text-[9px] sm:text-[10px] font-mono text-neon-yellow hover:text-neon-green transition-colors">
+              ▸ engagement pricing — SOL-native, verified on-chain ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ RECEIPT — the moat ═══ */}
       <div className="vapor-strip" />
       <section id="receipt" className="px-4 py-12 sm:py-16 scroll-mt-16">
@@ -323,8 +364,8 @@ export default function Home() {
         <div className="max-w-4xl mx-auto relative">
           <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">READY TO HUNT?</div>
           <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-lg mx-auto leading-relaxed">
-            Free hunts forever. Paid tiers unlock FULL mode and API keys — paid in SOL, verified on-chain.
-            Your payment receipt is your account.
+            Recon hunts are free forever. Engagements price against the audit you didn&apos;t buy —
+            paid in SOL, verified on-chain. Your payment receipt is your account.
           </p>
           <div className="flex items-center justify-center gap-4">
             <a
@@ -334,7 +375,7 @@ export default function Home() {
               UNLEASH THE PACK
             </a>
             <a href="/pricing" className="text-[9px] sm:text-[10px] font-mono text-neon-yellow hover:text-neon-green transition-colors">
-              pack ranks ↗
+              engagement pricing ↗
             </a>
           </div>
         </div>

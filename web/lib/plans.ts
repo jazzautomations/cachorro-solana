@@ -10,27 +10,43 @@ export interface Plan {
   id: string
   name: string
   priceSol: number // 0 = free
+  unit: 'mo' | 'engagement'
   huntsPerMonth: number // -1 = unlimited
   modes: string[]
   blurb: string
+  anchor: string // the audit-price comparison line
   perks: string[]
 }
 
 export const PLANS: Plan[] = [
   {
-    id: 'free', name: 'STRAY', priceSol: 0, huntsPerMonth: 3, modes: ['quick', 'deep'],
-    blurb: 'sniff around',
-    perks: ['3 quick hunts / month', 'live PACK MIND feed', 'bounty board access', 'labs access'],
+    id: 'free', name: 'SNIFF', priceSol: 0, unit: 'mo', huntsPerMonth: 3, modes: ['quick'],
+    blurb: 'watch the pack think on your program',
+    anchor: 'the free scan a firm charges a discovery call for',
+    perks: ['3 recon hunts / month', 'live PACK MIND feed', 'static surface map', 'bounty board + labs'],
   },
   {
-    id: 'hunter', name: 'HUNTER', priceSol: 0.5, huntsPerMonth: 30, modes: ['quick', 'deep', 'full'],
-    blurb: 'runs with the pack',
-    perks: ['30 hunts / month · all modes', 'bounty alerts on criticals', 'stale-receipt watchlist', 'report export'],
+    id: 'hunter', name: 'THE HUNT', priceSol: 20, unit: 'engagement', huntsPerMonth: 10, modes: ['quick', 'deep', 'full'],
+    blurb: 'one program, hunted end-to-end — every finding with an executable PoC or it does not ship',
+    anchor: 'a formal audit quote starts at $50k and lands in months',
+    perks: [
+      'FULL-mode hunt · all survivors PoC\'d',
+      'human-reviewed audit certificate',
+      'on-chain receipt — verify trustless',
+      'dup-check vs every public audit',
+      're-runs while findings are disputed',
+    ],
   },
   {
-    id: 'pack', name: 'ALPHA', priceSol: 2, huntsPerMonth: -1, modes: ['quick', 'deep', 'full'],
-    blurb: 'leads the hunt',
-    perks: ['unlimited hunts · all modes', 'API key for CI/CD', 'priority queue', 'attestation on every report'],
+    id: 'pack', name: 'CONTINUOUS', priceSol: 6, unit: 'mo', huntsPerMonth: -1, modes: ['quick', 'deep', 'full'],
+    blurb: 'the pack never sleeps — audits die on upgrade day, receipts don\'t',
+    anchor: 'traditional audits expire silently the moment you ship',
+    perks: [
+      'unlimited hunts · all modes',
+      'stale-receipt watchlist — auto re-hunt on upgrade',
+      'API key for CI — block deploy without a live receipt',
+      'priority queue · attestation on every report',
+    ],
   },
 ]
 

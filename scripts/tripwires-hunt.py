@@ -127,6 +127,16 @@ if "--emit" in sys.argv:
         _emit("error" if f["severity"] == "critical" else "note",
               "tripwire %s [%s]: %s" % (f["kind"], f["severity"], f["detail"]))
 
+# jev dissent — the calibrated judge disagrees with a promoted claim
+try:
+    jev = json.load(open(os.path.join(RUN, "jev_audit.json")))
+    for d in jev.get("dissenting", []):
+        flag("jev-dissent", "critical",
+             "jev scores %s at %.2f exploit-plausibility — promoted claim the judge doubts" % (d["id"], d["score"]),
+             **d)
+except Exception:
+    pass
+
 # atlas coverage — which canonical classes the pack actually exercised.
 # "found nothing" is only meaningful if you can show where you looked.
 ATLAS = [

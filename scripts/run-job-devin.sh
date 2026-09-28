@@ -145,6 +145,10 @@ PY
 # Fails soft (unfunded keypair -> attestStatus=unfunded), never changes
 # the hunt outcome.
 if grep -q '"status": *"done"' "$ST" 2>/dev/null; then
+  # jev second opinion — calibrated plausibility on every promoted claim
+  if [[ -f /root/.secrets-typesafe ]]; then
+    python3 "$ROOT/scripts/jev-judge.py" "$RUN" --emit >/dev/null 2>&1 || true
+  fi
   # self-audit before the anchor — tripwire flags become part of the receipt's journal
   python3 "$ROOT/scripts/tripwires-hunt.py" "$RUN" --emit >/dev/null 2>&1 || true
   SA=$(python3 - "$RUN/self_audit.json" <<'PY2'

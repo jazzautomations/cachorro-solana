@@ -12,6 +12,12 @@ function readSelfAudit(id: string): { clean: boolean; flags: { kind: string; sev
   } catch { return null }
 }
 
+function readJev(id: string): { mean: number | null; dissenting: { id: string; score: number }[] } | null {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(runDir(id), 'jev_audit.json'), 'utf8'))
+  } catch { return null }
+}
+
 export const dynamic = 'force-dynamic'
 
 // find the attestation receipt whose report_sha256 matches this run's report
@@ -88,6 +94,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   const programId = md ? extractProgramId(md) : null
   const claim = programId ? getClaim(programId) : null
   const selfAudit = readSelfAudit(id)
+  const jev = readJev(id)
 
   const attestState = receipt
     ? anchored
@@ -175,6 +182,12 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                         <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade"
                           title={`exercised: ${selfAudit.coverage.exercised.join(', ') || 'none'} · not exercised: ${selfAudit.coverage.not_exercised.join(', ')}`}>
                           ATLAS {selfAudit.coverage.exercised.length}/{selfAudit.coverage.atlas_classes}
+                        </span>
+                      )}
+                      {jev?.mean != null && (
+                        <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${jev.dissenting.length ? 'border-neon-yellow text-neon-yellow' : 'border-miami-sky/60 text-miami-sky'}`}
+                          title={jev.dissenting.length ? `dissenting: ${jev.dissenting.map(d => `${d.id} ${d.score}`).join(', ')}` : 'calibrated exploit-plausibility, mean over promoted claims'}>
+                          JUDGE {jev.mean.toFixed(2)}{jev.dissenting.length ? ` · ${jev.dissenting.length} DISSENT` : ''}
                         </span>
                       )}
                     </>

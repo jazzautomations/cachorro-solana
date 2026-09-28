@@ -84,3 +84,22 @@ Multi-tenant real fica pro launch: contas/wallet-login, run dir isolado por usu�
 - POST /api/scan agora spawna via `systemd-run --collect --unit=cachorro-hunt-<id>` (envs HOME/PATH/CACHORRO_ROOT passadas via --setenv). Restart/deploy do cachorro-web não mata caçada em voo. Fallback setsid fora de systemd.
 - BUG encontrado: run_1789560920_177f62 (onre-sol FULL) morreu no ANALYZE quando o web reiniciou — runner era filho do cgroup do serviço. Marcado error, relançado como run_1789568330_9453f2 (FULL, onre-sol $100K).
 - Ops key mintada localmente p/ hunts internos: cch_640f…83b463 (plan pack, em billing.json).
+
+## 28/09 — Service pivot + Miami pass (Devin, via tailscale)
+- Attestation ligada de verdade: scripts/attest-run.sh roda pós-hunt (determinístico,
+  nunca falha o run). Receipt pending = anchor-ready; mesmo digest sobe on-chain quando
+  a keypair tiver saldo. BLOCKER: `97JjCwCNed53KNXxrokiWBWXoYbeHhDXZuUTN2tgEnd7`
+  precisa ~0.2 SOL devnet (faucet 429 há dias). Depois: rodar attest-run.sh por run.
+- Fix fetch-target.sh: HOME unbound matava clone (2 hunts perdidas).
+- Design "miami phosphor": synthwave sun + grid animado, chroma, holo-frame, vapor
+  strips. Verde fósforo segue identidade.
+- /report/[id] virou audit certificate (verdict strip, ON-CHAIN RECEIPT card, findings
+  index, badge embed). Entrega deixou de ser só .md.
+- /pricing virou serviço: SNIFF free / THE HUNT 20 SOL-engagement / CONTINUOUS 6 SOL-mo
+  / PAY-PER-PROOF pilot. Tabela "AUDIT INVOICE, COMPARED" ancora no $50k-500k da firma.
+- Landing agora fala com o PROTOCOLO (buyer = quem segura TVL): threat-map board,
+  "ship with a receipt", jornada em voz de comprador. Hunters seguem servidos (board,
+  PoCs) mas como wedge, não como público.
+- docs/BUSINESS-PLAN.md: plano completo com stats frescas (Immunefi: $6.5k competition
+  vs $66k audit vs $24.5M exploit por critical; competitors AI todos EVM = Solana
+  whitespace) + story arc do pitch.

@@ -145,6 +145,16 @@ PY
 # Fails soft (unfunded keypair -> attestStatus=unfunded), never changes
 # the hunt outcome.
 if grep -q '"status": *"done"' "$ST" 2>/dev/null; then
+  # self-audit before the anchor — tripwire flags become part of the receipt's journal
+  python3 "$ROOT/scripts/tripwires-hunt.py" "$RUN" --emit >/dev/null 2>&1 || true
+  SA=$(python3 - "$RUN/self_audit.json" <<'PY2'
+import json, sys
+try:
+    d = json.load(open(sys.argv[1])); print("clean" if d["clean"] else "%d flags" % len(d["flags"]))
+except Exception: print("skipped")
+PY2
+)
+  jset "selfAudit=$SA"
   bash "$ROOT/scripts/attest-run.sh" "$ID" || true
 fi
 exit 0

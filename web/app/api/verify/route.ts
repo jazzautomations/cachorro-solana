@@ -95,7 +95,11 @@ export async function GET(req: Request) {
       return NextResponse.json({
         found: true, onchain: true, slot: tx.slot, signature: sig,
         receipt: r ?? null,
-        recomputed: r ? canonSha(r) === r.attestation_sha256 : null,
+        recomputed: r ? canonSha({
+          schema: r.schema, report_sha256: r.report_sha256, audited_commit: r.audited_commit,
+          verified_build_digest: r.verified_build_digest, journal_head: r.journal_head,
+          target: r.target, cluster: r.cluster, created_at: r.created_at,
+        }) === r.attestation_sha256 : null,
         why: r ? undefined : 'memo anchors a digest we have no local receipt for',
       })
     } catch (e) {
@@ -120,7 +124,8 @@ export async function GET(req: Request) {
 
   let onchain: { onchain: boolean; slot?: number; why?: string } = { onchain: false, why: 'not anchored yet' }
   if (r.signature) {
-    try { onchain = await checkTx(r.signature, r.memo) } catch (e) {
+    const memo = r.memo ?? `cachorro:v1:${r.attestation_sha256}`
+    try { onchain = await checkTx(r.signature, memo) } catch (e) {
       onchain = { onchain: false, why: `rpc: ${(e as Error).message}` }
     }
   }

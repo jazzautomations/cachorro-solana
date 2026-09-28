@@ -90,9 +90,15 @@ except Exception: print("")' 2>/dev/null)
   exit 0
 fi
 
-SHA=$(echo "$OUT" | sed -n s/.*attestation_sha[^:]*: *//p | tr -d " " | head -1)
-SIG=$(echo "$OUT" | sed -n s/.*signature[^:]*: *//p | tr -d " " | head -1)
-URL=$(echo "$OUT" | sed -n s/.*explorer[^:]*: *//p | tr -d " " | head -1)
+read -r SHA SIG URL < <(python3 - "$OUT" <<'PY2'
+import re, sys
+out = sys.argv[1]
+def grab(k):
+    m = re.search(rf"{k}\s*:\s*(\S+)", out)
+    return m.group(1) if m else ""
+print(grab("attestation_sha"), grab("signature"), grab("explorer"))
+PY2
+)
 
 jset "attestStatus=anchored" "attestation=$SHA" "attestationSig=$SIG" "attestationUrl=$URL"
 emit attest runner verdict "recibo ancorado on-chain — memo cachorro:v1:${SHA:0:8}… sig ${SIG:0:12}…"

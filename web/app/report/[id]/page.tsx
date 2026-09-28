@@ -6,6 +6,12 @@ import { Markdown } from '@/lib/markdown'
 import { readReport, isValidId, runDir } from '@/lib/cachorro'
 import { getClaim } from '@/lib/claims'
 
+function readSelfAudit(id: string): { clean: boolean; flags: { kind: string; severity: string }[] } | null {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(runDir(id), 'self_audit.json'), 'utf8'))
+  } catch { return null }
+}
+
 export const dynamic = 'force-dynamic'
 
 // find the attestation receipt whose report_sha256 matches this run's report
@@ -81,6 +87,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   const anchored = !!receipt?.signature
   const programId = md ? extractProgramId(md) : null
   const claim = programId ? getClaim(programId) : null
+  const selfAudit = readSelfAudit(id)
 
   const attestState = receipt
     ? anchored
@@ -157,6 +164,11 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                   {data?.survivorCount !== undefined && (
                     <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
                       {data.survivorCount} survivors tested
+                    </span>
+                  )}
+                  {selfAudit && (
+                    <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${selfAudit.clean ? 'border-neon-cyan/60 text-neon-cyan' : 'border-neon-yellow text-neon-yellow'}`}>
+                      SELF-AUDIT {selfAudit.clean ? '✓ CLEAN' : `${selfAudit.flags.length} FLAG${selfAudit.flags.length === 1 ? '' : 'S'}`}
                     </span>
                   )}
                 </div>

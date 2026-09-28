@@ -40,6 +40,17 @@ const LADDER = [
   { t: 'VERIFIED', d: 'the gate refuses promotion without oracle SUPPORTS + reproduction' },
 ]
 
+const RECEIPTS_DIR = path.resolve(process.cwd(), '..', 'attest', 'receipts')
+
+function anchoredCount(): number {
+  try {
+    return fs.readdirSync(RECEIPTS_DIR).filter((f) => {
+      try { return !!JSON.parse(fs.readFileSync(path.join(RECEIPTS_DIR, f), 'utf8')).signature }
+      catch { return false }
+    }).length
+  } catch { return 0 }
+}
+
 // aggregate honesty scoreboard — the refusal rate IS the brand
 function scoreboard() {
   let verde = 0, vermelho = 0
@@ -59,6 +70,7 @@ export default function Home() {
   const idx = readBounties()
   const nHunts = listRuns(50).length
   const sb = scoreboard()
+  const nAnchored = anchoredCount()
 
   return (
     <main className="min-h-screen bg-black">
@@ -131,6 +143,8 @@ export default function Home() {
           <span><span className="text-neon-cyan">{nHunts}</span> hunts logged</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-neon-green">{sb.verde}</span> proven · <span className="text-miami-pink">{sb.vermelho}</span> refuted by gate · <span className="text-white">0</span> false positives shipped</span>
+          <span className="text-dark-600">|</span>
+          <span><span className="text-neon-cyan">{nAnchored}</span> receipts anchored on devnet</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-neon-green">0</span> mainnet txs — local validator only</span>
           <span className="text-dark-600">|</span>

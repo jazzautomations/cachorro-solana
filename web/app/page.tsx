@@ -380,6 +380,36 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* ═══ FAQ — kill the objections before the judges raise them ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-baseline gap-3 mb-6">
+            <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">THE SKEPTIC SECTION</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+          </div>
+          <div className="space-y-px bg-dark-600 border border-dark-600">
+            {[
+              ['"isn\'t this just an LLM reading code?"',
+               'The LLM proposes; the machine disposes. Nothing becomes a finding without a deterministic oracle verdict and a reproduction — treatment drains, control blocks. The gate is code, not a prompt.'],
+              ['"does it replace a human audit?"',
+               'No — and anyone who says otherwise is selling you noise. It\'s the verified floor under one: cheap, continuous, executable. Deep economic exploits still want a human brain.'],
+              ['"does it touch mainnet?"',
+               'Never. Every PoC runs on a local validator or fork. The only on-chain write is the memo receipt.'],
+              ['"who submits the bug?"',
+               'A human, through the official bounty channel, after reproducing it. Nothing auto-submits.'],
+              ['"why trust the receipt?"',
+               'Don\'t. Recompute the digest yourself — that\'s the whole point. /verify'],
+            ].map(([q, a]) => (
+              <div key={q} className="bg-dark-900 p-4 sm:p-5">
+                <div className="text-[10px] sm:text-xs font-arcade text-miami-rose mb-1.5">{q}</div>
+                <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">{a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CLOSE — one ask ═══ */}
       <div className="vapor-strip" />
       <section className="px-4 py-14 sm:py-20 text-center relative overflow-hidden">

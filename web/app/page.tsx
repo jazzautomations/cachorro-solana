@@ -391,7 +391,7 @@ export default function Home() {
           <div className="space-y-px bg-dark-600 border border-dark-600">
             {[
               ['"isn\'t this just an LLM reading code?"',
-               'The LLM proposes; the machine disposes. Nothing becomes a finding without a deterministic oracle verdict and a reproduction — treatment drains, control blocks. The gate is code, not a prompt.'],
+               'Probabilistic models hallucinate bugs (false positives); statistical scanners sleep through them (false negatives). The pack couples both: the model proposes for recall, the machine disposes for precision — nothing becomes a finding without oracle verdict + reproduction.'],
               ['"does it replace a human audit?"',
                'No — and anyone who says otherwise is selling you noise. It\'s the verified floor under one: cheap, continuous, executable. Deep economic exploits still want a human brain.'],
               ['"does it touch mainnet?"',

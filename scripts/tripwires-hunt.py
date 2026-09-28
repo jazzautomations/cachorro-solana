@@ -127,7 +127,37 @@ if "--emit" in sys.argv:
         _emit("error" if f["severity"] == "critical" else "note",
               "tripwire %s [%s]: %s" % (f["kind"], f["severity"], f["detail"]))
 
-out = {"checked_at": int(time.time()), "flags": flags, "clean": not flags,
+# atlas coverage — which canonical classes the pack actually exercised.
+# "found nothing" is only meaningful if you can show where you looked.
+ATLAS = [
+    ("signer-authorization", ["signer", "authoriz", "authority"]),
+    ("account-data-matching", ["data-matching", "data match", "account data"]),
+    ("owner-checks", ["owner-check", "owner check", "owner"]),
+    ("type-cosplay", ["cosplay", "type-cosplay", "account-substitution", "substitution"]),
+    ("initialization", ["init", "reinit"]),
+    ("arbitrary-cpi", ["cpi", "cross-program", "arbitrary"]),
+    ("duplicate-mutable-accounts", ["duplicate", "alias"]),
+    ("bump-seed-canonicalization", ["bump", "seed", "canonical"]),
+    ("pda-sharing", ["pda-sharing", "pda share", "shared-pda"]),
+    ("closing-accounts", ["closing", "close", "revival"]),
+    ("sysvar-address-checking", ["sysvar", "introspection"]),
+]
+touched = set()
+for f in list(findings) + list(survivors):
+    vt = (f.get("vulnerability_type", "") + " " + f.get("description", "")).lower()
+    for cls, toks in ATLAS:
+        if any(t in vt for t in toks):
+            touched.add(cls)
+coverage = {"atlas_classes": len(ATLAS), "exercised": sorted(touched),
+            "not_exercised": sorted(c for c, _ in ATLAS if c not in touched)}
+
+# coverage tripwire: a deep/full hunt that touched <4 classes is narrow, not clean
+if st.get("mode") in ("deep", "full") and len(touched) < 4 and findings:
+    flag("narrow-coverage", "info",
+         "hunt touched %d/%d atlas classes — coverage too thin to claim clean" % (len(touched), len(ATLAS)),
+         exercised=sorted(touched))
+
+out = {"checked_at": int(time.time()), "flags": flags, "clean": not flags, "coverage": coverage,
        "counts": {"findings": len(findings), "survivors": len(survivors),
                   "verde": len(verde_files), "vermelho": len(vermelho_files)}}
 with open(os.path.join(RUN, "self_audit.json"), "w") as f:

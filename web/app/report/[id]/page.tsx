@@ -6,7 +6,7 @@ import { Markdown } from '@/lib/markdown'
 import { readReport, isValidId, runDir } from '@/lib/cachorro'
 import { getClaim } from '@/lib/claims'
 
-function readSelfAudit(id: string): { clean: boolean; flags: { kind: string; severity: string }[] } | null {
+function readSelfAudit(id: string): { clean: boolean; flags: { kind: string; severity: string }[]; coverage?: { atlas_classes: number; exercised: string[]; not_exercised: string[] } } | null {
   try {
     return JSON.parse(fs.readFileSync(path.join(runDir(id), 'self_audit.json'), 'utf8'))
   } catch { return null }
@@ -167,9 +167,17 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                     </span>
                   )}
                   {selfAudit && (
-                    <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${selfAudit.clean ? 'border-neon-cyan/60 text-neon-cyan' : 'border-neon-yellow text-neon-yellow'}`}>
-                      SELF-AUDIT {selfAudit.clean ? '✓ CLEAN' : `${selfAudit.flags.length} FLAG${selfAudit.flags.length === 1 ? '' : 'S'}`}
-                    </span>
+                    <>
+                      <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${selfAudit.clean ? 'border-neon-cyan/60 text-neon-cyan' : 'border-neon-yellow text-neon-yellow'}`}>
+                        SELF-AUDIT {selfAudit.clean ? '✓ CLEAN' : `${selfAudit.flags.length} FLAG${selfAudit.flags.length === 1 ? '' : 'S'}`}
+                      </span>
+                      {selfAudit.coverage && (
+                        <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade"
+                          title={`exercised: ${selfAudit.coverage.exercised.join(', ') || 'none'} · not exercised: ${selfAudit.coverage.not_exercised.join(', ')}`}>
+                          ATLAS {selfAudit.coverage.exercised.length}/{selfAudit.coverage.atlas_classes}
+                        </span>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

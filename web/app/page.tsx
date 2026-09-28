@@ -16,7 +16,7 @@ const JOURNEY = [
   {
     cmd: 'cachorro hunt <your-program>',
     t: 'POINT AT YOUR PROGRAM',
-    d: 'Your GitHub repo or your on-chain program ID. Fetch and static lint run in seconds — no wallet, no signup, no sales call.',
+    d: 'Your contract, wallet or protocol — GitHub repo or on-chain program ID. Fetch and static lint run in seconds — no wallet, no signup, no sales call.',
     meta: 'fetch 5s · static 7s',
   },
   {
@@ -96,10 +96,10 @@ export default function Home() {
           </h1>
 
           <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">
-            Your program holds value someone will try to take. Point the pack at it — it finds
-            the bug class, writes the exploit,
+            You built it — now test it like an attacker. Point the pack at your contract, wallet
+            or protocol — it finds the bug class, writes the exploit,
             <span className="text-neon-green"> runs it on a local validator — never mainnet —</span>
-            and anchors the verdict on-chain. The audit your users can verify themselves.
+            and anchors the verdict on-chain. Security you can check yourself — proof, not opinions.
           </p>
 
           {/* the console: screen on top, prompt at the bottom edge */}
@@ -232,7 +232,9 @@ export default function Home() {
             Probabilistic models hallucinate bugs — false positives. Statistical scanners sleep through them — false negatives.
             The pack uses each where it wins:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
+          <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
+            <div className="hidden sm:flex absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 w-6 items-center justify-center text-miami-rose font-arcade text-sm" style={{left:"33.333%"}}>→</div>
+            <div className="hidden sm:flex absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 w-6 items-center justify-center text-neon-green font-arcade text-sm" style={{left:"66.666%"}}>→</div>
             <div className="bg-dark-900 p-4 sm:p-5">
               <div className="text-[9px] font-arcade text-miami-rose mb-1.5">PROPOSE</div>
               <div className="text-[10px] sm:text-xs text-gray-300 mb-2">the model hunts</div>
@@ -276,8 +278,8 @@ export default function Home() {
             <span className="text-[8px] font-mono text-gray-600">vs what the pack ships</span>
           </div>
           <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-2xl leading-relaxed">
-            For protocol teams about to wire six figures to an audit firm — and for the hunter
-            who knows Immunefi pays for exploits, not prose.
+            For protocol teams about to wire five figures for a PDF — contracts, wallets, protocols. And for every team that already knows Immunefi pays for
+            exploits, not prose.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-dark-600 border border-dark-600">
             <div className="bg-dark-900 p-4 sm:p-5">
@@ -421,7 +423,7 @@ export default function Home() {
           <div className="border border-dark-600 bg-dark-900 p-4 sm:p-6">
             <div className="text-[10px] sm:text-xs font-arcade text-neon-red mb-3">RULES OF ENGAGEMENT</div>
             <ul className="text-[10px] sm:text-xs text-gray-500 space-y-1.5 leading-relaxed">
-              <li>▸ Audit only what you are authorized to audit — an active bounty with a defined scope.</li>
+              <li>▸ Audit only what you are authorized to audit — an active bounty or the owner's own program — authorized surface only.</li>
               <li>▸ PoCs run on a local validator or a local fork. No attack transaction ever touches mainnet.</li>
               <li>▸ Nothing is submitted automatically. A human reproduces the bug and files it through the official channel.</li>
               <li>▸ Untrusted targets are cloned, never built — a third-party build.rs is arbitrary code execution.</li>
@@ -477,7 +479,8 @@ export default function Home() {
       <section className="px-4 py-14 sm:py-20 text-center relative overflow-hidden">
         <div className="synth-sun absolute left-1/2 -translate-x-1/2 bottom-[-40%] w-72 h-72 sm:w-96 sm:h-96 opacity-40 pointer-events-none" />
         <div className="max-w-4xl mx-auto relative">
-          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">SHIP WITH A RECEIPT.</div>
+          <div className="text-[9px] sm:text-[10px] font-mono text-gray-600 mb-4">your contract. your wallet. your protocol. your move.</div>
+          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">TEST IT. PROVE IT. SHIP THE RECEIPT.</div>
           <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-lg mx-auto leading-relaxed">
             Recon on your program is free — see what the pack finds before you pay anyone anything.
             The engagement prices against the audit you didn&apos;t buy: paid in SOL, verified on-chain,
@@ -523,8 +526,9 @@ function BountyTeaser() {
           <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">THE BOARD IS THE THREAT MAP</h2>
           <span className="flex-1 border-b border-dashed border-dark-600" />
           <span className="text-[8px] sm:text-[9px] font-mono text-neon-yellow shrink-0">
-            {fmtUsd(total)} standing incentive to break these programs
+            {fmtUsd(total)} standing incentive
           </span>
+          <a href="/bounties" className="text-[8px] sm:text-[9px] font-mono text-neon-cyan hover:text-neon-green shrink-0">all {idx.bounties.length} ↗</a>
         </div>
         <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-6 max-w-2xl leading-relaxed">
           Every program below already pays for a verified exploit. Someone will collect —
@@ -552,11 +556,7 @@ function BountyTeaser() {
             </div>
           ))}
         </div>
-        <div className="mt-4">
-          <a href="/bounties" className="text-[9px] sm:text-[10px] font-mono text-neon-cyan hover:text-neon-green transition-colors">
-            ▸ full board — {idx.bounties.length} programs indexed ↗
-          </a>
-        </div>
+
       </div>
     </section>
   )

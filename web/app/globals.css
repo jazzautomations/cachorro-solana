@@ -205,7 +205,7 @@ input:-webkit-autofill:focus {
   border-radius: 9999px;
   background: linear-gradient(180deg, #fffb96 0%, #ffb56b 24%, #ff9d00 44%, #ff2a6d 76%, #b967ff 100%);
   box-shadow: 0 0 40px rgba(255, 42, 109, 0.4), 0 0 140px rgba(255, 157, 0, 0.22);
-  position: relative;
+  /* no position here — callers position it (absolute/relative) so ::after anchors right */
   overflow: hidden;
 }
 .synth-sun::after {

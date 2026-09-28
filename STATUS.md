@@ -2,6 +2,23 @@
 Prazo: 12/10/2026 23:59 PT. Trilha Solana + gerais + Trilha Brasil (US$5k) + Darwin (inscrição até 10/10).
 Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável, não parecer.
 
+## Hoje — 28/09 (onda web + infra)
+
+- Attest real: run-job-devin.sh -> scripts/attest-run.sh ancora receipt
+  pos-hunt; falha soft pra receipt pending quando a keypair ta seca
+- cachorro-attest.timer (systemd horario) retenta receipts pending
+- 5 receipts ANCORADOS no devnet (onre-sol 86d7ba5a / slot 505248105)
+- /api/verify bugs: receipt ancorado nao tem campo memo (derivar do digest);
+  path ?sig= recomputa payload canonico — verify agora prova memo on-chain
+- scripts/tripwires-hunt.py: estagio SELF-AUDIT pre-anchor (port dos
+  tripwires do pentest-agent v0.4.0) — promotion-without-proof, verificacao
+  facil-demais, confirmation collapse, rubber-stamp devil, suspicious-clean
+- semgrep pass no static-scan (corpus/semgrep-anchor.yml)
+- /claim + /api/claim: OWNER-VERIFIED via assinatura da upgrade authority
+- /api/scan/[id]/evidence: bundle .tar.gz (report+PoCs+events+receipt)
+- web: visual Miami, /report vira certificado, pricing como servico,
+  FAQ cetico, pass mobile, scoreboard de honestidade no ticker
+
 ## Feito
 - 15/09: git init do repo; decisão: casca web NOVA em `web/` reaproveitando o visual vaporwave do jazzweb3audit (globals.css + tailwind + Terminal/AgentFlow/Navbar). NÃO reviver jazzweb3audit (backend divergente, mixed-content).
 - Engine: scripts/fetch-target.sh (--repo | --program-id) e scripts/static-scan.sh funcionam sem IA. opencode com credencial `oci` (api).

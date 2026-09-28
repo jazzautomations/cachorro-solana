@@ -160,6 +160,15 @@ for f in list(findings) + list(survivors):
             touched.add(cls)
 coverage = {"atlas_classes": len(ATLAS), "exercised": sorted(touched),
             "not_exercised": sorted(c for c, _ in ATLAS if c not in touched)}
+# clean hunts still have coverage — the report's coverage-map table is the proof
+if not touched and report:
+    import re as _re2
+    m = _re2.search(r"##\s*Coverage Map[^#]*", report)
+    if m:
+        cov_rows = [l for l in m.group(0).splitlines()
+                    if l.strip().startswith("|") and "---" not in l and "Cluster" not in l]
+        if cov_rows:
+            coverage["clusters"] = len(cov_rows)
 
 # coverage tripwire: a deep/full hunt that touched <4 classes is narrow, not clean
 if st.get("mode") in ("deep", "full") and len(touched) < 4 and findings:

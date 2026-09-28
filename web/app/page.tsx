@@ -322,9 +322,9 @@ export default function Home() {
               <span className="text-[8px] text-gray-600">devnet</span>
             </div>
             <div className="p-3 space-y-1.5 text-[9px] sm:text-[10px]">
-              <div className="flex justify-between gap-2"><span className="text-gray-600">memo</span><span className="text-neon-green break-all">cachorro:v1:24037a60…</span></div>
-              <div className="flex justify-between gap-2"><span className="text-gray-600">journal_head</span><span className="text-gray-400">1a44a53f… → b94cbb55…</span></div>
-              <div className="flex justify-between gap-2"><span className="text-gray-600">report_sha256</span><span className="text-gray-400">sha256:✓</span></div>
+              <div className="flex justify-between gap-2"><span className="text-gray-600">memo</span><span className="text-neon-green break-all">cachorro:v1:3987b6c4…</span></div>
+              <div className="flex justify-between gap-2"><span className="text-gray-600">tx</span><span className="text-neon-cyan break-all">5QnooNTuvmjZ… ↗</span></div>
+              <div className="flex justify-between gap-2"><span className="text-gray-600">recomputed</span><span className="text-neon-green">digest ✓ matches</span></div>
               <div className="flex justify-between gap-2"><span className="text-gray-600">verify</span><span className="text-neon-green">recomputed → MATCH</span></div>
             </div>
             <div className="px-3 py-2 border-t border-dark-600 text-[8px] sm:text-[9px] text-gray-600 leading-relaxed">

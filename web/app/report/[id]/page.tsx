@@ -168,9 +168,9 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                       dup-flagged
                     </span>
                   )}
-                  {data?.survivorCount !== undefined && (
+                  {(data?.survivorCount ?? 0) > 0 && (
                     <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
-                      {data.survivorCount} survivors tested
+                      {data?.survivorCount} survivors tested
                     </span>
                   )}
                   {selfAudit && (
@@ -178,12 +178,17 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                       <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${selfAudit.clean ? 'border-neon-cyan/60 text-neon-cyan' : 'border-neon-yellow text-neon-yellow'}`}>
                         SELF-AUDIT {selfAudit.clean ? '✓ CLEAN' : `${selfAudit.flags.length} FLAG${selfAudit.flags.length === 1 ? '' : 'S'}`}
                       </span>
-                      {selfAudit.coverage && (
+                      {selfAudit.coverage && (selfAudit.coverage.exercised.length > 0 ? (
                         <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade"
-                          title={`exercised: ${selfAudit.coverage.exercised.join(', ') || 'none'} · not exercised: ${selfAudit.coverage.not_exercised.join(', ')}`}>
+                          title={`exercised: ${selfAudit.coverage.exercised.join(', ')}`}>
                           ATLAS {selfAudit.coverage.exercised.length}/{selfAudit.coverage.atlas_classes}
                         </span>
-                      )}
+                      ) : (selfAudit.coverage as {clusters?: number}).clusters ? (
+                        <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade"
+                          title="clean hunt — the report's coverage map shows what was read">
+                          COVERAGE {(selfAudit.coverage as {clusters?: number}).clusters} clusters
+                        </span>
+                      ) : null)}
                       {jev?.mean != null && (
                         <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${jev.dissenting.length ? 'border-neon-yellow text-neon-yellow' : 'border-miami-sky/60 text-miami-sky'}`}
                           title={jev.dissenting.length ? `dissenting: ${jev.dissenting.map(d => `${d.id} ${d.score}`).join(', ')}` : 'calibrated exploit-plausibility, mean over promoted claims'}>
@@ -205,7 +210,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                     </a>
                   </div>
                   <div className="p-3 space-y-1.5 text-[9px] sm:text-[10px]">
-                    <div className="flex justify-between gap-3"><span className="text-gray-600">memo</span><span className="text-neon-green break-all text-right">{receipt.memo}</span></div>
+                    <div className="flex justify-between gap-3"><span className="text-gray-600">memo</span><span className="text-neon-green break-all text-right">{receipt.memo ?? `cachorro:v1:${receipt.attestation_sha256}`}</span></div>
                     <div className="flex justify-between gap-3"><span className="text-gray-600">attestation</span><span className="text-gray-400 break-all text-right">{receipt.attestation_sha256?.slice(0, 24)}…</span></div>
                     {receipt.journal_head && (
                       <div className="flex justify-between gap-3"><span className="text-gray-600">journal_head</span><span className="text-gray-400 text-right">{String(receipt.journal_head).slice(0, 16)}…</span></div>

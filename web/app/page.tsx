@@ -205,6 +205,54 @@ export default function Home() {
       </section>
 
 
+
+      {/* ═══ THE PROOF STACK — probabilistic recalls, calibrated weighs, machine decides ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-baseline gap-3 mb-2">
+            <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">THE PROOF STACK</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[9px] sm:text-[10px] font-mono text-miami-purple shrink-0">probabilistic → calibrated → deterministic</span>
+          </div>
+          <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-6 leading-relaxed max-w-2xl">
+            Probabilistic models hallucinate bugs — false positives. Statistical scanners sleep through them — false negatives.
+            The pack uses each where it wins:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[9px] font-arcade text-miami-rose mb-1.5">PROPOSE</div>
+              <div className="text-[10px] sm:text-xs text-gray-300 mb-2">the model hunts</div>
+              <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
+                Research + analysis fan out for <span className="text-gray-300">recall</span> — semgrep sets the coverage floor,
+                the model reads what patterns miss. It may be wrong; that&apos;s allowed here.
+              </div>
+            </div>
+            <div className="bg-dark-900 p-4 sm:p-5 border-x border-dark-600/60">
+              <div className="text-[9px] font-arcade text-miami-sky mb-1.5">WEIGH</div>
+              <div className="text-[10px] sm:text-xs text-gray-300 mb-2">the judge calibrates</div>
+              <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
+                Every promoted claim gets a typed exploit-plausibility score from a System One judge —
+                <span className="text-gray-300"> a probability, not prose</span>. Dissent shows on the certificate.
+              </div>
+            </div>
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[9px] font-arcade text-neon-green mb-1.5">PROVE</div>
+              <div className="text-[10px] sm:text-xs text-gray-300 mb-2">the machine disposes</div>
+              <div className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
+                Nothing ships without oracle verdict + reproduction on a local validator — treatment drains, control blocks.
+                <span className="text-gray-300"> The gate is code, not a prompt.</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-3 text-center text-[9px] sm:text-[10px] font-mono text-gray-600 leading-relaxed">
+            then the pack audits itself: <span className="text-neon-cyan">self-audit tripwires</span> catch bias —
+            promotion without proof, suspiciously-easy verification, confirmation collapse —
+            and <span className="text-neon-cyan">atlas coverage</span> reports which vuln classes were actually exercised.
+            flags become part of the receipt&apos;s journal.
+          </div>
+        </div>
+      </section>
+
       {/* ═══ THE INVOICE — audit-price anchoring, the startup case ═══ */}
       <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
         <div className="max-w-4xl mx-auto">

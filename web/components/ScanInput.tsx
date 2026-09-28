@@ -103,7 +103,7 @@ export default function ScanInput() {
         <span className={kind ? 'text-neon-cyan' : 'text-gray-700'}>
           {kind === 'repo' ? '▸ target: GitHub repo (source audit)'
             : kind === 'program-id' ? `▸ target: on-chain program on ${cluster}`
-            : '▸ waiting for a target'}
+            : '▸ paste your program — repo or program id'}
         </span>
         <span className="text-gray-700 hidden xs:inline">local validator only · never mainnet</span>
       </div>

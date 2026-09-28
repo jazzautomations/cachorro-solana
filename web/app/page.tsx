@@ -11,9 +11,9 @@ export const dynamic = 'force-dynamic'
 
 const JOURNEY = [
   {
-    cmd: 'cachorro hunt <target>',
-    t: 'PASTE A TARGET',
-    d: 'A GitHub repo or an on-chain program ID. Fetch and static lint run in seconds — no wallet, no signup.',
+    cmd: 'cachorro hunt <your-program>',
+    t: 'POINT AT YOUR PROGRAM',
+    d: 'Your GitHub repo or your on-chain program ID. Fetch and static lint run in seconds — no wallet, no signup, no sales call.',
     meta: 'fetch 5s · static 7s',
   },
   {
@@ -65,9 +65,10 @@ export default function Home() {
           </h1>
 
           <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">
-            Point the pack at an Anchor program. It finds the bug class, writes the exploit,
+            Your program holds value someone will try to take. Point the pack at it — it finds
+            the bug class, writes the exploit,
             <span className="text-neon-green"> runs it on a local validator — never mainnet —</span>
-            and anchors the verdict on-chain. The audit you can verify yourself.
+            and anchors the verdict on-chain. The audit your users can verify themselves.
           </p>
 
           {/* the console: screen on top, prompt at the bottom edge */}
@@ -258,7 +259,7 @@ export default function Home() {
               <div className="flex justify-between gap-2"><span className="text-gray-600">verify</span><span className="text-neon-green">recomputed → MATCH</span></div>
             </div>
             <div className="px-3 py-2 border-t border-dark-600 text-[8px] sm:text-[9px] text-gray-600 leading-relaxed">
-              trivial for them to verify — hard for us to fake
+              trivial for your users to verify — hard for anyone to fake
             </div>
           </div>
         </div>
@@ -305,8 +306,9 @@ export default function Home() {
           <div className="flex-1">
             <h2 className="text-xs sm:text-base font-arcade text-neon-purple mb-1.5">LEARN BY HUNTING</h2>
             <p className="text-[10px] sm:text-xs text-gray-500 font-mono leading-relaxed">
-              17 lessons &amp; labs · every Sealevel vulnerability class · vulnerable vs secure side by side ·
-              the real exploit it caused · a button that sets the pack loose on it.
+              Your team reads the attacker&apos;s playbook — every Sealevel vulnerability class,
+              vulnerable vs secure side by side, the real exploit it caused, and a button that
+              sets the pack loose on it.
             </p>
           </div>
           <a
@@ -362,10 +364,11 @@ export default function Home() {
       <section className="px-4 py-14 sm:py-20 text-center relative overflow-hidden">
         <div className="synth-sun absolute left-1/2 -translate-x-1/2 bottom-[-40%] w-72 h-72 sm:w-96 sm:h-96 opacity-40 pointer-events-none" />
         <div className="max-w-4xl mx-auto relative">
-          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">READY TO HUNT?</div>
+          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">SHIP WITH A RECEIPT.</div>
           <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-lg mx-auto leading-relaxed">
-            Recon hunts are free forever. Engagements price against the audit you didn&apos;t buy —
-            paid in SOL, verified on-chain. Your payment receipt is your account.
+            Recon on your program is free — see what the pack finds before you pay anyone anything.
+            The engagement prices against the audit you didn&apos;t buy: paid in SOL, verified on-chain,
+            and it expires loudly when you upgrade.
           </p>
           <div className="flex items-center justify-center gap-4">
             <a
@@ -383,7 +386,7 @@ export default function Home() {
 
       <footer className="px-4 py-8 border-t border-dark-600">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[9px] sm:text-[10px] font-mono text-gray-700">
-          <span>CACHORRO · Solana program auditor · proof, not opinion</span>
+          <span>CACHORRO · the audit your users can verify · proof, not opinion</span>
           <span>built in the open during Colosseum · Solana track</span>
         </div>
       </footer>
@@ -400,13 +403,18 @@ function BountyTeaser() {
   return (
     <section id="board" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-baseline gap-3 mb-6">
-          <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">MONEY ON THE TABLE</h2>
+        <div className="flex items-baseline gap-3 mb-2">
+          <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">THE BOARD IS THE THREAT MAP</h2>
           <span className="flex-1 border-b border-dashed border-dark-600" />
           <span className="text-[8px] sm:text-[9px] font-mono text-neon-yellow shrink-0">
-            {fmtUsd(total)} in active Solana bounties
+            {fmtUsd(total)} standing incentive to break these programs
           </span>
         </div>
+        <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-6 max-w-2xl leading-relaxed">
+          Every program below already pays for a verified exploit. Someone will collect —
+          <span className="text-gray-300"> the only question is who hunts first.</span> If your
+          program is on this board, it should be the pack.
+        </p>
         <div className="border border-dark-600 divide-y divide-dark-600">
           {sol.map((b) => (
             <div key={b.id} className="flex items-center gap-3 px-3 sm:px-4 py-2.5 bg-dark-900">

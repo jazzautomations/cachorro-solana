@@ -29,7 +29,7 @@ export default function RecentHunts() {
         {runs === null ? (
           <div className="px-3 py-4 text-[10px] text-gray-700 font-mono animate-pulse">loading…</div>
         ) : runs.length === 0 ? (
-          <div className="px-3 py-4 text-[10px] text-gray-700 font-mono">no hunts yet — be the first target.</div>
+          <div className="px-3 py-4 text-[10px] text-gray-700 font-mono">no hunts yet — be the first program on the board.</div>
         ) : (
           runs.map((r) => (
             <a

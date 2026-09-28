@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: '%s | CACHORRO',
   },
   description:
-    'An agentic security auditor for Solana/Anchor programs. A pack of agents tears through your Rust like an attacker — findings ship with an executable PoC on a local validator. Proof, not opinion.',
+    'The audit your users can verify. An agentic security service for Solana/Anchor programs — every finding ships an executable PoC proven on a local validator, anchored on-chain. Proof, not opinion.',
   keywords: ['solana audit', 'anchor security', 'program audit', 'rust security', 'proof of concept', 'bug bounty'],
   icons: { icon: '/favicon.svg' },
 }

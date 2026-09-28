@@ -18,16 +18,7 @@ export default function Verifier() {
   }
 
   return (
-    <section className="px-3 sm:px-4 py-6 sm:py-10">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-[9px] text-gray-600 font-mono mb-1">TRUSTLESS CHECK</div>
-        <h1 className="text-sm sm:text-xl font-arcade text-neon-yellow mb-1">[ VERIFY A RECEIPT ]</h1>
-        <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-6 leading-relaxed">
-          Paste an attestation digest, a report sha256, or a transaction signature.
-          We recompute the canonical payload and check the on-chain memo —
-          verification that doesn't trust this website.
-        </p>
-
+    <div>
         <div className="flex gap-2">
           <input
             value={q}
@@ -82,6 +73,5 @@ export default function Verifier() {
           </div>
         )}
       </div>
-    </section>
   )
 }

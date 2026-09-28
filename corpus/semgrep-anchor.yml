@@ -1,0 +1,77 @@
+rules:
+  - id: anchor-accountinfo-param
+    message: "raw AccountInfo/UncheckedAccount param — owner+data checks are manual"
+    severity: WARNING
+    languages: [rust]
+    patterns:
+      - pattern-regex: '(AccountInfo|UncheckedAccount)\s*<'
+
+  - id: anchor-init-if-needed
+    message: "init_if_needed — reinitialization risk; re-init can drain or take over"
+    severity: ERROR
+    languages: [rust]
+    pattern: "init_if_needed"
+
+  - id: anchor-remaining-accounts
+    message: "ctx.remaining_accounts — untyped tail: validate count, owner, role"
+    severity: WARNING
+    languages: [rust]
+    pattern: "ctx.remaining_accounts"
+
+  - id: anchor-cpicontext-variable-program
+    message: "CpiContext::new($P, ...) — pin $P to expected id or this is arbitrary CPI"
+    severity: ERROR
+    languages: [rust]
+    pattern: "CpiContext::new($P, ...)"
+
+  - id: anchor-invoke-signed
+    message: "invoke_signed — PDA-signed CPI: audit seeds and target program"
+    severity: WARNING
+    languages: [rust]
+    pattern: "invoke_signed(...)"
+
+  - id: solana-lamport-manipulation
+    message: "manual lamport access — close-revival & rent-theft surface"
+    severity: WARNING
+    languages: [rust]
+    pattern-either:
+      - pattern: "$A.lamports.borrow_mut()"
+      - pattern: "$A.try_borrow_mut_lamports()"
+      - pattern: "$A.close($B)"
+
+  - id: anchor-sysvar-instructions
+    message: "instruction sysvar introspection — atomicity, phantom inner-ix class"
+    severity: WARNING
+    languages: [rust]
+    pattern-either:
+      - pattern: "load_instruction_at_checked(...)"
+      - pattern: "load_current_index_checked(...)"
+      - pattern: "get_instruction_relative(...)"
+
+  - id: solana-narrowing-cast
+    message: "narrowing as-cast — check overflow/truncation"
+    severity: INFO
+    languages: [rust]
+    pattern-either:
+      - pattern: "$X as u64"
+      - pattern: "$X as i64"
+      - pattern: "$X as u128"
+      - pattern: "$X as u32"
+      - pattern: "$X as usize"
+
+  - id: solana-panic-in-handler
+    message: "unwrap/expect/panic in program code — griefing/DoS vector"
+    severity: WARNING
+    languages: [rust]
+    pattern-either:
+      - pattern: "$X.unwrap()"
+      - pattern: "$X.expect($M)"
+      - pattern: "panic!(...)"
+
+  - id: token-transfer-cpi
+    message: "token CPI — if mint has Token-2022 transfer hooks this path may be reentrant"
+    severity: INFO
+    languages: [rust]
+    pattern-either:
+      - pattern: "token::transfer(...)"
+      - pattern: "token::transfer_checked(...)"

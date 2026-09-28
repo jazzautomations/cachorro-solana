@@ -4,6 +4,7 @@
 # Produz: <run_dir>/static/{cargo_audit.txt, clippy.txt, grep_lints.txt, zk_surface.txt, summary.txt}
 set -uo pipefail
 TARGET="${1:?target dir}"; RUN="${2:?run dir}"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$RUN/static"; mkdir -p "$OUT"
 export PATH="$HOME/.cargo/bin:$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
@@ -44,6 +45,21 @@ SRC="$TARGET"
   grep -rcInE "Signer<|has_one *=|constraint *=" "$SRC" --include=*.rs 2>/dev/null | head -40
 } > "$OUT/grep_lints.txt" 2>&1
 echo "[+] grep lints -> $OUT/grep_lints.txt"
+
+echo "[*] semgrep — anchor ruleset (semantic pass over the corpus)..."
+if command -v semgrep >/dev/null 2>&1 && [[ -f "$ROOT/corpus/semgrep-anchor.yml" ]]; then
+  timeout "${SEMGREP_TIMEOUT:-120}" semgrep --config "$ROOT/corpus/semgrep-anchor.yml" "$SRC"     --json --quiet --exclude='*tests*' --exclude='*/target/*' > "$OUT/semgrep.json" 2>/dev/null || true
+  python3 - "$OUT/semgrep.json" <<'SG' 2>/dev/null || true
+import json, sys
+try:
+    d = json.load(open(sys.argv[1]))
+    print("semgrep findings:", len(d.get("results", [])))
+except Exception:
+    print("semgrep findings: 0")
+SG
+else
+  echo "[~] semgrep ausente" > "$OUT/semgrep.json"
+fi
 
 echo "[*] zk surface detection..."
 {

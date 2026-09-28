@@ -36,7 +36,7 @@ Resolva os argumentos:
 - Senão: `RUN_DIR=cachorro-out/run_$(date +%Y%m%d_%H%M%S)` e rode 1-2 primeiro.
 
 1. **FETCH** — `bash scripts/fetch-target.sh --repo <url> RUN_DIR` ou `--program-id <PUBKEY> <cluster> RUN_DIR`. Bytecode-only? avise num `note` que sem fonte a análise fica rasa.
-2. **STATIC** — `SKIP_CLIPPY=1 bash scripts/static-scan.sh TARGET_DIR RUN_DIR` (pule se não houver fonte).
+2. **STATIC** — `SKIP_CLIPPY=1 bash scripts/static-scan.sh TARGET_DIR RUN_DIR` (pule se não houver fonte).  (corpus/semgrep-anchor.yml hits) feeds the same pass.
 3. **RESEARCH** (`devin-researcher`) — spec em `prompts/researcher.md`. Produza `RUN_DIR/research_context.md`: tipo de protocolo, lineage de fork, exploits conhecidos na família, superfície. Emita `thought` com o modelo mental do protocolo e `obs` com o que mudou sua prioridade.
 4. **ANALYZE** (`devin-analyzer`) — spec em `prompts/analyzer.md` + atlas `prompts/vuln-atlas.md`. Mapeie TODA a superfície de instruções antes de caçar. Alvo grande (>15 handlers)? Faça fan-out com `run_subagent` por cluster (access-control / CPI-DeFi / zk / token-math) — cada subagente lê o atlas. Escreva `RUN_DIR/findings.json` no schema do spec. Emita `thought` por cluster varrido e `finding` por candidato real.
 5. **DEVIL** (`devil-advocate`) — spec em `prompts/devil.md`. Tente MATAR cada finding relendo o código real. Sobreviventes → `RUN_DIR/survivors.json`. Emita `verdict` por finding (survived/killed + motivo em 1 linha).

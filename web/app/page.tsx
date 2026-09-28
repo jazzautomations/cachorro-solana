@@ -46,10 +46,12 @@ export default function Home() {
       <Navbar />
 
       {/* ═══ HERO — the product is usable in the first viewport ═══ */}
-      <section id="hunt" className="px-4 pt-10 pb-12 sm:pt-16 sm:pb-16 scroll-mt-16">
-        <div className="max-w-6xl mx-auto">
+      <section id="hunt" className="relative px-4 pt-10 pb-12 sm:pt-16 sm:pb-16 scroll-mt-16 overflow-hidden">
+        <div className="synth-grid" />
+        <div className="synth-sun absolute right-[4%] top-2 w-36 h-36 sm:w-60 sm:h-60 opacity-50 pointer-events-none hidden sm:block" />
+        <div className="max-w-6xl mx-auto relative">
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
-            <div className="text-[9px] sm:text-xs text-neon-green animate-blink font-mono">
+            <div className="text-[9px] sm:text-xs text-neon-green animate-blink neon-flicker font-mono">
               ▶ THE PACK IS AWAKE — 8 STAGES, ONE HUNT, ZERO OPINIONS
             </div>
             <div className="text-[8px] sm:text-[9px] font-mono text-gray-700">
@@ -58,8 +60,8 @@ export default function Home() {
           </div>
 
           <h1 className="font-arcade leading-[1.05] mb-4 sm:mb-6">
-            <span className="block text-4xl sm:text-6xl lg:text-7xl text-neon-green">PROOF,</span>
-            <span className="block text-4xl sm:text-6xl lg:text-7xl text-neon-cyan">NOT OPINION.</span>
+            <span className="block text-4xl sm:text-6xl lg:text-7xl text-neon-green chroma">PROOF,</span>
+            <span className="block text-4xl sm:text-6xl lg:text-7xl vapor-text chroma">NOT OPINION.</span>
           </h1>
 
           <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">
@@ -130,7 +132,7 @@ export default function Home() {
             {JOURNEY.map((j, i) => (
               <div key={j.t} className="flex gap-4 sm:gap-6">
                 <div className="flex flex-col items-center shrink-0 w-5">
-                  <span className="w-5 h-5 flex items-center justify-center border border-neon-green text-neon-green font-arcade text-[9px] bg-black">
+                  <span className={`w-5 h-5 flex items-center justify-center border font-arcade text-[9px] bg-black ${['border-neon-green text-neon-green', 'border-miami-sky text-miami-sky', 'border-miami-pink text-miami-pink'][i % 3]}`}>
                     {i + 1}
                   </span>
                   {i < JOURNEY.length - 1 && <span className="w-px flex-1 bg-gradient-to-b from-neon-green/60 to-dark-600" />}
@@ -148,9 +150,10 @@ export default function Home() {
       </section>
 
       {/* ═══ THE GATE — the argument, once, loud ═══ */}
-      <section id="gate" className="border-t border-dark-600 scroll-mt-16">
+      <div className="vapor-strip" />
+      <section id="gate" className="scroll-mt-16">
         <div className="px-4 pt-12 sm:pt-16 pb-8 text-center">
-          <div className="text-5xl sm:text-8xl font-bold font-arcade text-neon-red leading-none">$285M</div>
+          <div className="text-5xl sm:text-8xl font-bold font-arcade text-neon-red leading-none chroma neon-flicker">$285M</div>
           <p className="text-[10px] sm:text-xs text-gray-500 mt-3 max-w-xl mx-auto leading-relaxed">
             drained from Drift in <span className="text-gray-200">128 seconds</span> — after the audit.
             Reports ship prose; Immunefi won't pay without a runnable exploit.
@@ -180,7 +183,8 @@ export default function Home() {
       </section>
 
       {/* ═══ RECEIPT — the moat ═══ */}
-      <section id="receipt" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
+      <div className="vapor-strip" />
+      <section id="receipt" className="px-4 py-12 sm:py-16 scroll-mt-16">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
           <div>
             <h2 className="text-xs sm:text-base font-arcade text-neon-green mb-3">
@@ -199,7 +203,7 @@ export default function Home() {
               ▸ verify a receipt yourself — no trust in us required ↗
             </a>
           </div>
-          <div className="border border-dark-600 bg-dark-900 font-mono">
+          <div className="holo-frame font-mono">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/receipt.jpg" alt="A holographic attestation scroll chained on-chain" className="w-full h-32 sm:h-40 object-cover object-center block" loading="lazy" />
             <div className="px-3 py-2 border-b border-t border-dark-600 bg-dark-800 flex items-center justify-between">
@@ -313,9 +317,11 @@ export default function Home() {
       </section>
 
       {/* ═══ CLOSE — one ask ═══ */}
-      <section className="border-t border-dark-600 px-4 py-14 sm:py-20 text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3">READY TO HUNT?</div>
+      <div className="vapor-strip" />
+      <section className="px-4 py-14 sm:py-20 text-center relative overflow-hidden">
+        <div className="synth-sun absolute left-1/2 -translate-x-1/2 bottom-[-40%] w-72 h-72 sm:w-96 sm:h-96 opacity-40 pointer-events-none" />
+        <div className="max-w-4xl mx-auto relative">
+          <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">READY TO HUNT?</div>
           <p className="text-[10px] sm:text-xs text-gray-500 font-mono mb-6 max-w-lg mx-auto leading-relaxed">
             Free hunts forever. Paid tiers unlock FULL mode and API keys — paid in SOL, verified on-chain.
             Your payment receipt is your account.

@@ -139,4 +139,12 @@ fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path))
 with os.fdopen(fd, 'w') as f: json.dump(d, f, indent=2)
 os.replace(tmp, path)
 PY
+
+# ---------- 9. ATTEST (deterministic post-step, best-effort) ----------
+# Hunt is closed; if it produced a report, anchor the receipt on devnet.
+# Fails soft (unfunded keypair -> attestStatus=unfunded), never changes
+# the hunt outcome.
+if grep -q '"status": *"done"' "$ST" 2>/dev/null; then
+  bash "$ROOT/scripts/attest-run.sh" "$ID" || true
+fi
 exit 0

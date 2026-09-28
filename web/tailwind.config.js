@@ -25,6 +25,16 @@ module.exports = {
           blue: '#0066ff',
           purple: '#b400ff',
         },
+        miami: {
+          pink: '#ff2a6d',
+          rose: '#ff71ce',
+          teal: '#05d9e8',
+          sky: '#01cdfe',
+          purple: '#b967ff',
+          violet: '#7b2ff7',
+          sunset: '#ff9d00',
+          cream: '#fffb96',
+        },
         dark: {
           900: '#0a0a0a',
           800: '#111111',

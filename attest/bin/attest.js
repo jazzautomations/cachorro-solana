@@ -99,7 +99,7 @@ async function cmdAnchor(positional, flags) {
     verifiedBuildDigest: flags["verified-build-digest"] || null,
     journalHead: flags["journal-head"] || null,
     target,
-    createdAt: new Date().toISOString(),
+    createdAt: flags["created-at"] || new Date().toISOString(),
   });
   const attHash = attestationSha256(payload);
   const memo = memoString(attHash);

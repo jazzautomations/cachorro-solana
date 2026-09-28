@@ -4,6 +4,7 @@
 #   bash scripts/fetch-target.sh --repo <git_url> <dest_dir>
 #   bash scripts/fetch-target.sh --program-id <PUBKEY> <cluster> <dest_dir>   (cluster: mainnet|devnet|<rpc-url>)
 set -euo pipefail
+export HOME="${HOME:-/root}"
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
 MODE="${1:-}"
 case "$MODE" in

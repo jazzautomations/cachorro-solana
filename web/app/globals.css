@@ -173,3 +173,128 @@ input:-webkit-autofill:focus {
   animation: glitch 0.7s steps(2,end) 2;
   color: #ff2a6d;
 }
+
+/* ═══════════ MIAMI PHOSPHOR — hotline/vaporwave layer ═══════════ */
+
+/* chromatic aberration on arcade titles */
+.chroma {
+  text-shadow: 3px 0 rgba(255, 42, 109, 0.55), -3px 0 rgba(1, 205, 254, 0.55);
+}
+.chroma-soft {
+  text-shadow: 1.5px 0 rgba(255, 42, 109, 0.45), -1.5px 0 rgba(1, 205, 254, 0.45);
+}
+
+/* sunset gradient display text (hotline title) */
+.miami-text {
+  background: linear-gradient(180deg, #fffb96 0%, #ff9d00 38%, #ff2a6d 72%, #b967ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* phosphor→cyan→rose sweep for inline accents */
+.vapor-text {
+  background: linear-gradient(90deg, #00ff41, #05d9e8 45%, #ff71ce);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* synthwave sun — striped horizon sun, stripes thicken toward the bottom */
+.synth-sun {
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #fffb96 0%, #ffb56b 24%, #ff9d00 44%, #ff2a6d 76%, #b967ff 100%);
+  box-shadow: 0 0 40px rgba(255, 42, 109, 0.4), 0 0 140px rgba(255, 157, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+}
+.synth-sun::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(#0a0a0a, #0a0a0a) 0 58% / 100% 2px,
+    linear-gradient(#0a0a0a, #0a0a0a) 0 68% / 100% 4px,
+    linear-gradient(#0a0a0a, #0a0a0a) 0 78% / 100% 7px,
+    linear-gradient(#0a0a0a, #0a0a0a) 0 89% / 100% 11px,
+    linear-gradient(#0a0a0a, #0a0a0a) 0 99% / 100% 16px;
+  background-repeat: no-repeat;
+}
+
+/* perspective grid floor — the synthwave horizon, lines crawl toward you */
+.synth-grid {
+  position: absolute;
+  left: -60%;
+  right: -60%;
+  bottom: -8%;
+  height: 62%;
+  background-image:
+    linear-gradient(rgba(255, 42, 109, 0.30) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 205, 254, 0.18) 1px, transparent 1px);
+  background-size: 100% 42px, 46px 100%;
+  transform: perspective(320px) rotateX(64deg);
+  transform-origin: center top;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 28%);
+  animation: gridScroll 2.6s linear infinite;
+  pointer-events: none;
+}
+@keyframes gridScroll {
+  to { background-position: 0 42px, 0 0; }
+}
+
+/* vapor strip — gradient section divider */
+.vapor-strip {
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%, #00ff41 12%, #01cdfe 34%, #b967ff 52%, #ff2a6d 70%, #ff9d00 88%, transparent 100%);
+  opacity: 0.55;
+}
+.vapor-strip-thin {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(0, 255, 65, 0.7) 20%, rgba(1, 205, 254, 0.7) 45%, rgba(255, 42, 109, 0.7) 75%, transparent 100%);
+}
+
+/* neon sign flicker — rare, brief, like a tired sign on Ocean Drive */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  91% { opacity: 1; }
+  92% { opacity: 0.55; }
+  93% { opacity: 1; }
+  96% { opacity: 0.7; }
+  97% { opacity: 1; }
+}
+.neon-flicker { animation: flicker 5s linear infinite; }
+
+/* 8-bit notched corners (apply to solid-bg blocks — it clips borders) */
+.pixel-notch {
+  clip-path: polygon(
+    0 10px, 10px 10px, 10px 0,
+    calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px,
+    100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px),
+    calc(100% - 10px) 100%, 10px 100%, 10px calc(100% - 10px),
+    0 calc(100% - 10px)
+  );
+}
+
+/* holographic frame — the attestation card's animated psych-gradient border */
+.holo-frame {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#0d0d0d, #0d0d0d) padding-box,
+    linear-gradient(120deg, #00ff41, #01cdfe, #b967ff, #ff2a6d, #ff9d00, #00ff41) border-box;
+  background-size: 100% 100%, 300% 300%;
+  animation: holoPan 9s linear infinite;
+}
+@keyframes holoPan {
+  to { background-position: 0 0, 300% 0; }
+}
+
+/* palm-dark body tint: deep violet-black instead of pure black where wanted */
+.miami-bg {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(123, 47, 247, 0.16), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 85% 110%, rgba(255, 42, 109, 0.10), transparent 60%),
+    #0a0a0a;
+}

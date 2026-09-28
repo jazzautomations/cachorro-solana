@@ -3,12 +3,18 @@ import React from 'react'
 // Minimal md→React for our own reports: h1-h4, code fences, pipe tables,
 // bullets/numbers, bold, inline code, hr. No user HTML is ever rendered.
 function inline(text: string, key: number): React.ReactNode {
-  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g)
+  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*|\bVERDE\b|\bVERMELHO\b|\bAMARELO\b)/g)
   return parts.map((p, i) => {
     if (p.startsWith('`') && p.endsWith('`'))
       return <code key={`${key}-${i}`} className="px-1 bg-dark-800 text-neon-cyan text-[0.9em]">{p.slice(1, -1)}</code>
     if (p.startsWith('**') && p.endsWith('**'))
       return <strong key={`${key}-${i}`} className="text-white">{p.slice(2, -2)}</strong>
+    if (p === 'VERDE')
+      return <span key={`${key}-${i}`} className="font-arcade text-[0.8em] text-neon-green chroma-soft">VERDE</span>
+    if (p === 'VERMELHO')
+      return <span key={`${key}-${i}`} className="font-arcade text-[0.8em] text-miami-pink chroma-soft">VERMELHO</span>
+    if (p === 'AMARELO')
+      return <span key={`${key}-${i}`} className="font-arcade text-[0.8em] text-neon-yellow">AMARELO</span>
     return <React.Fragment key={`${key}-${i}`}>{p}</React.Fragment>
   })
 }

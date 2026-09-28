@@ -11,12 +11,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const data = isValidId(id) ? readReport(id) : null
 
   const done = data?.status === 'done'
-  const findings = data?.findings?.length ?? 0
-  const survivors = data?.survivorCount ?? 0
+    const survivors = data?.survivorCount ?? 0
   const label = done
-    ? findings > 0 ? `${survivors} proven finding${survivors === 1 ? '' : 's'} · PoC verified` : 'clean hunt · no survivors'
+    ? survivors > 0 ? `${survivors} proven finding${survivors === 1 ? '' : 's'} · PoC verified` : 'clean hunt · no survivors'
     : data?.status === 'running' ? 'hunt in progress' : 'hunt failed'
-  const color = done ? (findings > 0 ? '#00ff41' : '#00d4ff') : '#888'
+  const color = done ? (survivors > 0 ? '#00ff41' : '#00d4ff') : '#888'
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="560" height="64" role="img" aria-label="hunted by the pack">
   <rect width="560" height="64" fill="#0a0a0f" stroke="${color}" stroke-width="2"/>

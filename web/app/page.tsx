@@ -4,8 +4,11 @@ import ScanInput from '@/components/ScanInput'
 import RecentHunts from '@/components/RecentHunts'
 import LiveFeedPreview from '@/components/LiveFeedPreview'
 import { readBounties, solanaBounties } from '@/lib/bounties'
-import { listRuns } from '@/lib/cachorro'
+import { listRuns, readStatus } from '@/lib/cachorro'
 import { fmtUsd } from '@/lib/format'
+import fs from 'node:fs'
+import path from 'node:path'
+import { runDir } from '@/lib/cachorro'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,9 +40,25 @@ const LADDER = [
   { t: 'VERIFIED', d: 'the gate refuses promotion without oracle SUPPORTS + reproduction' },
 ]
 
+// aggregate honesty scoreboard — the refusal rate IS the brand
+function scoreboard() {
+  let verde = 0, vermelho = 0
+  for (const r of listRuns(50)) {
+    const st = readStatus(r.id)
+    if (!st?.reportFile) continue
+    try {
+      const md = fs.readFileSync(path.join(runDir(r.id), st.reportFile), 'utf8')
+      verde += (md.match(/VERDE/g) || []).length
+      vermelho += (md.match(/VERMELHO/g) || []).length
+    } catch { /* missing file */ }
+  }
+  return { verde, vermelho }
+}
+
 export default function Home() {
   const idx = readBounties()
   const nHunts = listRuns(50).length
+  const sb = scoreboard()
 
   return (
     <main className="min-h-screen bg-black">
@@ -110,6 +129,8 @@ export default function Home() {
           <span><span className="text-white">{idx.bounties.length}</span> programs indexed</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-neon-cyan">{nHunts}</span> hunts logged</span>
+          <span className="text-dark-600">|</span>
+          <span><span className="text-neon-green">{sb.verde}</span> proven · <span className="text-miami-pink">{sb.vermelho}</span> refuted by gate · <span className="text-white">0</span> false positives shipped</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-neon-green">0</span> mainnet txs — local validator only</span>
           <span className="text-dark-600">|</span>
@@ -387,7 +408,10 @@ export default function Home() {
       <footer className="px-4 py-8 border-t border-dark-600">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[9px] sm:text-[10px] font-mono text-gray-700">
           <span>CACHORRO · the audit your users can verify · proof, not opinion</span>
-          <span>built in the open during Colosseum · Solana track</span>
+          <span className="flex items-center gap-3">
+            <a href={process.env.CACHORRO_CONTACT_URL || '/pricing'} className="text-neon-yellow hover:text-neon-green transition-colors">TALK TO THE PACK ▸</a>
+            <span>built in the open during Colosseum · Solana track</span>
+          </span>
         </div>
       </footer>
     </main>

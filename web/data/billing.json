@@ -1,0 +1,35 @@
+{
+  "invoices": [
+    {
+      "id": "inv_823d625e638a",
+      "plan": "hunter",
+      "amountLamports": 500000000,
+      "memo": "cachorro:hunter:295321a8",
+      "createdAt": 1789561277
+    },
+    {
+      "id": "inv_3f4f2781e85b",
+      "plan": "hunter",
+      "amountLamports": 500000000,
+      "memo": "cachorro:hunter:c7933808",
+      "createdAt": 1789561292
+    },
+    {
+      "id": "inv_8ffa93735b05",
+      "plan": "hunter",
+      "amountLamports": 20000000000,
+      "memo": "cachorro:hunter:2b0a6d6d",
+      "createdAt": 1790617236
+    }
+  ],
+  "keys": [
+    {
+      "key": "cch_640f8517aedea0a7d2395fe94f83b463",
+      "plan": "pack",
+      "createdAt": 1789568214,
+      "huntsUsed": {
+        "2026-09": 2
+      }
+    }
+  ]
+}

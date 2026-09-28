@@ -4,6 +4,7 @@ import crypto from 'node:crypto'
 import Navbar from '@/components/Navbar'
 import { Markdown } from '@/lib/markdown'
 import { readReport, isValidId, runDir } from '@/lib/cachorro'
+import { getClaim } from '@/lib/claims'
 
 export const dynamic = 'force-dynamic'
 
@@ -57,6 +58,17 @@ function SevChip({ sev }: { sev: string | null }) {
   return <span className={`border px-1.5 py-0.5 text-[8px] font-arcade uppercase shrink-0 ${cls}`}>{sev || '—'}</span>
 }
 
+// program id from the report header — backtick-quoted base58 near "program",
+// else first non-hex base58 32–44 token (hex is filtered: commits collide otherwise)
+function extractProgramId(md: string): string | null {
+  const head = md.slice(0, 4000)
+  const re = /program[^\n]{0,100}?`?([1-9A-HJ-NP-Za-km-z]{32,44})`?/gi
+  for (const m of head.matchAll(re)) {
+    if (!/^[0-9a-f]+$/i.test(m[1])) return m[1]
+  }
+  return null
+}
+
 export default async function ReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const data = isValidId(id) ? readReport(id) : null
@@ -67,6 +79,8 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   const receipt = sha ? findReceipt(sha) : null
   const parsed = md ? parseReport(md) : null
   const anchored = !!receipt?.signature
+  const programId = md ? extractProgramId(md) : null
+  const claim = programId ? getClaim(programId) : null
 
   const attestState = receipt
     ? anchored
@@ -90,6 +104,14 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4">
                   <span className="text-[10px] sm:text-xs font-arcade vapor-text chroma-soft">[ AUDIT CERTIFICATE ]</span>
                   <a href={`/scan/${id}`} className="text-[9px] font-mono text-miami-sky hover:text-neon-green transition-colors">{id} ↗</a>
+                  {data?.mode === 'quick' && (
+                    <span className="border border-dark-600 text-gray-500 px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade">RECON · no PoC gate</span>
+                  )}
+                  {claim ? (
+                    <span className="border border-miami-sky text-miami-sky px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade chroma-soft">OWNER-VERIFIED</span>
+                  ) : programId ? (
+                    <a href="/claim" className="border border-dark-600 text-gray-500 px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade hover:text-neon-cyan hover:border-neon-cyan transition-colors">UNCLAIMED — claim ↗</a>
+                  ) : null}
                   <span className={`ml-auto border px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade ${attestState.cls}`}>
                     {attestState.label}
                   </span>
@@ -198,6 +220,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
 
               {/* ═══ FOOTER — artifacts & embed ═══ */}
               <div className="mt-4 flex flex-wrap gap-3 text-[9px] font-mono text-gray-600">
+                <a href={`/api/scan/${id}/evidence`} className="text-neon-green hover:text-white">▸ evidence bundle (.tar.gz — the PoCs, run them yourself)</a>
                 <a href={`/api/scan/${id}/report`} className="text-neon-cyan hover:text-neon-green">▸ raw .md</a>
                 <a href={`/badge/${id}.svg`} className="text-neon-cyan hover:text-neon-green">▸ embed badge</a>
                 <a href="/verify" className="text-neon-yellow hover:text-neon-green">▸ verify a report</a>

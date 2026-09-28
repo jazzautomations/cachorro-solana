@@ -62,11 +62,19 @@ elif [[ -z "$REV" && -d "$RUN" ]]; then
 fi
 [[ -z "$REV" ]] && REV="unknown"
 
+# verified-build digest: hash the deployed .so when we dumped one (program-id hunts)
+VBD=""
+if [[ -f "$RUN/onchain/program.so" ]] && command -v solana-verify >/dev/null 2>&1; then
+  VBD=$(solana-verify get-executable-hash "$RUN/onchain/program.so" 2>/dev/null | tail -1 | tr -d ' ')
+  [[ -n "$VBD" ]] && emit attest runner obs "verified build digest: $VBD (on-chain program bytes)"
+fi
+
 emit attest runner action "ancorando recibo on-chain — memo cachorro:v1:<digest> no devnet"
 jset "attestStatus=anchoring"
 
 ARGS=(anchor "$RUN/$REPORT" --target "$TARGET" --journal-head "$JHEAD" ${CREATED:+--created-at "$CREATED"})
 [[ -n "$REV" ]] && ARGS+=(--commit "$REV")
+[[ -n "$VBD" ]] && ARGS+=(--verified-build-digest "$VBD")
 
 OUT=$(cd "$ROOT/attest" && node bin/attest.js "${ARGS[@]}" 2>&1)
 RC=$?
@@ -77,6 +85,7 @@ if [[ $RC -ne 0 || ! "$OUT" =~ ANCHORED ]]; then
   # pending attestation — the digest binds report bytes + commit + journal
   DARGS=(digest "$RUN/$REPORT" --target "$TARGET" --journal-head "$JHEAD" ${CREATED:+--created-at "$CREATED"})
   [[ -n "$REV" ]] && DARGS+=(--commit "$REV")
+  [[ -n "$VBD" ]] && DARGS+=(--verified-build-digest "$VBD")
   DOUT=$(cd "$ROOT/attest" && node bin/attest.js "${DARGS[@]}" 2>&1) || true
   DSHA=$(echo "$DOUT" | python3 -c 'import json,sys
 try: print(json.load(sys.stdin).get("attestation_sha256",""))

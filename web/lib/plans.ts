@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, renameSync } from '
 import { join } from 'node:path'
 import crypto from 'node:crypto'
 
-export const TREASURY = process.env.CACHORRO_TREASURY || '6Ze5CGeF77xyS5p7aTcZUMKR86g8XjjUM3sTePFfDAjb'
+export const TREASURY = process.env.CACHORRO_TREASURY || '7sZ1fsa3UEUPodZBxbE9W61QPE3vxfgkcrWD6W9LsYh3'
 export const RPC = process.env.CACHORRO_RPC || 'https://api.devnet.solana.com'
 const DATA = join(process.cwd(), 'data', 'billing.json')
 
@@ -46,6 +46,17 @@ export const PLANS: Plan[] = [
       'stale-receipt watchlist — auto re-hunt on upgrade',
       'API key for CI — block deploy without a live receipt',
       'priority queue · attestation on every report',
+    ],
+  },
+  {
+    id: 'payg', name: 'PAY-PER-PROOF', priceSol: 0.5, unit: 'engagement', huntsPerMonth: -1, modes: ['quick', 'deep'],
+    blurb: 'bounty-style pilot — the pack hunts one program, you pay per VERDE finding it proves',
+    anchor: 'Immunefi charges ~$6.5k per critical found — we charge per proof, not per page',
+    perks: [
+      'DEEP-mode hunt on one program',
+      'pay per VERDE finding delivered',
+      'executable PoC per finding',
+      'on-chain receipt for every verdict',
     ],
   },
 ]

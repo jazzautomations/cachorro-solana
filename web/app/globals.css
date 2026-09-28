@@ -298,3 +298,11 @@ input:-webkit-autofill:focus {
     radial-gradient(ellipse 70% 45% at 85% 110%, rgba(255, 42, 109, 0.10), transparent 60%),
     #0a0a0a;
 }
+
+/* mobile: tone the effects down — readability over vibe on small screens */
+@media (max-width: 639px) {
+  .chroma { text-shadow: 1.5px 0 rgba(255,42,109,.45), -1.5px 0 rgba(1,205,254,.45); }
+  .chroma-soft { text-shadow: none; }
+  .synth-grid { opacity: .35; }
+  .synth-sun { display: none; }
+}

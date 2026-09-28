@@ -79,8 +79,8 @@ export default function Home() {
           </div>
 
           <h1 className="font-arcade leading-[1.05] mb-4 sm:mb-6">
-            <span className="block text-4xl sm:text-6xl lg:text-7xl text-neon-green chroma">PROOF,</span>
-            <span className="block text-4xl sm:text-6xl lg:text-7xl vapor-text chroma">NOT OPINION.</span>
+            <span className="block text-[1.55rem] xs:text-[1.8rem] sm:text-6xl lg:text-7xl text-neon-green chroma">PROOF,</span>
+            <span className="block text-[1.55rem] xs:text-[1.8rem] sm:text-6xl lg:text-7xl vapor-text chroma whitespace-nowrap">NOT&nbsp;OPINION.</span>
           </h1>
 
           <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">

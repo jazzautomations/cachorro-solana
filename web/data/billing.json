@@ -20,6 +20,30 @@
       "amountLamports": 20000000000,
       "memo": "cachorro:hunter:2b0a6d6d",
       "createdAt": 1790617236
+    },
+    {
+      "id": "inv_23807a8d5c6d",
+      "plan": "hunter",
+      "amountLamports": 20000000000,
+      "memo": "cachorro:hunter:62a94048",
+      "createdAt": 1790626208
+    },
+    {
+      "id": "inv_20d162ab5814",
+      "plan": "payg",
+      "amountLamports": 500000000,
+      "memo": "cachorro:payg:0d73cc3f",
+      "createdAt": 1790626303,
+      "paid": true,
+      "signature": "2cVvetpBPdSgwJZCt9qyE79bjfxFCQd3vDMYiXCbu3a6pyu1PujYYmZ2UBMksJr93Nffprjc3yPVtrFxvnXkyc68",
+      "key": "cch_adeff14e7d1143cd1976eb648b87e350"
+    },
+    {
+      "id": "inv_c847c2acb653",
+      "plan": "payg",
+      "amountLamports": 500000000,
+      "memo": "cachorro:payg:b9d63acb",
+      "createdAt": 1790626990
     }
   ],
   "keys": [
@@ -30,6 +54,12 @@
       "huntsUsed": {
         "2026-09": 4
       }
+    },
+    {
+      "key": "cch_adeff14e7d1143cd1976eb648b87e350",
+      "plan": "payg",
+      "createdAt": 1790626336,
+      "huntsUsed": {}
     }
   ]
 }

@@ -234,3 +234,37 @@ export function countRunning(): number {
     return 0
   }
 }
+
+// ── target gate ──────────────────────────────────────────────────────────────
+// A public scan endpoint that clones+compiles arbitrary repos is an RCE
+// waiting to happen (build.rs executes). Anonymous hunts are restricted to
+// orgs with a live bounty on the board, plus admin-listed orgs in
+// data/allowed_orgs.json (cohort projects, client engagements). Keyed hunts
+// bypass — engagement implies an approved target.
+export function allowedOrgs(): Set<string> {
+  const orgs = new Set<string>()
+  try {
+    const d = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'bounties.json'), 'utf8'))
+    for (const b of d.bounties ?? [])
+      for (const r of b.repos ?? []) {
+        const m = /^https?:\/\/github\.com\/([^/]+)\//.exec(r)
+        if (m) orgs.add(m[1].toLowerCase())
+      }
+  } catch { /* keep hunting safe */ }
+  try {
+    const d = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'allowed_orgs.json'), 'utf8'))
+    for (const o of d.orgs ?? []) orgs.add(String(o).toLowerCase())
+  } catch { /* none yet */ }
+  return orgs
+}
+
+export function allowedTarget(target: string, kind: string): { ok: boolean; why?: string } {
+  if (kind === 'program-id') return { ok: true } // program dumps don't compile anything
+  const m = /^https:\/\/github\.com\/([^/]+)\//.exec(target)
+  if (!m) return { ok: false, why: 'unparseable repo org' }
+  if (allowedOrgs().has(m[1].toLowerCase())) return { ok: true }
+  return {
+    ok: false,
+    why: `anonymous hunts are restricted to programs with a live bounty (see /bounties) — ${m[1]} isn't on the board. Engagement hunts go through a key`,
+  }
+}

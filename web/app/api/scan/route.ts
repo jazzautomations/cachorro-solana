@@ -4,7 +4,7 @@ import crypto from 'crypto'
 import fs from 'fs'
 import path from 'path'
 import {
-  assertEngine, countRunning, isValidId, listRuns, pickRunner,
+  allowedTarget, assertEngine, countRunning, isValidId, listRuns, pickRunner,
   PUBKEY_RE, REPO_RE, RUNS_DIR,
 } from '@/lib/cachorro'
 import { planFor, recordHunt, huntsLeft } from '@/lib/plans'
@@ -68,6 +68,12 @@ export async function POST(req: Request) {
 
   if (!target) return NextResponse.json({ error: 'target is required' }, { status: 400 })
   if (!kind) kind = target.startsWith('http') ? 'repo' : 'program-id'
+
+  // anonymous hunts can't aim at arbitrary code — build.rs is execution.
+  if (!keyEntry) {
+    const gate = allowedTarget(target, kind)
+    if (!gate.ok) return NextResponse.json({ error: gate.why }, { status: 403 })
+  }
 
   if (kind === 'repo') {
     if (!REPO_RE.test(target)) {

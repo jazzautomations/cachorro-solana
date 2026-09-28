@@ -65,6 +65,12 @@ export default function PayPanel({ plan, priceSol }: { plan: string; priceSol: n
           <div className="text-[9px] font-mono text-neon-cyan break-all select-all">{inv.treasury}</div>
           <div className="text-[8px] font-mono text-gray-500">with memo:</div>
           <div className="text-[9px] font-mono text-neon-purple break-all select-all">{inv.memo}</div>
+          <a
+            href={`solana:${inv.treasury}?amount=${priceSol}&memo=${encodeURIComponent(inv.memo)}&label=Cachorro%20${plan}&message=cachorro%20hunt`}
+            className="block text-center px-3 py-1.5 border border-neon-purple text-neon-purple font-arcade text-[8px] hover:bg-neon-purple hover:text-black transition-all"
+          >
+            PAY IN PHANTOM ▸
+          </a>
           <div className="pt-1 border-t border-dark-600">
             <input
               value={sig}

@@ -413,7 +413,20 @@ export default function Home() {
             <span className="flex-1 border-b border-dashed border-dark-600" />
             <span className="text-[8px] font-mono text-gray-600">every row is a real run</span>
           </div>
-          <RecentHunts />
+                    <div className="mb-6 border border-neon-green/40 bg-dark-900 p-4 sm:p-5">
+            <div className="flex items-baseline gap-3 mb-2">
+              <span className="text-[9px] font-arcade text-neon-green">REPLAYED EXPLOIT</span>
+              <span className="flex-1 border-b border-dashed border-dark-600" />
+              <span className="text-[8px] font-mono text-gray-600">validation — not vibes</span>
+            </div>
+            <div className="text-[10px] sm:text-xs font-mono text-gray-400 leading-relaxed">
+              Blind replay of the <span className="text-white">2M Cashio exploit</span> (Mar 2022): the pack
+              re-found <span className="text-neon-green">CRITICAL · infinite-mint</span> on the pre-patch commit —
+              <span className="text-neon-green">PoC-verified</span> on a mainnet fork — and came back
+              <span className="text-neon-cyan"> clean</span> on the patched commit. Treatment vs control on a real exploit.
+            </div>
+          </div>
+<RecentHunts />
         </div>
       </section>
 

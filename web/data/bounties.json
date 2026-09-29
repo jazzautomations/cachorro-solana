@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-28T06:00:34.518Z",
+  "updatedAt": "2026-09-29T06:00:31.252Z",
   "sources": {
     "immunefi": {
       "status": "ok",
-      "count": 174
+      "count": 173
     }
   },
   "bounties": [
@@ -255,7 +255,7 @@
         "https://github.com/smartcontractkit/external-adapters-js",
         "https://github.com/smartcontractkit/chainlink-evm"
       ],
-      "updatedDate": "2026-07-24T18:34:20.099Z"
+      "updatedDate": "2026-09-28T19:30:56.327Z"
     },
     {
       "id": "immunefi:hyperlane",
@@ -1538,7 +1538,7 @@
       "solana": false,
       "logo": "https://qn5bmgziiocgawpp.public.blob.vercel-storage.com/program-logos/phuongn%40immunefi.com-HRRlntLm0wgUL3yHO1ooa-mhtM4syqoqcMMRp6oHThrtRpWBVMt4.png",
       "repos": [],
-      "updatedDate": "2026-09-23T11:23:43.263Z"
+      "updatedDate": "2026-09-28T10:01:45.728Z"
     },
     {
       "id": "immunefi:enzyme-onyx",
@@ -3336,22 +3336,6 @@
       "logo": "https://images.ctfassets.net/t3wqy70tc3bv/5jW460UDYEbPDo4PZAOuZE/dd602e17d4ff01851c727c387eeecc5a/KEBPir98_400x400.jpg",
       "repos": [],
       "updatedDate": "2026-09-24T14:46:55.312Z"
-    },
-    {
-      "id": "immunefi:exodus",
-      "source": "immunefi",
-      "project": "Exodus",
-      "slug": "exodus",
-      "url": "https://immunefi.com/bug-bounty/exodus/information/",
-      "maxBounty": 18000,
-      "kyc": true,
-      "pocType": "required",
-      "ecosystems": [],
-      "languages": [],
-      "solana": false,
-      "logo": "https://images.ctfassets.net/t3wqy70tc3bv/6jSWqO85JxgkH0iBYbbZjy/9d0e1d65deee581154270c5856e55a99/Exodus.png",
-      "repos": [],
-      "updatedDate": "2026-07-17T09:27:46.734Z"
     },
     {
       "id": "immunefi:horizen",

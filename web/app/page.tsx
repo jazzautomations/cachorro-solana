@@ -136,7 +136,7 @@ export default function Home() {
       {/* ═══ TICKER — one line, not a section ═══ */}
       <div className="border-y border-dark-600 bg-dark-900/60 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-4 sm:gap-6 text-[8px] sm:text-[9px] font-mono text-gray-500 whitespace-nowrap overflow-x-auto">
-          <span><span className="text-neon-yellow">{fmtUsd(solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0))}</span> on the board</span>
+          <span><span className="text-neon-yellow">{fmtUsd(solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0))}</span> in authorized targets</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-white">{idx.bounties.length}</span> programs indexed</span>
           <span className="text-dark-600">|</span>
@@ -406,7 +406,34 @@ export default function Home() {
       </section>
 
       {/* ═══ FIELD LOG — evidence ═══ */}
-      <section id="hunts" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
+            {/* ═══ THE GAP — competitive honesty ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-[9px] sm:text-[10px] font-arcade text-gray-600 tracking-widest mb-6">WHY ANOTHER LAYER</div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
+            <div className="bg-dark-900 p-5">
+              <div className="text-[8px] font-mono text-gray-600 mb-2">AUDIT FIRM</div>
+              <div className="text-sm font-mono text-white mb-2">$20K–$150K · 4–8 week wait</div>
+              <div className="text-[10px] font-mono text-gray-500 leading-relaxed">Expert humans, point-in-time, one commit. The report expires the day you merge again. Zellic missed Wasabi; Neodyme audited Wormhole before $326M.</div>
+            </div>
+            <div className="bg-dark-900 p-5">
+              <div className="text-[8px] font-mono text-gray-600 mb-2">STATIC SCANNER</div>
+              <div className="text-sm font-mono text-white mb-2">cheap · instant · noisy</div>
+              <div className="text-[10px] font-mono text-gray-500 leading-relaxed">Pattern-matching ships false-positive piles. The fourth alert is real — but you've learned to skim by the third.</div>
+            </div>
+            <div className="bg-dark-900 p-5 border-2 border-neon-green/50">
+              <div className="text-[8px] font-mono text-neon-green mb-2">CACHORRO</div>
+              <div className="text-sm font-mono text-white mb-2">the layer between audits</div>
+              <div className="text-[10px] font-mono text-gray-400 leading-relaxed">Every claim must reproduce the exploit on a validator — treatment vs control — then the verdict anchors on-chain as a receipt anyone can verify. Maybes die at the gate; you get proofs or nothing.</div>
+            </div>
+          </div>
+          <div className="mt-4 text-[9px] sm:text-[10px] font-mono text-gray-600 text-center">
+            we don't replace auditors — we make their work verifiable, and catch what slips between engagements
+          </div>
+        </div>
+      </section>
+
+<section id="hunts" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-baseline gap-3 mb-6">
             <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">FIELD LOG</h2>
@@ -420,10 +447,10 @@ export default function Home() {
               <span className="text-[8px] font-mono text-gray-600">validation — not vibes</span>
             </div>
             <div className="text-[10px] sm:text-xs font-mono text-gray-400 leading-relaxed">
-              Blind replay of the <span className="text-white">2M Cashio exploit</span> (Mar 2022): the pack
+              Blind replay of the <span className="text-white">$52M Cashio exploit</span> (Mar 2022): the pack
               re-found <span className="text-neon-green">CRITICAL · infinite-mint</span> on the pre-patch commit —
-              <span className="text-neon-green">PoC-verified</span> on a mainnet fork — and came back
-              <span className="text-neon-cyan"> clean</span> on the patched commit. Treatment vs control on a real exploit.
+              <span className="text-neon-green">PoC-verified</span> on a mainnet fork — and the exploit got
+              <span className="text-neon-cyan"> blocked</span> on the patched commit. Treatment vs control on a real exploit.
             </div>
           </div>
 <RecentHunts />
@@ -546,7 +573,7 @@ function BountyTeaser() {
         <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-6 max-w-2xl leading-relaxed">
           Every program below already pays for a verified exploit. Someone will collect —
           <span className="text-gray-300"> the only question is who hunts first.</span> If your
-          program is on this board, it should be the pack.
+          program is covered, the pack hunts it — on us.
         </p>
         <div className="border border-dark-600 divide-y divide-dark-600">
           {sol.map((b) => (

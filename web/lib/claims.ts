@@ -96,3 +96,51 @@ export function getClaim(programId: string): Claim | null {
 export function putClaim(c: Claim) {
   const s = load(); s[c.programId] = c; save(s)
 }
+
+// ── repo claims: prove control by committing CACHORRO.md with our nonce ──
+
+interface RepoClaim { repo: string; nonce: string; verified: boolean; claimedAt: number }
+type RepoStore = Record<string, RepoClaim>
+
+const REPO_DATA = join(process.cwd(), 'data', 'repo_claims.json')
+const REPO_RE = /^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/
+
+function loadRepos(): RepoStore {
+  try { return JSON.parse(readFileSync(REPO_DATA, 'utf8')) } catch { return {} }
+}
+function saveRepos(s: RepoStore) {
+  mkdirSync(join(process.cwd(), 'data'), { recursive: true })
+  const tmp = REPO_DATA + '.tmp'
+  writeFileSync(tmp, JSON.stringify(s, null, 2))
+  renameSync(tmp, REPO_DATA)
+}
+
+export function newRepoClaim(repo: string): RepoClaim | null {
+  if (!REPO_RE.test(repo)) return null
+  const s = loadRepos()
+  if (s[repo]?.verified) return s[repo]
+  const c: RepoClaim = { repo, nonce: 'cachorro-claim-' + crypto.randomBytes(8).toString('hex'), verified: false, claimedAt: Math.floor(Date.now() / 1000) }
+  s[repo] = c; saveRepos(s)
+  return c
+}
+
+export function getRepoClaim(repo: string): RepoClaim | null {
+  return loadRepos()[repo] ?? null
+}
+
+/** Fetch CACHORRO.md at the repo root and check it carries our nonce. */
+export async function verifyRepoClaim(repo: string): Promise<boolean> {
+  const c = loadRepos()[repo]
+  if (!c || c.verified) return !!c?.verified
+  for (const branch of ['main', 'master', 'HEAD']) {
+    try {
+      const res = await fetch(`https://raw.githubusercontent.com/${repo}/${branch}/CACHORRO.md`,
+        { signal: AbortSignal.timeout(10_000) })
+      if (res.ok && (await res.text()).includes(c.nonce)) {
+        const s = loadRepos(); s[repo].verified = true; saveRepos(s)
+        return true
+      }
+    } catch { /* try next branch */ }
+  }
+  return false
+}

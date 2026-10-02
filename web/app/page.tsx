@@ -83,7 +83,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto relative">
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
             <div className="text-[9px] sm:text-xs text-neon-green animate-blink neon-flicker font-mono">
-              ▶ THE PACK IS AWAKE — 8 STAGES, ONE HUNT, ZERO OPINIONS
+              ▶ THE PACK IS AWAKE — AGENTS ARE ALREADY HUNTING YOU
             </div>
             <div className="text-[8px] sm:text-[9px] font-mono text-gray-700">
               COLOSSEUM · CRYPTO WORLD'S FAIR '26
@@ -96,10 +96,12 @@ export default function Home() {
           </h1>
 
           <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">
-            You built it — now test it like an attacker. Point the pack at your contract, wallet
-            or protocol — it finds the bug class, writes the exploit,
+            AI made offense cheap — autonomous agents are already reading your code.
+            Someone&apos;s pack will find your bug. Ours runs first: point it at your program, your
+            web2↔web3 wiring, your business logic — it finds the bug class, writes the exploit,
             <span className="text-neon-green"> runs it on a local validator — never mainnet —</span>
-            and anchors the verdict on-chain. Security you can check yourself — proof, not opinions.
+            and anchors the verdict on-chain. The pre-audit and post-audit rail for Solana startups —
+            proof, not opinions.
           </p>
 
           {/* the console: screen on top, prompt at the bottom edge */}
@@ -381,6 +383,47 @@ export default function Home() {
                 <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">{x.d}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ FULL SURFACE — web2↔web3 + business logic ═══ */}
+      <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-baseline gap-3 mb-6">
+            <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">BEYOND THE PROGRAM</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[8px] font-mono text-gray-600 hidden sm:inline">where the real exploits live</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[10px] sm:text-xs font-arcade mb-2 text-neon-cyan">BUSINESS LOGIC</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">
+                The pack reasons about economic intent, not just patterns: who can move whose money,
+                which invariant a vault actually relies on, what breaks when a keeper is honest-but-late.
+                Share inflation, donation attacks, fee redirection — the bugs that are legal Rust and fatal economics.
+              </div>
+            </div>
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[10px] sm:text-xs font-arcade mb-2 text-neon-yellow">WEB2↔WEB3 BRIDGE</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">
+                SwissBorg lost 1M through an API-side authority reassignment no scanner saw. We map the
+                off-chain trust surface — keeper keys, oracle wiring, admin ops, signing backends — and trace
+                where an off-chain compromise becomes an on-chain drain.
+              </div>
+            </div>
+            <div className="bg-dark-900 p-4 sm:p-5">
+              <div className="text-[10px] sm:text-xs font-arcade mb-2 text-neon-green">HONEST CONFIDENCE</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">
+                <span className="text-neon-green">VERDE</span> = exploit executed on a validator.
+                <span className="text-neon-yellow"> AMARELO</span> = structural evidence across a boundary we can&apos;t
+                fully execute locally. <span className="text-gray-400">detected-not-proven</span> = toolchain said no.
+                Every report ships a coverage map — what was exercised, not just what was found.
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 text-[9px] sm:text-[10px] font-mono text-gray-600 text-center">
+            built for Solana startups: run us before the 50K audit, after every upgrade, and on the bridges between
           </div>
         </div>
       </section>

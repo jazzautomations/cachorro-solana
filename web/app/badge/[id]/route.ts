@@ -8,7 +8,9 @@ export const dynamic = 'force-dynamic'
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id: raw } = await params
   const id = raw.replace(/\.svg$/, '')
-  const data = isValidId(id) ? readReport(id) : null
+  const valid = isValidId(id)
+  const data = valid ? readReport(id) : null
+  const displayId = valid ? id : 'invalid-id'
 
   const done = data?.status === 'done'
     const survivors = data?.survivorCount ?? 0
@@ -22,7 +24,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   <rect x="2" y="2" width="556" height="60" fill="none" stroke="${color}" stroke-opacity="0.25"/>
   <text x="16" y="28" font-family="monospace" font-size="18" fill="${color}" font-weight="bold">▶ HUNTED BY THE PACK</text>
   <text x="16" y="48" font-family="monospace" font-size="13" fill="#9ca3af">${label} — cachorro-solana · proof, not opinion</text>
-  <text x="544" y="28" text-anchor="end" font-family="monospace" font-size="11" fill="#4b5563">${id}</text>
+  <text x="544" y="28" text-anchor="end" font-family="monospace" font-size="11" fill="#4b5563">${displayId}</text>
 </svg>`
 
   return new Response(svg, {

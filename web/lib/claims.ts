@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, renameSync } from '
 import { join } from 'node:path'
 import crypto from 'node:crypto'
 
-export const RPC = process.env.CACHORRO_RPC || 'https://api.devnet.solana.com'
+export const RPC = process.env.CACHORRO_RPC || 'https://api.mainnet-beta.solana.com'
 const DATA = join(process.cwd(), 'data', 'claims.json')
 const B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 

@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 
 const ROOT = process.env.CACHORRO_ROOT || path.resolve(process.cwd(), '..')
 const RECEIPTS = path.join(ROOT, 'attest', 'receipts')
-const RPC = process.env.CACHORRO_RPC || 'https://api.devnet.solana.com'
+const RPC = process.env.CACHORRO_RPC || 'https://api.mainnet-beta.solana.com'
 const MEMO_PROGRAM = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'
 
 // mirrors attest/lib/canonical.js — sorted keys, no whitespace, recursive.

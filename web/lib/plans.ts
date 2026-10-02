@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import crypto from 'node:crypto'
 
 export const TREASURY = process.env.CACHORRO_TREASURY || '7sZ1fsa3UEUPodZBxbE9W61QPE3vxfgkcrWD6W9LsYh3'
-export const RPC = process.env.CACHORRO_RPC || 'https://api.devnet.solana.com'
+export const RPC = process.env.CACHORRO_RPC || 'https://api.mainnet-beta.solana.com'
 const DATA = join(process.cwd(), 'data', 'billing.json')
 
 export interface Plan {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import { isValidId, readStatus, runDir } from '@/lib/cachorro'
+import { isValidId, maskRepoRefs, publicTarget, readStatus, runDir } from '@/lib/cachorro'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -26,6 +26,11 @@ export async function GET(
     body = fs.readFileSync(file, 'utf8')
   } catch {
     return NextResponse.json({ error: 'report file missing' }, { status: 404 })
+  }
+  // unclaimed repos stay anonymous — mask the repo identity inside the body too
+  if (st?.target) {
+    const pub = publicTarget(st.target)
+    if (pub !== st.target) body = maskRepoRefs(body, st.target, pub)
   }
   return new NextResponse(body, {
     headers: {

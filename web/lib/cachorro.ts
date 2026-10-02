@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import crypto from 'node:crypto'
 
 export const CACHORRO_ROOT =
   process.env.CACHORRO_ROOT || path.resolve(process.cwd(), '..')
@@ -176,22 +177,74 @@ function countJson(file: string): number | undefined {
   }
 }
 
+// ── public identity ──────────────────────────────────────────────────────────
+// Reports are public receipts — but naming someone's repo in a public verdict is
+// disclosure. A repo stays a codename until its owner claims it (CACHORRO.md
+// nonce in the repo root → verified=true). Our own org is always named.
+const OUR_ORGS = new Set(['jazzautomations'])
+
+export function repoVerified(target: string): boolean {
+  const m = /^https?:\/\/github\.com\/([^/]+\/[^/]+?)(?:\.git|\/)?$/.exec(target)
+  if (!m) return false
+  try {
+    const s = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'repo_claims.json'), 'utf8'))
+    return !!s[m[1]]?.verified
+  } catch { return false }
+}
+
+export function publicTarget(target: string | undefined): string {
+  if (!target) return 'unknown target'
+  const m = /^https:\/\/github\.com\/([^/]+)\//.exec(target)
+  if (!m) return 'on-chain program'
+  if (OUR_ORGS.has(m[1].toLowerCase()) || repoVerified(target)) return target
+  const h = crypto.createHash('sha256').update(target).digest('hex').slice(0, 8)
+  return `anonymous target · ${h}`
+}
+
+/** Scrub repo identity out of free text for unclaimed targets. */
+export function maskRepoRefs(text: string, realTarget: string, pub: string): string {
+  if (pub === realTarget) return text
+  let out = text.split(realTarget).join(pub)
+  const m = /^https:\/\/github\.com\/([^/]+)\/([^/]+?)(?:\.git|\/)?$/.exec(realTarget)
+  if (!m) return out
+  out = out.split(`${m[1]}/${m[2]}`).join(pub)
+  const repoRe = new RegExp(`\\b${m[2].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g')
+  return out.replace(repoRe, pub)
+}
+
 export function readReport(id: string): ScanReport | null {
   const st = readStatus(id)
   if (!st) return null
   const dir = runDir(id)
   const staticDir = path.join(dir, 'static')
   const repoPrefix = path.join(dir, 'repo')
+  const pub = publicTarget(st.target)
+  const mask = (s: string) => (st.target ? maskRepoRefs(s, st.target, pub) : s)
+  const summary = parseSummary(path.join(staticDir, 'summary.txt'))
+  const maskedSummary = summary
+    ? Object.fromEntries(Object.entries(summary).map(([k, v]) => [k, mask(v)]))
+    : summary
+  const events = parseEvents(path.join(dir, 'events.jsonl'))?.map((e) => ({
+    ...e, text: mask(e.text),
+  }))
+  const findings = parseFindings(path.join(dir, 'findings.json'))?.map((f) => ({
+    ...f,
+    vulnerability_type: mask(f.vulnerability_type),
+    file: mask(f.file),
+    description: f.description ? mask(f.description) : f.description,
+    impact: f.impact ? mask(f.impact) : f.impact,
+  }))
   return {
     ...st,
-    summary: parseSummary(path.join(staticDir, 'summary.txt')),
+    target: pub,
+    summary: maskedSummary,
     sections: parseLints(path.join(staticDir, 'grep_lints.txt'), repoPrefix),
     zkModules: parseZk(path.join(staticDir, 'zk_surface.txt'), repoPrefix),
     onchain: parseOnchain(path.join(dir, 'onchain', 'program_account.json')),
-    fetchLog: tail(path.join(dir, 'fetch.log')),
-    staticLog: tail(path.join(dir, 'static.log')),
-    events: parseEvents(path.join(dir, 'events.jsonl')),
-    findings: parseFindings(path.join(dir, 'findings.json')),
+    fetchLog: tail(path.join(dir, 'fetch.log'))?.map(mask),
+    staticLog: tail(path.join(dir, 'static.log'))?.map(mask),
+    events,
+    findings,
     survivorCount: countJson(path.join(dir, 'survivors.json')),
   }
 }
@@ -218,7 +271,7 @@ export function listRuns(limit = 10) {
       const st = readStatus(id)
       return {
         id,
-        target: st?.target ?? '?',
+        target: publicTarget(st?.target),
         kind: st?.kind ?? 'repo',
         status: st?.status ?? 'error',
         createdAt: st?.createdAt ?? 0,

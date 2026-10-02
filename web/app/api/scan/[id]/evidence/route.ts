@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
-import { isValidId, runDir, readStatus } from '@/lib/cachorro'
+import { isValidId, publicTarget, runDir, readStatus } from '@/lib/cachorro'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -19,6 +19,13 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const st = readStatus(id)
   if (!st || st.status !== 'done' || !st.reportFile) {
     return NextResponse.json({ error: 'no finished report for this hunt' }, { status: 404 })
+  }
+  // the bundle names the repo everywhere (report body, findings, bridge map) —
+  // unclaimed targets keep the bundle owner-only
+  if (st.target && publicTarget(st.target) !== st.target) {
+    return NextResponse.json({
+      error: 'evidence bundle is owner-only — claim this repo at /api/claim/repo to unlock the full tarball',
+    }, { status: 403 })
   }
 
   const names = fs.readdirSync(dir).filter((n) =>

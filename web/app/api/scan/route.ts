@@ -105,12 +105,14 @@ export async function POST(req: Request) {
   if (!keyEntry) {
     const ip = (req.headers.get('x-forwarded-for') || 'unknown').split(',')[0].trim()
     const rlPath = path.join(process.cwd(), 'data', 'ratelimit.json')
-    let rl: Record<string, { t: number; target: string }> = {}
+    let rl: Record<string, number[]> = {}
     try { rl = JSON.parse(fs.readFileSync(rlPath, 'utf8')) } catch { /* fresh */ }
-    const last = rl[ip]
-    if (last && Date.now() / 1000 - last.t < 600) {
+    const now = Math.floor(Date.now() / 1000)
+    const recent = (rl[ip] || []).filter((t) => now - t < 600)
+    // 3 free hunts per 10min per IP — tolerates shared event NAT, still stops spam
+    if (recent.length >= 3) {
       return NextResponse.json(
-        { error: 'easy, cowboy — one free hunt per 10 minutes. paid keys have no leash (/pricing)' },
+        { error: 'easy, cowboy — 3 free hunts per 10 minutes. paid keys have no leash (/pricing)' },
         { status: 429 }
       )
     }
@@ -128,7 +130,7 @@ export async function POST(req: Request) {
         } catch { /* skip */ }
       }
     }
-    rl[ip] = { t: Math.floor(Date.now() / 1000), target }
+    rl[ip] = [...recent, now]
     fs.mkdirSync(path.dirname(rlPath), { recursive: true })
     fs.writeFileSync(rlPath, JSON.stringify(rl))
   }

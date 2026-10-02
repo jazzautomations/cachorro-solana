@@ -42,18 +42,31 @@ for f in findings if isinstance(findings, list) else []:
                     path = cand; break
     check = {"id": fid, "file": rel, "file_found": bool(path), "quote_found": False}
     if path:
-        body = norm(open(path, errors="replace").read())
-        snip = norm(f.get("code_snippet", ""))
-        if len(snip) >= 24:
-            check["quote_found"] = snip in body
+        body_raw = open(path, errors="replace").read()
+        body = norm(body_raw)
+        raw = (f.get("code_snippet", "") or "").replace("\\n", " ")
+        # token-grounding: every distinctive identifier quoted must exist
+        # verbatim in the file — catches invented code, tolerates paraphrase
+        toks = set(re.findall(r"[A-Za-z_][A-Za-z0-9_.]{5,}", raw))
+        toks = {t for t in toks if not t.startswith(("http", "JSON.string", "console"))}
+        func_ok = False
+        if f.get("function"):
+            func_ok = norm(f["function"]) in body
+        if toks:
+            hits = sum(1 for t in toks if t in body_raw)
+            ratio = hits / len(toks)
+            check["tokens"] = f"{hits}/{len(toks)}"
+            check["missing"] = sorted(t for t in toks if t not in body_raw)[:6]
+            # grounded = most quoted identifiers exist, or the cited fn exists
+            # and at least some tokens match. Zero grounding = invented code.
+            check["quote_found"] = ratio >= 0.8 or (func_ok and ratio >= 0.3)
+            check["weak_snippet"] = not check["quote_found"] and (func_ok or hits > 0)
         else:
-            # short/absent snippet: check that function or distinctive string exists
-            probe = norm(f.get("function", ""))
-            check["quote_found"] = bool(probe) and probe in body
+            check["quote_found"] = func_ok
             check["weak_snippet"] = True
     f["citation_ok"] = check["file_found"] and check["quote_found"]
-    if not f["citation_ok"]:
-        f["hallucination"] = True
+    f["citation_weak"] = bool(check.get("weak_snippet"))
+    f["hallucination"] = not f["citation_ok"]  # always recompute — stale flags die
     results.append(check)
 
 json.dump(findings, open(findings_path, "w"), indent=1)

@@ -3,9 +3,7 @@ import Navbar from '@/components/Navbar'
 import ScanInput from '@/components/ScanInput'
 import RecentHunts from '@/components/RecentHunts'
 import LiveFeedPreview from '@/components/LiveFeedPreview'
-import { readBounties, solanaBounties } from '@/lib/bounties'
 import { listRuns, readStatus } from '@/lib/cachorro'
-import { fmtUsd } from '@/lib/format'
 import fs from 'node:fs'
 import path from 'node:path'
 import { runDir } from '@/lib/cachorro'
@@ -67,7 +65,6 @@ function scoreboard() {
 }
 
 export default function Home() {
-  const idx = readBounties()
   const nHunts = listRuns(50).length
   const sb = scoreboard()
   const nAnchored = anchoredCount()
@@ -138,9 +135,9 @@ export default function Home() {
       {/* ═══ TICKER — one line, not a section ═══ */}
       <div className="border-y border-dark-600 bg-dark-900/60 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-4 sm:gap-6 text-[8px] sm:text-[9px] font-mono text-gray-500 whitespace-nowrap overflow-x-auto">
-          <span><span className="text-neon-yellow">{fmtUsd(solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0))}</span> in authorized targets</span>
+          <span><span className="text-neon-yellow">owner-claimed</span> hunts earn the doberman seal</span>
           <span className="text-dark-600">|</span>
-          <span><span className="text-white">{idx.bounties.length}</span> programs indexed</span>
+          <span><span className="text-white">repo claims</span> via CACHORRO.md nonce</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-neon-cyan">{nHunts}</span> hunts logged</span>
           <span className="text-dark-600">|</span>
@@ -153,9 +150,6 @@ export default function Home() {
           <span>journal: <span className="text-neon-purple">hash-chained</span></span>
         </div>
       </div>
-
-      {/* ═══ BOARD — money first: pick a target that pays ═══ */}
-      <BountyTeaser />
 
       {/* ═══ THE HUNT — a terminal timeline, not three cards ═══ */}
       <section className="px-4 py-12 sm:py-16 border-t border-dark-600">
@@ -428,23 +422,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ LABS — split banner ═══ */}
+      {/* ═══ THE SEAL — claim your repo, wear the badge ═══ */}
       <section className="border-t border-dark-600">
-        <div className="max-w-6xl mx-auto px-4 py-8 sm:py-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
-          <div className="flex-1">
-            <h2 className="text-xs sm:text-base font-arcade text-neon-purple mb-1.5">LEARN BY HUNTING</h2>
-            <p className="text-[10px] sm:text-xs text-gray-500 font-mono leading-relaxed">
-              Your team reads the attacker&apos;s playbook — every Sealevel vulnerability class,
-              vulnerable vs secure side by side, the real exploit it caused, and a button that
-              sets the pack loose on it.
-            </p>
+        <div className="max-w-6xl mx-auto px-4 py-10 sm:py-12">
+          <div className="flex items-baseline gap-3 mb-5">
+            <h2 className="text-xs sm:text-base font-arcade text-neon-purple shrink-0">THE DOBERMAN SEAL</h2>
+            <span className="flex-1 border-b border-dashed border-dark-600" />
+            <span className="text-[8px] font-mono text-gray-600">proof you can put in your README</span>
           </div>
-          <a
-            href="/labs"
-            className="px-5 py-2.5 border border-neon-purple text-neon-purple font-arcade text-[9px] sm:text-[10px] hover:bg-neon-purple hover:text-black transition-all shrink-0"
-          >
-            ENTER THE LABS ▸
-          </a>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-dark-600 border border-dark-600">
+            {[
+              { n: '1', t: 'CLAIM', d: 'POST /api/claim/repo — commit the nonce we give you as CACHORRO.md. Now the pack knows it\'s yours.' },
+              { n: '2', t: 'HUNT', d: 'Drop your repo in the terminal above. The pack hunts it end to end — programs, wiring, business logic.' },
+              { n: '3', t: 'WEAR IT', d: 'Your report gets a public URL, an on-chain receipt, and an embeddable SVG badge. Verified-owner hunts show your name.' },
+            ].map((x) => (
+              <div key={x.n} className="bg-dark-900 p-4 sm:p-5">
+                <div className="text-neon-purple font-arcade text-lg mb-1">{x.n}</div>
+                <div className="text-[10px] sm:text-xs font-arcade text-white mb-2">{x.t}</div>
+                <div className="text-[10px] sm:text-xs text-gray-500 leading-relaxed">{x.d}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -506,7 +504,7 @@ export default function Home() {
           <div className="border border-dark-600 bg-dark-900 p-4 sm:p-6">
             <div className="text-[10px] sm:text-xs font-arcade text-neon-red mb-3">RULES OF ENGAGEMENT</div>
             <ul className="text-[10px] sm:text-xs text-gray-500 space-y-1.5 leading-relaxed">
-              <li>▸ Audit only what you are authorized to audit — an active bounty or the owner's own program — authorized surface only.</li>
+              <li>▸ Audit only what you are authorized to audit — your own repo, or a program whose owner claims it. Anonymous hunts hit the allowlist, not random strangers.</li>
               <li>▸ PoCs run on a local validator or a local fork. No attack transaction ever touches mainnet.</li>
               <li>▸ Nothing is submitted automatically. A human reproduces the bug and files it through the official channel.</li>
               <li>▸ Untrusted targets are cloned, never built — a third-party build.rs is arbitrary code execution.</li>
@@ -544,7 +542,7 @@ export default function Home() {
               ['"does it touch mainnet?"',
                'Never. Every PoC runs on a local validator or fork. The only on-chain write is the memo receipt.'],
               ['"who submits the bug?"',
-               'A human, through the official bounty channel, after reproducing it. Nothing auto-submits.'],
+               'A human, after reproducing it — private disclosure to the owner, or the fix itself. Nothing auto-submits, nothing leaks: unclaimed targets stay anonymous codenames.'],
               ['"why trust the receipt?"',
                'Don\'t. Recompute the digest yourself — that\'s the whole point. /verify'],
             ].map(([q, a]) => (
@@ -593,54 +591,5 @@ export default function Home() {
         </div>
       </footer>
     </main>
-  )
-}
-
-function BountyTeaser() {
-  const idx = readBounties()
-  const sol = solanaBounties(idx).slice(0, 6)
-  if (!sol.length) return null
-  const total = solanaBounties(idx).reduce((s, b) => s + (b.maxBounty || 0), 0)
-
-  return (
-    <section id="board" className="px-4 py-12 sm:py-16 border-t border-dark-600 scroll-mt-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-baseline gap-3 mb-2">
-          <h2 className="text-xs sm:text-base font-arcade text-white shrink-0">THE BOARD IS THE THREAT MAP</h2>
-          <span className="flex-1 border-b border-dashed border-dark-600" />
-          <span className="text-[8px] sm:text-[9px] font-mono text-neon-yellow shrink-0">
-            {fmtUsd(total)} standing incentive
-          </span>
-          <a href="/bounties" className="text-[8px] sm:text-[9px] font-mono text-neon-cyan hover:text-neon-green shrink-0">all {idx.bounties.length} ↗</a>
-        </div>
-        <p className="text-[10px] sm:text-xs font-mono text-gray-500 mb-6 max-w-2xl leading-relaxed">
-          Every program below already pays for a verified exploit. Someone will collect —
-          <span className="text-gray-300"> the only question is who hunts first.</span> If your
-          program is covered, the pack hunts it — on us.
-        </p>
-        <div className="border border-dark-600 divide-y divide-dark-600">
-          {sol.map((b) => (
-            <div key={b.id} className="flex items-center gap-3 px-3 sm:px-4 py-2.5 bg-dark-900">
-              <span className="text-[11px] sm:text-sm font-mono text-white flex-1 min-w-0 truncate">{b.project}</span>
-              <span className="text-[8px] font-mono text-gray-600 uppercase shrink-0 hidden sm:inline">{b.source}</span>
-              <span className="text-[10px] sm:text-xs font-mono text-neon-green w-16 text-right shrink-0">{fmtUsd(b.maxBounty)}</span>
-              {b.repos[0] ? (
-                <a
-                  href={`/?target=${encodeURIComponent(b.repos[0])}#hunt`}
-                  className="px-2 py-1 border border-neon-green/60 text-neon-green text-[8px] sm:text-[9px] font-mono hover:bg-neon-green hover:text-black transition-all shrink-0"
-                >
-                  HUNT ▸
-                </a>
-              ) : (
-                <a href={b.url} target="_blank" rel="noreferrer" className="px-2 py-1 border border-dark-600 text-gray-500 text-[8px] sm:text-[9px] font-mono hover:text-neon-cyan shrink-0">
-                  SCOPE ↗
-                </a>
-              )}
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
   )
 }

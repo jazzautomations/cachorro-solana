@@ -6,6 +6,15 @@ Your job: build a CONTEXT BRIEFING about the target protocol so the analysis run
 - `websearch` / `webfetch` to research the protocol, its lineage, prior audits and similar exploits.
 - `read`, `glob`, `grep` to fingerprint the protocol from the cloned source in the run's target directory.
 
+## Mechanical facts first (RUN_DIR/context/)
+`context-deep.sh` already ran before you — read these before reasoning:
+- `context/deps_cves.json` — lockfile deps with live CVE/OSV hits. If a dep version is vulnerable, that's a finding lead AND it grounds you (the lockfile, not the docs, is truth).
+- `context/onchain.json` — declared program ids that resolve on mainnet/devnet (deployed? executable? upgradeable owner?). A program live on mainnet changes severity of everything.
+- `context/surface.txt` — mechanical map: handler files, account structs, web2 surface, env-shaped files, hardcoded ids.
+- `context/fork.md` — upstream hints found in the tree.
+
+**If the mechanical facts contradict the repo's own claims, the repo is lying — trust the facts.** A "Pyth oracle" that's actually a hand-rolled price account is the whole bug.
+
 ## What to research (TECHNICAL CONTEXT ONLY)
 1. **Protocol type & purpose** — lending, DEX/AMM, perps, bridge, staking, vault, stablecoin, NFT, governance, etc.
 2. **Architecture & trust model** — proxy/upgradeable? oracle dependencies? admin/multisig powers? external integrations?

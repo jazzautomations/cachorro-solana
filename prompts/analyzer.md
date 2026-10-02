@@ -46,6 +46,6 @@ Append/write a JSON array to `<RUN_DIR>/findings.json`. Each finding:
   "poc_outline": "How to prove it: an anchor-test (TS) or litesvm test, or a solana-test-validator --clone mainnet fork, or (for zk) a snarkjs forge harness. Say which accounts/inputs."
 }
 ```
-Be specific and cite REAL code. **Do NOT report false positives** — if a canonical class is correctly mitigated, say so explicitly in a short note (that's valuable signal for the DEVIL/report), but do not inflate it into a finding. If you find nothing real, write `[]`.
+Be specific and cite REAL code. **Every `code_snippet` must be verbatim text that literally greps inside `file`** — a citation check runs right after ANALYZE and kills any finding whose quote doesn't match the cloned repo. If you can't grep it, you didn't read it — drop the finding. **Do NOT report false positives** — if a canonical class is correctly mitigated, say so explicitly in a short note (that's valuable signal for the DEVIL/report), but do not inflate it into a finding. If you find nothing real, write `[]`.
 
 End your turn with the JSON path and a short ranked summary (one line per finding, most-severe first), plus a one-line note on which canonical classes you verified as SECURE.

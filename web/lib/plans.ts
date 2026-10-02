@@ -124,6 +124,10 @@ export function lookupKey(key: string) {
 
 export function planFor(key: string | null): { plan: Plan; keyEntry: ReturnType<typeof lookupKey> } {
   const entry = key ? lookupKey(key) : null
+  if (entry && !PLANS.some((p) => p.id === entry.plan)) {
+    // key references a retired plan — fail closed to anonymous, never crash
+    return { plan: PLANS[0], keyEntry: null }
+  }
   const plan = entry ? PLANS.find((p) => p.id === entry.plan)! : PLANS[0]
   return { plan, keyEntry: entry }
 }

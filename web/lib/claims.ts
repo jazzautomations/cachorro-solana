@@ -136,7 +136,8 @@ export async function verifyRepoClaim(repo: string): Promise<boolean> {
     try {
       const res = await fetch(`https://raw.githubusercontent.com/${repo}/${branch}/CACHORRO.md`,
         { signal: AbortSignal.timeout(10_000) })
-      if (res.ok && (await res.text()).includes(c.nonce)) {
+      // nonce must appear as its own token — not glued inside other text
+      if (res.ok && new RegExp(`(^|\\s)${c.nonce.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s|$)`).test(await res.text())) {
         const s = loadRepos(); s[repo].verified = true; saveRepos(s)
         return true
       }

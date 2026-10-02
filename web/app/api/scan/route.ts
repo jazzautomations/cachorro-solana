@@ -63,7 +63,6 @@ export async function POST(req: Request) {
     if (huntsLeft(apiKey, 0) === 0) {
       return NextResponse.json({ error: `monthly hunt quota reached for ${plan.name}` }, { status: 429 })
     }
-    recordHunt(apiKey!)
   }
 
   if (!target) return NextResponse.json({ error: 'target is required' }, { status: 400 })
@@ -100,6 +99,41 @@ export async function POST(req: Request) {
       { status: 429 }
     )
   }
+
+  // anonymous abuse guard: one open hunt per IP per 10min, and no duplicate
+  // hunt on a repo that's already running. Keyed hunts skip this.
+  if (!keyEntry) {
+    const ip = (req.headers.get('x-forwarded-for') || 'unknown').split(',')[0].trim()
+    const rlPath = path.join(process.cwd(), 'data', 'ratelimit.json')
+    let rl: Record<string, { t: number; target: string }> = {}
+    try { rl = JSON.parse(fs.readFileSync(rlPath, 'utf8')) } catch { /* fresh */ }
+    const last = rl[ip]
+    if (last && Date.now() / 1000 - last.t < 600) {
+      return NextResponse.json(
+        { error: 'easy, cowboy — one free hunt per 10 minutes. paid keys have no leash (/pricing)' },
+        { status: 429 }
+      )
+    }
+    const dup = listRuns(10).some((r) => r.status === 'running')
+    if (dup) {
+      for (const d of fs.readdirSync(RUNS_DIR)) {
+        try {
+          const st = JSON.parse(fs.readFileSync(path.join(RUNS_DIR, d, 'status.json'), 'utf8'))
+          if (st.status === 'running' && st.target === target) {
+            return NextResponse.json(
+              { error: `the pack is already hunting that repo — watch it live at /report/${d}` },
+              { status: 409 }
+            )
+          }
+        } catch { /* skip */ }
+      }
+    }
+    rl[ip] = { t: Math.floor(Date.now() / 1000), target }
+    fs.mkdirSync(path.dirname(rlPath), { recursive: true })
+    fs.writeFileSync(rlPath, JSON.stringify(rl))
+  }
+
+  if (keyEntry) recordHunt(apiKey!)
 
   const id = `run_${Math.floor(Date.now() / 1000)}_${crypto.randomBytes(3).toString('hex')}`
   if (!isValidId(id)) {

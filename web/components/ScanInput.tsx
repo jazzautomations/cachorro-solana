@@ -11,7 +11,7 @@ export default function ScanInput() {
   const params = useSearchParams()
   const [target, setTarget] = useState('')
   const [cluster, setCluster] = useState('mainnet')
-  const [mode, setMode] = useState('deep')
+  const [mode, setMode] = useState('quick')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 

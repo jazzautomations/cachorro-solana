@@ -69,8 +69,9 @@ export async function POST(req: Request) {
   if (!target) return NextResponse.json({ error: 'target is required' }, { status: 400 })
   if (!kind) kind = target.startsWith('http') ? 'repo' : 'program-id'
 
-  // anonymous hunts can't aim at arbitrary code — build.rs is execution.
-  if (!keyEntry) {
+  // anonymous QUICK is open season — any public repo. DEEP/FULL stay keyed:
+  // deeper hunts run heavier, paid, claimed-workload pipelines.
+  if (!keyEntry && mode !== 'quick') {
     const gate = allowedTarget(target, kind)
     if (!gate.ok) return NextResponse.json({ error: gate.why }, { status: 403 })
   }

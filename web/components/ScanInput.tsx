@@ -57,14 +57,14 @@ export default function ScanInput() {
           onKeyDown={(e) => e.key === 'Enter' && !busy && unleash()}
           placeholder="https://github.com/org/program  —  or  —  Tokenkeg...VQ5DA"
           spellCheck={false}
-          className="flex-1 min-w-0 px-4 py-3 bg-dark-900 border border-dark-600 text-white font-mono text-[11px] sm:text-xs
-                     placeholder:text-gray-700 focus:border-neon-green focus:outline-none transition-colors"
+          className="flex-1 min-w-0 px-4 py-3 bg-dark-900 border border-dark-600 text-white font-mono text-[11px] sm:text-[13px]
+                     placeholder:text-gray-600 focus:border-neon-green focus:outline-none transition-colors"
         />
         <select
           value={cluster}
           onChange={(e) => setCluster(e.target.value)}
           disabled={kind === 'repo'}
-          className="px-3 py-3 bg-dark-900 border border-dark-600 text-neon-cyan font-mono text-[11px] sm:text-xs
+          className="px-3 py-3 bg-dark-900 border border-dark-600 text-neon-cyan font-mono text-[11px] sm:text-[13px]
                      focus:border-neon-green focus:outline-none disabled:opacity-40 sm:w-auto"
         >
           <option value="mainnet">mainnet</option>
@@ -73,15 +73,15 @@ export default function ScanInput() {
         <button
           onClick={unleash}
           disabled={busy}
-          className="px-5 py-3 border-2 border-neon-green text-neon-green font-arcade text-[10px] sm:text-xs whitespace-nowrap
+          className="px-5 py-3 border-2 border-neon-green text-neon-green font-arcade text-[11.5px] sm:text-[13px] whitespace-nowrap
                      hover:bg-neon-green hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {busy ? 'RELEASING…' : 'UNLEASH THE PACK'}
         </button>
       </div>
 
-      <div className="mt-2 flex items-center gap-1 text-[8px] sm:text-[9px] font-mono">
-        <span className="text-gray-700 mr-1">mode:</span>
+      <div className="mt-2 flex items-center gap-1 text-[11.5px] sm:text-[10.5px] font-mono">
+        <span className="text-gray-600 mr-1">mode:</span>
         {([
           ['quick', 'QUICK ~40min · top-1'],
           ['deep', 'DEEP ~90min · top-3'],
@@ -91,7 +91,7 @@ export default function ScanInput() {
             key={m}
             onClick={() => setMode(m)}
             className={`px-2 py-0.5 border transition-colors ${
-              mode === m ? 'border-neon-green text-neon-green' : 'border-dark-600 text-gray-600 hover:text-gray-400'
+              mode === m ? 'border-neon-green text-neon-green' : 'border-dark-600 text-gray-500 hover:text-gray-400'
             }`}
           >
             {label}
@@ -99,16 +99,16 @@ export default function ScanInput() {
         ))}
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-3 text-[9px] sm:text-[10px] font-mono">
-        <span className={kind ? 'text-neon-cyan' : 'text-gray-700'}>
+      <div className="mt-3 flex items-center justify-between gap-3 text-[10.5px] sm:text-[11.5px] font-mono">
+        <span className={kind ? 'text-neon-cyan' : 'text-gray-600'}>
           {kind === 'repo' ? '▸ target: GitHub repo (source audit)'
             : kind === 'program-id' ? `▸ target: on-chain program on ${cluster}`
             : '▸ paste your program — repo or program id'}
         </span>
-        <span className="text-gray-700 hidden xs:inline">local validator only · never mainnet</span>
+        <span className="text-gray-600 hidden xs:inline">local validator only · never mainnet</span>
       </div>
 
-      {error && <div className="mt-3 text-[10px] text-neon-red font-mono break-words">✗ {error}</div>}
+      {error && <div className="mt-3 text-[11.5px] text-neon-red font-mono break-words">✗ {error}</div>}
     </div>
   )
 }

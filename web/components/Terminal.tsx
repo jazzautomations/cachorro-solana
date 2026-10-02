@@ -35,16 +35,16 @@ export default function Terminal({
   return (
     <div className="border border-dark-600 bg-dark-900">
       <div className="flex items-center justify-between px-3 py-2 border-b border-dark-600 bg-dark-800">
-        <span className="text-[10px] text-neon-green font-arcade truncate">{title}</span>
+        <span className="text-[11.5px] text-neon-green font-arcade truncate">{title}</span>
         <div className="flex gap-1.5 shrink-0">
           <div className="w-2 h-2 rounded-full bg-neon-red" />
           <div className="w-2 h-2 rounded-full bg-neon-yellow" />
           <div className="w-2 h-2 rounded-full bg-neon-green" />
         </div>
       </div>
-      <div ref={ref} className={`${height} overflow-auto p-3 font-mono text-[10px] sm:text-xs leading-relaxed bg-black`}>
+      <div ref={ref} className={`${height} overflow-auto p-3 font-mono text-[11.5px] sm:text-[13px] leading-relaxed bg-black`}>
         {lines.length === 0 ? (
-          <span className="text-gray-700 animate-pulse">▸ {empty}</span>
+          <span className="text-gray-600 animate-pulse">▸ {empty}</span>
         ) : (
           lines.map((l, i) => (
             <div key={i} className={`whitespace-pre-wrap break-all ${color(l)}`}>{l}</div>

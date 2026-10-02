@@ -26,7 +26,7 @@ export default function ClaimForm() {
   return (
     <div className="border border-dark-600 bg-dark-900 p-4 space-y-3">
       {ok ? (
-        <div className="text-[10px] font-arcade text-neon-green">✓ PROGRAM CLAIMED — your certificates now carry OWNER-VERIFIED</div>
+        <div className="text-[11.5px] font-arcade text-neon-green">✓ PROGRAM CLAIMED — your certificates now carry OWNER-VERIFIED</div>
       ) : (
         <>
           <input
@@ -34,23 +34,23 @@ export default function ClaimForm() {
             onChange={(e) => setPid(e.target.value)}
             placeholder="program id (base58)"
             spellCheck={false}
-            className="w-full px-3 py-2.5 bg-dark-800 border border-dark-600 text-white font-mono text-[10px] placeholder:text-gray-700 focus:border-neon-green focus:outline-none"
+            className="w-full px-3 py-2.5 bg-dark-800 border border-dark-600 text-white font-mono text-[11.5px] placeholder:text-gray-600 focus:border-neon-green focus:outline-none"
           />
           <input
             value={sig}
             onChange={(e) => setSig(e.target.value)}
             placeholder="signature (base58) of cachorro:claim:<programId>"
             spellCheck={false}
-            className="w-full px-3 py-2.5 bg-dark-800 border border-dark-600 text-white font-mono text-[10px] placeholder:text-gray-700 focus:border-neon-green focus:outline-none"
+            className="w-full px-3 py-2.5 bg-dark-800 border border-dark-600 text-white font-mono text-[11.5px] placeholder:text-gray-600 focus:border-neon-green focus:outline-none"
           />
           <button
             onClick={submit}
             disabled={busy || !pid.trim() || !sig.trim()}
-            className="w-full px-3 py-2 border border-neon-green text-neon-green font-arcade text-[9px] hover:bg-neon-green hover:text-black transition-all disabled:opacity-50"
+            className="w-full px-3 py-2 border border-neon-green text-neon-green font-arcade text-[10.5px] hover:bg-neon-green hover:text-black transition-all disabled:opacity-50"
           >
             {busy ? 'VERIFYING ON-CHAIN…' : 'CLAIM PROGRAM ▸'}
           </button>
-          {msg && <div className="text-[9px] font-mono text-neon-red break-words">{msg}</div>}
+          {msg && <div className="text-[10.5px] font-mono text-neon-red break-words">{msg}</div>}
         </>
       )}
     </div>

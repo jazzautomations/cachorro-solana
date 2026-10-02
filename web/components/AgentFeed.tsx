@@ -10,7 +10,7 @@ const KIND_STYLE: Record<string, { icon: string; cls: string; label: string }> =
   finding: { icon: '!', cls: 'text-neon-yellow', label: 'FINDING' },
   verdict: { icon: '⚖', cls: 'text-neon-orange', label: 'VERDICT' },
   poc:     { icon: '⚡', cls: 'text-neon-green',  label: 'POC' },
-  note:    { icon: '·', cls: 'text-gray-500',    label: 'NOTE' },
+  note:    { icon: '·', cls: 'text-gray-400',    label: 'NOTE' },
   error:   { icon: '✕', cls: 'text-neon-red',    label: 'ERROR' },
 }
 
@@ -31,8 +31,8 @@ export default function AgentFeed({ events, live }: { events: HuntEvent[]; live:
   return (
     <div className="bg-dark-900 border border-dark-600 pixel-border-glow">
       <div className="flex items-center justify-between px-3 sm:px-4 py-2 border-b border-dark-600 bg-dark-800">
-        <span className="text-[10px] sm:text-xs font-arcade text-neon-purple">PACK MIND</span>
-        <span className="text-[9px] sm:text-[10px] font-mono text-gray-600">
+        <span className="text-[11.5px] sm:text-[13px] font-arcade text-neon-purple">PACK MIND</span>
+        <span className="text-[10.5px] sm:text-[11.5px] font-mono text-gray-500">
           {events.length ? `${events.length} events` : live ? 'agents warming up…' : 'no events'}
         </span>
       </div>
@@ -41,11 +41,11 @@ export default function AgentFeed({ events, live }: { events: HuntEvent[]; live:
           const k = KIND_STYLE[e.kind] || KIND_STYLE.note
           return (
             <div key={i} className="flex items-start gap-2 px-1.5 py-1 border-l-2 border-dark-700 hover:bg-dark-800/60">
-              <span className="text-[9px] text-gray-700 shrink-0 pt-px w-14">{hhmmss(e.ts)}</span>
-              <span className={`text-[9px] shrink-0 pt-px w-16 ${k.cls}`}>{k.icon} {k.label}</span>
+              <span className="text-[10.5px] text-gray-600 shrink-0 pt-px w-14">{hhmmss(e.ts)}</span>
+              <span className={`text-[10.5px] shrink-0 pt-px w-16 ${k.cls}`}>{k.icon} {k.label}</span>
               <div className="min-w-0 flex-1">
-                <span className="text-[9px] text-gray-600 mr-2">[{e.agent}·{e.stage}]</span>
-                <span className={`text-[10px] sm:text-[11px] break-words ${
+                <span className="text-[10.5px] text-gray-500 mr-2">[{e.agent}·{e.stage}]</span>
+                <span className={`text-[11.5px] sm:text-[11px] break-words ${
                   e.kind === 'finding' || e.kind === 'verdict'
                     ? /critical|CONFIRMED/i.test(e.text) ? 'text-neon-yellow animate-glitch' : 'text-neon-yellow'
                     : e.kind === 'error' ? 'text-neon-red' : 'text-gray-300'
@@ -57,7 +57,7 @@ export default function AgentFeed({ events, live }: { events: HuntEvent[]; live:
           )
         })}
         {live && (
-          <div className="px-1.5 py-1 text-[10px] text-neon-purple animate-pulse">▸ the pack is thinking…</div>
+          <div className="px-1.5 py-1 text-[11.5px] text-neon-purple animate-pulse">▸ the pack is thinking…</div>
         )}
         <div ref={endRef} />
       </div>

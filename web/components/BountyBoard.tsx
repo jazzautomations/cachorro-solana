@@ -14,20 +14,20 @@ export default function BountyBoard({ bounties, updatedAt }: { bounties: Bounty[
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-3 mb-4 text-[9px] sm:text-[10px] font-mono">
+      <div className="flex flex-wrap items-center gap-3 mb-4 text-[10.5px] sm:text-[11.5px] font-mono">
         <button
           onClick={() => setSolOnly(true)}
-          className={`px-2.5 py-1 border transition-colors ${solOnly ? 'border-neon-green text-neon-green' : 'border-dark-600 text-gray-600 hover:text-gray-400'}`}
+          className={`px-2.5 py-1 border transition-colors ${solOnly ? 'border-neon-green text-neon-green' : 'border-dark-600 text-gray-500 hover:text-gray-400'}`}
         >
           SOLANA · {solCount}
         </button>
         <button
           onClick={() => setSolOnly(false)}
-          className={`px-2.5 py-1 border transition-colors ${!solOnly ? 'border-neon-cyan text-neon-cyan' : 'border-dark-600 text-gray-600 hover:text-gray-400'}`}
+          className={`px-2.5 py-1 border transition-colors ${!solOnly ? 'border-neon-cyan text-neon-cyan' : 'border-dark-600 text-gray-500 hover:text-gray-400'}`}
         >
           ALL · {bounties.length}
         </button>
-        <span className="text-gray-600 ml-auto">
+        <span className="text-gray-500 ml-auto">
           {fmtUsd(totalUsd)} on the table{updatedAt ? ` · indexed ${updatedAt.slice(0, 10)}` : ''}
         </span>
       </div>
@@ -45,47 +45,47 @@ export default function BountyBoard({ bounties, updatedAt }: { bounties: Bounty[
                   {b.project}
                 </span>
                 {b.pocType === 'required' && (
-                  <span className="hidden sm:inline text-[8px] font-mono text-neon-purple border border-neon-purple/40 px-1.5 py-0.5 shrink-0">
+                  <span className="hidden sm:inline text-[11.5px] font-mono text-neon-purple border border-neon-purple/40 px-1.5 py-0.5 shrink-0">
                     PoC REQUIRED
                   </span>
                 )}
                 {b.kyc && (
-                  <span className="hidden sm:inline text-[8px] font-mono text-gray-500 border border-dark-600 px-1.5 py-0.5 shrink-0">
+                  <span className="hidden sm:inline text-[11.5px] font-mono text-gray-400 border border-dark-600 px-1.5 py-0.5 shrink-0">
                     KYC
                   </span>
                 )}
-                <span className="text-[10px] sm:text-xs font-mono text-neon-green shrink-0 w-16 text-right">
+                <span className="text-[11.5px] sm:text-[13px] font-mono text-neon-green shrink-0 w-16 text-right">
                   {fmtUsd(b.maxBounty)}
                 </span>
-                <span className="text-gray-700 text-[10px] shrink-0">{isOpen ? '▾' : '▸'}</span>
+                <span className="text-gray-600 text-[11.5px] shrink-0">{isOpen ? '▾' : '▸'}</span>
               </button>
 
               {isOpen && (
                 <div className="border-t border-dark-600 px-3 py-3 space-y-2.5">
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-[9px] sm:text-[10px] font-mono text-gray-500">
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10.5px] sm:text-[11.5px] font-mono text-gray-400">
                     <span>source: <a href={b.url} target="_blank" rel="noreferrer" className="text-neon-cyan hover:underline">{b.source} ↗</a></span>
                     {b.ecosystems.length > 0 && <span>ecosystems: {b.ecosystems.slice(0, 5).join(', ')}</span>}
                     {b.pocType && <span>PoC: {b.pocType}</span>}
                   </div>
                   {b.repos.length > 0 ? (
                     <div className="space-y-1">
-                      <div className="text-[8px] font-mono text-gray-600 uppercase">in-scope repos — pick a target:</div>
+                      <div className="text-[11.5px] font-mono text-gray-500 uppercase">in-scope repos — pick a target:</div>
                       {b.repos.map((r) => (
                         <div key={r} className="flex items-center gap-2 min-w-0">
                           <a
                             href={`/?target=${encodeURIComponent(r)}#hunt`}
-                            className="px-2 py-1 border border-neon-green/60 text-neon-green text-[9px] font-mono hover:bg-neon-green hover:text-black transition-all shrink-0"
+                            className="px-2 py-1 border border-neon-green/60 text-neon-green text-[10.5px] font-mono hover:bg-neon-green hover:text-black transition-all shrink-0"
                           >
                             HUNT ▸
                           </a>
-                          <a href={r} target="_blank" rel="noreferrer" className="text-[10px] font-mono text-gray-400 hover:text-neon-cyan truncate">
+                          <a href={r} target="_blank" rel="noreferrer" className="text-[11.5px] font-mono text-gray-400 hover:text-neon-cyan truncate">
                             {r.replace('https://github.com/', '')}
                           </a>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="text-[9px] font-mono text-gray-600">
+                    <div className="text-[10.5px] font-mono text-gray-500">
                       no public repo in scope listing — check the program page for on-chain targets
                     </div>
                   )}

@@ -10,7 +10,7 @@ const SEV_CLS: Record<string, string> = {
   critical: 'text-neon-red border-neon-red',
   high: 'text-neon-orange border-neon-orange',
   medium: 'text-neon-yellow border-neon-yellow',
-  low: 'text-gray-500 border-dark-600',
+  low: 'text-gray-400 border-dark-600',
 }
 
 const TILES: { key: string; label: string; color: string }[] = [
@@ -30,21 +30,21 @@ function Section({ s, open }: { s: LintSection; open: boolean }) {
         onClick={() => setExpanded(!expanded)}
         className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-dark-800 transition-colors"
       >
-        <span className="text-neon-green text-[10px] w-3 shrink-0">{expanded ? '▾' : '▸'}</span>
-        <span className="flex-1 min-w-0 text-[10px] sm:text-[11px] text-gray-300 font-mono break-words">{s.title}</span>
-        <span className={`text-[10px] font-arcade shrink-0 ${n ? 'text-neon-yellow' : 'text-gray-700'}`}>{n}</span>
+        <span className="text-neon-green text-[11.5px] w-3 shrink-0">{expanded ? '▾' : '▸'}</span>
+        <span className="flex-1 min-w-0 text-[11.5px] sm:text-[11px] text-gray-300 font-mono break-words">{s.title}</span>
+        <span className={`text-[11.5px] font-arcade shrink-0 ${n ? 'text-neon-yellow' : 'text-gray-600'}`}>{n}</span>
       </button>
       {expanded && (
         <div className="border-t border-dark-700 max-h-80 overflow-auto">
           {n === 0 ? (
-            <div className="px-3 py-3 text-[10px] text-gray-700 font-mono">
+            <div className="px-3 py-3 text-[11.5px] text-gray-600 font-mono">
               {s.raw.length ? s.raw.join('\n') : 'nothing matched — clean on this heuristic.'}
             </div>
           ) : (
             s.lines.map((l, i) => (
               <div key={i} className="px-3 py-1.5 border-b border-dark-800 last:border-b-0">
-                <div className="text-[9px] text-neon-cyan font-mono break-all">{l.file}:{l.line}</div>
-                <div className="text-[10px] text-gray-400 font-mono whitespace-pre-wrap break-all">{l.code}</div>
+                <div className="text-[10.5px] text-neon-cyan font-mono break-all">{l.file}:{l.line}</div>
+                <div className="text-[11.5px] text-gray-400 font-mono whitespace-pre-wrap break-all">{l.code}</div>
               </div>
             ))
           )}
@@ -101,7 +101,7 @@ export default function ScanView({ id }: { id: string }) {
     )
   }
   if (!data) {
-    return <div className="text-[11px] font-mono text-gray-600 animate-pulse">▸ loading hunt {id}…</div>
+    return <div className="text-[11px] font-mono text-gray-500 animate-pulse">▸ loading hunt {id}…</div>
   }
 
   const logs = [
@@ -119,16 +119,16 @@ export default function ScanView({ id }: { id: string }) {
     <div className="space-y-4 sm:space-y-6">
       {/* target header */}
       <div className="border border-dark-600 bg-dark-900 p-3 sm:p-4">
-        <div className="text-[9px] text-gray-600 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}{data.mode ? ` · ${data.mode.toUpperCase()}` : ''}</div>
+        <div className="text-[10.5px] text-gray-500 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}{data.mode ? ` · ${data.mode.toUpperCase()}` : ''}</div>
         <div className="text-[11px] sm:text-sm text-neon-green font-mono break-all">{data.target}</div>
-        <div className="text-[9px] text-gray-700 font-mono mt-1">{data.id}</div>
+        <div className="text-[10.5px] text-gray-600 font-mono mt-1">{data.id}</div>
       </div>
 
       {/* stale receipt — target moved after the hunt */}
       {data.stale && (
         <div className="border border-neon-yellow bg-dark-900 p-3 sm:p-4 flex flex-wrap items-center gap-3">
-          <span className="text-[10px] sm:text-xs font-arcade text-neon-yellow">[ RECEIPT STALE ]</span>
-          <span className="text-[9px] sm:text-[10px] font-mono text-gray-500 flex-1 min-w-0">
+          <span className="text-[11.5px] sm:text-[13px] font-arcade text-neon-yellow">[ RECEIPT STALE ]</span>
+          <span className="text-[10.5px] sm:text-[11.5px] font-mono text-gray-400 flex-1 min-w-0">
             target moved after this hunt — {data.targetRev?.slice(0, 8)} → {data.staleRev?.slice(0, 8)}.
             The attestation no longer covers the live code.
           </span>
@@ -137,14 +137,14 @@ export default function ScanView({ id }: { id: string }) {
               href={`${data.target}/compare/${data.targetRev}...${data.staleRev}`}
               target="_blank"
               rel="noreferrer"
-              className="px-2.5 py-1 border border-dark-600 text-gray-500 text-[8px] sm:text-[9px] font-mono hover:text-neon-cyan shrink-0"
+              className="px-2.5 py-1 border border-dark-600 text-gray-400 text-[11.5px] sm:text-[10.5px] font-mono hover:text-neon-cyan shrink-0"
             >
               WHAT CHANGED ↗
             </a>
           )}
           <a
             href={`/?target=${encodeURIComponent(data.target)}#hunt`}
-            className="px-2.5 py-1 border border-neon-yellow text-neon-yellow text-[8px] sm:text-[9px] font-mono hover:bg-neon-yellow hover:text-black transition-all shrink-0"
+            className="px-2.5 py-1 border border-neon-yellow text-neon-yellow text-[11.5px] sm:text-[10.5px] font-mono hover:bg-neon-yellow hover:text-black transition-all shrink-0"
           >
             RE-HUNT ▸
           </a>
@@ -158,16 +158,16 @@ export default function ScanView({ id }: { id: string }) {
             <span className="text-[11px] sm:text-sm font-arcade text-neon-green">HUNT COMPLETE</span>
             <div className="flex gap-2">
               {(['critical', 'high', 'medium', 'low'] as const).filter((s) => sev[s]).map((s) => (
-                <span key={s} className={`text-[8px] sm:text-[9px] font-mono border px-1.5 py-0.5 uppercase ${SEV_CLS[s]}`}>
+                <span key={s} className={`text-[11.5px] sm:text-[10.5px] font-mono border px-1.5 py-0.5 uppercase ${SEV_CLS[s]}`}>
                   {sev[s]} {s}
                 </span>
               ))}
             </div>
-            <span className="text-[9px] font-mono text-gray-600 ml-auto">⏱ {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, '0')}</span>
+            <span className="text-[10.5px] font-mono text-gray-500 ml-auto">⏱ {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, '0')}</span>
           </div>
           {data.reportFile && (
             <a href={`/api/scan/${data.id}/report`} target="_blank"
-               className="mt-3 inline-block text-[10px] sm:text-xs font-mono text-neon-cyan hover:text-neon-green transition-colors">
+               className="mt-3 inline-block text-[11.5px] sm:text-[13px] font-mono text-neon-cyan hover:text-neon-green transition-colors">
               ▸ {data.reportFile} — full hunt report ↗
             </a>
           )}
@@ -191,26 +191,26 @@ export default function ScanView({ id }: { id: string }) {
             {data.findings.map((f, i) => (
               <details key={i} className="group">
                 <summary className="flex items-center gap-2 sm:gap-3 px-3 py-2 cursor-pointer hover:bg-dark-800 transition-colors list-none">
-                  <span className={`text-[8px] sm:text-[9px] font-mono border px-1.5 py-0.5 uppercase shrink-0 ${SEV_CLS[f.severity] || SEV_CLS.low}`}>
+                  <span className={`text-[11.5px] sm:text-[10.5px] font-mono border px-1.5 py-0.5 uppercase shrink-0 ${SEV_CLS[f.severity] || SEV_CLS.low}`}>
                     {f.severity}
                   </span>
-                  <span className="flex-1 min-w-0 text-[10px] sm:text-[11px] text-gray-300 font-mono truncate">
-                    {f.id && <span className="text-gray-600">{f.id} </span>}{f.vulnerability_type}
+                  <span className="flex-1 min-w-0 text-[11.5px] sm:text-[11px] text-gray-300 font-mono truncate">
+                    {f.id && <span className="text-gray-500">{f.id} </span>}{f.vulnerability_type}
                   </span>
-                  <span className="text-[9px] text-neon-cyan font-mono truncate hidden sm:inline max-w-[40%]">
+                  <span className="text-[10.5px] text-neon-cyan font-mono truncate hidden sm:inline max-w-[40%]">
                     {f.file}{f.line_range ? `:${f.line_range}` : ''}
                   </span>
-                  <span className="text-neon-green text-[9px] shrink-0 group-open:rotate-90 transition-transform">▸</span>
+                  <span className="text-neon-green text-[10.5px] shrink-0 group-open:rotate-90 transition-transform">▸</span>
                 </summary>
                 <div className="px-3 pb-3 pt-1 space-y-2 border-t border-dark-700">
                   {f.function && (
-                    <div className="text-[9px] text-gray-600 font-mono">fn: {f.function}</div>
+                    <div className="text-[10.5px] text-gray-500 font-mono">fn: {f.function}</div>
                   )}
                   {f.description && (
-                    <p className="text-[10px] sm:text-[11px] text-gray-400 font-mono leading-relaxed whitespace-pre-wrap break-words">{f.description}</p>
+                    <p className="text-[11.5px] sm:text-[11px] text-gray-400 font-mono leading-relaxed whitespace-pre-wrap break-words">{f.description}</p>
                   )}
                   {f.impact && (
-                    <p className="text-[10px] sm:text-[11px] text-neon-yellow font-mono leading-relaxed break-words">impact: {f.impact}</p>
+                    <p className="text-[11.5px] sm:text-[11px] text-neon-yellow font-mono leading-relaxed break-words">impact: {f.impact}</p>
                   )}
                 </div>
               </details>
@@ -226,8 +226,8 @@ export default function ScanView({ id }: { id: string }) {
           target="_blank"
           className="flex items-center justify-between border border-neon-green bg-dark-900 px-4 py-3 hover:bg-dark-800 transition-colors"
         >
-          <span className="text-[10px] sm:text-xs font-arcade text-neon-green">[ HUNT REPORT READY ]</span>
-          <span className="text-[9px] sm:text-[10px] font-mono text-neon-cyan">{data.reportFile} ↗</span>
+          <span className="text-[11.5px] sm:text-[13px] font-arcade text-neon-green">[ HUNT REPORT READY ]</span>
+          <span className="text-[10.5px] sm:text-[11.5px] font-mono text-neon-cyan">{data.reportFile} ↗</span>
         </a>
       )}
 
@@ -237,7 +237,7 @@ export default function ScanView({ id }: { id: string }) {
         </div>
       )}
       {data.staticNote && (
-        <div className="border border-neon-yellow bg-dark-900 p-3 text-[10px] sm:text-[11px] font-mono text-neon-yellow break-words">
+        <div className="border border-neon-yellow bg-dark-900 p-3 text-[11.5px] sm:text-[11px] font-mono text-neon-yellow break-words">
           ⚠ {data.staticNote}
         </div>
       )}
@@ -264,8 +264,8 @@ export default function ScanView({ id }: { id: string }) {
               { l: 'DATA LENGTH', v: data.onchain.dataLen != null ? `${data.onchain.dataLen} B` : '—' },
             ].map((t) => (
               <div key={t.l} className="border border-dark-600 bg-dark-900 p-3">
-                <div className="text-[8px] sm:text-[9px] text-gray-600 mb-1">{t.l}</div>
-                <div className={`text-neon-cyan ${t.mono ? 'text-[9px] break-all font-mono' : 'text-base sm:text-lg font-bold'}`}>{t.v}</div>
+                <div className="text-[11.5px] sm:text-[10.5px] text-gray-500 mb-1">{t.l}</div>
+                <div className={`text-neon-cyan ${t.mono ? 'text-[10.5px] break-all font-mono' : 'text-base sm:text-lg font-bold'}`}>{t.v}</div>
               </div>
             ))}
           </div>
@@ -280,7 +280,7 @@ export default function ScanView({ id }: { id: string }) {
             {TILES.map((t) => (
               <div key={t.key} className="border border-dark-600 bg-dark-900 p-3 text-center">
                 <div className={`text-lg sm:text-2xl font-bold ${t.color}`}>{data.summary?.[t.key] ?? '—'}</div>
-                <div className="text-[8px] sm:text-[9px] text-gray-600 mt-1 leading-tight">{t.label}</div>
+                <div className="text-[11.5px] sm:text-[10.5px] text-gray-500 mt-1 leading-tight">{t.label}</div>
               </div>
             ))}
           </div>
@@ -293,7 +293,7 @@ export default function ScanView({ id }: { id: string }) {
           <h2 className="text-[11px] sm:text-sm font-arcade text-neon-purple mb-3">[ ZK SURFACE ]</h2>
           <div className="border border-dark-600 bg-dark-900 p-3 space-y-1">
             {data.zkModules.map((m) => (
-              <div key={m} className="text-[10px] text-neon-purple font-mono break-all">◆ {m}</div>
+              <div key={m} className="text-[11.5px] text-neon-purple font-mono break-all">◆ {m}</div>
             ))}
           </div>
         </div>
@@ -310,7 +310,7 @@ export default function ScanView({ id }: { id: string }) {
               <Section key={i} s={s} open={i === 0} />
             ))}
           </div>
-          <p className="text-[9px] text-gray-700 mt-3 leading-relaxed">
+          <p className="text-[10.5px] text-gray-600 mt-3 leading-relaxed">
             Static heuristics are leads, not findings. The AI stages (ANALYZE → DEVIL → POC) turn a lead
             into an exploit proven on a local validator — they come online in M1.
           </p>

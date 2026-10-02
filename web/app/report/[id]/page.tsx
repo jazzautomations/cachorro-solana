@@ -67,7 +67,7 @@ function SevChip({ sev }: { sev: string | null }) {
       : k.startsWith('med')
         ? 'text-neon-yellow border-neon-yellow/50'
         : 'text-neon-cyan border-neon-cyan/50'
-  return <span className={`border px-1.5 py-0.5 text-[8px] font-arcade uppercase shrink-0 ${cls}`}>{sev || '—'}</span>
+  return <span className={`border px-1.5 py-0.5 text-[11.5px] font-arcade uppercase shrink-0 ${cls}`}>{sev || '—'}</span>
 }
 
 // program id from the report header — backtick-quoted base58 near "program",
@@ -100,7 +100,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
     ? anchored
       ? { label: 'ANCHORED · devnet', cls: 'text-neon-green border-neon-green' }
       : { label: 'PENDING ANCHOR', cls: 'text-neon-yellow border-neon-yellow' }
-    : { label: 'NO RECEIPT', cls: 'text-gray-600 border-dark-600' }
+    : { label: 'NO RECEIPT', cls: 'text-gray-500 border-dark-600' }
 
   return (
     <main className="min-h-screen bg-black miami-bg">
@@ -116,81 +116,81 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
               {/* ═══ CERTIFICATE HEADER ═══ */}
               <div className="holo-frame p-4 sm:p-5 mb-4">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4">
-                  <span className="text-[10px] sm:text-xs font-arcade vapor-text chroma-soft">[ AUDIT CERTIFICATE ]</span>
-                  <a href={`/scan/${id}`} className="text-[9px] font-mono text-miami-sky hover:text-neon-green transition-colors">{id} ↗</a>
+                  <span className="text-[11.5px] sm:text-[13px] font-arcade vapor-text chroma-soft">[ AUDIT CERTIFICATE ]</span>
+                  <a href={`/scan/${id}`} className="text-[10.5px] font-mono text-miami-sky hover:text-neon-green transition-colors">{id} ↗</a>
                   {data?.mode === 'quick' && (
-                    <span className="border border-dark-600 text-gray-500 px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade">RECON · no PoC gate</span>
+                    <span className="border border-dark-600 text-gray-400 px-2 py-0.5 text-[11.5px] sm:text-[10.5px] font-arcade">RECON · no PoC gate</span>
                   )}
                   {claim ? (
-                    <span className="border border-miami-sky text-miami-sky px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade chroma-soft">OWNER-VERIFIED</span>
+                    <span className="border border-miami-sky text-miami-sky px-2 py-0.5 text-[11.5px] sm:text-[10.5px] font-arcade chroma-soft">OWNER-VERIFIED</span>
                   ) : programId ? (
-                    <a href="/claim" className="border border-dark-600 text-gray-500 px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade hover:text-neon-cyan hover:border-neon-cyan transition-colors">UNCLAIMED — claim ↗</a>
+                    <a href="/claim" className="border border-dark-600 text-gray-400 px-2 py-0.5 text-[11.5px] sm:text-[10.5px] font-arcade hover:text-neon-cyan hover:border-neon-cyan transition-colors">UNCLAIMED — claim ↗</a>
                   ) : null}
-                  <span className={`ml-auto border px-2 py-0.5 text-[8px] sm:text-[9px] font-arcade ${attestState.cls}`}>
+                  <span className={`ml-auto border px-2 py-0.5 text-[11.5px] sm:text-[10.5px] font-arcade ${attestState.cls}`}>
                     {attestState.label}
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-[9px] sm:text-[10px] font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-[10.5px] sm:text-[11.5px] font-mono">
                   <div className="flex justify-between gap-3 border-b border-dark-600/60 py-1">
-                    <span className="text-gray-600">target</span>
+                    <span className="text-gray-500">target</span>
                     <span className="text-gray-300 text-right break-all">{data?.target}</span>
                   </div>
                   <div className="flex justify-between gap-3 border-b border-dark-600/60 py-1">
-                    <span className="text-gray-600">audited commit</span>
+                    <span className="text-gray-500">audited commit</span>
                     <span className="text-neon-cyan">{data?.targetRev ? data.targetRev.slice(0, 12) : '—'}</span>
                   </div>
                   <div className="flex justify-between gap-3 border-b border-dark-600/60 py-1">
-                    <span className="text-gray-600">mode</span>
+                    <span className="text-gray-500">mode</span>
                     <span className="text-gray-300 uppercase">{data?.mode || 'deep'}</span>
                   </div>
                   <div className="flex justify-between gap-3 border-b border-dark-600/60 py-1">
-                    <span className="text-gray-600">report sha256</span>
+                    <span className="text-gray-500">report sha256</span>
                     <span className="text-gray-400">sha256:{sha?.slice(0, 16)}…</span>
                   </div>
                 </div>
 
                 {/* verdict strip — the numbers that matter */}
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="border border-neon-green/60 text-neon-green px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
+                  <span className="border border-neon-green/60 text-neon-green px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade">
                     {parsed?.findings.length ?? 0} FINDINGS
                   </span>
-                  <span className="border border-neon-green text-neon-green px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
+                  <span className="border border-neon-green text-neon-green px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade">
                     ✓ {parsed?.verde ?? 0} VERDE
                   </span>
                   {(parsed?.vermelho ?? 0) > 0 && (
-                    <span className="border border-miami-pink text-miami-pink px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
+                    <span className="border border-miami-pink text-miami-pink px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade">
                       ✗ {parsed!.vermelho} VERMELHO
                     </span>
                   )}
                   {(parsed?.dup ?? 0) > 0 && (
-                    <span className="border border-neon-yellow/60 text-neon-yellow px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
+                    <span className="border border-neon-yellow/60 text-neon-yellow px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade">
                       dup-flagged
                     </span>
                   )}
                   {(data?.survivorCount ?? 0) > 0 && (
-                    <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade">
+                    <span className="border border-dark-600 text-gray-400 px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade">
                       {data?.survivorCount} survivors tested
                     </span>
                   )}
                   {selfAudit && (
                     <>
-                      <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${selfAudit.clean ? 'border-neon-cyan/60 text-neon-cyan' : 'border-neon-yellow text-neon-yellow'}`}>
+                      <span className={`border px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade ${selfAudit.clean ? 'border-neon-cyan/60 text-neon-cyan' : 'border-neon-yellow text-neon-yellow'}`}>
                         SELF-AUDIT {selfAudit.clean ? '✓ CLEAN' : `${selfAudit.flags.length} FLAG${selfAudit.flags.length === 1 ? '' : 'S'}`}
                       </span>
                       {selfAudit.coverage && (selfAudit.coverage.exercised.length > 0 ? (
-                        <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade"
+                        <span className="border border-dark-600 text-gray-400 px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade"
                           title={`exercised: ${selfAudit.coverage.exercised.join(', ')}`}>
                           ATLAS {selfAudit.coverage.exercised.length}/{selfAudit.coverage.atlas_classes}
                         </span>
                       ) : (selfAudit.coverage as {clusters?: number}).clusters ? (
-                        <span className="border border-dark-600 text-gray-500 px-2 py-1 text-[8px] sm:text-[9px] font-arcade"
+                        <span className="border border-dark-600 text-gray-400 px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade"
                           title="clean hunt — the report's coverage map shows what was read">
                           COVERAGE {(selfAudit.coverage as {clusters?: number}).clusters} clusters
                         </span>
                       ) : null)}
                       {jev?.mean != null && (
-                        <span className={`border px-2 py-1 text-[8px] sm:text-[9px] font-arcade ${jev.dissenting.length ? 'border-neon-yellow text-neon-yellow' : 'border-miami-sky/60 text-miami-sky'}`}
+                        <span className={`border px-2 py-1 text-[11.5px] sm:text-[10.5px] font-arcade ${jev.dissenting.length ? 'border-neon-yellow text-neon-yellow' : 'border-miami-sky/60 text-miami-sky'}`}
                           title={jev.dissenting.length ? `dissenting: ${jev.dissenting.map(d => `${d.id} ${d.score}`).join(', ')}` : 'calibrated exploit-plausibility, mean over promoted claims'}>
                           JUDGE {jev.mean.toFixed(2)}{jev.dissenting.length ? ` · ${jev.dissenting.length} DISSENT` : ''}
                         </span>
@@ -204,29 +204,29 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
               {receipt && (
                 <div className="border border-dark-600 bg-dark-900 mb-4 font-mono">
                   <div className="px-3 py-2 border-b border-dark-600 bg-dark-800 flex items-center justify-between">
-                    <span className="text-[9px] font-arcade text-miami-sky chroma-soft">ON-CHAIN RECEIPT</span>
-                    <a href={`/verify?sha=${receipt.attestation_sha256}`} className="text-[8px] font-mono text-neon-yellow hover:text-neon-green">
+                    <span className="text-[10.5px] font-arcade text-miami-sky chroma-soft">ON-CHAIN RECEIPT</span>
+                    <a href={`/verify?sha=${receipt.attestation_sha256}`} className="text-[11.5px] font-mono text-neon-yellow hover:text-neon-green">
                       verify trustless ↗
                     </a>
                   </div>
-                  <div className="p-3 space-y-1.5 text-[9px] sm:text-[10px]">
-                    <div className="flex justify-between gap-3"><span className="text-gray-600">memo</span><span className="text-neon-green break-all text-right">{receipt.memo ?? `cachorro:v1:${receipt.attestation_sha256}`}</span></div>
-                    <div className="flex justify-between gap-3"><span className="text-gray-600">attestation</span><span className="text-gray-400 break-all text-right">{receipt.attestation_sha256?.slice(0, 24)}…</span></div>
+                  <div className="p-3 space-y-1.5 text-[10.5px] sm:text-[11.5px]">
+                    <div className="flex justify-between gap-3"><span className="text-gray-500">memo</span><span className="text-neon-green break-all text-right">{receipt.memo ?? `cachorro:v1:${receipt.attestation_sha256}`}</span></div>
+                    <div className="flex justify-between gap-3"><span className="text-gray-500">attestation</span><span className="text-gray-400 break-all text-right">{receipt.attestation_sha256?.slice(0, 24)}…</span></div>
                     {receipt.journal_head && (
-                      <div className="flex justify-between gap-3"><span className="text-gray-600">journal_head</span><span className="text-gray-400 text-right">{String(receipt.journal_head).slice(0, 16)}…</span></div>
+                      <div className="flex justify-between gap-3"><span className="text-gray-500">journal_head</span><span className="text-gray-400 text-right">{String(receipt.journal_head).slice(0, 16)}…</span></div>
                     )}
                     {anchored ? (
                       <div className="flex justify-between gap-3">
-                        <span className="text-gray-600">tx</span>
+                        <span className="text-gray-500">tx</span>
                         <a href={receipt.explorer_url} target="_blank" rel="noreferrer" className="text-miami-sky hover:text-neon-green break-all text-right">
                           {receipt.signature.slice(0, 20)}… ↗
                         </a>
                       </div>
                     ) : (
-                      <div className="flex justify-between gap-3"><span className="text-gray-600">chain</span><span className="text-neon-yellow">digest anchor-ready — awaiting devnet slot</span></div>
+                      <div className="flex justify-between gap-3"><span className="text-gray-500">chain</span><span className="text-neon-yellow">digest anchor-ready — awaiting devnet slot</span></div>
                     )}
                   </div>
-                  <div className="px-3 py-2 border-t border-dark-600 text-[8px] text-gray-600">
+                  <div className="px-3 py-2 border-t border-dark-600 text-[11.5px] text-gray-500">
                     trivial to verify · hard to fake · expires when the program upgrades
                   </div>
                 </div>
@@ -236,14 +236,14 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
               {(parsed?.findings.length ?? 0) > 0 && (
                 <div className="mb-4">
                   <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-[9px] font-arcade text-white">FINDINGS</span>
+                    <span className="text-[10.5px] font-arcade text-white">FINDINGS</span>
                     <span className="flex-1 vapor-strip-thin" />
                   </div>
                   <div className="grid grid-cols-1 gap-px bg-dark-600 border border-dark-600">
                     {parsed!.findings.map((f) => (
                       <div key={f.id} className="bg-dark-900 px-3 py-2 flex items-center gap-3">
-                        <span className="text-[9px] font-arcade text-miami-rose shrink-0">{f.id}</span>
-                        <span className="text-[9px] sm:text-[10px] font-mono text-gray-400 truncate flex-1">{f.title}</span>
+                        <span className="text-[10.5px] font-arcade text-miami-rose shrink-0">{f.id}</span>
+                        <span className="text-[10.5px] sm:text-[11.5px] font-mono text-gray-400 truncate flex-1">{f.title}</span>
                         <SevChip sev={f.sev} />
                       </div>
                     ))}
@@ -257,14 +257,14 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
               </article>
 
               {/* ═══ FOOTER — artifacts & embed ═══ */}
-              <div className="mt-4 flex flex-wrap gap-3 text-[9px] font-mono text-gray-600">
+              <div className="mt-4 flex flex-wrap gap-3 text-[10.5px] font-mono text-gray-500">
                 <a href={`/api/scan/${id}/evidence`} className="text-neon-green hover:text-white">▸ evidence bundle (.tar.gz — the PoCs, run them yourself)</a>
                 <a href={`/api/scan/${id}/report`} className="text-neon-cyan hover:text-neon-green">▸ raw .md</a>
                 <a href={`/badge/${id}.svg`} className="text-neon-cyan hover:text-neon-green">▸ embed badge</a>
                 <a href="/verify" className="text-neon-yellow hover:text-neon-green">▸ verify a report</a>
               </div>
-              <div className="mt-3 border border-dark-600 bg-dark-900/60 p-3 text-[8px] sm:text-[9px] font-mono text-gray-600 overflow-x-auto">
-                <span className="text-gray-500">embed in your README — </span>
+              <div className="mt-3 border border-dark-600 bg-dark-900/60 p-3 text-[11.5px] sm:text-[10.5px] font-mono text-gray-500 overflow-x-auto">
+                <span className="text-gray-400">embed in your README — </span>
                 <code className="text-miami-cream">[![hunted by the pack](/badge/{id}.svg)](/report/{id})</code>
               </div>
             </>

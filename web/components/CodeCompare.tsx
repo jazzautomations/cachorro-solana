@@ -29,16 +29,16 @@ export default function CodeCompare({
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
-            className={`px-3 py-2 text-[8px] sm:text-[9px] font-arcade border-r border-dark-600 transition-colors ${
-              tab === t.key ? t.cls + ' bg-dark-900' : 'text-gray-600 hover:text-gray-400'
+            className={`px-3 py-2 text-[11.5px] sm:text-[10.5px] font-arcade border-r border-dark-600 transition-colors ${
+              tab === t.key ? t.cls + ' bg-dark-900' : 'text-gray-500 hover:text-gray-400'
             }`}
           >
             {t.label}
           </button>
         ))}
-        <span className="ml-auto px-3 py-2 text-[8px] font-mono text-gray-700">rust · anchor</span>
+        <span className="ml-auto px-3 py-2 text-[11.5px] font-mono text-gray-600">rust · anchor</span>
       </div>
-      <pre className="p-3 sm:p-4 text-[9px] sm:text-[11px] font-mono leading-relaxed overflow-x-auto text-gray-300 max-h-[520px] overflow-y-auto">
+      <pre className="p-3 sm:p-4 text-[10.5px] sm:text-[11px] font-mono leading-relaxed overflow-x-auto text-gray-300 max-h-[520px] overflow-y-auto">
         {code}
       </pre>
     </div>

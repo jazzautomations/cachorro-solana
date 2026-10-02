@@ -19,7 +19,7 @@ const KIND_CLS: Record<string, string> = {
   finding: 'text-neon-yellow',
   verdict: 'text-neon-orange',
   poc: 'text-neon-green',
-  note: 'text-gray-500',
+  note: 'text-gray-400',
   error: 'text-neon-red',
 }
 
@@ -59,14 +59,14 @@ export default function LiveFeedPreview() {
   return (
     <div className="border border-dark-600 bg-black/80 text-left pixel-border-glow h-full flex flex-col">
       <div className="flex items-center justify-between px-3 py-2 border-b border-dark-600 bg-dark-800 gap-2">
-        <span className="text-[9px] sm:text-[10px] font-arcade text-neon-purple shrink-0">PACK MIND</span>
+        <span className="text-[10.5px] sm:text-[11.5px] font-arcade text-neon-purple shrink-0">PACK MIND</span>
         {live ? (
-          <a href={`/scan/${live.id}`} className="flex items-center gap-1.5 text-[8px] font-mono text-neon-red hover:text-neon-green min-w-0">
+          <a href={`/scan/${live.id}`} className="flex items-center gap-1.5 text-[11.5px] font-mono text-neon-red hover:text-neon-green min-w-0">
             <span className="w-1.5 h-1.5 rounded-full bg-neon-red animate-pulse shrink-0" />
             <span className="truncate">LIVE: {live.target.replace('https://github.com/', '')}</span>
           </a>
         ) : (
-          <span className="flex items-center gap-1.5 text-[8px] font-mono text-gray-600 shrink-0">
+          <span className="flex items-center gap-1.5 text-[11.5px] font-mono text-gray-500 shrink-0">
             <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
             replay of a real hunt
           </span>
@@ -75,17 +75,17 @@ export default function LiveFeedPreview() {
       <div className="p-3 space-y-1.5 flex-1 font-mono">
         {shown.map((e, i) => (
           <div key={i} className="flex items-start gap-2">
-            <span className={`text-[8px] sm:text-[9px] uppercase shrink-0 w-14 pt-px ${KIND_CLS[e.kind] || 'text-gray-500'}`}>
+            <span className={`text-[11.5px] sm:text-[10.5px] uppercase shrink-0 w-14 pt-px ${KIND_CLS[e.kind] || 'text-gray-400'}`}>
               {e.kind}
             </span>
-            <span className="text-[9px] sm:text-[10px] text-gray-500 leading-relaxed break-words">
-              <span className="text-gray-700">{e.agent} </span>
+            <span className="text-[10.5px] sm:text-[11.5px] text-gray-400 leading-relaxed break-words">
+              <span className="text-gray-600">{e.agent} </span>
               {e.text}
             </span>
           </div>
         ))}
-        {live && <span className="text-neon-green animate-blink text-[10px]">▊</span>}
-        {!live && n < FEED.length && <span className="text-neon-green animate-blink text-[10px]">▊</span>}
+        {live && <span className="text-neon-green animate-blink text-[11.5px]">▊</span>}
+        {!live && n < FEED.length && <span className="text-neon-green animate-blink text-[11.5px]">▊</span>}
       </div>
     </div>
   )

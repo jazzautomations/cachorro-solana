@@ -179,6 +179,7 @@ export async function POST(req: Request) {
     stage: 'fetch',
     mode,
     stages: { fetch: 'running' },
+    githubLogin: ghLogin,
     createdAt: Math.floor(Date.now() / 1000),
   }
   const tmp = path.join(dir, 'status.json.tmp')

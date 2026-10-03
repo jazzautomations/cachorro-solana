@@ -269,14 +269,18 @@ export function listRuns(limit = 10) {
     .slice(0, limit)
     .map(({ id }) => {
       const st = readStatus(id)
+      // private-repo hunts never reach the public feed
+      if (st?.githubLogin) return null
       return {
         id,
         target: publicTarget(st?.target),
         kind: st?.kind ?? 'repo',
         status: st?.status ?? 'error',
+        sealed: !!st?.sealed,
         createdAt: st?.createdAt ?? 0,
       }
     })
+    .filter((r): r is NonNullable<typeof r> => r !== null)
 }
 
 export function countRunning(): number {

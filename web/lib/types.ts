@@ -1,7 +1,7 @@
 export interface JobStatus {
   id: string
   target: string
-  kind: 'repo' | 'program-id'
+  kind: 'repo' | 'program-id' | 'site'
   cluster?: string
   status: 'running' | 'done' | 'error'
   stage: string
@@ -17,6 +17,8 @@ export interface JobStatus {
   stale?: boolean
   staleRev?: string
   staleSince?: number
+  githubLogin?: string
+  sealed?: boolean
 }
 
 export interface LintEntry { file: string; line: number; code: string }

@@ -66,7 +66,11 @@ export async function POST(req: Request) {
   }
 
   if (!target) return NextResponse.json({ error: 'target is required' }, { status: 400 })
-  if (!kind) kind = target.startsWith('http') ? 'repo' : 'program-id'
+  if (!kind) {
+    kind = target.startsWith('http')
+      ? REPO_RE.test(target) ? 'repo' : 'site'
+      : 'program-id'
+  }
 
   // anonymous QUICK is open season — any public repo. DEEP/FULL stay keyed:
   // deeper hunts run heavier, paid, claimed-workload pipelines.
@@ -89,8 +93,13 @@ export async function POST(req: Request) {
     if (cluster !== 'mainnet' && cluster !== 'devnet') {
       return NextResponse.json({ error: 'cluster must be mainnet or devnet' }, { status: 400 })
     }
+  } else if (kind === 'site') {
+    // black-box web target — GET-only recon, SSRF-guarded at fetch time
+    if (!/^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}/i.test(target)) {
+      return NextResponse.json({ error: 'not a valid site URL (https://app.example.com)' }, { status: 400 })
+    }
   } else {
-    return NextResponse.json({ error: 'kind must be repo or program-id' }, { status: 400 })
+    return NextResponse.json({ error: 'kind must be repo, program-id, or site' }, { status: 400 })
   }
 
   if (countRunning() >= MAX_CONCURRENT) {

@@ -57,6 +57,9 @@ jset "status=running" "stage=fetch" "stage.fetch=running" "engine=devin" "mode=$
 emit fetch runner action "clonando alvo: $TARGET"
 if [[ "$KIND" == "repo" ]]; then
   bash "$ROOT/scripts/fetch-target.sh" --repo "$TARGET" "$RUN" > "$RUN/fetch.log" 2>&1
+elif [[ "$KIND" == "site" ]]; then
+  emit fetch runner action "recon black-box GET-only: $TARGET"
+  bash "$ROOT/scripts/fetch-target.sh" --site "$TARGET" "$RUN" > "$RUN/fetch.log" 2>&1
 else
   bash "$ROOT/scripts/fetch-target.sh" --program-id "$TARGET" "$CLUSTER" "$RUN" > "$RUN/fetch.log" 2>&1
 fi
@@ -64,6 +67,10 @@ FETCH_RC=$?
 if [[ "$KIND" == "repo" && ! -d "$RUN/repo" ]]; then
   jset "stage.fetch=error"
   fail "fetch failed: clone produced no repo (rc=$FETCH_RC)"
+fi
+if [[ "$KIND" == "site" && ! -d "$RUN/site" ]]; then
+  jset "stage.fetch=error"
+  fail "fetch failed: site recon produced nothing (rc=$FETCH_RC)"
 fi
 jset "stage.fetch=done"
 # record what we actually hunted — the upgrade monitor compares against this
@@ -110,7 +117,11 @@ case "$MODE" in
   quick) MODE_GUIDE="Modo QUICK: sem fan-out — um passe de ANALYZE focado nas classes T1/T2 do atlas, DEVIL só nos candidatos critical/high, PoC do top-1 survivor apenas. Velocidade > cobertura." ;;
   full)  MODE_GUIDE="Modo FULL: fan-out por cluster obrigatório, DEVIL em dois passes (segundo passe re-lê os killed buscando ressurreição válida), PoC de TODOS os survivors ordenados por severidade. Cobertura > velocidade." ;;
 esac
-PROMPT="Leia $ROOT/.devin/skills/cachorro-sol/SKILL.md e execute o pipeline /cachorro-sol para o alvo $TARGET com RUN_DIR=$RUN e TARGET_DIR=$RUN/repo (fetch e static já feitos — vá direto pro estágio 3 RESEARCH). $MODE_GUIDE Siga o contrato de observabilidade do skill ao pé da letra: jset nos estágios e emit-event a cada passo. Trabalhe de forma autônoma até o REPORT; não peça confirmação."
+if [[ "$KIND" == "site" ]]; then
+  PROMPT="Leia $ROOT/.devin/skills/cachorro-sol/SKILL.md e execute o pipeline /cachorro-sol para o alvo $TARGET com RUN_DIR=$RUN e TARGET_DIR=$RUN/site — alvo é um SITE (black-box web). Fetch e static já feitos; TARGET_DIR contém index.html, headers, probe_paths.txt e js/*. Use o pipeline de forma adaptada: RESEARCH identifica stack/provedor de auth/endpoints; ANALYZE caça classes web2↔web3 + AI (atlas); DEVIL tenta matar; PoC = requests curl reproduzíveis (GET apenas, nada destrutivo — race, IDOR-read, header smudge). $MODE_GUIDE jset/emit-event a cada passo. Autônomo até o REPORT."
+else
+  PROMPT="Leia $ROOT/.devin/skills/cachorro-sol/SKILL.md e execute o pipeline /cachorro-sol para o alvo $TARGET com RUN_DIR=$RUN e TARGET_DIR=$RUN/repo (fetch e static já feitos — vá direto pro estágio 3 RESEARCH). $MODE_GUIDE Siga o contrato de observabilidade do skill ao pé da letra: jset nos estágios e emit-event a cada passo. Trabalhe de forma autônoma até o REPORT; não peça confirmação."
+fi
 
 timeout "$AI_TIMEOUT" "$DEVIN_BIN" -p "$PROMPT" \
   --permission-mode bypass \

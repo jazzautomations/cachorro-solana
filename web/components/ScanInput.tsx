@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 const REPO_RE = /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+(\.git)?\/?$/
 const PUBKEY_RE = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/
+const SITE_RE = /^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}.*$/i
 
 export default function ScanInput() {
   const router = useRouter()
@@ -21,13 +22,14 @@ export default function ScanInput() {
   }, [params])
 
   const t = target.trim()
-  const kind: 'repo' | 'program-id' | null =
-    REPO_RE.test(t) ? 'repo' : PUBKEY_RE.test(t) ? 'program-id' : null
+  const kind: 'repo' | 'program-id' | 'site' | null =
+    REPO_RE.test(t) ? 'repo' : PUBKEY_RE.test(t) ? 'program-id'
+    : SITE_RE.test(t) ? 'site' : null
 
   const unleash = async () => {
-    if (!t) { setError('Paste a GitHub repo URL or a Solana program ID'); return }
+    if (!t) { setError('Paste a GitHub repo, a site URL, or a Solana program ID'); return }
     if (!kind) {
-      setError('Not a public GitHub repo URL nor a base58 program ID (32-44 chars)')
+      setError('Not a repo URL, site URL, nor base58 program ID')
       return
     }
     setBusy(true)
@@ -55,7 +57,7 @@ export default function ScanInput() {
           value={target}
           onChange={(e) => { setTarget(e.target.value); setError('') }}
           onKeyDown={(e) => e.key === 'Enter' && !busy && unleash()}
-          placeholder="https://github.com/org/program  —  or  —  Tokenkeg...VQ5DA"
+          placeholder="repo · site · program id — https://github.com/org/x · https://app.x.com · Tokenkeg…"
           spellCheck={false}
           className="flex-1 min-w-0 px-4 py-3 bg-dark-900 border border-dark-600 text-white font-mono text-[11px] sm:text-[13px]
                      placeholder:text-gray-600 focus:border-neon-green focus:outline-none transition-colors"
@@ -63,7 +65,7 @@ export default function ScanInput() {
         <select
           value={cluster}
           onChange={(e) => setCluster(e.target.value)}
-          disabled={kind === 'repo'}
+          disabled={kind !== 'program-id'}
           className="px-3 py-3 bg-dark-900 border border-dark-600 text-neon-cyan font-mono text-[11px] sm:text-[13px]
                      focus:border-neon-green focus:outline-none disabled:opacity-40 sm:w-auto"
         >
@@ -103,7 +105,8 @@ export default function ScanInput() {
         <span className={kind ? 'text-neon-cyan' : 'text-gray-600'}>
           {kind === 'repo' ? '▸ target: GitHub repo (source audit)'
             : kind === 'program-id' ? `▸ target: on-chain program on ${cluster}`
-            : '▸ paste your program — repo or program id'}
+            : kind === 'site' ? '▸ target: live site (black-box recon)'
+            : '▸ repo · site · program id'}
         </span>
         <span className="text-gray-600 hidden xs:inline">local validator only · never mainnet</span>
       </div>

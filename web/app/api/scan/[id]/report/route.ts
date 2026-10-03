@@ -67,7 +67,7 @@ export async function GET(
   if (!isValidId(id)) {
     return NextResponse.json({ error: 'invalid job id' }, { status: 400 })
   }
-  const st = readStatus(id) as Record<string, unknown> | undefined
+  const st = readStatus(id) as unknown as Record<string, unknown> | undefined
   const name = st?.reportFile as string | undefined
   if (!name || !/^[\w.-]+$/.test(name)) {
     return NextResponse.json({ error: 'no report yet' }, { status: 404 })

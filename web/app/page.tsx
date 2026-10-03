@@ -94,11 +94,11 @@ export default function Home() {
 
           <p className="text-[11px] sm:text-sm text-gray-400 mb-8 max-w-xl leading-relaxed">
             AI made offense cheap — autonomous agents are already reading your code.
-            Someone&apos;s pack will find your bug. Ours runs first: point it at your program, your
-            web2↔web3 wiring, your business logic — it finds the bug class, writes the exploit,
+            Someone&apos;s pack will find your bug. Ours runs first: repo, site, or program id —
+            Solana, EVM, or the web2↔web3 wiring — it finds the bug class, writes the exploit,
             <span className="text-neon-green"> runs it on a local validator — never mainnet —</span>
-            and anchors the verdict on-chain. The pre-audit and post-audit rail for Solana startups —
-            proof, not opinions.
+            and anchors the verdict on-chain. Born at the Colosseum Crypto World&apos;s Fair —
+            the pack that hunts this cohort&apos;s code. Proof, not opinion.
           </p>
 
           {/* the console: screen on top, prompt at the bottom edge */}
@@ -135,9 +135,11 @@ export default function Home() {
       {/* ═══ TICKER — one line, not a section ═══ */}
       <div className="border-y border-dark-600 bg-dark-900/60 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center gap-4 sm:gap-6 text-[11.5px] sm:text-[10.5px] font-mono text-gray-400 whitespace-nowrap overflow-x-auto">
-          <span><span className="text-neon-yellow">owner-claimed</span> hunts earn the doberman seal</span>
+          <span><span className="text-neon-yellow">open season</span> — free QUICK hunts for the cohort until Oct 12</span>
           <span className="text-dark-600">|</span>
-          <span><span className="text-white">repo claims</span> via CACHORRO.md nonce</span>
+          <span><span className="text-white">repo · site · program id</span> — one input, all stacks</span>
+          <span className="text-dark-600">|</span>
+          <span><span className="text-neon-yellow">owner-claimed</span> hunts earn the doberman seal</span>
           <span className="text-dark-600">|</span>
           <span><span className="text-neon-cyan">{nHunts}</span> hunts logged</span>
           <span className="text-dark-600">|</span>
@@ -563,9 +565,9 @@ export default function Home() {
           <div className="text-[10.5px] sm:text-[11.5px] font-mono text-gray-500 mb-4">your contract. your wallet. your protocol. your move.</div>
           <div className="text-lg sm:text-3xl font-arcade text-neon-green mb-3 chroma">TEST IT. PROVE IT. SHIP THE RECEIPT.</div>
           <p className="text-[11.5px] sm:text-[13px] text-gray-400 font-mono mb-6 max-w-lg mx-auto leading-relaxed">
-            Recon on your program is free — see what the pack finds before you pay anyone anything.
-            The engagement prices against the audit you didn&apos;t buy: paid in SOL, verified on-chain,
-            and it expires loudly when you upgrade.
+            Free QUICK hunts for everyone building at the Fair — until Oct 12.
+            After the hackathon the pack closes: engagement hunts become paid, keys-gated,
+            priced against the audit you didn&apos;t buy — paid in SOL, verified on-chain.
           </p>
           <div className="flex items-center justify-center gap-4">
             <a
@@ -586,7 +588,7 @@ export default function Home() {
           <span>CACHORRO · the audit your users can verify · proof, not opinion</span>
           <span className="flex items-center gap-3">
             <a href={process.env.CACHORRO_CONTACT_URL || '/pricing'} className="text-neon-yellow hover:text-neon-green transition-colors">TALK TO THE PACK ▸</a>
-            <span>built in the open during Colosseum · Solana track</span>
+            <span>born at Colosseum Crypto World&apos;s Fair · multi-track</span>
           </span>
         </div>
       </footer>

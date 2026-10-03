@@ -60,7 +60,7 @@ export async function cloakPrivatePayout(recipientAddress: string, lamports: big
     }
 
     // 2. private withdrawal to the claimant — pool pays them, not us
-    const wd = await fullWithdraw(deposited.outputUtxos, recipientAddress, {
+    const wd = await fullWithdraw(deposited.outputUtxos, recipientAddress as Parameters<typeof fullWithdraw>[1], {
       connection,
       programId: CLOAK_PROGRAM_ID,
       relayUrl,

@@ -8,6 +8,7 @@
     "start": "next start -p 8790 -H 0.0.0.0"
   },
   "dependencies": {
+    "@cloak.dev/sdk": "^0.2.5",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

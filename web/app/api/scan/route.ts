@@ -42,6 +42,21 @@ export async function POST(req: Request) {
   const mode = (body.mode || 'deep').trim()
   let kind = (body.kind || '').trim()
 
+  // GitHub OAuth session — "scan my private repo" (Snyk-style). The
+  // session cookie maps to a server-side token; consent = their repos.
+  const ghSid = req.headers.get('cookie')?.match(/cch_gh_session=([a-f0-9]+)/)?.[1]
+  let ghToken: string | undefined
+  let ghLogin: string | undefined
+  if (ghSid) {
+    try {
+      const store = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), 'data', 'gh_oauth.json'), 'utf8')
+      ) as Record<string, { token: string; login: string }>
+      const e = store[ghSid]
+      if (e) { ghToken = e.token; ghLogin = e.login }
+    } catch { /* no store yet */ }
+  }
+
   if (!['quick', 'deep', 'full'].includes(mode)) {
     return NextResponse.json({ error: 'mode must be quick, deep or full' }, { status: 400 })
   }
@@ -73,8 +88,10 @@ export async function POST(req: Request) {
   }
 
   // anonymous QUICK is open season — any public repo. DEEP/FULL stay keyed:
-  // deeper hunts run heavier, paid, claimed-workload pipelines.
-  if (!keyEntry && mode !== 'quick') {
+  // deeper hunts run heavier, paid, claimed-workload pipelines. A GitHub-
+  // connected user consented via OAuth — their repos bypass the org gate
+  // (DEEP allowed on own code), still unkeyed.
+  if (!keyEntry && mode !== 'quick' && !(ghToken && kind === 'repo')) {
     const gate = allowedTarget(target, kind)
     if (!gate.ok) return NextResponse.json({ error: gate.why }, { status: 403 })
   }
@@ -174,16 +191,20 @@ export async function POST(req: Request) {
   // running hunt. systemd-run puts the job in its own transient unit; setsid
   // is the fallback for non-systemd hosts.
   const useSystemd = fs.existsSync('/usr/bin/systemd-run') || fs.existsSync('/bin/systemd-run')
+  // private-repo consent token — env-only, never written to the run dir
+  const ghEnv = ghToken ? { CACHORRO_GH_TOKEN: ghToken } : {}
   const child = useSystemd
     ? spawn('systemd-run', [
         '--quiet', '--collect', '--unit', `cachorro-hunt-${id}`,
         '--setenv', `HOME=${process.env.HOME || '/root'}`,
         '--setenv', `PATH=${process.env.PATH}`,
         '--setenv', `CACHORRO_ROOT=${runnerCwd}`,
+        ...(ghToken ? ['--setenv', `CACHORRO_GH_TOKEN=${ghToken}`] : []),
         'bash', runner, id, kind, target, cluster, mode,
       ], { detached: true, stdio: 'ignore', cwd: runnerCwd })
     : spawn('setsid', ['bash', runner, id, kind, target, cluster, mode], {
         detached: true, stdio: 'ignore', cwd: runnerCwd,
+        env: { ...process.env, ...ghEnv },
       })
   child.unref()
 

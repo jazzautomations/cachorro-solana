@@ -13,3 +13,4 @@ test-ledger/
 cachorro-out/engine-runs/
 .secrets
 web/data/billing.json
+web/data/gh_oauth.json

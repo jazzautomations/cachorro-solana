@@ -11,7 +11,15 @@ case "$MODE" in
   --repo)
     REPO="${2:?repo url}"; DEST="${3:?dest dir}"; mkdir -p "$DEST"
     echo "[*] Clonando $REPO ..."
-    if ! git clone --depth 1 "$REPO" "$DEST/repo" 2>/dev/null; then
+    # OAuth session token → private repos. Via http.extraheader so the
+    # token never lands in .git/config.
+    if [[ -n "${CACHORRO_GH_TOKEN:-}" && "$REPO" == https://github.com/* ]]; then
+      B64=$(printf 'x:%s' "$CACHORRO_GH_TOKEN" | base64 -w0)
+      if ! git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $B64" clone --depth 1 "$REPO" "$DEST/repo" 2>/dev/null; then
+        rm -rf "$DEST/repo"; git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $B64" clone "$REPO" "$DEST/repo"
+      fi
+      echo "[+] private repo — github session token used (never stored)"
+    elif ! git clone --depth 1 "$REPO" "$DEST/repo" 2>/dev/null; then
       rm -rf "$DEST/repo"; git clone "$REPO" "$DEST/repo"
     fi
     echo "[+] Codigo em: $DEST/repo"

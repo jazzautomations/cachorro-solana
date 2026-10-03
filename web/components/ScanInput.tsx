@@ -15,6 +15,13 @@ export default function ScanInput() {
   const [mode, setMode] = useState('quick')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const [gh, setGh] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch('/api/auth/github/me').then((r) => r.json()).then((d) => {
+      if (d.connected) setGh(d.login)
+    }).catch(() => {})
+  }, [])
 
   useEffect(() => {
     const t = params.get('target')
@@ -99,6 +106,16 @@ export default function ScanInput() {
             {label}
           </button>
         ))}
+      </div>
+
+      <div className="mt-2 text-[10.5px] sm:text-[11.5px] font-mono">
+        {gh ? (
+          <span className="text-neon-green">github connected as @{gh} — private repos huntable</span>
+        ) : (
+          <a href="/api/auth/github" className="text-gray-500 hover:text-neon-cyan transition-colors">
+            connect github ▸ hunt your private repos
+          </a>
+        )}
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-3 text-[10.5px] sm:text-[11.5px] font-mono">

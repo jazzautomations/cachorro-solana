@@ -117,7 +117,7 @@ export async function POST(req: Request) {
     let rl: Record<string, number[]> = {}
     try { rl = JSON.parse(fs.readFileSync(rlPath, 'utf8')) } catch { /* fresh */ }
     const now = Math.floor(Date.now() / 1000)
-    const recent = (rl[ip] || []).filter((t) => now - t < 600)
+    const recent = (Array.isArray(rl[ip]) ? rl[ip] : []).filter((t) => now - t < 600)
     // 3 free hunts per 10min per IP — tolerates shared event NAT, still stops spam
     if (recent.length >= 3) {
       return NextResponse.json(

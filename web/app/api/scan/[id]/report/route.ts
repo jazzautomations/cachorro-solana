@@ -95,7 +95,7 @@ export async function GET(
   const m = target?.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)
   const claimed = m ? !!getRepoClaim(m[1])?.verified : true
   if (m && !claimed) {
-    return new NextResponse(sealedReport(id, st), {
+    return new NextResponse(sealedReport(id, st ?? {}), {
       headers: { 'content-type': 'text/markdown; charset=utf-8' },
     })
   }

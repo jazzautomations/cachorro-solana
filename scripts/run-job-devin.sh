@@ -155,7 +155,7 @@ if [[ "$TRUST" == "untrusted" ]]; then
     exec setpriv --reuid 65534 --regid 65534 --init-groups \
       env -i HOME=/var/lib/cachorro-sandbox/home PATH=/var/lib/cachorro-sandbox/bin:/usr/local/bin:/usr/bin:/bin \
       timeout "$SBX_AIT" "$SBX_DEVIN" -p "$SBX_PROMPT" \
-      --permission-mode smart --respect-workspace-trust false
+      --permission-mode dangerous --respect-workspace-trust false
   ' > "$RUN/devin.log" 2>&1
   DEVIN_RC=$?
 else

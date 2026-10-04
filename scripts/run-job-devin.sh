@@ -139,7 +139,7 @@ if [[ "$TRUST" == "untrusted" ]]; then
   chmod -R a+r "$SBX/home/.config-devin" 2>/dev/null || true
   chmod -R a+rwX "$SBX/home" "$RUN"
   export SBX_PROMPT="${PROMPT//$ROOT/$SBX/work}"
-  export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT" SBX_DEVIN="$DEVIN_BIN"
+  export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT" SBX_DEVIN="/var/lib/cachorro-sandbox/bin/$(basename "$DEVIN_BIN")"
   unshare -m bash -c '
     mkdir -p /var/lib/cachorro-sandbox/bin &&
     mount --bind "$SBX_ROOT" /var/lib/cachorro-sandbox/work &&

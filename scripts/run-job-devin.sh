@@ -141,13 +141,16 @@ if [[ "$TRUST" == "untrusted" ]]; then
   export SBX_PROMPT="${PROMPT//$ROOT/$SBX/work}"
   export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT" SBX_DEVIN="$DEVIN_BIN"
   unshare -m bash -c '
+    mkdir -p /var/lib/cachorro-sandbox/bin &&
     mount --bind "$SBX_ROOT" /var/lib/cachorro-sandbox/work &&
+    mount --bind /root/.local/bin /var/lib/cachorro-sandbox/bin &&
+    mount -o remount,ro,bind /var/lib/cachorro-sandbox/bin &&
     mount --bind /var/lib/cachorro-empty /root &&
     mount --bind /var/lib/cachorro-empty /etc/systemd/system &&
     mkdir -p /var/lib/cachorro-sandbox/home/.config &&
     ln -sfn /var/lib/cachorro-sandbox/home/.config-devin /var/lib/cachorro-sandbox/home/.config/devin &&
     exec setpriv --reuid 65534 --regid 65534 --init-groups \
-      env -i HOME=/var/lib/cachorro-sandbox/home PATH=/usr/local/bin:/usr/bin:/bin \
+      env -i HOME=/var/lib/cachorro-sandbox/home PATH=/var/lib/cachorro-sandbox/bin:/usr/local/bin:/usr/bin:/bin \
       timeout "$SBX_AIT" "$SBX_DEVIN" -p "$SBX_PROMPT" \
       --permission-mode smart --respect-workspace-trust false
   ' > "$RUN/devin.log" 2>&1

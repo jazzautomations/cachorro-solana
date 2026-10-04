@@ -38,7 +38,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   }
   // the bundle names the repo everywhere (report body, findings, bridge map) —
   // sealed/unclaimed targets keep the bundle owner-only
-  if (isSealedView(st as Record<string, unknown>) || (st.target && publicTarget(st.target) !== st.target)) {
+  if (isSealedView(st) || (st.target && publicTarget(st.target) !== st.target)) {
     return NextResponse.json({
       error: 'evidence bundle is owner-only — claim this repo at /api/claim/repo to unlock the full tarball',
     }, { status: 403 })

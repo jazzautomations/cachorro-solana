@@ -253,7 +253,9 @@ export function readReport(id: string): ScanReport | null {
 // A hunt's payload (files, PoC, exploit path) stays sealed for the public until
 // the owner proves control. Sites have no claim path → always sealed. Private
 // hunts (githubLogin) are never public. Our own orgs publish by design.
-export function isSealedView(st: Record<string, unknown> | null | undefined): boolean {
+export function isSealedView(
+  st: { sealed?: boolean; githubLogin?: string | null; kind?: string; target?: string } | null | undefined,
+): boolean {
   if (!st) return true
   if (st.sealed === true) return true
   if (st.githubLogin) return true
@@ -285,7 +287,7 @@ export function publicScanView(r: ScanReport): Record<string, unknown> {
 }
 
 /** Sealed public report markdown — counts + classes, never files/snippets. */
-export function sealedReportMd(id: string, st: Record<string, unknown>): string {
+export function sealedReportMd(id: string, st: { target?: string } | null | undefined): string {
   const dir = runDir(id)
   let rows = ''
   let n = 0
@@ -300,7 +302,7 @@ export function sealedReportMd(id: string, st: Record<string, unknown>): string 
       break
     } catch { /* next file */ }
   }
-  const pub = st.target ? publicTarget(String(st.target)) : 'the target'
+  const pub = st?.target ? publicTarget(String(st.target)) : 'the target'
   return [
     `# sealed hunt — ${pub}`,
     '',

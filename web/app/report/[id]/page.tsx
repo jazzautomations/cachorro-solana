@@ -88,7 +88,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   const st = isValidId(id) ? readStatus(id) : null
 
   // private hunts (github oauth) render for the owner session only
-  const owner = (st as Record<string, unknown> | null)?.githubLogin as string | undefined
+  const owner = st?.githubLogin
   if (owner) {
     const jar = await cookies()
     const sid = jar.get('cch_gh_session')?.value
@@ -112,10 +112,10 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   }
 
   // sealed hunts: the public page renders the sealed view — never the raw report
-  const sealed = isSealedView(st as Record<string, unknown> | null)
+  const sealed = isSealedView(st)
   const file = data?.reportFile ? path.join(runDir(id), data.reportFile) : null
   const rawMd = file && fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null
-  const md = sealed ? sealedReportMd(id, (st as Record<string, unknown>) ?? {}) : rawMd
+  const md = sealed ? sealedReportMd(id, st) : rawMd
 
   // the receipt binds to the REAL report sha — even when the page is sealed
   const sha = rawMd ? crypto.createHash('sha256').update(rawMd).digest('hex') : null

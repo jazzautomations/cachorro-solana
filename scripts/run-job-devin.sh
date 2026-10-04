@@ -136,8 +136,10 @@ if [[ "$TRUST" == "untrusted" ]]; then
   SBX=/var/lib/cachorro-sandbox
   install -d -m 0755 "$SBX/work" "$SBX/home" /var/lib/cachorro-empty
   cp -a /root/.config/devin "$SBX/home/.config-devin" 2>/dev/null || true
-  chmod -R a+r "$SBX/home/.config-devin" 2>/dev/null || true
-  chmod -R a+rwX "$SBX/home" "$RUN"
+  mkdir -p "$SBX/home/.local/share"
+  cp -a /root/.local/share/devin "$SBX/home/.local/share/" 2>/dev/null || true
+  chmod -R a+rwX "$SBX/home" 2>/dev/null || true
+  chmod -R a+rwX "$RUN"
   export SBX_PROMPT="${PROMPT//$ROOT/$SBX/work}"
   export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT" SBX_DEVIN="/var/lib/cachorro-sandbox/bin/$(basename "$DEVIN_BIN")"
   unshare -m bash -c '

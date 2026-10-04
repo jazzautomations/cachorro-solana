@@ -137,9 +137,9 @@ if [[ "$TRUST" == "untrusted" ]]; then
   install -d -m 0755 "$SBX/work" "$SBX/home" /var/lib/cachorro-empty
   cp -a /root/.config/devin "$SBX/home/.config-devin" 2>/dev/null || true
   chmod -R a+r "$SBX/home/.config-devin" 2>/dev/null || true
-  chmod -R a+rwX "$RUN"
+  chmod -R a+rwX "$SBX/home" "$RUN"
   PROMPT="${PROMPT//$ROOT/$SBX/work}"
-  unshare -Urm bash -c '
+  unshare -m bash -c '
     mount --bind "'"$ROOT"'" /var/lib/cachorro-sandbox/work &&
     mount --bind /var/lib/cachorro-empty /root &&
     mount --bind /var/lib/cachorro-empty /etc/systemd/system &&

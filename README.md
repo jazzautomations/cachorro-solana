@@ -6,7 +6,7 @@ The pack hunts its own repository — the [self-audit report](https://cachorro.j
 
 **The audit your users can verify.** Point the pack at an Anchor program or a deployed program ID: it fans out like a bug bounty, attacks the surface, writes an executable PoC for every survivor, then anchors the verdict as a receipt on-chain.
 
-Six human audits (Quantstamp ×3, Ackee, OtterSec) passed over `onre-finance/onre-sol` — the pack found 4 novel bugs and proved each on a local validator. See `docs/` for the business plan and pitch.
+Six human audits (Quantstamp ×3, Ackee, OtterSec) passed over `onre-finance/onre-sol` — the pack found 4 novel bugs and proved each on a local validator. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the system diagrams and `docs/` for the business plan and pitch.
 
 ## The proof stack
 

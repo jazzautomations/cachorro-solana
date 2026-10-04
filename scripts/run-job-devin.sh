@@ -127,11 +127,38 @@ else
   PROMPT="Leia $ROOT/.devin/skills/cachorro-sol/SKILL.md e execute o pipeline /cachorro-sol para o alvo $TARGET com RUN_DIR=$RUN e TARGET_DIR=$RUN/repo (fetch e static já feitos — vá direto pro estágio 3 RESEARCH). $MODE_GUIDE Siga o contrato de observabilidade do skill ao pé da letra: jset nos estágios e emit-event a cada passo. Trabalhe de forma autônoma até o REPORT; não peça confirmação."
 fi
 
-timeout "$AI_TIMEOUT" "$DEVIN_BIN" -p "$PROMPT" \
-  --permission-mode bypass \
-  --respect-workspace-trust false \
-  > "$RUN/devin.log" 2>&1
-DEVIN_RC=$?
+# ── untrusted hunts run the AI stage inside a mount+user namespace ──────────
+# anonymous targets are attacker-controlled content: prompt injection is a
+# real RCE vector. the devin stage drops to uid nobody inside a namespace
+# where /root and system secrets are bind-hidden, env is clean, and exec is
+# gated by the fast model ("smart" mode). trusted hunts keep the fast path.
+TRUST="${6:-untrusted}"
+if [[ "$TRUST" == "untrusted" ]]; then
+  SBX=/var/lib/cachorro-sandbox
+  install -d -m 0755 "$SBX/work" "$SBX/home" /var/lib/cachorro-empty
+  cp -a /root/.config/devin "$SBX/home/.config-devin" 2>/dev/null || true
+  chmod -R a+r "$SBX/home/.config-devin" 2>/dev/null || true
+  chmod -R a+rwX "$RUN"
+  PROMPT="${PROMPT//$ROOT/$SBX/work}"
+  unshare -Urm bash -c '
+    mount --bind "'"$ROOT"'" /var/lib/cachorro-sandbox/work &&
+    mount --bind /var/lib/cachorro-empty /root &&
+    mount --bind /var/lib/cachorro-empty /etc/systemd/system &&
+    mkdir -p /var/lib/cachorro-sandbox/home/.config &&
+    ln -sfn /var/lib/cachorro-sandbox/home/.config-devin /var/lib/cachorro-sandbox/home/.config/devin &&
+    exec setpriv --reuid 65534 --regid 65534 --init-groups \
+      env -i HOME=/var/lib/cachorro-sandbox/home PATH=/usr/local/bin:/usr/bin:/bin \
+      timeout '"$AI_TIMEOUT"' "'"$DEVIN_BIN"'" -p '"$PROMPT"' \
+      --permission-mode smart --respect-workspace-trust false
+  ' > "$RUN/devin.log" 2>&1
+  DEVIN_RC=$?
+else
+  timeout "$AI_TIMEOUT" "$DEVIN_BIN" -p "$PROMPT" \
+    --permission-mode bypass \
+    --respect-workspace-trust false \
+    > "$RUN/devin.log" 2>&1
+  DEVIN_RC=$?
+fi
 
 # If devin finished cleanly it already set status=done; only patch leftovers.
 python3 - "$ST" "$DEVIN_RC" <<'PY'

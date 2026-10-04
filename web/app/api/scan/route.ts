@@ -221,8 +221,10 @@ export async function POST(req: Request) {
         '--setenv', `CACHORRO_ROOT=${runnerCwd}`,
         ...(ghToken ? ['--setenv', `CACHORRO_GH_TOKEN=${ghToken}`] : []),
         'bash', runner, id, kind, target, cluster, mode,
+        keyEntry || ghToken ? 'trusted' : 'untrusted',
       ], { detached: true, stdio: 'ignore', cwd: runnerCwd })
-    : spawn('setsid', ['bash', runner, id, kind, target, cluster, mode], {
+    : spawn('setsid', ['bash', runner, id, kind, target, cluster, mode,
+        keyEntry || ghToken ? 'trusted' : 'untrusted'], {
         detached: true, stdio: 'ignore', cwd: runnerCwd,
         env: { ...process.env, ...ghEnv },
       })

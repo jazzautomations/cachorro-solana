@@ -138,16 +138,17 @@ if [[ "$TRUST" == "untrusted" ]]; then
   cp -a /root/.config/devin "$SBX/home/.config-devin" 2>/dev/null || true
   chmod -R a+r "$SBX/home/.config-devin" 2>/dev/null || true
   chmod -R a+rwX "$SBX/home" "$RUN"
-  PROMPT="${PROMPT//$ROOT/$SBX/work}"
+  export SBX_PROMPT="${PROMPT//$ROOT/$SBX/work}"
+  export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT" SBX_DEVIN="$DEVIN_BIN"
   unshare -m bash -c '
-    mount --bind "'"$ROOT"'" /var/lib/cachorro-sandbox/work &&
+    mount --bind "$SBX_ROOT" /var/lib/cachorro-sandbox/work &&
     mount --bind /var/lib/cachorro-empty /root &&
     mount --bind /var/lib/cachorro-empty /etc/systemd/system &&
     mkdir -p /var/lib/cachorro-sandbox/home/.config &&
     ln -sfn /var/lib/cachorro-sandbox/home/.config-devin /var/lib/cachorro-sandbox/home/.config/devin &&
     exec setpriv --reuid 65534 --regid 65534 --init-groups \
       env -i HOME=/var/lib/cachorro-sandbox/home PATH=/usr/local/bin:/usr/bin:/bin \
-      timeout '"$AI_TIMEOUT"' "'"$DEVIN_BIN"'" -p '"$PROMPT"' \
+      timeout "$SBX_AIT" "$SBX_DEVIN" -p "$SBX_PROMPT" \
       --permission-mode smart --respect-workspace-trust false
   ' > "$RUN/devin.log" 2>&1
   DEVIN_RC=$?

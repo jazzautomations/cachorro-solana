@@ -64,6 +64,10 @@ else
   bash "$ROOT/scripts/fetch-target.sh" --program-id "$TARGET" "$CLUSTER" "$RUN" > "$RUN/fetch.log" 2>&1
 fi
 FETCH_RC=$?
+if [[ $FETCH_RC -ne 0 ]]; then
+  jset "stage.fetch=error"
+  fail "fetch refused/failed (rc=$FETCH_RC) — see fetch.log"
+fi
 if [[ "$KIND" == "repo" && ! -d "$RUN/repo" ]]; then
   jset "stage.fetch=error"
   fail "fetch failed: clone produced no repo (rc=$FETCH_RC)"

@@ -3,6 +3,7 @@ import { spawn } from 'child_process'
 import crypto from 'crypto'
 import fs from 'fs'
 import path from 'path'
+import dns from 'node:dns/promises'
 import {
   allowedTarget, assertEngine, countRunning, isValidId, listRuns, pickRunner,
   PUBKEY_RE, REPO_RE, RUNS_DIR,
@@ -114,6 +115,24 @@ export async function POST(req: Request) {
     // black-box web target — GET-only recon, SSRF-guarded at fetch time
     if (!/^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}/i.test(target)) {
       return NextResponse.json({ error: 'not a valid site URL (https://app.example.com)' }, { status: 400 })
+    }
+    // early SSRF reject: resolve the host and refuse private/loopback/
+    // link-local addresses — nip.io & friends must die before they eat a slot
+    try {
+      const host = new URL(target).hostname
+      const addrs = (await dns.lookup(host, { all: true })).map((a) => a.address)
+      const blocked = addrs.some((ip) => {
+        const v4 = ip.startsWith('::ffff:') ? ip.slice(7) : ip
+        return (
+          /^127\.|^10\.|^169\.254\.|^192\.168\.|^172\.(1[6-9]|2\d|3[01])\.|^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(v4) ||
+          v4 === '::1' || /^f[cd]/i.test(v4) || /^fe8|^fe9|^fea|^feb/i.test(v4)
+        )
+      })
+      if (blocked || addrs.length === 0) {
+        return NextResponse.json({ error: 'refused: host resolves to a private address' }, { status: 400 })
+      }
+    } catch {
+      return NextResponse.json({ error: 'refused: host does not resolve' }, { status: 400 })
     }
   } else {
     return NextResponse.json({ error: 'kind must be repo, program-id, or site' }, { status: 400 })

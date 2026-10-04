@@ -49,7 +49,7 @@ case "$MODE" in
     ;;
   --site)
     # Black-box web target: GET-only recon. SSRF-guarded — refuses private IPs.
-    SITE="${2:?site url}"; DEST="${3:?dest dir}"; mkdir -p "$DEST/site"
+    SITE="${2:?site url}"; DEST="${3:?dest dir}"
     case "$SITE" in http://*|https://*) ;; *) echo "[!] site must be http(s) url"; exit 1;; esac
     HOST=$(python3 -c "from urllib.parse import urlsplit;print(urlsplit('$SITE').hostname or '')")
     [ -z "$HOST" ] && { echo "[!] unparseable site"; exit 1; }
@@ -65,6 +65,9 @@ try:
 except socket.gaierror:
     sys.exit(2)
 EOF
+    # only create the run dir AFTER the host is proven safe — an empty dir
+    # would otherwise read as a successful fetch to the runner
+    mkdir -p "$DEST/site"
     echo "[*] Black-box recon on $SITE ..."
     UA="cachorro-recon/1.0 (+authorized-test)"
     curl -skL --max-time 20 -A "$UA" -D "$DEST/site/root.headers" -o "$DEST/site/index.html" "$SITE" || true

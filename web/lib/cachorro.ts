@@ -343,7 +343,6 @@ export function listRuns(limit = 10) {
       return { id, mtime }
     })
     .sort((a, b) => b.mtime - a.mtime)
-    .slice(0, limit)
     .map(({ id }) => {
       const st = readStatus(id)
       // private-repo hunts never reach the public feed; failed/aborted
@@ -360,6 +359,7 @@ export function listRuns(limit = 10) {
       }
     })
     .filter((r): r is NonNullable<typeof r> => r !== null)
+    .slice(0, limit)
 }
 
 export function countRunning(): number {

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getInvoice, markPaid, TREASURY, RPC } from '@/lib/plans'
+import { getInvoice, markPaid, signatureConsumed, TREASURY, RPC } from '@/lib/plans'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -38,13 +38,15 @@ async function verifyPayment(signature: string, memo: string, lamports: number) 
     return p?.type === 'transfer' && p.info?.destination === TREASURY && (p.info?.lamports ?? 0) >= lamports
   })
 
+  // exact memo equality — one transaction can carry many memo instructions
+  // with attacker-chosen text, so substring matching would let one payment
+  // masquerade as bound to invoices it never intended to pay
   const memoInIx = instructions.some((ix: { programId?: string; parsed?: string }) =>
-    ix.programId === MEMO_PROGRAM && typeof ix.parsed === 'string' && ix.parsed.includes(memo)
+    ix.programId === MEMO_PROGRAM && ix.parsed === memo
   )
-  const memoInLogs = (tx.meta?.logMessages ?? []).some((l: string) => l.includes(memo))
 
   if (!paid) return { ok: false, why: 'no transfer to treasury covering the amount' }
-  if (!memoInIx && !memoInLogs) return { ok: false, why: 'memo missing — payment not bound to this invoice' }
+  if (!memoInIx) return { ok: false, why: 'memo missing — payment not bound to this invoice' }
   return { ok: true }
 }
 
@@ -67,6 +69,11 @@ export async function POST(req: Request) {
   try {
     const v = await verifyPayment(sig, inv.memo, inv.amountLamports)
     if (!v.ok) return NextResponse.json({ paid: false, why: v.why }, { status: 402 })
+    // one payment signature redeems at most one invoice — a tx can carry
+    // several memos, so binding must be enforced at redemption, not just match
+    if (signatureConsumed(sig, inv.id)) {
+      return NextResponse.json({ paid: false, why: 'payment signature already redeemed for another invoice' }, { status: 402 })
+    }
     const res = markPaid(inv.id, sig)!
     return NextResponse.json({ paid: true, key: res.key, plan: res.plan })
   } catch (e) {

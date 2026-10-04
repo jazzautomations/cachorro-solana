@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { newRepoClaim, getRepoClaim, verifyRepoClaim } from '@/lib/claims'
+import { newRepoClaim, getRepoClaim, verifyRepoClaim, markRepoPayoutSent } from '@/lib/claims'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -15,18 +15,26 @@ export async function POST(req: Request) {
   if (!REPO_RE.test(repo)) return NextResponse.json({ error: 'repo must be owner/name' }, { status: 400 })
 
   if (body.verify) {
+    // payout may only ever fire on the unverified→verified transition — an
+    // already-claimed repo must never retrigger a treasury movement
+    const before = getRepoClaim(repo)
+    const wasVerified = !!before?.verified
     const ok = await verifyRepoClaim(repo)
     const c = getRepoClaim(repo)
     if (!ok) return NextResponse.json({ verified: false, error: 'nonce not found in CACHORRO.md (checked main/master/HEAD)', nonce: c?.nonce }, { status: 403 })
 
     // optional private bounty payout — claimant passes their Solana address,
-    // treasury shields + withdraws via Cloak: no on-chain link treasury↔owner
+    // treasury shields + withdraws via Cloak: no on-chain link treasury↔owner.
+    // The treasury moves at most once per repo claim and only on the
+    // verified:false→true transition — a replayed verify can never retrigger.
     let payout: { ok: boolean; depositSig?: string; withdrawSig?: string; error?: string } | undefined
     const payoutAddr = (body.payoutAddress || '').trim()
-    if (payoutAddr && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(payoutAddr)) {
-      const { cloakPrivatePayout } = await import('@/lib/cloak')
+    if (!wasVerified && payoutAddr && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(payoutAddr)) {
       const amount = BigInt(process.env.CACHORRO_CLAIM_PAYOUT_LAMPORTS || '0')
-      if (amount > 0n) payout = await cloakPrivatePayout(payoutAddr, amount)
+      if (amount > 0n && markRepoPayoutSent(repo)) {
+        const { cloakPrivatePayout } = await import('@/lib/cloak')
+        payout = await cloakPrivatePayout(payoutAddr, amount)
+      }
     }
     return NextResponse.json({ verified: true, repo, claimedAt: c?.claimedAt, payout })
   }

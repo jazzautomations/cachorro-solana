@@ -105,6 +105,11 @@ export function getInvoice(id: string): Invoice | null {
   return load().invoices.find((i) => i.id === id) ?? null
 }
 
+/** 1:1 binding — one payment signature can redeem at most one invoice. */
+export function signatureConsumed(signature: string, exceptInvoiceId?: string): boolean {
+  return load().invoices.some((i) => i.signature === signature && i.id !== exceptInvoiceId)
+}
+
 export function markPaid(id: string, signature: string): { key: string; plan: string } | null {
   const s = load()
   const inv = s.invoices.find((i) => i.id === id)

@@ -99,7 +99,7 @@ export function putClaim(c: Claim) {
 
 // ── repo claims: prove control by committing CACHORRO.md with our nonce ──
 
-interface RepoClaim { repo: string; nonce: string; verified: boolean; claimedAt: number }
+interface RepoClaim { repo: string; nonce: string; verified: boolean; claimedAt: number; payoutSent?: boolean }
 type RepoStore = Record<string, RepoClaim>
 
 const REPO_DATA = join(process.cwd(), 'data', 'repo_claims.json')
@@ -126,6 +126,16 @@ export function newRepoClaim(repo: string): RepoClaim | null {
 
 export function getRepoClaim(repo: string): RepoClaim | null {
   return loadRepos()[repo] ?? null
+}
+
+/** One-shot flag — the treasury moves at most once per repo claim. */
+export function markRepoPayoutSent(repo: string): boolean {
+  const s = loadRepos()
+  const c = s[repo]
+  if (!c || c.payoutSent) return false
+  c.payoutSent = true
+  saveRepos(s)
+  return true
 }
 
 /** Fetch CACHORRO.md at the repo root and check it carries our nonce. */

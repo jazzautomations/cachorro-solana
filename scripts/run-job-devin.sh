@@ -151,6 +151,7 @@ if [[ "$TRUST" == "untrusted" ]]; then
     mount --bind /var/lib/cachorro-empty /etc/systemd/system &&
     mkdir -p /var/lib/cachorro-sandbox/home/.config &&
     ln -sfn /var/lib/cachorro-sandbox/home/.config-devin /var/lib/cachorro-sandbox/home/.config/devin &&
+    cd /var/lib/cachorro-sandbox/work &&
     exec setpriv --reuid 65534 --regid 65534 --init-groups \
       env -i HOME=/var/lib/cachorro-sandbox/home PATH=/var/lib/cachorro-sandbox/bin:/usr/local/bin:/usr/bin:/bin \
       timeout "$SBX_AIT" "$SBX_DEVIN" -p "$SBX_PROMPT" \

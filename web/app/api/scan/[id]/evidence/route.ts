@@ -3,7 +3,18 @@ import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
-import { isValidId, publicTarget, runDir, readStatus } from '@/lib/cachorro'
+import { isValidId, publicTarget, runDir, readStatus, isSealedView } from '@/lib/cachorro'
+
+function ghLoginOf(req: Request): string | undefined {
+  const sid = req.headers.get('cookie')?.match(/cch_gh_session=([a-f0-9]+)/)?.[1]
+  if (!sid) return undefined
+  try {
+    const store = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), 'data', 'gh_oauth.json'), 'utf8')
+    ) as Record<string, { login: string }>
+    return store[sid]?.login
+  } catch { return undefined }
+}
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -12,7 +23,7 @@ const ROOT = process.env.CACHORRO_ROOT || path.resolve(process.cwd(), '..')
 const MAX_BYTES = 40 * 1024 * 1024
 
 // the deliverable: everything a skeptic needs to re-run the proof themselves
-export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   if (!isValidId(id)) return NextResponse.json({ error: 'invalid id' }, { status: 400 })
   const dir = runDir(id)
@@ -20,9 +31,14 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   if (!st || st.status !== 'done' || !st.reportFile) {
     return NextResponse.json({ error: 'no finished report for this hunt' }, { status: 404 })
   }
+  // private hunts: owner session only
+  const owner = st.githubLogin as string | undefined
+  if (owner && ghLoginOf(req) !== owner) {
+    return NextResponse.json({ error: 'sealed — this hunt belongs to a github session that is not yours' }, { status: 403 })
+  }
   // the bundle names the repo everywhere (report body, findings, bridge map) —
-  // unclaimed targets keep the bundle owner-only
-  if (st.target && publicTarget(st.target) !== st.target) {
+  // sealed/unclaimed targets keep the bundle owner-only
+  if (isSealedView(st as Record<string, unknown>) || (st.target && publicTarget(st.target) !== st.target)) {
     return NextResponse.json({
       error: 'evidence bundle is owner-only — claim this repo at /api/claim/repo to unlock the full tarball',
     }, { status: 403 })

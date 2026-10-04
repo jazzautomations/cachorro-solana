@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import { isValidId, maskRepoRefs, publicTarget, readStatus, runDir } from '@/lib/cachorro'
+import { isValidId, maskRepoRefs, publicTarget, readStatus, runDir, isSealedView, sealedReportMd } from '@/lib/cachorro'
 import { getRepoClaim } from '@/lib/claims'
 
 export const runtime = 'nodejs'
@@ -19,44 +19,7 @@ function ghLoginOf(req: Request): string | undefined {
 }
 
 /** Sealed public view — counts + classes, never files/snippets/exploits. */
-function sealedReport(id: string, st: Record<string, unknown>): string {
-  const dir = runDir(id)
-  let rows = ''
-  let n = 0
-  for (const f of ['survivors.json', 'findings.json']) {
-    try {
-      const list = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))
-      const arr = Array.isArray(list) ? list : list.findings || list.survivors || []
-      for (const it of arr) {
-        n++
-        rows += `| ${it.id ?? `F${n}`} | ${it.severity ?? '?'} | ${it.class ?? it.title ?? '?'} |\n`
-      }
-      break
-    } catch { /* next file */ }
-  }
-  const pub = st.target ? publicTarget(String(st.target)) : 'the target'
-  return [
-    `# sealed hunt — ${pub}`,
-    '',
-    `run \`${id}\` · the pack hunted this target. the findings are **sealed** —`,
-    `a leaked vulnerability is an attack vector, so the pack doesn't leak.`,
-    '',
-    '## what ships publicly',
-    '',
-    '| ID | Severity | Class |',
-    '|---|---|---|',
-    rows || '| — | — | details sealed |\n',
-    '',
-    '## unseal',
-    '',
-    'The owner unlocks the full report by claiming the target:',
-    'commit `CACHORRO.md` with a pack nonce (POST /api/claim/repo) — proof of',
-    'control, then the findings open. Private-repo hunts (GitHub connected)',
-    'never appear publicly at all.',
-    '',
-    'proof, not opinion — but only to those with skin in it.',
-  ].join('\n')
-}
+const sealedReport = sealedReportMd
 
 /** Serves the final hunt report (report_*.md) written by the REPORT stage. */
 export async function GET(
@@ -89,12 +52,9 @@ export async function GET(
     return NextResponse.json({ error: 'report file missing' }, { status: 404 })
   }
 
-  // unclaimed repos stay anonymous AND sealed — public sees counts/classes
-  // only; the owner claims the repo (CACHORRO.md nonce) to open the body.
+  // sealed hunts: public sees counts/classes only; owner unseals via claim.
   const target = st?.target as string | undefined
-  const m = target?.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)
-  const claimed = m ? !!getRepoClaim(m[1])?.verified : true
-  if (m && !claimed) {
+  if (isSealedView(st)) {
     return new NextResponse(sealedReport(id, st ?? {}), {
       headers: { 'content-type': 'text/markdown; charset=utf-8' },
     })

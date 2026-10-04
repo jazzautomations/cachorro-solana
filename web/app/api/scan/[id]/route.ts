@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { assertEngine, isValidId, readReport } from '@/lib/cachorro'
+import { assertEngine, isValidId, readReport, readStatus, isSealedView, publicScanView } from '@/lib/cachorro'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -17,9 +17,14 @@ export async function GET(
   if (!isValidId(id)) {
     return NextResponse.json({ error: 'invalid job id' }, { status: 400 })
   }
+  const st = readStatus(id)
   const report = readReport(id)
   if (!report) {
     return NextResponse.json({ error: 'job not found' }, { status: 404 })
+  }
+  // sealed hunts: public gets counts + severity/class only — never the exploit map
+  if (isSealedView(st)) {
+    return NextResponse.json(publicScanView(report))
   }
   return NextResponse.json(report)
 }

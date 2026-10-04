@@ -3,7 +3,8 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import Navbar from '@/components/Navbar'
 import { Markdown } from '@/lib/markdown'
-import { readReport, isValidId, runDir } from '@/lib/cachorro'
+import { readReport, isValidId, runDir, readStatus, isSealedView, sealedReportMd } from '@/lib/cachorro'
+import { cookies } from 'next/headers'
 import { getClaim } from '@/lib/claims'
 
 function readSelfAudit(id: string): { clean: boolean; flags: { kind: string; severity: string }[]; coverage?: { atlas_classes: number; exercised: string[]; not_exercised: string[] } } | null {
@@ -84,10 +85,40 @@ function extractProgramId(md: string): string | null {
 export default async function ReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const data = isValidId(id) ? readReport(id) : null
-  const file = data?.reportFile ? path.join(runDir(id), data.reportFile) : null
-  const md = file && fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null
+  const st = isValidId(id) ? readStatus(id) : null
 
-  const sha = md ? crypto.createHash('sha256').update(md).digest('hex') : null
+  // private hunts (github oauth) render for the owner session only
+  const owner = (st as Record<string, unknown> | null)?.githubLogin as string | undefined
+  if (owner) {
+    const jar = await cookies()
+    const sid = jar.get('cch_gh_session')?.value
+    let login: string | undefined
+    try {
+      const store = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'gh_oauth.json'), 'utf8'))
+      login = sid ? store[sid]?.login : undefined
+    } catch { /* no session */ }
+    if (login !== owner) {
+      return (
+        <main className="min-h-screen bg-black miami-bg">
+          <Navbar />
+          <section className="px-3 sm:px-4 py-10">
+            <div className="max-w-4xl mx-auto border border-dark-600 bg-dark-900 p-6 text-[12px] font-mono text-gray-400">
+              ✗ private hunt — this report belongs to a connected github session that is not yours.
+            </div>
+          </section>
+        </main>
+      )
+    }
+  }
+
+  // sealed hunts: the public page renders the sealed view — never the raw report
+  const sealed = isSealedView(st as Record<string, unknown> | null)
+  const file = data?.reportFile ? path.join(runDir(id), data.reportFile) : null
+  const rawMd = file && fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null
+  const md = sealed ? sealedReportMd(id, (st as Record<string, unknown>) ?? {}) : rawMd
+
+  // the receipt binds to the REAL report sha — even when the page is sealed
+  const sha = rawMd ? crypto.createHash('sha256').update(rawMd).digest('hex') : null
   const receipt = sha ? findReceipt(sha) : null
   const parsed = md ? parseReport(md) : null
   const anchored = !!receipt?.signature

@@ -249,6 +249,81 @@ export function readReport(id: string): ScanReport | null {
   }
 }
 
+// ── sealed view ──────────────────────────────────────────────────────────────
+// A hunt's payload (files, PoC, exploit path) stays sealed for the public until
+// the owner proves control. Sites have no claim path → always sealed. Private
+// hunts (githubLogin) are never public. Our own orgs publish by design.
+export function isSealedView(st: Record<string, unknown> | null | undefined): boolean {
+  if (!st) return true
+  if (st.sealed === true) return true
+  if (st.githubLogin) return true
+  if (st.kind === 'site') return true
+  const t = String(st.target ?? '')
+  const m = /^https:\/\/github\.com\/([^/]+)\//.exec(t)
+  if (m && OUR_ORGS.has(m[1].toLowerCase())) return false
+  if (m) return !repoVerified(t)
+  return true
+}
+
+/** Public payload for a sealed hunt: counts + severity/class rows only. */
+export function publicScanView(r: ScanReport): Record<string, unknown> {
+  return {
+    id: r.id,
+    target: r.target,
+    kind: r.kind,
+    status: r.status,
+    sealed: true,
+    createdAt: r.createdAt,
+    survivorCount: r.survivorCount,
+    findings: (r.findings ?? []).map((f) => ({
+      id: f.id,
+      severity: f.severity,
+      vulnerability_type: f.vulnerability_type,
+    })),
+    note: 'sealed — the owner unseals by claiming the target (CACHORRO.md nonce)',
+  }
+}
+
+/** Sealed public report markdown — counts + classes, never files/snippets. */
+export function sealedReportMd(id: string, st: Record<string, unknown>): string {
+  const dir = runDir(id)
+  let rows = ''
+  let n = 0
+  for (const f of ['survivors.json', 'findings.json']) {
+    try {
+      const list = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))
+      const arr = Array.isArray(list) ? list : list.findings || list.survivors || []
+      for (const it of arr) {
+        n++
+        rows += `| ${it.id ?? `F${n}`} | ${it.severity ?? '?'} | ${it.class ?? it.title ?? '?'} |\n`
+      }
+      break
+    } catch { /* next file */ }
+  }
+  const pub = st.target ? publicTarget(String(st.target)) : 'the target'
+  return [
+    `# sealed hunt — ${pub}`,
+    '',
+    `run \`${id}\` · the pack hunted this target. the findings are **sealed** —`,
+    `a leaked vulnerability is an attack vector, so the pack doesn't leak.`,
+    '',
+    '## what ships publicly',
+    '',
+    '| ID | Severity | Class |',
+    '|---|---|---|',
+    rows || '| — | — | details sealed |\n',
+    '',
+    '## unseal',
+    '',
+    'The owner unlocks the full report by claiming the target:',
+    'commit `CACHORRO.md` with a pack nonce (POST /api/claim/repo) — proof of',
+    'control, then the findings open. Private-repo hunts (GitHub connected)',
+    'never appear publicly at all.',
+    '',
+    'proof, not opinion — but only to those with skin in it.',
+  ].join('\n')
+}
+
 export function listRuns(limit = 10) {
   let names: string[]
   try {

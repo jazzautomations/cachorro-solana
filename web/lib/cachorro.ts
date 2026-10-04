@@ -346,14 +346,16 @@ export function listRuns(limit = 10) {
     .slice(0, limit)
     .map(({ id }) => {
       const st = readStatus(id)
-      // private-repo hunts never reach the public feed
+      // private-repo hunts never reach the public feed; failed/aborted
+      // runs are internal noise, not public receipts
       if (st?.githubLogin) return null
+      if (st?.status !== 'done' && st?.status !== 'running') return null
       return {
         id,
         target: publicTarget(st?.target),
         kind: st?.kind ?? 'repo',
         status: st?.status ?? 'error',
-        sealed: !!st?.sealed,
+        sealed: isSealedView(st),
         createdAt: st?.createdAt ?? 0,
       }
     })

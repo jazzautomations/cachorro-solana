@@ -2,6 +2,53 @@
 Prazo: 12/10/2026 23:59 PT. Trilha Solana + gerais + Trilha Brasil (US$5k) + Darwin (inscrição até 10/10).
 Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável, não parecer.
 
+## Semana final — verificado 06/10 (via Copilot /me + páginas oficiais)
+
+**Portal Colosseum** — projeto existe como DRAFT "Cachorro", category Security Tools, country Brazil:
+- [ ] **SUBMETER** — draft não compete
+- [ ] tracks[] — vazio; marcar Solana (conferir se aceita multi-select pra EVM se port sair)
+- [ ] website/liveProductLink → trocar ts.net por https://cachorro.jazzautomations.com.br
+- [ ] acceleratorOptIn false → true ($250k, ≥10 vagas, winners entrevistados)
+- [ ] pitchVideoLink + demoVideoLink + presentationLink + technicalDemoLink — todos vazios
+- [ ] traction / marketValidation / competition / monetization / teamCommitment / teamLocationDetails — todos null
+- [ ] twitterHandle/telegramHandle — vazios
+- [ ] weekly update 1min (updates[] vazio) — "strongly recommended"
+- [x] whatBuilding/whyNow/technologies/chainUsage/repoContext/externalContributors — preenchidos
+
+**Empilháveis fora do portal** (mesma submission conta):
+- [ ] Trilha Brasil Earn: superteam.fun/earn/listing/side-track-superteam-brasil — $5k USDG + $1k SolarEcoFund. DOIS passos: Colosseum + Earn. Deadline igual 12/10
+- [ ] Darwin Startups (Florianópolis, capital markets on-chain) — inscrição ~10/10, framing = attestation como compliance artifact (PITCH.md §6)
+- [x] Privacy Week — INSCRITO; resultado sai 10/10
+
+**Multi-chain (decisão pendente):**
+- Irmão EVM RESGATADO do jazz-oracle → ~/Projects/cachorro-evm/cachorro-opencode (estava em evidencegate/cachorro-opencode, não estava no GitHub)
+- Pipeline EVM completo: fetch --address via cast etherscan-source, PoC forge fork (FFI off), mesma espinha 8 estágios — formato opencode, não integrado na engine/web
+- foundry 1.8.5 + slither 0.11.6 instalados no jazz-oracle (ubuntu)
+- **E2E EVM VALIDADO 06/10**: DeFiVulnLabs fetch+static (slither: 238 contratos, 686 findings) + forge PoC — exploit de reentrancy drenou EtherStore (treatment) e remediated bloqueou c/ "No re-entrancy" (control)
+- **EVIDÊNCIA 6-CHAIN FEITA 06/10** (`~/evidencegate/chain-evidence/*.log` no jazz-oracle):
+  mesmo exploit treatment/control (EtherStore reentrancy, `forge test --fork-url`) executado
+  em fork de estado real de **ethereum, base, arbitrum, hyperliquid, tempo, robinhood** —
+  [PASS] testReentrancy em todas, bloco real capturado por chain, remediated bloqueou ataque.
+  Tempo mostrou gas divergente (Osaka) — diferença real de semântica detectada.
+  → **marcar 7 tracks no portal**: Solana + as 6 EVM. Zcash fica fora (sem program layer).
+- **HUNTS REPO REAL 06/10** (`chain-evidence/hunt_*.log`): fetch+slither em repos reais
+  por chain — ethereum=Uniswap v4-core (120 contratos, 131 findings), tempo=tempo-std
+  (39 contratos, 34 findings). base/aerodrome, arbitrum/gmx, hyperliquid/hyper-evm-lib e
+  robinhood/nitro-contracts: fetch ok mas build upstream quebrado (stack-too-deep c/ via_ir,
+  dep tree npm, remapping absoluto) — evidência = repo baixado + fork-exec já validado.
+- Faltam pra aprofundar: ETHERSCAN_API_KEY (modo --address) — evidência extra, não bloqueante
+- Regra: 1 submission por time. Tracks vazias sem integração real = só dilui
+
+**COHORT SWEEP 06/10** — GitHub search enumerou 380 repos públicos criados pra edição
+("colosseum"/"worlds fair" no nome/desc), 238 com código auditável (15 Rust, 3 Solidity,
+153 TS, 38 JS, 27 Python, 2 Go). Sweep via `POST /api/scan mode=quick` no prod, throttle
+90s, reports saem selados+anonimizados no feed — donos reivindicam grátis via /claim.
+Wave 1 = 18 programas de verdade (Rust+Solidity). Lista: `~/cohort-juicy.json` no VPS.
+Narrativa: "the pack audited the fair" — contador público de coverage + claims = traction
+ao vivo durante o julgamento.
+
+**Só o humano faz:** cliques do portal (login Colosseum), inscrição Earn, Darwin, gravar pitch/demo video, texto final da submission (Copilot não escreve texto pra colar — juiz lê como palavra do time).
+
 ## Hoje — 28/09 (onda web + infra)
 
 - Attest real: run-job-devin.sh -> scripts/attest-run.sh ancora receipt

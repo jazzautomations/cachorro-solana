@@ -192,12 +192,30 @@ export function repoVerified(target: string): boolean {
   } catch { return false }
 }
 
+let anonSaltCache: string | null = null
+// server-side salt for anon labels — without it, anyone with a repo list can
+// rainbow-table sha256(url)[:8] and deanonymize the public feed. env first,
+// else a persisted random secret; last resort is a per-process secret (labels
+// change on restart — cosmetic only, still private).
+function anonSalt(): string {
+  if (anonSaltCache) return anonSaltCache
+  if (process.env.CACHORRO_ANON_SALT) return (anonSaltCache = process.env.CACHORRO_ANON_SALT)
+  try {
+    const p = path.join(process.cwd(), 'data', 'anon_salt')
+    if (fs.existsSync(p)) return (anonSaltCache = fs.readFileSync(p, 'utf8').trim())
+    const s = crypto.randomBytes(16).toString('hex')
+    fs.mkdirSync(path.dirname(p), { recursive: true })
+    fs.writeFileSync(p, s)
+    return (anonSaltCache = s)
+  } catch { return (anonSaltCache = crypto.randomBytes(16).toString('hex')) }
+}
+
 export function publicTarget(target: string | undefined): string {
   if (!target) return 'unknown target'
   const m = /^https:\/\/github\.com\/([^/]+)\//.exec(target)
   if (!m) return 'on-chain program'
   if (OUR_ORGS.has(m[1].toLowerCase()) || repoVerified(target)) return target
-  const h = crypto.createHash('sha256').update(target).digest('hex').slice(0, 8)
+  const h = crypto.createHash('sha256').update(`${anonSalt()}:${target}`).digest('hex').slice(0, 8)
   return `anonymous target · ${h}`
 }
 
@@ -234,9 +252,12 @@ export function readReport(id: string): ScanReport | null {
     description: f.description ? mask(f.description) : f.description,
     impact: f.impact ? mask(f.impact) : f.impact,
   }))
+  const sealedView = isSealedView(st)
   return {
     ...st,
     target: pub,
+    // a raw commit sha is searchable on GitHub — it deanonymizes a sealed hunt
+    targetRev: sealedView ? undefined : st.targetRev,
     summary: maskedSummary,
     sections: parseLints(path.join(staticDir, 'grep_lints.txt'), repoPrefix),
     zkModules: parseZk(path.join(staticDir, 'zk_surface.txt'), repoPrefix),

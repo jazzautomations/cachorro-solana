@@ -135,19 +135,30 @@ fi
 TRUST="${6:-untrusted}"
 if [[ "$TRUST" == "untrusted" ]]; then
   SBX=/var/lib/cachorro-sandbox
-  install -d -m 0755 "$SBX/work" "$SBX/home" /var/lib/cachorro-empty
+  install -d -m 0755 "$SBX/work" "$SBX/home" "$SBX/bin" "$SBX/install" /var/lib/cachorro-empty
   cp -a /root/.config/devin "$SBX/home/.config-devin" 2>/dev/null || true
   mkdir -p "$SBX/home/.local/share"
   cp -a /root/.local/share/devin "$SBX/home/.local/share/" 2>/dev/null || true
   chmod -R a+rwX "$SBX/home" 2>/dev/null || true
   chmod -R a+rwX "$RUN"
+  # DEVIN_BIN is usually a symlink into ~/.local/share/devin — inside the
+  # namespace /root is hidden, so the symlink dangles (exec ENOENT). Bind the
+  # resolved install tree at $SBX/install and point SBX_DEVIN at the real file.
+  DEVIN_REAL="$(readlink -f "$DEVIN_BIN")"
+  if [[ "$DEVIN_REAL" == /root/.local/share/devin/* ]]; then
+    export SBX_DEVIN_SRC="/root/.local/share/devin"
+    export SBX_DEVIN="$SBX/install/${DEVIN_REAL#/root/.local/share/devin/}"
+  else
+    export SBX_DEVIN_SRC="$(dirname "$DEVIN_REAL")"
+    export SBX_DEVIN="$SBX/install/$(basename "$DEVIN_REAL")"
+  fi
   export SBX_PROMPT="${PROMPT//$ROOT/$SBX/work}"
-  export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT" SBX_DEVIN="/var/lib/cachorro-sandbox/bin/$(basename "$DEVIN_BIN")"
+  export SBX_ROOT="$ROOT" SBX_AIT="$AI_TIMEOUT"
   unshare -m bash -c '
-    mkdir -p /var/lib/cachorro-sandbox/bin &&
     mount --bind "$SBX_ROOT" /var/lib/cachorro-sandbox/work &&
-    mount --bind /root/.local/bin /var/lib/cachorro-sandbox/bin &&
-    mount -o remount,ro,bind /var/lib/cachorro-sandbox/bin &&
+    mount --bind "$SBX_DEVIN_SRC" /var/lib/cachorro-sandbox/install &&
+    mount -o remount,ro,bind /var/lib/cachorro-sandbox/install &&
+    ln -sfn "$SBX_DEVIN" /var/lib/cachorro-sandbox/bin/devin &&
     mount --bind /var/lib/cachorro-empty /root &&
     mount --bind /var/lib/cachorro-empty /etc/systemd/system &&
     mkdir -p /var/lib/cachorro-sandbox/home/.config &&

@@ -47,6 +47,13 @@ Wave 1 = 18 programas de verdade (Rust+Solidity). Lista: `~/cohort-juicy.json` n
 Narrativa: "the pack audited the fair" — contador público de coverage + claims = traction
 ao vivo durante o julgamento.
 
+**FIX SELAGEM 06/10** — achei e corrigi deanonymization no anon labeling durante a sweep:
+`sha256(url)[:8]` sem salt era rainbow-tableável (lista pública de repos da coorte casa
+hashes). Agora `sha256(salt:url)` com segredo em data/anon_salt. Também mascarei
+targetRev (commit sha pesquisável no GitHub) em views seladas. Commit 715ad82, em prod.
+Resultado parcial da wave 1: ~12 reports, **5 CRITICALs validados** (oracle-alpha,
+solana_mixer, fortis, compliance-relayer, Offset) + ~5 HIGHs — PoCs VERDE nos mesmos.
+
 **Só o humano faz:** cliques do portal (login Colosseum), inscrição Earn, Darwin, gravar pitch/demo video, texto final da submission (Copilot não escreve texto pra colar — juiz lê como palavra do time).
 
 ## Hoje — 28/09 (onda web + infra)

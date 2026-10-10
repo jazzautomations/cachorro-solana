@@ -586,10 +586,17 @@ export default function Home() {
       <footer className="px-4 py-8 border-t border-dark-600">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[10.5px] sm:text-[11.5px] font-mono text-gray-600">
           <span>CACHORRO · the audit your users can verify · proof, not opinion</span>
-          <span className="flex items-center gap-3">
+          <span className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <a href="/disclosure" className="text-gray-500 hover:text-neon-cyan transition-colors">disclosure</a>
+            <a href="/privacy" className="text-gray-500 hover:text-neon-cyan transition-colors">privacy &amp; AI</a>
+            <a href="/.well-known/security.txt" className="text-gray-500 hover:text-neon-cyan transition-colors">security.txt</a>
             <a href={process.env.CACHORRO_CONTACT_URL || '/pricing'} className="text-neon-yellow hover:text-neon-green transition-colors">TALK TO THE PACK ▸</a>
             <span>born at Colosseum Crypto World&apos;s Fair · multi-track</span>
           </span>
+        </div>
+        <div className="max-w-6xl mx-auto mt-4 text-[11.5px] font-mono text-gray-600 leading-relaxed">
+          AI-assisted analysis, as-is — not a formal audit; absence of findings does not mean code is safe.
+          Exploits run on local forks only — mainnet is never touched.
         </div>
       </footer>
     </main>

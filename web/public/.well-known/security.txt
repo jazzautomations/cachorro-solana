@@ -1,0 +1,4 @@
+Contact: https://github.com/jazzautomations/cachorro-solana/security/advisories/new
+Expires: 2027-10-10T00:00:00.000Z
+Preferred-Languages: en, pt
+Policy: https://cachorro.jazzautomations.com.br/disclosure

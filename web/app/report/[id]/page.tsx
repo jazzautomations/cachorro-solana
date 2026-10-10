@@ -298,6 +298,18 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
                 <span className="text-gray-400">embed in your README — </span>
                 <code className="text-miami-cream">[![hunted by the pack](/badge/{id}.svg)](/report/{id})</code>
               </div>
+
+              {/* ═══ DISCLAIMER — on every report, per our own gate ═══ */}
+              <div className="mt-4 border border-dark-600 bg-dark-900 p-3 text-[11.5px] sm:text-[10.5px] font-mono text-gray-500 leading-relaxed">
+                AI-assisted analysis delivered <span className="text-gray-300">as-is</span> — this is{' '}
+                <span className="text-neon-yellow">not a formal audit</span> and does not replace human review.{' '}
+                Absence of findings <span className="text-neon-yellow">does not mean the code is safe</span>. Exploits
+                were executed on local validators/forks only — no attack transaction ever touches mainnet. The
+                on-chain receipt proves this analysis ran at the stated commit; it is not a seal of safety.{' '}
+                <a href="/disclosure" className="text-neon-cyan hover:text-neon-green">disclosure</a> ·{' '}
+                <a href="/privacy" className="text-neon-cyan hover:text-neon-green">privacy &amp; AI notice</a> ·{' '}
+                <a href="/.well-known/security.txt" className="text-neon-cyan hover:text-neon-green">security.txt</a>
+              </div>
             </>
           )}
         </div>

@@ -10,7 +10,7 @@
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-DEVIN_BIN="${DEVIN_BIN:-/root/.local/bin/devin}"
+DEVIN_BIN="${DEVIN_BIN:-$(command -v devin 2>/dev/null || echo /root/.local/bin/devin)}"
 AI_TIMEOUT="${CACHORRO_AI_TIMEOUT:-5400}"
 
 # scan modes: quick (top-1 survivor, ~40min cap), deep (top-3, default),

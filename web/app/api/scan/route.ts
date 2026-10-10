@@ -208,26 +208,35 @@ export async function POST(req: Request) {
   const runner = pickRunner()
   const runnerCwd = path.dirname(path.dirname(runner))
   // Escapes the web service cgroup: a cachorro-web restart must not kill a
-  // running hunt. systemd-run --user puts the job in its own transient unit
-  // under the service account's manager — needs linger enabled for the user
-  // (loginctl enable-linger). The bus path check is the real viability test:
-  // a bare systemd-run (system unit) from a non-root service fails polkit
-  // with "Interactive authentication required" and silently spawns nothing.
+  // running hunt. Preferred: /usr/local/sbin/cachorro-hunt-spawn — a
+  // root-owned, sudoers-gated wrapper that puts the job in a transient
+  // SYSTEM unit (the untrusted-hunt sandbox needs real root: unshare -m,
+  // /var/lib dirs). Fallback: systemd-run --user under the service
+  // account's manager (needs `loginctl enable-linger`; the bus path is the
+  // real viability test — bare systemd-run from non-root fails polkit with
+  // "Interactive authentication required" and silently spawns nothing).
+  // Last resort: setsid (dies with the web service — degraded, not dead).
+  const SPAWN = '/usr/local/sbin/cachorro-hunt-spawn'
   const uid = process.getuid?.() ?? 0
   const xdgRuntime = `/run/user/${uid}`
   const userBus = `${xdgRuntime}/bus`
-  const useSystemd = fs.existsSync('/usr/bin/systemd-run') && fs.existsSync(userBus)
+  const useSpawn = fs.existsSync(SPAWN)
+  const useSystemd = !useSpawn && fs.existsSync('/usr/bin/systemd-run') && fs.existsSync(userBus)
   // private-repo consent token — env-only, never written to the run dir
   const ghEnv = ghToken ? { CACHORRO_GH_TOKEN: ghToken } : {}
-  const child = useSystemd
+  const trust = keyEntry || ghToken ? 'trusted' : 'untrusted'
+  const child = useSpawn
+    ? spawn('sudo', [
+        '-n', SPAWN, id, kind, target, cluster, mode, trust, ghToken || '',
+      ], { detached: true, stdio: 'ignore', cwd: runnerCwd })
+    : useSystemd
     ? spawn('systemd-run', [
         '--user', '--quiet', '--collect', '--unit', `cachorro-hunt-${id}`,
         '--setenv', `HOME=${process.env.HOME || '/root'}`,
         '--setenv', `PATH=${process.env.PATH}`,
         '--setenv', `CACHORRO_ROOT=${runnerCwd}`,
         ...(ghToken ? ['--setenv', `CACHORRO_GH_TOKEN=${ghToken}`] : []),
-        'bash', runner, id, kind, target, cluster, mode,
-        keyEntry || ghToken ? 'trusted' : 'untrusted',
+        'bash', runner, id, kind, target, cluster, mode, trust,
       ], {
         detached: true, stdio: 'ignore', cwd: runnerCwd,
         env: {
@@ -237,7 +246,7 @@ export async function POST(req: Request) {
         },
       })
     : spawn('setsid', ['bash', runner, id, kind, target, cluster, mode,
-        keyEntry || ghToken ? 'trusted' : 'untrusted'], {
+        trust], {
         detached: true, stdio: 'ignore', cwd: runnerCwd,
         env: { ...process.env, ...ghEnv },
       })

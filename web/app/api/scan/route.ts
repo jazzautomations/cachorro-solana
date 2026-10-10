@@ -208,21 +208,34 @@ export async function POST(req: Request) {
   const runner = pickRunner()
   const runnerCwd = path.dirname(path.dirname(runner))
   // Escapes the web service cgroup: a cachorro-web restart must not kill a
-  // running hunt. systemd-run puts the job in its own transient unit; setsid
-  // is the fallback for non-systemd hosts.
-  const useSystemd = fs.existsSync('/usr/bin/systemd-run') || fs.existsSync('/bin/systemd-run')
+  // running hunt. systemd-run --user puts the job in its own transient unit
+  // under the service account's manager — needs linger enabled for the user
+  // (loginctl enable-linger). The bus path check is the real viability test:
+  // a bare systemd-run (system unit) from a non-root service fails polkit
+  // with "Interactive authentication required" and silently spawns nothing.
+  const uid = process.getuid?.() ?? 0
+  const xdgRuntime = `/run/user/${uid}`
+  const userBus = `${xdgRuntime}/bus`
+  const useSystemd = fs.existsSync('/usr/bin/systemd-run') && fs.existsSync(userBus)
   // private-repo consent token — env-only, never written to the run dir
   const ghEnv = ghToken ? { CACHORRO_GH_TOKEN: ghToken } : {}
   const child = useSystemd
     ? spawn('systemd-run', [
-        '--quiet', '--collect', '--unit', `cachorro-hunt-${id}`,
+        '--user', '--quiet', '--collect', '--unit', `cachorro-hunt-${id}`,
         '--setenv', `HOME=${process.env.HOME || '/root'}`,
         '--setenv', `PATH=${process.env.PATH}`,
         '--setenv', `CACHORRO_ROOT=${runnerCwd}`,
         ...(ghToken ? ['--setenv', `CACHORRO_GH_TOKEN=${ghToken}`] : []),
         'bash', runner, id, kind, target, cluster, mode,
         keyEntry || ghToken ? 'trusted' : 'untrusted',
-      ], { detached: true, stdio: 'ignore', cwd: runnerCwd })
+      ], {
+        detached: true, stdio: 'ignore', cwd: runnerCwd,
+        env: {
+          ...process.env,
+          XDG_RUNTIME_DIR: xdgRuntime,
+          DBUS_SESSION_BUS_ADDRESS: `unix:path=${userBus}`,
+        },
+      })
     : spawn('setsid', ['bash', runner, id, kind, target, cluster, mode,
         keyEntry || ghToken ? 'trusted' : 'untrusted'], {
         detached: true, stdio: 'ignore', cwd: runnerCwd,

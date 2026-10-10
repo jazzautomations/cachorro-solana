@@ -25,6 +25,7 @@ if d.get('status') == 'running':
     d['updatedAt'] = int(time.time())
     fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path))
     with os.fdopen(fd, 'w') as f: json.dump(d, f, indent=2)
+    os.chmod(tmp, 0o644)  # mkstemp makes 0600 — hunts run as root, the web reads as ubuntu
     os.replace(tmp, path)
 PY
   exit 0

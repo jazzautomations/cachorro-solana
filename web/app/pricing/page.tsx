@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar'
 import PayPanel from '@/components/PayPanel'
-import { PLANS, RPC } from '@/lib/plans'
+import { PUBLIC_PLANS, RPC } from '@/lib/plans'
 
 export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Pricing' }
@@ -52,7 +52,7 @@ export default function PricingPage() {
 
           {/* ═══ tiers ═══ */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {PLANS.map((p) => (
+            {PUBLIC_PLANS.map((p) => (
               <div
                 key={p.id}
                 className={`border bg-dark-900 p-4 sm:p-5 flex flex-col ${
@@ -100,6 +100,8 @@ export default function PricingPage() {
           <div className="mt-8 text-[10.5px] font-mono text-gray-500 text-center leading-relaxed">
             how it works: checkout returns a treasury address + unique memo → you send SOL with that memo →
             we verify the tx on-chain → key issued, bound to nothing but the payment. cancel = stop paying.
+            <br />
+            <a href="/docs" className="text-neon-cyan hover:text-neon-green">▸ API docs — how to use your key from curl, scripts or CI</a>
           </div>
         </div>
       </section>

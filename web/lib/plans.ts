@@ -16,6 +16,7 @@ export interface Plan {
   blurb: string
   anchor: string // the audit-price comparison line
   perks: string[]
+  hidden?: boolean // not sold on /pricing — issued by hand (scripts/mint-key.mjs)
 }
 
 export const PLANS: Plan[] = [
@@ -59,7 +60,21 @@ export const PLANS: Plan[] = [
       'priority queue · attestation on every report',
     ],
   },
+  {
+    id: 'partner', name: 'DESIGN PARTNER', priceSol: 0, unit: 'mo', huntsPerMonth: -1, modes: ['quick', 'deep', 'full'],
+    blurb: 'hand-issued key for design partners and our own ops hunts',
+    anchor: 'not for sale — ask the pack',
+    perks: ['all modes', 'no monthly cap', 'skips the anonymous rate limit'],
+    hidden: true,
+  },
 ]
+
+/** Plans shown on /pricing and /docs. Hidden plans are only minted by hand. */
+export const PUBLIC_PLANS = PLANS.filter((p) => !p.hidden)
+
+/** Retired plan ids still present on issued keys → the plan they now map to. */
+const LEGACY_PLANS: Record<string, string> = { pack: 'partner' }
+const resolvePlanId = (id: string) => LEGACY_PLANS[id] ?? id
 
 export interface Invoice {
   id: string
@@ -72,7 +87,8 @@ export interface Invoice {
   key?: string
 }
 
-interface Store { invoices: Invoice[]; keys: { key: string; plan: string; createdAt: number; huntsUsed: Record<string, number> }[] }
+interface KeyEntry { key: string; plan: string; createdAt: number; huntsUsed: Record<string, number>; label?: string }
+interface Store { invoices: Invoice[]; keys: KeyEntry[] }
 
 function load(): Store {
   if (!existsSync(DATA)) return { invoices: [], keys: [] }
@@ -129,11 +145,12 @@ export function lookupKey(key: string) {
 
 export function planFor(key: string | null): { plan: Plan; keyEntry: ReturnType<typeof lookupKey> } {
   const entry = key ? lookupKey(key) : null
-  if (entry && !PLANS.some((p) => p.id === entry.plan)) {
-    // key references a retired plan — fail closed to anonymous, never crash
+  const planId = entry ? resolvePlanId(entry.plan) : null
+  if (entry && !PLANS.some((p) => p.id === planId)) {
+    // key references an unknown plan — fail closed to anonymous, never crash
     return { plan: PLANS[0], keyEntry: null }
   }
-  const plan = entry ? PLANS.find((p) => p.id === entry.plan)! : PLANS[0]
+  const plan = entry ? PLANS.find((p) => p.id === planId)! : PLANS[0]
   return { plan, keyEntry: entry }
 }
 

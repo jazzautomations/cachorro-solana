@@ -35,12 +35,20 @@ Next.js 15 app (`web/`): landing, bounty board (174 programs / $6.3M indexed), l
 cd web && npm install && npx next dev  # :3000 (prod: next build && cachorro-web.service)
 ```
 
-Hunt via API:
+Hunt via API — full reference at [cachorro.jazzautomations.com.br/docs](https://cachorro.jazzautomations.com.br/docs):
 
 ```bash
-curl -X POST $HOST/api/scan -H 'content-type: application/json' \
-  -d '{"target":"https://github.com/orca-so/whirlpools","kind":"repo","mode":"deep"}'
+# anonymous: QUICK only, 3 hunts / 10 min / IP
+curl -X POST https://cachorro.jazzautomations.com.br/api/scan -H 'content-type: application/json' \
+  -d '{"target":"https://github.com/orca-so/whirlpools","mode":"quick"}'
+
+# keyed: DEEP / FULL per plan — buy a key with SOL (/pricing) or ask for a design-partner key
+curl -X POST https://cachorro.jazzautomations.com.br/api/scan -H 'content-type: application/json' \
+  -H "X-Cachorro-Key: $CACHORRO_KEY" \
+  -d '{"target":"https://github.com/orca-so/whirlpools","mode":"deep"}'
 ```
+
+Operators issue keys by hand with `web/scripts/mint-key.mjs` (`mint --plan partner --label "<who>"`, `list`, `label`, `revoke`).
 
 ## Pipeline
 

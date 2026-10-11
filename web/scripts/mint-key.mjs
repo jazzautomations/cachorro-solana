@@ -31,7 +31,7 @@ function load() {
 function save(s) {
   mkdirSync(dirname(DATA), { recursive: true })
   const tmp = DATA + '.tmp'
-  writeFileSync(tmp, JSON.stringify(s, null, 2))
+  writeFileSync(tmp, JSON.stringify(s, null, 2), { mode: 0o600 }) // holds live keys
   renameSync(tmp, DATA)
 }
 

@@ -94,7 +94,7 @@ function load(): Store {
 function save(s: Store) {
   mkdirSync(join(process.cwd(), 'data'), { recursive: true })
   const tmp = DATA + '.tmp'
-  writeFileSync(tmp, JSON.stringify(s, null, 2))
+  writeFileSync(tmp, JSON.stringify(s, null, 2), { mode: 0o600 }) // holds live keys
   renameSync(tmp, DATA)
 }
 

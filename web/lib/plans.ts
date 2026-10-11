@@ -72,9 +72,6 @@ export const PLANS: Plan[] = [
 /** Plans shown on /pricing and /docs. Hidden plans are only minted by hand. */
 export const PUBLIC_PLANS = PLANS.filter((p) => !p.hidden)
 
-/** Retired plan ids still present on issued keys → the plan they now map to. */
-const LEGACY_PLANS: Record<string, string> = { pack: 'partner' }
-const resolvePlanId = (id: string) => LEGACY_PLANS[id] ?? id
 
 export interface Invoice {
   id: string
@@ -145,12 +142,11 @@ export function lookupKey(key: string) {
 
 export function planFor(key: string | null): { plan: Plan; keyEntry: ReturnType<typeof lookupKey> } {
   const entry = key ? lookupKey(key) : null
-  const planId = entry ? resolvePlanId(entry.plan) : null
-  if (entry && !PLANS.some((p) => p.id === planId)) {
-    // key references an unknown plan — fail closed to anonymous, never crash
+  if (entry && !PLANS.some((p) => p.id === entry.plan)) {
+    // key references a retired plan — fail closed to anonymous, never crash
     return { plan: PLANS[0], keyEntry: null }
   }
-  const plan = entry ? PLANS.find((p) => p.id === planId)! : PLANS[0]
+  const plan = entry ? PLANS.find((p) => p.id === entry.plan)! : PLANS[0]
   return { plan, keyEntry: entry }
 }
 

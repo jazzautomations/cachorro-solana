@@ -100,7 +100,7 @@ curl -s -X POST ${BASE}/api/scan \\
                     <tr className="border-t border-dark-600">
                       <td className="pr-3 py-1 text-gray-300">no key</td><td className="pr-3">quick</td><td className="pr-3">3 per 10 min / IP</td><td>free</td>
                     </tr>
-                    {PUBLIC_PLANS.map((p) => (
+                    {PUBLIC_PLANS.filter((p) => p.priceSol > 0).map((p) => (
                       <tr key={p.id} className="border-t border-dark-600">
                         <td className="pr-3 py-1 text-gray-300">{p.name} <span className="text-gray-600">({p.id})</span></td>
                         <td className="pr-3">{p.modes.join(' · ')}</td>
@@ -135,7 +135,7 @@ curl -s -X POST ${BASE}/api/billing/verify \\
 `}</Code>
               <p className="mt-3">
                 <span className="text-neon-green">▸ Building on Cachorro?</span> Audit firms and teams integrating the pack get a
-                design-partner key — all modes, no monthly cap.{' '}
+                design-partner key — all modes, no monthly cap, and the full results of every hunt the key launches.{' '}
                 <a href="https://github.com/jazzautomations/cachorro-solana/issues/new?title=Design%20partner%20key" target="_blank" rel="noreferrer" className="text-neon-cyan hover:text-neon-green">
                   Ask for one ↗
                 </a>
@@ -174,6 +174,8 @@ curl -s -X POST ${BASE}/api/billing/verify \\
                 bug class only, the report comes back sealed, and the evidence bundle is refused.
                 Prove ownership on <a href="/claim" className="text-neon-cyan hover:text-neon-green">/claim</a> (upgrade-authority
                 signature or a <span className="text-neon-cyan">CACHORRO.md</span> nonce commit) and the same calls return everything.
+                Design-partner keys are the one exception: send the same key on the GET calls and the hunts it launched come back
+                in full — status, report and evidence bundle. Partner keys are issued by hand to firms working under an engagement.
                 See <a href="/disclosure" className="text-neon-cyan hover:text-neon-green">coordinated disclosure</a>.
               </p>
             </Card>

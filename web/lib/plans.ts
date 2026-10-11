@@ -24,7 +24,7 @@ export const PLANS: Plan[] = [
     id: 'free', name: 'SNIFF', priceSol: 0, unit: 'mo', huntsPerMonth: 3, modes: ['quick'],
     blurb: 'watch the pack think on your program',
     anchor: 'the free scan a firm charges a discovery call for',
-    perks: ['3 QUICK hunts / month', 'live PACK MIND feed', 'static surface map + bridge map', 'public receipt per run'],
+    perks: ['QUICK hunts, no key — 3 per 10 min', 'live PACK MIND feed', 'static surface map + bridge map', 'public receipt per run'],
   },
   {
     id: 'payg', name: 'PAY-PER-PROOF', priceSol: 0.5, unit: 'engagement', huntsPerMonth: -1, modes: ['quick', 'deep'],
@@ -138,6 +138,24 @@ export function markPaid(id: string, signature: string): { key: string; plan: st
 
 export function lookupKey(key: string) {
   return load().keys.find((k) => k.key === key) ?? null
+}
+
+/** Stable, non-reversible id for a key — stored on hunts instead of the key itself. */
+export function keyFingerprint(key: string): string {
+  return crypto.createHash('sha256').update(key).digest('hex').slice(0, 16)
+}
+
+/**
+ * Design-partner keys are hand-issued to vetted firms under engagement, so a
+ * partner sees the full results of hunts it launched itself. Every other caller
+ * — paid keys included — still gets the sealed view until the owner claims.
+ */
+export function partnerOwnsHunt(req: Request, st: { keyOwner?: unknown } | null | undefined): boolean {
+  const key = req.headers.get('x-cachorro-key')
+  if (!key || !st || typeof st.keyOwner !== 'string') return false
+  const entry = lookupKey(key)
+  if (!entry || entry.plan !== 'partner') return false
+  return keyFingerprint(key) === st.keyOwner
 }
 
 export function planFor(key: string | null): { plan: Plan; keyEntry: ReturnType<typeof lookupKey> } {

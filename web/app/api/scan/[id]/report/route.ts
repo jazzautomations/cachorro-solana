@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import { isValidId, maskRepoRefs, publicTarget, readStatus, runDir, isSealedView, sealedReportMd } from '@/lib/cachorro'
+import { partnerOwnsHunt } from '@/lib/plans'
 import { getRepoClaim } from '@/lib/claims'
 
 export const runtime = 'nodejs'
@@ -53,13 +54,15 @@ export async function GET(
   }
 
   // sealed hunts: public sees counts/classes only; owner unseals via claim.
+  // A design-partner key reads its own hunts in full, unmasked.
+  const partner = partnerOwnsHunt(req, st)
   const target = st?.target as string | undefined
-  if (isSealedView(st)) {
+  if (isSealedView(st) && !partner) {
     return new NextResponse(sealedReport(id, st ?? {}), {
       headers: { 'content-type': 'text/markdown; charset=utf-8' },
     })
   }
-  if (target) {
+  if (target && !partner) {
     const pub = publicTarget(target)
     if (pub !== target) body = maskRepoRefs(body, target, pub)
   }

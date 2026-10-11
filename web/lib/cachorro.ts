@@ -230,14 +230,15 @@ export function maskRepoRefs(text: string, realTarget: string, pub: string): str
   return out.replace(repoRe, pub)
 }
 
-export function readReport(id: string): ScanReport | null {
+/** `unmasked` is for callers already allowed to see the target (a partner key on its own hunt). */
+export function readReport(id: string, opts: { unmasked?: boolean } = {}): ScanReport | null {
   const st = readStatus(id)
   if (!st) return null
   const dir = runDir(id)
   const staticDir = path.join(dir, 'static')
   const repoPrefix = path.join(dir, 'repo')
-  const pub = publicTarget(st.target)
-  const mask = (s: string) => (st.target ? maskRepoRefs(s, st.target, pub) : s)
+  const pub = opts.unmasked ? st.target : publicTarget(st.target)
+  const mask = (s: string) => (st.target && !opts.unmasked ? maskRepoRefs(s, st.target, pub) : s)
   const summary = parseSummary(path.join(staticDir, 'summary.txt'))
   const maskedSummary = summary
     ? Object.fromEntries(Object.entries(summary).map(([k, v]) => [k, mask(v)]))
@@ -252,7 +253,7 @@ export function readReport(id: string): ScanReport | null {
     description: f.description ? mask(f.description) : f.description,
     impact: f.impact ? mask(f.impact) : f.impact,
   }))
-  const sealedView = isSealedView(st)
+  const sealedView = isSealedView(st) && !opts.unmasked
   return {
     ...st,
     target: pub,

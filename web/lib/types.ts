@@ -19,6 +19,7 @@ export interface JobStatus {
   staleSince?: number
   githubLogin?: string
   sealed?: boolean
+  keyOwner?: string // keyFingerprint of the API key that launched the hunt
 }
 
 export interface LintEntry { file: string; line: number; code: string }

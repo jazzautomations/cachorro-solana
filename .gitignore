@@ -14,3 +14,6 @@ cachorro-out/engine-runs/
 .secrets
 web/data/billing.json
 web/data/gh_oauth.json
+web/data/anon_salt
+web/data/ratelimit.json
+web/data/billing.json.bak-*

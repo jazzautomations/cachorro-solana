@@ -8,7 +8,7 @@ import {
   allowedTarget, assertEngine, countRunning, isValidId, listRuns, pickRunner,
   PUBKEY_RE, REPO_RE, RUNS_DIR,
 } from '@/lib/cachorro'
-import { planFor, recordHunt, huntsLeft } from '@/lib/plans'
+import { planFor, recordHunt, huntsLeft, keyFingerprint } from '@/lib/plans'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -199,6 +199,7 @@ export async function POST(req: Request) {
     mode,
     stages: { fetch: 'running' },
     githubLogin: ghLogin,
+    keyOwner: keyEntry ? keyFingerprint(apiKey!) : undefined,
     createdAt: Math.floor(Date.now() / 1000),
   }
   const tmp = path.join(dir, 'status.json.tmp')

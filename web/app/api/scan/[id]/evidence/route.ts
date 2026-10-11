@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { isValidId, publicTarget, runDir, readStatus, isSealedView } from '@/lib/cachorro'
+import { partnerOwnsHunt } from '@/lib/plans'
 
 function ghLoginOf(req: Request): string | undefined {
   const sid = req.headers.get('cookie')?.match(/cch_gh_session=([a-f0-9]+)/)?.[1]
@@ -38,7 +39,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   }
   // the bundle names the repo everywhere (report body, findings, bridge map) —
   // sealed/unclaimed targets keep the bundle owner-only
-  if (isSealedView(st) || (st.target && publicTarget(st.target) !== st.target)) {
+  if (!partnerOwnsHunt(req, st) && (isSealedView(st) || (st.target && publicTarget(st.target) !== st.target))) {
     return NextResponse.json({
       error: 'evidence bundle is owner-only — claim this repo at /api/claim/repo to unlock the full tarball',
     }, { status: 403 })

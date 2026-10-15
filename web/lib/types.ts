@@ -6,6 +6,10 @@ export interface JobStatus {
   status: 'running' | 'done' | 'error'
   stage: string
   mode?: 'quick' | 'deep' | 'full'
+  box?: 'white' | 'grey' | 'black'
+  deployed?: string
+  deployedKind?: 'program-id' | 'site'
+  scope?: string[]
   stages: Record<string, string>
   staticNote?: string
   error?: string

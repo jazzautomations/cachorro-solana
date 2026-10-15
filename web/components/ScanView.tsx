@@ -119,8 +119,18 @@ export default function ScanView({ id }: { id: string }) {
     <div className="space-y-4 sm:space-y-6">
       {/* target header */}
       <div className="border border-dark-600 bg-dark-900 p-3 sm:p-4">
-        <div className="text-[10.5px] text-gray-500 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}{data.mode ? ` · ${data.mode.toUpperCase()}` : ''}</div>
+        <div className="text-[10.5px] text-gray-500 font-mono mb-1">TARGET · {data.kind}{data.cluster ? ` · ${data.cluster}` : ''}{data.engine ? ` · ${data.engine}` : ''}{data.mode ? ` · ${data.mode.toUpperCase()}` : ''}{data.box ? ` · ${data.box.toUpperCase()} BOX` : ''}</div>
         <div className="text-[11px] sm:text-sm text-neon-green font-mono break-all">{data.target}</div>
+        {data.deployed && (
+          <div className="text-[10.5px] sm:text-[11.5px] font-mono text-gray-400 mt-1 break-all">
+            live: <span className="text-neon-cyan">{data.deployed}</span>
+          </div>
+        )}
+        {data.scope?.length ? (
+          <div className="text-[10.5px] sm:text-[11.5px] font-mono text-gray-400 mt-1 break-all">
+            scope: <span className="text-gray-300">{data.scope.join(' · ')}</span>
+          </div>
+        ) : null}
         <div className="text-[10.5px] text-gray-600 font-mono mt-1">{data.id}</div>
       </div>
 

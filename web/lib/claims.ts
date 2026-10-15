@@ -155,3 +155,19 @@ export async function verifyRepoClaim(repo: string): Promise<boolean> {
   }
   return false
 }
+
+/** Mark a repo claimed outright — used when GitHub OAuth already proved push access. */
+export function markRepoVerified(repo: string): RepoClaim | null {
+  if (!REPO_RE.test(repo)) return null
+  const s = loadRepos()
+  const prev = s[repo]
+  s[repo] = {
+    repo,
+    nonce: prev?.nonce || 'cachorro-claim-' + crypto.randomBytes(8).toString('hex'),
+    verified: true,
+    claimedAt: prev?.verified ? prev.claimedAt : Math.floor(Date.now() / 1000),
+    payoutSent: prev?.payoutSent,
+  }
+  saveRepos(s)
+  return s[repo]
+}

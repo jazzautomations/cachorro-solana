@@ -15,6 +15,25 @@ export const dynamic = 'force-dynamic'
 
 const MAX_CONCURRENT = 3
 
+// refuse hosts that resolve to private/loopback/link-local — SSRF guard
+async function privateHost(url: string): Promise<string | null> {
+  try {
+    const host = new URL(url).hostname
+    const addrs = (await dns.lookup(host, { all: true })).map((a) => a.address)
+    const blocked = addrs.some((ip) => {
+      const v4 = ip.startsWith('::ffff:') ? ip.slice(7) : ip
+      return (
+        /^127\.|^10\.|^169\.254\.|^192\.168\.|^172\.(1[6-9]|2\d|3[01])\.|^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(v4) ||
+        v4 === '::1' || /^f[cd]/i.test(v4) || /^fe8|^fe9|^fea|^feb/i.test(v4)
+      )
+    })
+    if (blocked || addrs.length === 0) return 'refused: host resolves to a private address'
+    return null
+  } catch {
+    return 'refused: host does not resolve'
+  }
+}
+
 export async function GET() {
   try {
     assertEngine()
@@ -31,7 +50,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: (e as Error).message }, { status: 500 })
   }
 
-  let body: { target?: string; kind?: string; cluster?: string; mode?: string }
+  let body: { target?: string; kind?: string; cluster?: string; mode?: string; deployed?: string; scope?: string }
   try {
     body = await req.json()
   } catch {
@@ -42,6 +61,11 @@ export async function POST(req: Request) {
   const cluster = (body.cluster || 'mainnet').trim()
   const mode = (body.mode || 'deep').trim()
   let kind = (body.kind || '').trim()
+  // grey box: the source (target, a repo) plus the live thing it ships as
+  const deployed = (body.deployed || '').trim()
+  // scope: paths/globs to focus on, one per line or comma; "!path" excludes.
+  // tight charset — this text reaches the agent, so it stays data, not prose
+  const scopeRaw = (body.scope || '').trim()
 
   // GitHub OAuth session — "scan my private repo" (Snyk-style). The
   // session cookie maps to a server-side token; consent = their repos.
@@ -116,27 +140,40 @@ export async function POST(req: Request) {
     if (!/^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}/i.test(target)) {
       return NextResponse.json({ error: 'not a valid site URL (https://app.example.com)' }, { status: 400 })
     }
-    // early SSRF reject: resolve the host and refuse private/loopback/
-    // link-local addresses — nip.io & friends must die before they eat a slot
-    try {
-      const host = new URL(target).hostname
-      const addrs = (await dns.lookup(host, { all: true })).map((a) => a.address)
-      const blocked = addrs.some((ip) => {
-        const v4 = ip.startsWith('::ffff:') ? ip.slice(7) : ip
-        return (
-          /^127\.|^10\.|^169\.254\.|^192\.168\.|^172\.(1[6-9]|2\d|3[01])\.|^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(v4) ||
-          v4 === '::1' || /^f[cd]/i.test(v4) || /^fe8|^fe9|^fea|^feb/i.test(v4)
-        )
-      })
-      if (blocked || addrs.length === 0) {
-        return NextResponse.json({ error: 'refused: host resolves to a private address' }, { status: 400 })
-      }
-    } catch {
-      return NextResponse.json({ error: 'refused: host does not resolve' }, { status: 400 })
-    }
+    const why = await privateHost(target)
+    if (why) return NextResponse.json({ error: why }, { status: 400 })
   } else {
     return NextResponse.json({ error: 'kind must be repo, program-id, or site' }, { status: 400 })
   }
+
+  let deployedKind: 'program-id' | 'site' | undefined
+  if (deployed) {
+    if (kind !== 'repo') {
+      return NextResponse.json({ error: 'deployed only goes with a repo target (grey box)' }, { status: 400 })
+    }
+    if (PUBKEY_RE.test(deployed)) {
+      deployedKind = 'program-id'
+      if (cluster !== 'mainnet' && cluster !== 'devnet') {
+        return NextResponse.json({ error: 'cluster must be mainnet or devnet' }, { status: 400 })
+      }
+    } else if (/^https?:\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}/i.test(deployed)) {
+      deployedKind = 'site'
+      const why = await privateHost(deployed)
+      if (why) return NextResponse.json({ error: `deployed: ${why}` }, { status: 400 })
+    } else {
+      return NextResponse.json({ error: 'deployed must be a Solana program id or a site URL' }, { status: 400 })
+    }
+  }
+
+  let scope: string[] = []
+  if (scopeRaw) {
+    if (kind !== 'repo') return NextResponse.json({ error: 'scope needs source code — use it with a repo' }, { status: 400 })
+    if (scopeRaw.length > 600 || !/^[\w./*!@\-,\s]+$/.test(scopeRaw)) {
+      return NextResponse.json({ error: 'scope: up to 600 chars of paths, globs and !excludes' }, { status: 400 })
+    }
+    scope = scopeRaw.split(/[,\n]+/).map((x) => x.trim()).filter(Boolean).slice(0, 30)
+  }
+  const box = kind === 'repo' ? (deployedKind ? 'grey' : 'white') : 'black'
 
   if (countRunning() >= MAX_CONCURRENT) {
     return NextResponse.json(
@@ -193,7 +230,11 @@ export async function POST(req: Request) {
     id,
     target,
     kind,
-    cluster: kind === 'program-id' ? cluster : undefined,
+    cluster: kind === 'program-id' || deployedKind === 'program-id' ? cluster : undefined,
+    box,
+    deployed: deployedKind ? deployed : undefined,
+    deployedKind,
+    scope: scope.length ? scope : undefined,
     status: 'running',
     stage: 'fetch',
     mode,
@@ -205,6 +246,9 @@ export async function POST(req: Request) {
   const tmp = path.join(dir, 'status.json.tmp')
   fs.writeFileSync(tmp, JSON.stringify(status, null, 2))
   fs.renameSync(tmp, path.join(dir, 'status.json'))
+  // the runner picks these up from the run dir — the spawn wrapper's argv stays fixed
+  if (deployedKind) fs.writeFileSync(path.join(dir, 'deployed.txt'), `${deployedKind} ${deployed} ${cluster}\n`)
+  if (scope.length) fs.writeFileSync(path.join(dir, 'scope.txt'), scope.join('\n') + '\n')
 
   const runner = pickRunner()
   const runnerCwd = path.dirname(path.dirname(runner))

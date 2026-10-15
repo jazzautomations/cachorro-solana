@@ -6,13 +6,12 @@ export default function Navbar() {
           CACHORRO
         </a>
         <div className="hidden sm:flex items-center gap-4 text-[11.5px] font-mono">
-          <a href="/claim" className="text-gray-500 hover:text-neon-green transition-colors">CLAIM YOUR REPO</a>
-          <a href="/#gate" className="text-gray-500 hover:text-neon-green transition-colors">PROOF</a>
-          <a href="/#receipt" className="text-gray-500 hover:text-neon-green transition-colors">RECEIPT</a>
+          <a href="/#how" className="text-gray-500 hover:text-neon-green transition-colors">HOW IT WORKS</a>
+          <a href="/claim" className="text-gray-500 hover:text-neon-purple transition-colors">CLAIM</a>
           <a href="/#hunts" className="text-gray-500 hover:text-neon-green transition-colors">HUNTS</a>
+          <a href="/docs" className="text-gray-500 hover:text-neon-cyan transition-colors">API</a>
           <a href="/verify" className="text-gray-500 hover:text-neon-yellow transition-colors">VERIFY</a>
           <a href="/pricing" className="text-gray-500 hover:text-neon-yellow transition-colors">PRICING</a>
-          <a href="/docs" className="text-gray-500 hover:text-neon-cyan transition-colors">API</a>
         </div>
         <a
           href="/#hunt"

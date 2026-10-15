@@ -54,7 +54,10 @@ export async function GET(req: Request) {
   fs.mkdirSync(path.dirname(file), { recursive: true })
   fs.writeFileSync(file, JSON.stringify(store))
 
-  const res = NextResponse.redirect(`${process.env.CACHORRO_ORIGIN || 'https://jazz-oracle.taild017e2.ts.net'}/?connected=github`)
+  const next = decodeURIComponent(req.headers.get('cookie')?.match(/cch_gh_next=([^;]+)/)?.[1] || '/')
+  const back = /^\/(?![/\\])/.test(next) ? next : '/'
+  const res = NextResponse.redirect(`${process.env.CACHORRO_ORIGIN || 'https://cachorro.jazzautomations.com.br'}${back}${back.includes('?') ? '&' : '?'}connected=github`)
+  res.cookies.delete('cch_gh_next')
   res.cookies.set('cch_gh_session', sid, { httpOnly: true, maxAge: 60 * 60 * 24 * 30, sameSite: 'lax', secure: true })
   return res
 }

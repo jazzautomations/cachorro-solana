@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { newRepoClaim, getRepoClaim, verifyRepoClaim, markRepoPayoutSent } from '@/lib/claims'
+import { newRepoClaim, getRepoClaim, verifyRepoClaim, markRepoPayoutSent, markRepoVerified } from '@/lib/claims'
+import { ghSession } from '@/lib/gh-session'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -13,6 +14,24 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}))
   const repo = (body.repo || '').trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '')
   if (!REPO_RE.test(repo)) return NextResponse.json({ error: 'repo must be owner/name' }, { status: 400 })
+
+  // one-click path: the connected GitHub account already has push access
+  if (body.github) {
+    const gh = ghSession(req)
+    if (!gh) return NextResponse.json({ error: 'connect GitHub first' }, { status: 401 })
+    const r = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: { Authorization: `Bearer ${gh.token}`, 'User-Agent': 'cachorro', Accept: 'application/vnd.github+json' },
+      signal: AbortSignal.timeout(10_000),
+    }).catch(() => null)
+    if (!r || r.status === 404) return NextResponse.json({ error: `@${gh.login} can't see ${repo}` }, { status: 404 })
+    if (!r.ok) return NextResponse.json({ error: `GitHub said ${r.status} — try again` }, { status: 502 })
+    const info = await r.json() as { full_name?: string; permissions?: { admin?: boolean; push?: boolean } }
+    if (!info.permissions?.admin && !info.permissions?.push) {
+      return NextResponse.json({ error: `@${gh.login} can't push to ${repo}, so it isn't yours to claim` }, { status: 403 })
+    }
+    const c = markRepoVerified(info.full_name || repo)
+    return NextResponse.json({ verified: true, repo: c?.repo, claimedAt: c?.claimedAt, via: 'github', login: gh.login })
+  }
 
   if (body.verify) {
     // payout may only ever fire on the unverified→verified transition — an

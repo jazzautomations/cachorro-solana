@@ -57,13 +57,13 @@ export default function DocsPage() {
           <div className="text-[10.5px] text-gray-500 font-mono mb-1">CURL · SCRIPTS · CI</div>
           <h1 className="text-sm sm:text-xl font-arcade text-neon-green chroma-soft mb-2">[ API ]</h1>
           <p className="text-[11.5px] sm:text-[13px] font-mono text-gray-400 mb-6 leading-relaxed">
-            Everything the site does is one HTTP call away. No SDK needed — JSON in, JSON out, one header for auth.
+            Everything the site does, you can do with curl. Send a target, wait, read the report. Quick hunts need no key.
           </p>
 
           <div className="space-y-4 font-mono text-[11.5px] sm:text-[13px] text-gray-400 leading-relaxed">
 
             <Card title="QUICKSTART — THREE CALLS" id="quickstart">
-              <p>Start a hunt, poll until it finishes, read the report. Anonymous callers get QUICK mode for free.</p>
+              <p>1. Start a hunt. 2. Ask how it&apos;s going until it says done. 3. Read the report.</p>
               <Code>{`
 # 1. unleash the pack
 curl -s -X POST ${BASE}/api/scan \\
@@ -148,7 +148,23 @@ curl -s -X POST ${BASE}/api/billing/verify \\
                 <li><span className="text-neon-cyan">mode</span> — <span className="text-gray-300">quick</span> | <span className="text-gray-300">deep</span> | <span className="text-gray-300">full</span>. Defaults to deep, so anonymous callers must send <span className="text-gray-300">&quot;quick&quot;</span>.</li>
                 <li><span className="text-neon-cyan">kind</span> — repo | program-id | site. Optional: inferred from the target.</li>
                 <li><span className="text-neon-cyan">cluster</span> — mainnet | devnet, for program ids. Defaults to mainnet.</li>
+                <li><span className="text-neon-cyan">deployed</span> — optional, repo targets only. The program id or site the repo ships as. Turns the hunt into a <span className="text-gray-300">grey box</span>: we compare source against what is live.</li>
+                <li><span className="text-neon-cyan">scope</span> — optional, repo targets only. Folders or files to hunt, one per line or comma separated. Prefix with <span className="text-gray-300">!</span> to skip. Up to 600 chars.</li>
               </ul>
+              <p className="mt-3">Which box you get depends on what you send:</p>
+              <ul className="list-none space-y-1 mt-1">
+                <li><span className="text-gray-300">white box</span> — target is a repo</li>
+                <li><span className="text-gray-300">grey box</span> — target is a repo, plus <span className="text-neon-cyan">deployed</span></li>
+                <li><span className="text-gray-300">black box</span> — target is a site or a program id</li>
+              </ul>
+              <Code>{`
+curl -s -X POST ${BASE}/api/scan \\
+  -H 'content-type: application/json' \\
+  -d '{"target":"https://github.com/you/your-program",
+       "deployed":"YourProgram1111111111111111111111111111111",
+       "scope":"programs/vault, !tests",
+       "mode":"quick"}'
+`}</Code>
             </Card>
 
             <Card title="ENDPOINTS" id="endpoints">

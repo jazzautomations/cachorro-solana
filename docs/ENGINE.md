@@ -7,7 +7,7 @@ with a **Solana body** (a toolpack of Solana adapters) and a **Solana moat**
 (on-chain attestation anchored to the journal head). This is what turns cachorro
 from a script into a product: *proof, not prose*, enforced in code.
 
-The framework is Felipe's own (`/root/pentest-agent/pentest-agent-v3`); it is
+The framework is Felipe's own (`pentest-agent/pentest-agent-v3`); it is
 **vendored** into this repo under `engine/`.
 
 ## What is reused from v3 (AS-IS, zero rewrite)
@@ -36,8 +36,8 @@ agent cloned from `web-experiment-runner` (the `sqli-differential` template);
 
 ### Relocation edits (vendoring only)
 
-Two v3 **test fixtures** hardcoded the old bundle path `/root/pentest-agent`;
-they now point at `/root/cachorro-solana` so the suite passes from the new
+Two v3 **test fixtures** hardcoded the old bundle path `pentest-agent`;
+they now point at `cachorro-solana` so the suite passes from the new
 location. One test's expected agent list gained `solana-experiment-runner`.
 No runtime behaviour changed.
 

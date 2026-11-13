@@ -164,7 +164,7 @@ de-risk spike that produces ONE real analyzer→PoC output**, before we commit t
   Hermes *today*. Known hazards: runsc not installed; **no `/dev/kvm`** → ptrace platform (slower,
   unproven for the Solana BPF runtime under gVisor's emulated kernel); Hermes may itself be containerized.
 - **The old fallback ("run on Zo") is DEAD** — Zo was discontinued 16/08 (memory). Real fallback for the
-  *untrusted-target* sandbox = **Jazz VPS** (`root@100.123.90.115` via tailnet) or a throwaway cloud VM.
+  *untrusted-target* sandbox = **Jazz VPS** (`root@<hunt-box>` via tailnet) or a throwaway cloud VM.
   **Never drop to `runc`** — v3 refuses it by design.
 - **Decision Felipe owns:** (a) approve running M1 without runsc (recommended — unblocks the money shot),
   and (b) whether to spend a day on runsc + a pinned litesvm image now for M3, or defer to post-hackathon.

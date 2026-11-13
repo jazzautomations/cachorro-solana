@@ -10,7 +10,7 @@
 flowchart LR
     subgraph edge["edge"]
         U[user / judge] --> V[vercel proxy<br/>cachorro.jazzautomations.com.br<br/>WAF challenge]
-        V -->|rewrite| F[tailscale funnel<br/>jazz-oracle.taild017e2.ts.net]
+        V -->|rewrite| F[tailscale funnel<br/><hunt-box>.ts.net]
     end
 
     subgraph web["web · next.js :8790"]

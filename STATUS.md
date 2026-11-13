@@ -21,11 +21,11 @@ Pitch: auditor agêntico de programas Solana/Anchor que entrega PoC executável,
 - [x] Privacy Week — INSCRITO; resultado sai 10/10
 
 **Multi-chain (decisão pendente):**
-- Irmão EVM RESGATADO do jazz-oracle → ~/Projects/cachorro-evm/cachorro-opencode (estava em evidencegate/cachorro-opencode, não estava no GitHub)
+- Irmão EVM RESGATADO do hunt-box → ~/Projects/cachorro-evm/cachorro-opencode (estava em evidencegate/cachorro-opencode, não estava no GitHub)
 - Pipeline EVM completo: fetch --address via cast etherscan-source, PoC forge fork (FFI off), mesma espinha 8 estágios — formato opencode, não integrado na engine/web
-- foundry 1.8.5 + slither 0.11.6 instalados no jazz-oracle (ubuntu)
+- foundry 1.8.5 + slither 0.11.6 instalados no hunt-box (ubuntu)
 - **E2E EVM VALIDADO 06/10**: DeFiVulnLabs fetch+static (slither: 238 contratos, 686 findings) + forge PoC — exploit de reentrancy drenou EtherStore (treatment) e remediated bloqueou c/ "No re-entrancy" (control)
-- **EVIDÊNCIA 6-CHAIN FEITA 06/10** (`~/evidencegate/chain-evidence/*.log` no jazz-oracle):
+- **EVIDÊNCIA 6-CHAIN FEITA 06/10** (`~/evidencegate/chain-evidence/*.log` no hunt-box):
   mesmo exploit treatment/control (EtherStore reentrancy, `forge test --fork-url`) executado
   em fork de estado real de **ethereum, base, arbitrum, hyperliquid, tempo, robinhood** —
   [PASS] testReentrancy em todas, bloco real capturado por chain, remediated bloqueou ataque.
@@ -79,7 +79,7 @@ solana_mixer, fortis, compliance-relayer, Offset) + ~5 HIGHs — PoCs VERDE nos 
 
 ## M0 — FEITO 15/09
 - `web/`: Next 15 + Tailwind (visual vaporwave transplantado do jazzweb3audit), 1 tela: input program-id/repo → `POST /api/scan` → `scripts/run-job.sh` (fetch + static) → AgentFlow com polling 2s → relatório estático (summary tiles + seções de lint colapsáveis + conta on-chain). Jobs em `cachorro-out/runs/<id>/status.json`. Sem DB, só filesystem.
-- No ar na Hermes: systemd `cachorro-web.service` :8790, **só pela tailnet** → http://100.83.230.76:8790
+- No ar na Hermes: systemd `cachorro-web.service` :8790, **só pela tailnet** → http://<tailnet-ip>:8790
 - Smoke E2E: coral-xyz/sealevel-attacks (repo, 12s, 8 seções de lint / 55 entradas) e Tokenkeg… (program-id mainnet, 1s, conta on-chain + static skipped). Limite de 3 jobs simultâneos (429) validado.
 - Estágios RESEARCH/ANALYZE/DEVIL/POC/REVIEW aparecem como `pending-ai` — entram no M1.
 
@@ -90,7 +90,7 @@ solana_mixer, fortis, compliance-relayer, Offset) + ~5 HIGHs — PoCs VERDE nos 
 - Provado: 5/5 unit tests (canonicalização + lógica de verify contra tx mockada); `fetchMemoTx` validado contra tx real de memo no devnet (parse do log OK). ⚠️ **anchor ao vivo bloqueado hoje** pelo faucet devnet (429 "airdrop limit today" por IP nesta VPS, RPC e CLI). Rodar quando o faucet liberar (ou financiar manual): `solana airdrop 1 $(solana address -k attest/.devnet-keypair.json) --url https://api.devnet.solana.com` e então `node attest/bin/attest.js anchor attest/fixtures/sample-report.json`.
 
 ## M1 — Verticalização da espinha v3 — FEITO 15/09 (o "framework fodido")
-- **`engine/`**: espinha pentest-agent **v3 vendorizada** (journal hash-chain, evidence vault SHA-256, research graph tipado, capability broker, oracle determinístico, promotion gates, reporting). Valida (`python3 engine/runtime/validate_bundle.py engine` → VALID, 14 agents) e **39/39 unit tests v3 passam** dentro de `engine/`. Edições só de relocação (2 fixtures apontavam `/root/pentest-agent` → `/root/cachorro-solana`; lista de agentes +`solana-experiment-runner`); runtime AS-IS, 0 reescrita.
+- **`engine/`**: espinha pentest-agent **v3 vendorizada** (journal hash-chain, evidence vault SHA-256, research graph tipado, capability broker, oracle determinístico, promotion gates, reporting). Valida (`python3 engine/runtime/validate_bundle.py engine` → VALID, 14 agents) e **39/39 unit tests v3 passam** dentro de `engine/`. Edições só de relocação (2 fixtures apontavam `pentest-agent` → `cachorro-solana`; lista de agentes +`solana-experiment-runner`); runtime AS-IS, 0 reescrita.
 - **Toolpack Solana** (`engine/toolpacks/adapters/`, mesmo contrato de `common.py`): `anchor-static-scan` (embrulha `scripts/static-scan.sh`, `workspace_write`, não builda alvo), `solana-program-dump` (`scripts/fetch-target.sh`, `network_read`, RPC DNS-pinado, nunca assina tx), `litesvm-poc` (PoC diferencial Rust como **processo confiável** em corpus que NÓS compilamos — sem runsc/validador/faucet no M1). Registrados em `registry.yaml` (packs `solana-core`/`solana-dynamic`) e no dispatcher `run_adapter.py`.
 - **UM finding pela espinha real** (`engine/runtime/solana_round.py`, corpus `spike/vault/` = par vulnerável/fixed self-authored): static→observation → hipótese/experimento (prosa scriptada) → `litesvm-poc` ×2 → `binary_differential_oracle` **supports** (treatment 2/2 drenou **5.000.000.000 lamports** → vault 0; control 0/2 bloqueado com `Custom(1)=ERR_INCORRECT_AUTHORITY`, vault intacto) → `add_evidence` → `verify_primitive` (candidate→verified) → clean-room → `add_finding`. Journal (5 records) e graph verificados independentemente. **A gate roda de verdade — LLM não promove opinião a finding.**
 - **Atestação ancorada no journal head real**: `journal.verify()` head `1a44a53f…` → `attest digest` → digest `24037a60d04d…`, memo `cachorro:v1:24037a60…`, recibo local `attest/receipts/<digest>.json` (`status: pending_anchor_faucet_blocked`); evento `attestation.anchored` encadeado de volta no journal (head final `b94cbb55…`). Envio devnet ao vivo = faucet-bloqueado (mesmo 429), digest é anchor-ready. Doc: `docs/ENGINE.md`.

@@ -17,3 +17,10 @@ web/data/gh_oauth.json
 web/data/anon_salt
 web/data/ratelimit.json
 web/data/billing.json.bak-*
+web/data/claims.json
+web/data/repo_claims.json
+web/data/cloak_notes/
+
+# Runtime/build artifacts that should never be committed
+web/tsconfig.tsbuildinfo
+docs/internal/

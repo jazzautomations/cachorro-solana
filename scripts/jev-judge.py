@@ -10,7 +10,9 @@ import json, os, re, sys, urllib.request
 
 RUN = sys.argv[1]
 EMIT = "--emit" in sys.argv
-KEY_FILE = "/root/.secrets-typesafe"
+KEY_FILE = os.environ.get(
+    "TYPESAFE_KEY_FILE", os.path.expanduser("~/.secrets-typesafe")
+)
 API = "https://api.typesafe.ai/v1/systemone"
 
 def get_key():

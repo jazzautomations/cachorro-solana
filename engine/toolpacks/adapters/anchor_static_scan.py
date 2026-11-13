@@ -48,7 +48,7 @@ class AnchorStaticScanAdapter:
             # HOME + SKIP_CLIPPY keep the scan deterministic under the executor's
             # minimal env: grep heuristics are the observation signal; the heavy
             # clippy compile (which needs the anchor toolchain) is skipped.
-            environment={"HOME": "/root", "SKIP_CLIPPY": "1"},
+            environment={"HOME": str(Path.home()), "SKIP_CLIPPY": "1"},
         )
 
     def run(

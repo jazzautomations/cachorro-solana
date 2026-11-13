@@ -3,11 +3,11 @@
 # Insecure variants MUST be flagged; secure/recommended MUST come back clean.
 # Produces the public metric: "X/Y seeded bugs caught, 0 false alarms".
 set -uo pipefail
-ROOT="/root/cachorro-solana"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CORPUS="$ROOT/corpus/sealevel-attacks"
 RUNS="$ROOT/cachorro-out/runs"
 mkdir -p "$RUNS"
-export HOME="${HOME:-/root}"
+export HOME="${HOME:-$(getent passwd "$(id -u)" | cut -d: -f6)}"
 
 declare -a CASES=(
   "0-signer-authorization/insecure signer-authorization"

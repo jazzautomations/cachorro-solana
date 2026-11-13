@@ -64,7 +64,7 @@ class SolanaProgramDumpAdapter:
             timeout_seconds=120,
             max_output_bytes=4_000_000,
             network=True,
-            environment={"HOME": "/root"},
+            environment={"HOME": str(Path.home())},
         )
 
     def run(

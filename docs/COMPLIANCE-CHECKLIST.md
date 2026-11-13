@@ -184,7 +184,7 @@ Vazar `cachorro-out/` = vazar 0-day. Cruza confidencialidade (LGPD) com a nature
 ## 14. 🔴/🟡 Engenharia herdada (sem adaptação web3)
 
 - [ ] 🔴 Segredos (chave do provider, keypair do signer) em env/arquivo gitignored, nunca no repo. (feito)
-- [ ] 🔴 HTTPS + headers de segurança quando sair da tailnet. (hoje só na tailnet `100.83.230.76:8790` = mitigação válida.)
+- [ ] 🔴 HTTPS + headers de segurança quando sair da tailnet. (hoje só na tailnet `<tailnet-ip>:8790` = mitigação válida.)
 - [ ] 🔴 Rate limit em endpoints públicos. (feito: 3 jobs simultâneos → 429.)
 - [ ] 🟡 `cargo-audit`/Dependabot no CI do **nosso** código (duplo: nossas deps E as do alvo — ver §6).
 - [ ] 🟡 Sentry/uptime/logs estruturados **sem** o conteúdo do código-alvo em texto puro.

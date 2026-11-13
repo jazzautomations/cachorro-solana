@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import os
 import sys
 from pathlib import Path
 
@@ -15,20 +16,26 @@ sys.path.insert(0, str(ROOT / "runtime"))
 from campaign import Campaign  # noqa: E402
 
 
-SOURCES = (
-    Path("/root/evidence/eternal-osint-v3/artifact-sha256.txt"),
-    Path("/root/evidence/eternal-osint-v3/http-dns-observations.md"),
-    Path("/root/evidence/eternal-osint-v3/hyperpure-route-chronology.tsv"),
-    Path("/root/evidence/eternal-osint-v3/mcp-public-issue-evidence.md"),
-    Path("/root/evidence/eternal-osint-v3/ct-zomato-v3.json"),
-    Path("/root/evidence/eternal-osint-v3/ct-zomans-v3.json"),
-    Path("/root/evidence/eternal-osint-v3/ct-runnr-v3.json"),
-    Path("/root/evidence/eternal-osint-v3/ct-blinkit-v3.json"),
-    Path("/root/evidence/eternal-osint-v3/ct-grofers-v3.json"),
-    Path("/root/evidence/eternal-osint-v3/ct-groferio-v3.json"),
-    Path("/root/evidence/eternal-osint-v3/ct-hyperpure-v3.json"),
-    Path("/root/evidence/zomato-web-public/search-network-contract-snippets.txt"),
-    Path("/root/evidence/zomato-web-public/responses.json"),
+EVIDENCE_ROOT = Path(
+    os.environ.get("CACHORRO_EVIDENCE_ROOT", "~/.local/share/evidence")
+).expanduser()
+SOURCES = tuple(
+    EVIDENCE_ROOT / rel
+    for rel in (
+        "eternal-osint-v3/artifact-sha256.txt",
+        "eternal-osint-v3/http-dns-observations.md",
+        "eternal-osint-v3/hyperpure-route-chronology.tsv",
+        "eternal-osint-v3/mcp-public-issue-evidence.md",
+        "eternal-osint-v3/ct-zomato-v3.json",
+        "eternal-osint-v3/ct-zomans-v3.json",
+        "eternal-osint-v3/ct-runnr-v3.json",
+        "eternal-osint-v3/ct-blinkit-v3.json",
+        "eternal-osint-v3/ct-grofers-v3.json",
+        "eternal-osint-v3/ct-groferio-v3.json",
+        "eternal-osint-v3/ct-hyperpure-v3.json",
+        "zomato-web-public/search-network-contract-snippets.txt",
+        "zomato-web-public/responses.json",
+    )
 )
 MAX_FILE_BYTES = 3_000_000
 

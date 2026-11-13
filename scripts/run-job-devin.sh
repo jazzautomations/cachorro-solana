@@ -10,7 +10,10 @@
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-DEVIN_BIN="${DEVIN_BIN:-$(command -v devin 2>/dev/null || echo /root/.local/bin/devin)}"
+DEVIN_BIN="${DEVIN_BIN:-$(command -v devin 2>/dev/null || echo "$HOME/.local/bin/devin")}"
+DEVIN_DATA_DIR="${DEVIN_DATA_DIR:-$HOME/.local/share/devin}"
+DEVIN_CONFIG_DIR="${DEVIN_CONFIG_DIR:-$HOME/.config/devin}"
+TYPESAFE_KEY_FILE="${TYPESAFE_KEY_FILE:-$HOME/.secrets-typesafe}"
 AI_TIMEOUT="${CACHORRO_AI_TIMEOUT:-5400}"
 
 # scan modes: quick (top-1 survivor, ~40min cap), deep (top-3, default),
@@ -164,18 +167,18 @@ TRUST="${6:-untrusted}"
 if [[ "$TRUST" == "untrusted" ]]; then
   SBX=/var/lib/cachorro-sandbox
   install -d -m 0755 "$SBX/work" "$SBX/home" "$SBX/bin" "$SBX/install" /var/lib/cachorro-empty
-  cp -a /root/.config/devin "$SBX/home/.config-devin" 2>/dev/null || true
+  cp -a "$DEVIN_CONFIG_DIR" "$SBX/home/.config-devin" 2>/dev/null || true
   mkdir -p "$SBX/home/.local/share"
-  cp -a /root/.local/share/devin "$SBX/home/.local/share/" 2>/dev/null || true
+  cp -a "$DEVIN_DATA_DIR" "$SBX/home/.local/share/" 2>/dev/null || true
   chmod -R a+rwX "$SBX/home" 2>/dev/null || true
   chmod -R a+rwX "$RUN"
   # DEVIN_BIN is usually a symlink into ~/.local/share/devin — inside the
   # namespace /root is hidden, so the symlink dangles (exec ENOENT). Bind the
   # resolved install tree at $SBX/install and point SBX_DEVIN at the real file.
   DEVIN_REAL="$(readlink -f "$DEVIN_BIN")"
-  if [[ "$DEVIN_REAL" == /root/.local/share/devin/* ]]; then
-    export SBX_DEVIN_SRC="/root/.local/share/devin"
-    export SBX_DEVIN="$SBX/install/${DEVIN_REAL#/root/.local/share/devin/}"
+  if [[ "$DEVIN_REAL" == "$DEVIN_DATA_DIR"/* ]]; then
+    export SBX_DEVIN_SRC="$DEVIN_DATA_DIR"
+    export SBX_DEVIN="$SBX/install/${DEVIN_REAL#$DEVIN_DATA_DIR/}"
   else
     export SBX_DEVIN_SRC="$(dirname "$DEVIN_REAL")"
     export SBX_DEVIN="$SBX/install/$(basename "$DEVIN_REAL")"
@@ -235,7 +238,7 @@ PY
 # the hunt outcome.
 if grep -q '"status": *"done"' "$ST" 2>/dev/null; then
   # jev second opinion — calibrated plausibility on every promoted claim
-  if [[ -f /root/.secrets-typesafe ]]; then
+  if [[ -f "$TYPESAFE_KEY_FILE" ]]; then
     python3 "$ROOT/scripts/jev-judge.py" "$RUN" --emit >/dev/null 2>&1 || true
   fi
   # self-audit before the anchor — tripwire flags become part of the receipt's journal

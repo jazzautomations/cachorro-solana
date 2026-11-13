@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -57,6 +58,9 @@ def build_receipt(username: str, ttl_hours: int, now: datetime | None = None) ->
     issued = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     expires = issued + timedelta(hours=ttl_hours)
     stamp = issued.strftime("%Y%m%dT%H%M%SZ")
+    evidence_root = Path(
+        os.environ.get("CACHORRO_EVIDENCE_ROOT", "~/.local/share/evidence")
+    ).expanduser()
     assets = [
         {"kind": "host", "value": value, "actions": WEB_ACTIONS}
         for value in ALLOWED_HOSTS
@@ -72,12 +76,12 @@ def build_receipt(username: str, ttl_hours: int, now: datetime | None = None) ->
         [
             {
                 "kind": "filesystem",
-                "value": "/root/evidence/eternal-osint-v3",
+                "value": str(evidence_root / "eternal-osint-v3"),
                 "actions": ["artifact.import"],
             },
             {
                 "kind": "filesystem",
-                "value": "/root/evidence/zomato-web-public",
+                "value": str(evidence_root / "zomato-web-public"),
                 "actions": ["artifact.import"],
             },
         ]

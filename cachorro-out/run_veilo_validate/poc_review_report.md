@@ -68,7 +68,7 @@ Inserting the identical commitment at two leaf positions of one tree yields two 
 
 ## Reproduction summary
 ```
-cd /root/veilo-audit/privacy-program/cachorro-out/run_manual/poc
+cd <audit-workdir>/privacy-program/cachorro-out/run_manual/poc
 npm install               # snarkjs@0.7.6, circomlibjs, ffjavascript, veilo-sdk-core (already installed)
 node baseline.js          # honest proof -> VERIFY: true   (evidence the harness matches the real VK)
 node attack_A.js          # value inflation -> all THROW (Num2Bits(248) on outputs)

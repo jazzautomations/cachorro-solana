@@ -59,7 +59,7 @@ class LiteSVMPoCAdapter:
             cwd=str(corpus_dir),
             timeout_seconds=120,
             max_output_bytes=2_000_000,
-            environment={"HOME": "/root"},
+            environment={"HOME": str(Path.home())},
         )
 
     def _parse(self, stdout: bytes) -> dict[str, object]:

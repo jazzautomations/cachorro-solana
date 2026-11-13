@@ -3,9 +3,9 @@
 # commit (treatment) and the patched commit (control). The pack must flag the
 # former and not the latter. Strongest possible validation.
 set -uo pipefail
-ROOT="/root/cachorro-solana"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUNS="$ROOT/cachorro-out/runs"
-export HOME="${HOME:-/root}"
+export HOME="${HOME:-$(getent passwd "$(id -u)" | cut -d: -f6)}"
 
 REPO="https://github.com/cashioapp/cashio"
 # vuln = last commit before the patch; fixed = the patch commit

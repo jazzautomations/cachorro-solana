@@ -4,6 +4,7 @@ import crypto from 'crypto'
 import fs from 'fs'
 import path from 'path'
 import dns from 'node:dns/promises'
+import os from 'node:os'
 import {
   allowedTarget, assertEngine, countRunning, isValidId, listRuns, pickRunner,
   PUBKEY_RE, REPO_RE, RUNS_DIR,
@@ -277,7 +278,7 @@ export async function POST(req: Request) {
     : useSystemd
     ? spawn('systemd-run', [
         '--user', '--quiet', '--collect', '--unit', `cachorro-hunt-${id}`,
-        '--setenv', `HOME=${process.env.HOME || '/root'}`,
+        '--setenv', `HOME=${process.env.HOME || os.homedir()}`,
         '--setenv', `PATH=${process.env.PATH}`,
         '--setenv', `CACHORRO_ROOT=${runnerCwd}`,
         ...(ghToken ? ['--setenv', `CACHORRO_GH_TOKEN=${ghToken}`] : []),

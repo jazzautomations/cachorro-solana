@@ -120,7 +120,7 @@ Herança direta, sem adaptação web3 (só listando para não perder):
       gitignored, **nunca no repo** (§5, §17). Já cumprido: `.devnet-keypair.json`
       gitignored, credencial `oci` no opencode.
 - [ ] 🔴 HTTPS + headers de segurança na web quando sair da tailnet (§5). Hoje está **só
-      na tailnet** (`100.83.230.76:8790`), o que é uma mitigação válida de exposição.
+      na tailnet** (`<tailnet-ip>:8790`), o que é uma mitigação válida de exposição.
 - [ ] 🔴 Rate limit em endpoints públicos (§5). Já existe: limite de 3 jobs simultâneos (429).
 - [ ] 🟡 `cargo-audit`/Dependabot no CI do **nosso próprio** código (§5). Ver B.7 — aqui é
       duplo: nossas deps E as deps do alvo.

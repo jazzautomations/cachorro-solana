@@ -44,7 +44,7 @@ soa startup e não produto.
 | PoE (serviço $5k/audit) pediu a engine como ferramenta | conversa direta | LOI pendente |
 | 20+ hunts, 3+ criticals em programas da cohort (um com 6 audits humanas) | `cachorro-out/runs/` | — |
 | 5 receipts ANCORADOS devnet | explorer | ✅ |
-| E2E EVM validado (fetch→slither→forge, exploit executado) | jazz-oracle 06/10 | ✅ |
+| E2E EVM validado (fetch→slither→forge, exploit executado) | hunt-box 06/10 | ✅ |
 
 **Silêncio dos times = prova de mordida, não de alucinação.** Padrão clássico de
 disclosure informal: receberam exploit executado → discussão interna/correção quieta.

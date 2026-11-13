@@ -1,8 +1,8 @@
 # 08 — Verticalizing cachorro-solana onto the pentest-agent v3 spine
 
 Data: 2026-09-15. Autor: análise do código-fonte real em
-`/root/pentest-agent/pentest-agent-v3` (runtime 0.3.0) + `/root/pentest-agent/docs/{zero-day-framework-v3-rfc.md,gap-matrix-v3.md}`
-cruzado com `/root/cachorro-solana/{AGENTS.md,STATUS.md,scripts,attest}`.
+`pentest-agent/pentest-agent-v3` (runtime 0.3.0) + `pentest-agent/docs/{zero-day-framework-v3-rfc.md,gap-matrix-v3.md}`
+cruzado com `cachorro-solana/{AGENTS.md,STATUS.md,scripts,attest}`.
 
 > **Tese.** O v3 já é a espinha certa: journal hash-chained, evidence vault por SHA-256,
 > grafo de pesquisa tipado, gates de promoção `candidate→verified` que **exigem oráculo +
@@ -330,8 +330,8 @@ operacional e evidência experimental."
 ---
 
 ### Fontes (acessadas 2026-09-15)
-- Código v3: `/root/pentest-agent/pentest-agent-v3/{runtime,agents,toolpacks,schemas}` + `docs/{zero-day-framework-v3-rfc.md,gap-matrix-v3.md}` (corte 2026-09-07).
-- Cachorro: `/root/cachorro-solana/{AGENTS.md,STATUS.md,scripts,attest}`.
+- Código v3: `pentest-agent/pentest-agent-v3/{runtime,agents,toolpacks,schemas}` + `docs/{zero-day-framework-v3-rfc.md,gap-matrix-v3.md}` (corte 2026-09-07).
+- Cachorro: `cachorro-solana/{AGENTS.md,STATUS.md,scripts,attest}`.
 - [LiteSVM — solana.com/docs/tools/litesvm](https://solana.com/docs/tools/litesvm); [Anchor LiteSVM](https://www.anchor-lang.com/docs/testing/litesvm) (Anchor v1.0.0 default, abr/2026).
 - [solana-test-validator --clone (QuickNode)](https://www.quicknode.com/guides/solana-development/accounts-and-data/fork-programs-to-localnet).
 - [Ackee Trident](https://ackee.xyz/blog/introducing-trident-the-first-open-source-fuzzer-for-solana-programs/); [Trident Arena (2026)](https://ackee.xyz/blog/trident-arena-multi-agent-ai-security-for-solana-programs/); [Solana Security Toolbox 2026](https://dev.to/ohmygod/the-solana-security-toolbox-in-2026-a-practitioners-guide-to-fuzzing-static-analysis-and-5h7f).
